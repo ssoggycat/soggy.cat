@@ -1,8 +1,12 @@
 <!DOCTYPE html>
 <html>
 <head>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Spline+Sans+Mono&display=swap" rel="stylesheet">
   <link rel="icon" href="img/icon.jpg">
   <link rel="canonical" href="https://soggy.cat/">
+  <link rel="stylesheet" href="static/main.css">
   <title>soggy cat</title>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -13,13 +17,15 @@
   <meta name="title" content="soggy cat">
   <meta property="og:title" content="soggy cat">
   <meta property="og:image" content="https://soggy.cat/img/soggycat.jpg">
-  <script>
-    //redirect to https
-    if (window.location.protocol != "https:")
-        window.location.protocol = "https"
-  </script>
 </head>
 <body>
-     <img style="height:100%;width:auto;" src="img/soggycat.jpg"/>
+     <img id="soggycat" src="img/soggycat.jpg" data-tilt data-tilt-scale="1.06" />
+     <div id="sidemenu">
+     <a href="github.html" class="menubuttonsa"><div class="menubuttons"><img src='img/github.png'/>GitHub</div></a>
+     <a href="nocss.html" class="menubuttonsa"><div class="menubuttons"><img src='img/nocss.svg'/>No CSS</div></a>
+     </div>
+     <button id="circlebtn"></button>
+     <script src='static/vanillatilt.js'></script>
+     <script src="static/main.js"></script>
 </body>
 </html>
