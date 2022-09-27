@@ -16,4 +16,4 @@
 * main idea
 * awesome css
 ### 🐮 – AndreiXYZ ([github](https://github.com/Willa-OWOT))
-* uhh what did he do
+* literally nothing lol
