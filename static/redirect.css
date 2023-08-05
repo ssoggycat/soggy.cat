@@ -2,10 +2,6 @@ body {
 background-color: #0d1117;
 }
 
-#cat{
-    animation: rotateAnimation 2s linear infinite;
-}
-
 #epiccat{
     height:70%;
     position: absolute;
@@ -15,10 +11,6 @@ background-color: #0d1117;
     animation: epiccat 1s ease 2s 1 normal forwards;
     box-shadow: 15px 17px 26px rgb(41, 41, 41,0.6);
     border-radius:1.5%;
-}
-
-@keyframes rotateAnimation {
-to {transform: rotateY(360deg);}
 }
 
 @keyframes epiccat {
