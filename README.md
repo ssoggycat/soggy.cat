@@ -7,7 +7,6 @@
 * domain setup
 * organisation creator
 ### 🐶 – cv ([🔗](https://github.com/cv003))
-* website content
 * planning
 ### 🖥️ – FP ([🔗](https://github.com/system2k))
 * domain billing
@@ -15,5 +14,3 @@
 ### 🌙 – moonrays ([🔗](https://github.com/moon-rays))
 * main idea
 * awesome css
-### 🐮 – AndreiXYZ ([🔗](https://github.com/Willa-OWOT))
-* literally nothing lol
