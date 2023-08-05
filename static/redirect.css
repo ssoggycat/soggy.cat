@@ -1,4 +1,8 @@
-/* #cat{
+body {
+background-color: #0d1117;
+}
+
+#cat{
     height:70%;
     width:auto;
     margin:auto;
@@ -6,10 +10,6 @@
     animation: rotateAnimation 2s linear infinite;
     box-shadow: 15px 17px 26px rgb(41, 41, 41,0.6);
     border-radius:1.5%;
-} */
-
-body {
-background-color: #24292e;
 }
 
 #epiccat{
