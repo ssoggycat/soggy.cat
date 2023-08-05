@@ -1,4 +1,4 @@
-#cat{
+/* #cat{
     height:70%;
     width:auto;
     margin:auto;
@@ -6,7 +6,32 @@
     animation: rotateAnimation 2s linear infinite;
     box-shadow: 15px 17px 26px rgb(41, 41, 41,0.6);
     border-radius:1.5%;
+} */
+
+#epiccat{
+    height:70%;
+    width:auto;
+    margin:auto;
+    margin-top:100px;
+    animation: epiccat 1s ease 2s 1 normal forwards;
+    box-shadow: 15px 17px 26px rgb(41, 41, 41,0.6);
+    border-radius:1.5%;
 }
+
+@keyframes epiccat {
+	0% {
+		opacity: 1;
+		transform: rotate(0) scale(1);
+		transform-origin: 50% 0;
+	}
+
+	100% {
+		opacity: 0;
+		transform: rotate(-540deg) scale(0);
+		transform-origin: 50% 0;
+	}
+}
+
 body{
     perspective: 1500px;
 }
