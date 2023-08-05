@@ -8,6 +8,10 @@
     border-radius:1.5%;
 } */
 
+body {
+background-color: #2b3137;
+}
+
 #epiccat{
     height:70%;
     position: absolute;
