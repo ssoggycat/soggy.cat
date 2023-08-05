@@ -19,7 +19,7 @@
   <meta property="og:image" content="https://soggy.cat/img/soggycat.jpg">
 </head>
 <body>
-     <img id="soggycat" src="https://soggy.cat/img/soggycat.jpg" data-tilt data-tilt-scale="1.06" />
+     <img id="soggycat" src="https://soggy.cat/img/soggycat.jpg" data-tilt data-tilt-scale="1.06" onclick='playRandomSound()' />
      <div id="sidemenu">
      <a href="https://soggy.cat/github" class="menubuttonsa"><div class="menubuttons"><img src='https://soggy.cat/img/github.png'/>GitHub</div></a>
      <a href="https://soggy.cat/nocss" class="menubuttonsa"><div class="menubuttons"><img src='https://soggy.cat/img/nocss.svg'/>No CSS</div></a>
@@ -27,5 +27,6 @@
      <button id="circlebtn"></button>
      <script src='https://soggy.cat/static/vanillatilt.js'></script>
      <script src="https://soggy.cat/static/main.js"></script>
+     <span id='player' style='display:none'></span>
 </body>
 </html>
