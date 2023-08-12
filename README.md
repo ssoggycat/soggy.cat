@@ -3,14 +3,15 @@
 **cat?** it's a **cat** for sure!
 
 ## CREDITS
+### 🖥️ – FP ([🔗](https://github.com/system2k))
+* domain billing
+* regery help
 ### 🐱 – yagton ([🔗](https://github.com/tlras))
 * domain setup
 * organisation creator
 ### 🐶 – cv ([🔗](https://github.com/cv003))
 * planning
-### 🖥️ – FP ([🔗](https://github.com/system2k))
-* domain billing
-* regery help
+* bad coding
 ### 🌙 – moonrays ([🔗](https://github.com/moon-rays))
 * main idea
-* awesome css
+* good coding
