@@ -1,8 +1,13 @@
 body {
 background-color: #0d1117;
+scroll="no";
+overflow: hidden;
+margin: 0px; 
+padding: 0px;
 }
 
 /* body{
     perspective: 1500px;
+    
 }
 */
