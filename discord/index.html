@@ -1,1 +1,82 @@
-wip
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+        
+    <meta charset="utf-8" />
+    <title>&#65279;</title>
+    <meta property="og:title" content="soggy world" />
+    <meta name="description" content="our very sleepy discord" />
+    
+    <link rel="icon" href="https://soggy.cat/img/icon.webp" />
+    
+    <meta name="twitter:card" content="summary"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="theme-color" content="#64DAFF"/>
+    <meta http-equiv="refresh" content="0; url='discord://discord.com/invite/soggycat'" />
+
+    <script src="https://rawgit.com/bradley/Blotter/master/build/blotter.min.js"></script>
+    <script src="https://rawgit.com/bradley/Blotter/master/build/materials/liquidDistortMaterial.js"></script>
+    
+  </head>
+  <body><div id="body">
+    
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <div class="main"></div>
+    
+    <style>
+    @import url('https://fonts.googleapis.com/css2?family=Josefin+Sans:wght@700&display=swap');
+    :root {
+      background-color: #333333;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      font-family: 'Josefin Sans', sans-serif;
+      cursor: url("https://cdn.discordapp.com/attachments/817456773996740670/1149072226432331836/zLhXyYJ.cur"), pointer;
+    }
+    </style>
+    
+    <script>
+
+var text2 = new Blotter.Text("one second...", {
+  family: "Josefin Sans",
+  size: 50,
+  fill: '#dbeeff'
+});
+
+liquid = new Blotter.LiquidDistortMaterial();
+
+liquid.uniforms.uSpeed.value = 0.3;
+liquid.uniforms.uVolatility.value = 0.03;
+liquid.uniforms.uSeed.value = 0.2;
+
+bliquid = new Blotter(liquid, {
+  texts: text2 });
+
+main = document.querySelector('.main');
+bScopeL = bliquid.forText(text2);
+
+bScopeL.appendTo(main);
+    </script>
+    
+    </div>
+  </body>
+</html>
