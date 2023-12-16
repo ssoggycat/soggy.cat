@@ -9,9 +9,13 @@
 ### 🐱 – yagton ([🔗](https://github.com/tlras))
 * domain setup
 * organisation creator
-### 🐶 – cv ([🔗](https://github.com/cv003))
-* planning
-* bad coding
 ### 🌙 – moonrays ([🔗](https://github.com/moon-rays))
 * main idea
 * good coding
+### 🐶 – cv ([🔗](https://github.com/cv003))
+* planning
+* bad coding
+### 🔹 – mat ([🔗](https://github.com/m5x11))
+* literally everything
+* he's just that cool
+
