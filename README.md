@@ -15,7 +15,7 @@
 ### 🐶 – cv ([🔗](https://github.com/cv003))
 * planning
 * bad coding
-### 🔹 – mat ([🔗](https://github.com/m5x11))
+### 🔹 – mat ([🔗](https://github.com/mat5555))
 * literally everything
 * he's just that cool
 
