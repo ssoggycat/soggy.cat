@@ -1,6 +1,0 @@
-{
-	"imports": {
-		"three": "./threejs/three.module.js",
-		"GLTFLoader": "./threejs/addons/GLTFLoader.js"
-	}
-}
