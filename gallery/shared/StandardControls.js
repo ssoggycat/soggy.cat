@@ -8,7 +8,7 @@ function getControlDir(eventCode,controls,controlMap) {
 	if (!controls.hasOwnProperty(eventCode)) return;
 
 	const control = controls[eventCode];
-	const directions = controlMap[control];
+	const directions = controlMap[control][0][2]; //hardcoded movement for testing
 
 	const addedVel = new Vector3(directions[0],directions[1],directions[2]);
 	return [control,directions,addedVel];
@@ -20,6 +20,9 @@ class StandardControls extends PointerLockControls {
 		super(camera, domElement);
 
 		this.velocity = new Vector3(0,0,0);
+
+		this.motionTarget = [];
+		this.acceleration = [];
 
 		this.controls = {
 			"KeyW": "forwards",
@@ -33,14 +36,37 @@ class StandardControls extends PointerLockControls {
 		}; //best of the best for now, will probably switch out later
 
 		this.controlMap = {
-			"forwards": [0,0,1],
-			"backwards": [0,0,-1],
+			"forwards": [
+				["motionTarget","movement",[0,0,1]]
+			],
+
+			"backwards": [
+				["motionTarget","movement",[0,0,-1]]
+			],
 		
-			"left": [-1,0,0],
-			"right": [1,0,0],
+
+			"left": [
+				["motionTarget","movement",[-1,0,0]]
+			],
+
+			"right": [
+				["motionTarget","movement",[1,0,0]]
+			],
 		
-			"up": [0,1,0],
-			"down": [0,-1,0]
+			"up": [
+				["motionTarget","movement",[0,1,0]]
+			],
+			"down": [
+				["motionTarget","movement",[0,-1,0]]
+			],
+
+			"jump": [
+				["acceleration","jumping",[0,1,0]]
+			],
+			"crouch": [
+				["scale.mult","crouching",[1,0.5,1]],
+				["motion.scale","movement",[.5]]
+			],
 		};
 		//again... best of the best. 
 		//i really want an "up" for later, that determines the direction that these go
@@ -54,7 +80,7 @@ class StandardControls extends PointerLockControls {
 		this.heldControls = [];
 		addEventListener('keydown', (event) => {
 			if (this.isLocked != true || this.heldKeys.indexOf(event.code) > -1) return;
-			console.log(this.heldKeys.hasOwnProperty(event.code));
+
 			this.heldKeys.push(event.code);
 
 			const controlData = getControlDir(event.code,this.controls,this.controlMap);

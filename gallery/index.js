@@ -26,14 +26,14 @@ animate();
 
 function init() {
 
-	camera = new THREE.PerspectiveCamera( 90, window.innerWidth / window.innerHeight, 0.1, 100 );
+	camera = new THREE.PerspectiveCamera( 90, window.innerWidth / window.innerHeight, 0.05, 30 );
 	camera.position.x = 0;
 	camera.position.z = 5;
 
 	cubeRenderTarget = new THREE.WebGLCubeRenderTarget( 512 );
 	cubeRenderTarget.texture.type = THREE.HalfFloatType;
 
-	cubeCamera = new THREE.CubeCamera( 1, 1000, cubeRenderTarget );
+	cubeCamera = new THREE.CubeCamera( 1, 30, cubeRenderTarget );
 
 	controls = new StandardControls(camera,document.body);
 
@@ -44,12 +44,16 @@ function init() {
 
 	light = new THREE.SpotLight('#dafed6', 60);
 	light.castShadow = true;
-	light.shadow.blurSamples = 20;
+	light.shadow.bias = -0.001;
+
+	light.shadow.blurSamples = 17;
+	light.shadow.radius = 7;
+
+	light.shadow.mapSize.width = 512;
+	light.shadow.mapSize.height = 512;
+
 	light.angle = Math.PI/3.5;
 	light.penumbra = .75;
-	light.shadow.radius = 2;
-	light.shadow.mapSize.width = 2048;
-	light.shadow.mapSize.height = 2048;
 	
 	light.position.z = 3;
 	light.position.y = 4;
@@ -66,9 +70,15 @@ function init() {
 
 		const spot = root.getObjectByName('Spot');
 		spot.castShadow = true;
+		spot.shadow.bias = -0.001;
+		spot.shadow.blurSamples = 5;
+		spot.shadow.radius = 4;
 
 		const spot2 = root.getObjectByName('Spot001');
 		spot2.castShadow = true;
+		spot2.shadow.bias = -0.001;
+		spot2.shadow.blurSamples = 5;
+		spot2.shadow.radius = 4;
 
 		const text2 = root.getObjectByName('Text001');
 		text2.castShadow = true;
@@ -79,6 +89,7 @@ function init() {
 
 		plane = root.getObjectByName('Plane');
 		plane.receiveShadow = true;
+		plane.castShadow = true;
 		plane.material.envMap = cubeRenderTarget.texture;
 
 		console.log(debug.dumpObject(root).join('\n'));
@@ -86,6 +97,9 @@ function init() {
 
 	renderer = new THREE.WebGLRenderer( { antialias: true, logarithmicDepthBuffer: false } );
 	renderer.shadowMap.enabled = true;
+	renderer.shadowMap.type = THREE.VSMShadowMap;
+	renderer.toneMapping = THREE.AgXToneMapping;
+
 	renderer.setPixelRatio( window.devicePixelRatio );
 	renderer.setSize( window.innerWidth, window.innerHeight );
 	document.body.appendChild( renderer.domElement );
@@ -128,11 +142,13 @@ function animate(time) {
 		cubeCamera.position.z = camera.position.z;
 	};
 
-	if (cframe % 2 == 0) cubeCamera.update( renderer, scene ); //render reflection at half the framerate
+	
 	
 	
 
 	last_rendered_time = time;
 	requestAnimationFrame(animate);
+
+	if (cframe % 2 == 0) cubeCamera.update( renderer, scene ); //render reflection at half the framerate
 	renderer.render(scene, camera);
 }
