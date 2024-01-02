@@ -2,7 +2,9 @@
 **wet?** nope, more like **soggy**.
 **cat?** it's a **cat** for sure!
 
-## CREDITS
+![sog](img/soggycat.webp)
+
+## CREDITS :
 ### 🖥️ – FP ([🔗](https://github.com/system2k))
 * domain billing
 * regery help
