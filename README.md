@@ -2,7 +2,7 @@
 **wet?** nope, more like **soggy**.
 **cat?** it's a **cat** for sure!
 
-<img src="img/soggycat.webp" alt="image" width="50%" height="auto">
+<img src="img/soggycat.webp" alt="image" width="100%" height="10%">
 
 ## CREDITS :
 ### 🖥️ – FP ([🔗](https://github.com/system2k))
