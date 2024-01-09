@@ -19,5 +19,5 @@
 * bad coding
 ### 🔹 – mat ([🔗](https://github.com/mat5555))
 * literally everything
-* he's just that cool
+* she's just that cool
 
