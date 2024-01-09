@@ -18,6 +18,5 @@
 * planning
 * bad coding
 ### 🔹 – mat ([🔗](https://github.com/mat5555))
-* literally everything
-* she's just that cool
-
+* a lot of stuff
+* like a lot lot
