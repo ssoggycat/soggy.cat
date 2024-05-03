@@ -6,6 +6,8 @@ if (window.location.protocol != "https:")
 document.getElementById('circlebtn').addEventListener('click',toggleMenu)
 const sidemenu = document.getElementById('sidemenu')
 let menuOut = false
+// this probably could be improved by implementing a list of all known crypto sites
+const blocked_domains = ['coinscan.com', 'dexscreener.com', 'geckoterminal.com', 'coinmarketcap.com', 'uniswap.org']
 function toggleMenu(){
     if(menuOut){
         sidemenu.style.width = '0'
@@ -15,3 +17,24 @@ function toggleMenu(){
         menuOut = true
     }
 }
+
+function scamStop()
+{
+	referrer = document.referrer;
+
+	try
+	{
+		const url = new URL(referrer);
+		const domain = url.hostname;
+		if (domain != "" && blocked_domains.includes(domain))
+		{
+			console.log("Blocked domain: " + domain);
+			window.location.href = "https://soggy.cat/stop";
+		}
+	}
+	catch (e)
+	{
+		console.log("No referrer");
+	}
+}
+scamStop();
