@@ -1,22 +1,25 @@
-# soggy.cat
+<p align="center">
+  <img src="https://files.catbox.moe/nfhjgd.png" alt="image" width="90%" height="auto"> <br>
+  </p>
+
 **wet?** nope, more like **soggy**.
-**cat?** it's a **cat** for sure!
+**cat?** it's a **cat** for sure! <br>
+<sub> all of the edits in this repo reflect on the website itself so it's always up to date. </sub>
 
-<img src="img/soggycat.webp" alt="image" width="5%" height="auto">
-
-## CREDITS :
+## ~ CREDITS ~
 ### 🖥️ – FP ([🔗](https://github.com/system2k))
-* domain billing
+* domain billing!!
 * regery help
+### 🔹 – mat ([🔗](https://github.com/mat5555))
+* all of the more complicated and cool thingamabobs
 ### 🐱 – yagton ([🔗](https://github.com/tlras))
 * domain setup
-* organisation creator
-### 🌙 – moonrays ([🔗](https://github.com/moon-rays))
-* main idea
-* good coding
+* github organization creator
 ### 🐶 – cv ([🔗](https://github.com/cv003))
 * planning
-* bad coding
-### 🔹 – mat ([🔗](https://github.com/mat5555))
-* a lot of stuff
-* like a lot lot
+* BAD coding
+### 🌙 – moonrays ([🔗](https://github.com/moon-rays))
+* main idea
+* GOOD coding
+
+<h6 align="center">meow meow meow meow meow meow meow meow meow meow meow meow meow meow meow meow meow</h6>
