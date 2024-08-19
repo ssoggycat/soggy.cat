@@ -1,0 +1,59 @@
+<?xml version="1.0"?>
+<properties>
+	<loadingbar>
+		<loadtext_de>Laden</loadtext_de>
+		<loadtext_en>Loading</loadtext_en>
+		<loadtext_es>Cargando</loadtext_es>
+		<loadtext_fr>Chargement</loadtext_fr>
+		<loadtext_it>Caricamento</loadtext_it>
+		<loadtext_nl>Laden</loadtext_nl>
+		<loadtext_pt>Carregando</loadtext_pt>
+		<loadtext_sv>Laddar</loadtext_sv>
+	</loadingbar>
+
+	<splashscreen>
+		<show_splashscreen>true</show_splashscreen>
+		<betweenimagestime>0</betweenimagestime>
+		<splashtime>1</splashtime>
+		<images>
+			<image>zylom_540x405.png</image>
+		</images>
+	</splashscreen>
+
+	<gamesettings>
+		<filename>BejeweledTwist.swf</filename>	<!-- TODO: filename of your game swf -->
+		<framerate>31</framerate>				<!-- TODO: framerate of your game swf -->
+	</gamesettings>
+
+	<datagathering>
+		<url_highscore>http://{0}/servlet/GameInfo</url_highscore>
+		<url_datagathering>http://{0}/servlet/DataGathering</url_datagathering>
+		<url_toplist>http://{0}/servlet/ToplistsFrame</url_toplist>
+		<encrypted_postvars>true</encrypted_postvars>
+		<keys>
+			<key datatype="String">visitID</key>
+			<key datatype="Number">skinnedGameID</key>
+			<key datatype="Number">gameSetID</key>
+			<key datatype="Boolean">sound</key>
+			<key datatype="Number">highestLevel</key>
+			<key datatype="Number">highestScore</key>
+			<key datatype="Number">gamesPlayed</key>
+			<key datatype="Number">restarts</key>
+			<key datatype="Number">playTime</key>
+			<key datatype="Number">loadTime</key>
+			<key datatype="Number">idleTime</key>
+		</keys>
+	</datagathering>
+
+	<defaultflashvars>
+		<language>nl</language>
+		<country>NL</country>
+		<numTrialLevels>0</numTrialLevels>
+		<comInterval>900</comInterval>
+		<numAdLevels>0</numAdLevels>
+		<showAds>false</showAds>
+		<hasDownloadable>true</hasDownloadable>
+		<downloadableURL>http://www.zylom.com</downloadableURL>
+		<cheatsEnabled>false</cheatsEnabled>
+	</defaultflashvars>
+</properties>

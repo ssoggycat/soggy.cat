@@ -1,0 +1,283 @@
+<Bejeweled>
+	<!-- SPLASH SCREEN -->
+
+	<CreatedBy>
+		<text _locID="CreatedByText"><!-- _locComment_text="Text on splash screen above PopCap logo" -->CREATED BY</text>
+		<font _locID="CreatedByTextFont"><!-- _locComment_text="Change only if the default does not support the target language" -->Arial</font>
+		<size _locID="CreatedByTextSize"><!-- _locComment_text="Change only if the content does not fit {Formatting=Number}" -->14</size>
+		<embed _locID="CreatedByEmbed"><!-- _locComment_text="True = Use embedded font. This must be false if you change the font or use an unsupported character (supported = A-Z, Punctuation)" -->true</embed>
+	</CreatedBy>
+	<NowLoading>
+		<text _locID="LoadingText"><!-- _locComment_text="Text on splash screen below PopCap logo" -->LOADING</text>
+		<font _locID="LoadingTextFont"><!-- _locComment_text="Change only if the default does not support the target language" -->Arial</font>
+		<size _locID="LoadingTextSize"><!-- _locComment_text="Change only if the content does not fit {Formatting=Number}" -->14</size>
+		<embed _locID="LoadingEmbed"><!-- _locComment_text="True = Use embedded font. This must be false if you change the font or use an unsupported character (supported = A-Z, Punctuation)" -->true</embed>
+	</NowLoading>
+
+	<!-- MAIN UI -->
+
+	<NewGame>
+		<text _locID="NewGameButton"><!-- _locComment_text="Label on button to start a new game" -->NEW GAME</text>
+		<font _locID="NewGameButtonFont"><!-- _locComment_text="Change only if the default does not support the target language" -->Halfmoon</font>
+		<size _locID="NewGameButtonSize"><!-- _locComment_text="Change only if the content does not fit. Point size 11 includes 30% expansion, if any string with button in the name is changed, all strings with "button" in the name should be changed. {Formatting=Number}" -->14</size>
+		<embed _locID="NewGameButtonEmbed"><!-- _locComment_text="True = Use embedded font. This must be false if you change the font or use an unsupported character (supported = A-Z, Punctuation)" -->true</embed>
+	</NewGame>
+	<Upgrade>
+		<text _locID="UpgradeButton"><!-- _locComment_text="Label on button to upgrade to deluxe" -->UPGRADE</text>
+		<font _locID="UpgradeButtonFont"><!-- _locComment_text="Change only if the default does not support the target language" -->Halfmoon</font>
+		<size _locID="UpgradeButtonSize"><!-- _locComment_text="Change only if the content does not fit Point size 11 includes 30% expansion, if any string with button in the name is changed, all strings with "button" in the name should be changed. {Formatting=Number}" -->14</size>
+		<embed _locID="UpgradeButtonEmbed"><!-- _locComment_text="True = Use embedded font. This must be false if you change the font or use an unsupported character (supported = A-Z, Punctuation)" -->true</embed>
+	</Upgrade>
+	<Mode1>
+		<text _locID="SimpleModeButton"><!-- _locComment_text="Label on button to select Simple Mode" -->SIMPLE</text>
+		<font _locID="SimpleModeButtonFont"><!-- _locComment_text="Change only if the default does not support the target language" -->Halfmoon</font>
+		<size _locID="SimpleModeButtonSize"><!-- _locComment_text="Change only if the content does not fit Point size 11 includes 30% expansion, if any string with button in the name is changed, all strings with "button" in the name should be changed. {Formatting=Number}" -->14</size>
+		<embed _locID="SimpleModeButtonEmbed"><!-- _locComment_text="True = Use embedded font. This must be false if you change the font or use an unsupported character (supported = A-Z, Punctuation)" -->true</embed>
+	</Mode1>
+	<Mode2>
+		<text _locID="TimedModeButton"><!-- _locComment_text="Label on button to select Timed Mode" -->TIMED</text>
+		<font _locID="TimedModeButtonFont"><!-- _locComment_text="Change only if the default does not support the target language" -->Halfmoon</font>
+		<size _locID="TimedModeButtonSize"><!-- _locComment_text="Change only if the content does not fit Point size 11 includes 30% expansion, if any string with button in the name is changed, all strings with "button" in the name should be changed. {Formatting=Number}" -->14</size>
+		<embed _locID="TimedModeButtonEmbed"><!-- _locComment_text="True = Use embedded font. This must be false if you change the font or use an unsupported character (supported = A-Z, Punctuation)" -->true</embed>
+	</Mode2>
+	<Score>
+		<text _locID="ScoreText"><!-- _locComment_text="Label on the game score region" -->SCORE</text>
+		<font _locID="ScoreTextFont"><!-- _locComment_text="Change only if the default does not support the target language" -->Halfmoon</font>
+		<size _locID="ScoreTextSize"><!-- _locComment_text="Change only if the content does not fit {Formatting=Number}" -->14</size>
+		<embed _locID="ScoreEmbed"><!-- _locComment_text="True = Use embedded font. This must be false if you change the font or use an unsupported character (supported = A-Z, Punctuation)" -->true</embed>
+	</Score>
+
+	<!-- NEW GAME DIALOG -->
+
+	<NewGameTitle>
+		<text _locID="NewGameDialogTitle"><!-- _locComment_text="Title of the New Game Dialog" -->RESTART GAME?</text>
+		<font _locID="NewGameDialogTitleFont"><!-- _locComment_text="Change only if the default does not support the target language" -->Halfmoon</font>
+		<size _locID="NewGameDialogTitleSize"><!-- _locComment_text="Change only if the content does not fit {Formatting=Number}" -->18</size>
+		<embed _locID="NewGameDialogTitleEmbed"><!-- _locComment_text="True = Use embedded font. This must be false if you change the font or use an unsupported character (supported = A-Z, Punctuation)" -->true</embed>
+	</NewGameTitle>
+	<NewGameYes>
+		<text _locID="NewGameDialogYesButton"><!-- _locComment_text="Label on button to answer yes to starting a new game" -->YES</text>
+		<font _locID="NewGameDialogYesButtonFont"><!-- _locComment_text="Change only if the default does not support the target language" -->Halfmoon</font>
+		<size _locID="NewGameDialogYesButtonSize"><!-- _locComment_text="Change only if the content does not fit Point size 11 includes 30% expansion, if any string with button in the name is changed, all strings with "button" in the name should be changed. {Formatting=Number}" -->14</size>
+		<embed _locID="NewGameDialogYesButtonEmbed"><!-- _locComment_text="True = Use embedded font. This must be false if you change the font or use an unsupported character (supported = A-Z, Punctuation)" -->true</embed>
+	</NewGameYes>
+	<NewGameNo>
+		<text _locID="NewGameDialogNoButton"><!-- _locComment_text="Label on button to answer no to starting a new game" -->NO</text>
+		<font _locID="NewGameDialogNoButtonFont"><!-- _locComment_text="Change only if the default does not support the target language" -->Halfmoon</font>
+		<size _locID="NewGameDialogNoButtonSize"><!-- _locComment_text="Change only if the content does not fit Point size 11 includes 30% expansion, if any string with button in the name is changed, all strings with "button" in the name should be changed. {Formatting=Number}" -->14</size>
+		<embed _locID="NewGameDialogNoButtonEmbed"><!-- _locComment_text="True = Use embedded font. This must be false if you change the font or use an unsupported character (supported = A-Z, Punctuation)" -->true</embed>
+	</NewGameNo>
+
+	<!-- PAUSE DIALOG -->
+
+	<PauseTitle>
+		<text _locID="PauseDialogTitle"><!-- _locComment_text="Title of the Pause Game Dialog" -->GAME IS PAUSED</text>
+		<font _locID="PauseDialogTitleFont"><!-- _locComment_text="Change only if the default does not support the target language" -->Halfmoon</font>
+		<size _locID="PauseDialogTitleSize"><!-- _locComment_text="Change only if the content does not fit {Formatting=Number}" -->18</size>
+		<embed _locID="PauseDialogTitleEmbed"><!-- _locComment_text="True = Use embedded font. This must be false if you change the font or use an unsupported character (supported = A-Z, Punctuation)" -->true</embed>
+	</PauseTitle>
+	<PausePlay>
+		<text _locID="PauseDialogPlayButton"><!-- _locComment_text="Label on the button to unpause the game" -->PLAY</text>
+		<font _locID="PauseDialogPlayButtonFont"><!-- _locComment_text="Change only if the default does not support the target language" -->Halfmoon</font>
+		<size _locID="PauseDialogPlayButtonSize"><!-- _locComment_text="Change only if the content does not fit {Formatting=Number}" -->14</size>
+		<embed _locID="PauseDialogPlayButtonEmbed"><!-- _locComment_text="True = Use embedded font. This must be false if you change the font or use an unsupported character (supported = A-Z, Punctuation)" -->true</embed>
+	</PausePlay>
+
+	<!-- ILLEGAL MOVE DIALOG -->
+
+	<IllegalTitle>
+		<text _locID="IllegalMoveDialogTitle"><!-- _locComment_text="Title of the Illegal Move Dialog" -->ILLEGAL MOVE</text>
+		<font _locID="IllegalMoveDialogTitleFont"><!-- _locComment_text="Change only if the default does not support the target language" -->Halfmoon</font>
+		<size _locID="IllegalMoveDialogTitleSize"><!-- _locComment_text="Change only if the content does not fit {Formatting=Number}" -->18</size>
+		<embed _locID="IllegalMoveDialogTitleEmbed"><!-- _locComment_text="True = Use embedded font. This must be false if you change the font or use an unsupported character (supported = A-Z, Punctuation)" -->true</embed>
+	</IllegalTitle>
+	<IllegalExplanation>
+		<text _locID="IllegalMoveDialogText"><!-- _locComment_text="Text on the Illegal Move Dialog" -->SWAP TWO ADJACENT GEMS TO CREATE A SET OF THREE OR MORE GEMS OF THE SAME COLOR.</text>
+		<font _locID="IllegalMoveDialogTextFont"><!-- _locComment_text="Change only if the default does not support the target language" -->Arial</font>
+		<size _locID="IllegalMoveDialogTextSize"><!-- _locComment_text="Change only if the content does not fit {Formatting=Number}" -->10</size>
+		<embed _locID="IllegalMoveDialogEmbed"><!-- _locComment_text="True = Use embedded font. This must be false if you change the font or use an unsupported character (supported = A-Z, Punctuation)" -->true</embed>
+	</IllegalExplanation>  
+	<IllegalHelp>
+		<text _locID="IllegalMoveDialogHelpButton"><!-- _locComment_text="Label on button for help on the Illegal Move Dialog" -->HELP</text>
+		<font _locID="IllegalMoveDialogHelpButtonFont"><!-- _locComment_text="Change only if the default does not support the target language" -->Halfmoon</font>
+		<size _locID="IllegalMoveDialogHelpButtonSize"><!-- _locComment_text="Change only if the content does not fit {Formatting=Number}" -->14</size>
+		<embed _locID="IllegalMoveDialogHelpButtonEmbed"><!-- _locComment_text="True = Use embedded font. This must be false if you change the font or use an unsupported character (supported = A-Z, Punctuation)" -->true</embed>
+	</IllegalHelp>
+	<IllegalPlay>
+		<text _locID="IllegalMoveDialogPlayButton"><!-- _locComment_text="Label on the button to dismiss the dialog" -->PLAY</text>
+		<font _locID="IllegalMoveDialogPlayButtonFont"><!-- _locComment_text="Change only if the default does not support the target language" -->Halfmoon</font>
+		<size _locID="IllegalMoveDialogPlayButtonSize"><!-- _locComment_text="Change only if the content does not fit {Formatting=Number}" -->14</size>
+		<embed _locID="IllegalMoveDialogPlayButtonEmbed"><!-- _locComment_text="True = Use embedded font. This must be false if you change the font or use an unsupported character (supported = A-Z, Punctuation)" -->true</embed>
+	</IllegalPlay>
+
+	<!-- QUICK HELP DIALOG -->
+
+	<AssistTitle>
+		<text _locID="QuickHelpDialogTitle"><!-- _locComment_text="Title of Quick Help Dialog through the Help button" -->HOW TO PLAY THIS GAME</text>
+		<font _locID="QuickHelpDialogTitleFont"><!-- _locComment_text="Change only if the default does not support the target language" -->Halfmoon</font>
+		<size _locID="QuickHelpDialogTitleSize"><!-- _locComment_text="Change only if the content does not fit {Formatting=Number}" -->18</size>
+		<embed _locID="QuickHelpDialogTitleEmbed"><!-- _locComment_text="True = Use embedded font. This must be false if you change the font or use an unsupported character (supported = A-Z, Punctuation)" -->true</embed>
+	</AssistTitle>  
+	<AssistIntroTitle>
+		<text _locID="QuickHelpDialogWelcomeTitle"><!-- _locComment_text="Title of Quick Help Dialog on first entering the game" -->WELCOME TO BEJEWELED!</text>
+		<font _locID="QuickHelpDialogWelcomeTitleFont"><!-- _locComment_text="Change only if the default does not support the target language" -->Halfmoon</font>
+		<size _locID="QuickHelpDialogWelcomeTitleSize"><!-- _locComment_text="Change only if the content does not fit {Formatting=Number}" -->18</size>
+		<embed _locID="QuickHelpDialogWelcomeTitleEmbed"><!-- _locComment_text="True = Use embedded font. This must be false if you change the font or use an unsupported character (supported = A-Z, Punctuation)" -->true</embed>
+	</AssistIntroTitle>  
+	<AssistPlay>
+		<text _locID="QuickHelpDialogPlayButton"><!-- _locComment_text="Label on button to return to the game from the Quick Help Dialog" -->PLAY</text>
+		<font _locID="QuickHelpDialogPlayButtonFont"><!-- _locComment_text="Change only if the default does not support the target language" -->Halfmoon</font>
+		<size _locID="QuickHelpDialogPlayButtonSize"><!-- _locComment_text="Change only if the content does not fit {Formatting=Number}" -->14</size>
+		<embed _locID="QuickHelpDialogPlayButtonEmbed"><!-- _locComment_text="True = Use embedded font. This must be false if you change the font or use an unsupported character (supported = A-Z, Punctuation)" -->true</embed>
+	</AssistPlay>
+	<AssistPlaySimple>
+		<text _locID="QuickHelpDialogPlaySimpleButton"><!-- _locComment_text="Label on button to start a new game in Simple Mode from the Quick Help Dialog" -->PLAY SIMPLE</text>
+		<font _locID="QuickHelpDialogPlaySimpleButtonFont"><!-- _locComment_text="Change only if the default does not support the target language" -->Halfmoon</font>
+		<size _locID="QuickHelpDialogPlaySimpleButtonSize"><!-- _locComment_text="Change only if the content does not fit Point size 11 includes 30% expansion, if any string with button in the name is changed, all strings with "button" in the name should be changed. {Formatting=Number}" -->14</size>
+		<embed _locID="QuickHelpDialogPlaySimpleButtonEmbed"><!-- _locComment_text="True = Use embedded font. This must be false if you change the font or use an unsupported character (supported = A-Z, Punctuation)" -->true</embed>
+	</AssistPlaySimple>
+	<AssistPlayTimed>
+		<text _locID="QuickHelpDialogPlayTimedButton"><!-- _locComment_text="Label on button to start a new game in Timed Mode from the Quick Help Dialog" -->PLAY TIMED</text>
+		<font _locID="QuickHelpDialogPlayTimedButtonFont"><!-- _locComment_text="Change only if the default does not support the target language" -->Halfmoon</font>
+		<size _locID="QuickHelpDialogPlayTimedButtonSize"><!-- _locComment_text="Change only if the content does not fit Point size 11 includes 30% expansion, if any string with button in the name is changed, all strings with "button" in the name should be changed. {Formatting=Number}" -->14</size>
+		<embed _locID="QuickHelpDialogPlayTimedButtonEmbed"><!-- _locComment_text="True = Use embedded font. This must be false if you change the font or use an unsupported character (supported = A-Z, Punctuation)" -->true</embed>
+	</AssistPlayTimed>
+	<AssistTip1>
+		<text _locID="QuickHelpDialogText1"><!-- _locComment_text="Text 1 on Quick Help Dialog" -->SWAP ADJACENT GEMS TO ALIGN SETS OF 3 OR MORE.</text>
+		<font _locID="QuickHelpDialogText1Font"><!-- _locComment_text="Change only if the default does not support the target language" -->Arial</font>
+		<size _locID="QuickHelpDialogText1Size"><!-- _locComment_text="Change only if the content does not fit {Formatting=Number}" -->10</size>
+		<embed _locID="QuickHelpDialogText1Embed"><!-- _locComment_text="True = Use embedded font. This must be false if you change the font or use an unsupported character (supported = A-Z, Punctuation)" -->true</embed>
+	</AssistTip1>
+	<AssistTip2>
+		<text _locID="QuickHelpDialogText2"><!-- _locComment_text="Text 2 on Quick Help Dialog" -->A WINNING SET IS 3 OR MORE GEMS OF SAME COLOR.</text>
+		<font _locID="QuickHelpDialogText2Font"><!-- _locComment_text="Change only if the default does not support the target language" -->Arial</font>
+		<size _locID="QuickHelpDialogText2Size"><!-- _locComment_text="Change only if the content does not fit {Formatting=Number}" -->10</size>
+		<embed _locID="QuickHelpDialogText2Embed"><!-- _locComment_text="True = Use embedded font. This must be false if you change the font or use an unsupported character (supported = A-Z, Punctuation)" -->true</embed>
+	</AssistTip2>
+	<AssistTip3>
+		<text _locID="QuickHelpDialogText3"><!-- _locComment_text="Text 3 on Quick Help Dialog. Omit this line if there is not room for a full translation on the other lines." -->COMBOS AND CASCADES AWARD EXTRA POINTS.</text>
+		<font _locID="QuickHelpDialogText3Font"><!-- _locComment_text="Change only if the default does not support the target language" -->Arial</font>
+		<size _locID="QuickHelpDialogText3Size"><!-- _locComment_text="Change only if the content does not fit {Formatting=Number}" -->10</size>
+		<embed _locID="QuickHelpDialogText3Embed"><!-- _locComment_text="True = Use embedded font. This must be false if you change the font or use an unsupported character (supported = A-Z, Punctuation)" -->true</embed>
+	</AssistTip3>  
+	<AssistTip4>
+		<text _locID="QuickHelpDialogText4"><!-- _locComment_text="Text 4 on Quick Help Dialog" -->FILL THE GEM METER FOR A BONUS!</text>
+		<font _locID="QuickHelpDialogText4Font"><!-- _locComment_text="Change only if the default does not support the target language" -->Arial</font>
+		<size _locID="QuickHelpDialogText4Size"><!-- _locComment_text="Change only if the content does not fit {Formatting=Number}" -->10</size>
+		<embed _locID="QuickHelpDialogText4Embed"><!-- _locComment_text="True = Use embedded font. This must be false if you change the font or use an unsupported character (supported = A-Z, Punctuation)" -->true</embed>
+	</AssistTip4> 
+	<AssistTip5>
+		<text _locID="QuickHelpDialogText5"><!-- _locComment_text="Text 5 on Quick Help Dialog" -->PRESS SPACEBAR TO PAUSE.</text>
+		<font _locID="QuickHelpDialogText5Font"><!-- _locComment_text="Change only if the default does not support the target language" -->Arial</font>
+		<size _locID="QuickHelpDialogText5Size"><!-- _locComment_text="Change only if the content does not fit {Formatting=Number}" -->10</size>
+		<embed _locID="QuickHelpDialogText5Embed"><!-- _locComment_text="True = Use embedded font. This must be false if you change the font or use an unsupported character (supported = A-Z, Punctuation)" -->true</embed>
+	</AssistTip5> 
+
+	<!-- END GAME DIALOG -->
+
+	<EndGameTitle>
+		<text _locID="EndGameDialogTitle"><!-- _locComment_text="Title on End Game Dialog" -->GAME STATISTICS</text>
+		<font _locID="EndGameDialogTitleFont"><!-- _locComment_text="Change only if the default does not support the target language" -->Halfmoon</font>
+		<size _locID="EndGameDialogTitleSize"><!-- _locComment_text="Change only if the content does not fit {Formatting=Number}" -->18</size>
+		<embed _locID="EndGameDialogTitleEmbed"><!-- _locComment_text="True = Use embedded font. This must be false if you change the font or use an unsupported character (supported = A-Z, Punctuation)" -->true</embed>
+	</EndGameTitle> 
+	<EndGameUpload>
+		<text _locID="UploadButton"><!-- _locComment_text="Label on button to upload the score for the game" -->UPLOAD SCORE</text>
+		<font _locID="UploadButtonFont"><!-- _locComment_text="Change only if the default does not support the target language" -->Halfmoon</font>
+		<size _locID="UploadButtonSize"><!-- _locComment_text="Change only if the content does not fit {Formatting=Number}" -->14</size>
+		<embed _locID="UploadButtonEmbed"><!-- _locComment_text="True = Use embedded font. This must be false if you change the font or use an unsupported character (supported = A-Z, Punctuation)" -->true</embed>
+	</EndGameUpload>
+	<EndGameUploaded>
+		<text _locID="UploadButton2"><!-- _locComment_text="Label on button to upload the score after the score has been uploaded" -->UPLOADED</text>
+		<font _locID="UploadButton2Font"><!-- _locComment_text="Change only if the default does not support the target language" -->Halfmoon</font>
+		<size _locID="UploadButton2Size"><!-- _locComment_text="Change only if the content does not fit {Formatting=Number}" -->14</size>
+		<embed _locID="UploadButton2Embed"><!-- _locComment_text="True = Use embedded font. This must be false if you change the font or use an unsupported character (supported = A-Z, Punctuation)" -->true</embed>
+	</EndGameUploaded>
+	<EndGamePlay>
+		<text _locID="EndGameDialogPlayButton"><!-- _locComment_text="Label on button to play the game again" -->PLAY AGAIN</text>
+		<font _locID="EndGameDialogPlayButtonFont"><!-- _locComment_text="Change only if the default does not support the target language" -->Halfmoon</font>
+		<size _locID="EndGameDialogPlayButtonSize"><!-- _locComment_text="Change only if the content does not fit {Formatting=Number}" -->14</size>
+		<embed _locID="EndGameDialogPlayButtonEmbed"><!-- _locComment_text="True = Use embedded font. This must be false if you change the font or use an unsupported character (supported = A-Z, Punctuation)" -->true</embed>
+	</EndGamePlay>
+	<EndGameDuration>
+		<text _locID="EndGameDialogDurationText"><!-- _locComment_text="Text on the End Game Dialog for game duration" -->GAME DURATION</text>
+		<font _locID="EndGameDialogDurationTextFont"><!-- _locComment_text="Change only if the default does not support the target language" -->Arial Narrow</font>
+		<size _locID="EndGameDialogDurationTextSize"><!-- _locComment_text="Change only if the content does not fit {Formatting=Number}" -->10</size>
+		<embed _locID="EndGameDialogDurationEmbed"><!-- _locComment_text="True = Use embedded font. This must be false if you change the font or use an unsupported character (supported = A-Z, Punctuation)" -->true</embed>
+	</EndGameDuration>
+	<EndGameCleared>
+		<text _locID="EndGameDialogClearedText"><!-- _locComment_text="Text on the End Game Dialog for number of gems cleared" -->GEMS CLEARED</text>
+		<font _locID="EndGameDialogClearedTextFont"><!-- _locComment_text="Change only if the default does not support the target language" -->Arial Narrow</font>
+		<size _locID="EndGameDialogClearedTextSize"><!-- _locComment_text="Change only if the content does not fit {Formatting=Number}" -->10</size>
+		<embed _locID="EndGameDialogClearedEmbed"><!-- _locComment_text="True = Use embedded font. This must be false if you change the font or use an unsupported character (supported = A-Z, Punctuation)" -->true</embed>
+	</EndGameCleared>
+	<EndGamePerMinute>
+		<text _locID="EndGameDialogRateText"><!-- _locComment_text="Text on the End Game Dialog for the rate of gems per minute cleared" -->GEMS PER MINUTE</text>
+		<font _locID="EndGameDialogRateTextFont"><!-- _locComment_text="Change only if the default does not support the target language" -->Arial Narrow</font>
+		<size _locID="EndGameDialogRateTextSize"><!-- _locComment_text="Change only if the content does not fit {Formatting=Number}" -->10</size>
+		<embed _locID="EndGameDialogRateEmbed"><!-- _locComment_text="True = Use embedded font. This must be false if you change the font or use an unsupported character (supported = A-Z, Punctuation)" -->true</embed>
+	</EndGamePerMinute>
+	<EndGameBestMove>
+		<text _locID="EndGameDialogBestText"><!-- _locComment_text="Text on the End Game Dialog for the best score for a single move" -->BEST SINGLE MOVE</text>
+		<font _locID="EndGameDialogBestTextFont"><!-- _locComment_text="Change only if the default does not support the target language" -->Arial Narrow</font>
+		<size _locID="EndGameDialogBestTextSize"><!-- _locComment_text="Change only if the content does not fit {Formatting=Number}" -->10</size>
+		<embed _locID="EndGameDialogBestEmbed"><!-- _locComment_text="True = Use embedded font. This must be false if you change the font or use an unsupported character (supported = A-Z, Punctuation)" -->true</embed>
+	</EndGameBestMove> 
+
+	<!-- CRYSTAL BALL PROMPTS -->
+
+	<PromptNoMoreMoves>
+		<text _locID="NoMovesPrompt"><!-- _locComment_text="Text prompt that appears in crystal ball when there are no more moves" -->NO&#10;MORE&#10;MOVES</text>
+		<font _locID="NoMovesPromptFont"><!-- _locComment_text="Change only if the default does not support the target language" -->Arial</font>
+		<size _locID="NoMovesPromptSize"><!-- _locComment_text="Change only if the content does not fit {Formatting=Number}" -->16</size>
+		<embed _locID="NoMovesPromptEmbed"><!-- _locComment_text="True = Use embedded font. This must be false if you change the font or use an unsupported character (supported = A-Z, Punctuation)" -->true</embed>
+	</PromptNoMoreMoves> 
+	<PromptTimeIsUp>
+		<text _locID="TimeUpPrompt"><!-- _locComment_text="Text prompt that appears in crystal ball when time is up" -->TIME&#10;IS&#10;UP</text>
+		<font _locID="TimeUpPromptFont"><!-- _locComment_text="Change only if the default does not support the target language" -->Arial</font>
+		<size _locID="TimeUpPromptSize"><!-- _locComment_text="Change only if the content does not fit {Formatting=Number}" -->16</size>
+		<embed _locID="TimeUpPromptEmbed"><!-- _locComment_text="True = Use embedded font. This must be false if you change the font or use an unsupported character (supported = A-Z, Punctuation)" -->true</embed>
+	</PromptTimeIsUp> 
+	<PromptTakeAHint>
+		<text _locID="TakeAHintPrompt"><!-- _locComment_text="Text prompt that appears in crystal ball when a hint is shown" -->TAKE&#10;A&#10;HINT</text>
+		<font _locID="TakeAHintFontPrompt"><!-- _locComment_text="Change only if the default does not support the target language" -->Arial</font>
+		<size _locID="TakeAHintSizePrompt"><!-- _locComment_text="Change only if the content does not fit {Formatting=Number}" -->16</size>
+		<embed _locID="TakeAHintEmbedPrompt"><!-- _locComment_text="True = Use embedded font. This must be false if you change the font or use an unsupported character (supported = A-Z, Punctuation)" -->true</embed>
+	</PromptTakeAHint> 
+	
+
+	<!-- GAME BOARD TEXT GRAPHICS -->
+
+	<!-- Leave these commented out to get nice looking graphics. 
+	<Bonus>
+		<text _locID="BonusAnnouncement">BONUS!</text>
+		<font _locID="BonusAnnouncementFont">Arial</font>
+		<size _locID="BonusAnnouncementSize">16</size>
+		<embed _locID="BonusAnnouncementEmbed"><!-- _locComment_text="True = Use embedded font. This must be false if you change the font or use an unsupported character (supported = A-Z, Punctuation)" -->true</embed>
+	</Bonus>
+	<NoMoreMoves>
+		<text _locID="NoMovesAnnouncement">NO MORE MOVES</text>
+		<font _locID="NoMovesAnnouncementFont">Arial</font>
+		<size _locID="NoMovesAnnouncementSize">16</size>
+		<embed _locID="NoMovesAnnouncementEmbed"><!-- _locComment_text="True = Use embedded font. This must be false if you change the font or use an unsupported character (supported = A-Z, Punctuation)" -->true</embed>
+	</NoMoreMoves>
+	<GameOver>
+		<text _locID="GameOverAnnouncement">GAME OVER</text>
+		<font _locID="GameOverAnnouncementFont">Arial</font>
+		<size _locID="GameOverAnnouncementSize">16</size>
+		<embed _locID="GameOverAnnouncementEmbed"><!-- _locComment_text="True = Use embedded font. This must be false if you change the font or use an unsupported character (supported = A-Z, Punctuation)" -->true</embed>
+	</GameOver>
+	<TimeIsUp>
+		<text _locID="TimeUpAnnouncement">TIME IS UP!</text>
+		<font _locID="TimeUpAnnouncementFont">Arial</font>
+		<size _locID="TimeUpAnnouncementSize">16</size>
+		<embed _locID="TimeUpAnnouncementEmbed"><!-- _locComment_text="True = Use embedded font. This must be false if you change the font or use an unsupported character (supported = A-Z, Punctuation)" -->true</embed>
+	</TimeIsUp>
+	<BarBonus>
+		<text _locID="BonusBarLabel">BONUS</text>
+		<font _locID="BonusBarLabelFont">Halfmoon</font>
+		<size _locID="BonusBarLabelSize">14</size>
+		<embed _locID="BonusBarLabelEmbed"><!-- _locComment_text="True = Use embedded font. This must be false if you change the font or use an unsupported character (supported = A-Z, Punctuation)" -->true</embed>
+	</BarBonus>
+	-->
+</Bejeweled>

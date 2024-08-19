@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<data>
+
+	<plugins>
+	</plugins>
+	
+	<resources>
+	  <res/>
+	</resources>
+	
+	<upsells>
+	     <url>http://www.popcap.com/games/zumasrevenge?cid=IPC_zumasrevenge_level_text_uk</url>
+             <enabled>true</enabled>
+	</upsells>
+	
+	<moregames>
+	     <url>http://www.popcap.com/</url>
+	     <enabled>false</enabled>
+	</moregames>
+	
+	<MSN>
+	    <enabled>false</enabled>
+	    <!-- This value should be in MILLISECONDS -->
+	    <!-- The minimum value is 1000 -->
+	    <loadBroadcastRate>3000</loadBroadcastRate>
+	    <scoreBroadcastRate>5000</scoreBroadcastRate>
+ 	</MSN>
+ 	 
+	<commands>
+	    <enabled>true</enabled>
+
+	    <!-- Framework controls -->
+	    <bind keyCombo="F1">ToggleDebugInfo</bind>
+	    <!-- Pauses framework updates, or advances the framework by one update. -->
+	    <bind keyCombo="F9">StepUpdates</bind>
+	    <!-- Resumes framework updates. -->
+	    <bind keyCombo="Shift+F9">ResumeUpdates</bind>	
+
+	    <bind keyCombo="NUM_1">RedBall</bind>
+	    <bind keyCombo="NUM_2">YellowBall</bind>
+	    <bind keyCombo="NUM_3">GreenBall</bind>
+	    <bind keyCombo="NUM_4">BlueBall</bind>
+	    <bind keyCombo="NUM_5">PurpleBall</bind>
+	    <bind keyCombo="NUM_6">WhiteBall</bind>
+	    <bind keyCombo="b">Bomb</bind>
+	    <bind keyCombo="s">Stop</bind>
+	    <bind keyCombo="r">Reverse</bind>
+	    <bind keyCombo="c">Cannon</bind>
+	    <bind keyCombo="h">HourGlass</bind>
+	    <bind keyCombo="u">PauseBalls</bind>
+	    <bind keyCombo="f">ForceFruit</bind>
+	    <bind keyCombo="Delete">DeleteBall</bind>
+	    <bind keyCombo="t">ForceTimeUp</bind>
+	    <bind keyCombo="p">ToggleFPS</bind>
+	    <bind keyCombo="a">ShowStatsScreen</bind>
+	    <bind keyCombo="z">FillZumaBar</bind>
+	    <bind keyCombo="k">GivePoints</bind>
+	    <bind keyCombo="q">BestTimes</bind>
+	    <bind keyCombo="RIGHT_BRACKET">ForwardLevel</bind>
+	    <bind keyCombo="LEFT_BRACKET">BackwardLevel</bind>
+	</commands>
+	
+</data>

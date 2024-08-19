@@ -1,0 +1,90 @@
+<locale>
+<sections>
+<section name="instructions">
+<text id="heading">Instructions</text>
+<text id="instruct1">Use the mouse to aim a shot</text>
+<text id="instruct2">Hit all orange pegs to win</text>
+<text id="instruct3">Hit greens for magic powers</text>
+<text id="instruct4">Hit purple for point boost</text>
+</section>
+<section name="challenge_defaults">
+<text id="title">Lorem ipsum dolor sit amet</text>
+<text id="desc">Lorem ipsum dolor sit amet</text>
+</section>
+<section name="stage_select">
+<text id="character1_name">BJORN</text>
+<text id="character1_sub">Super Guide</text>
+<text id="character1_desc">Aim your shoots with amazing laser precision!</text>
+<text id="character2_name">KAT TUT</text>
+<text id="character2_sub">Pyramid Power</text>
+<text id="character2_desc">Expand the bucket for lucky bounces and free balls!</text>
+<text id="challenge_name">CHALLENGE</text>
+<text id="challenge_sub">Experts only!</text>
+<text id="challenge_desc">Hone your Peggle skills with these tricky tests!</text>
+<text id="score">SCORE:</text>
+<text id="top_score">TOP SCORE:</text>
+</section>
+<section name="game_ui">
+<text id="score_level">SCORE</text>
+<text id="score_total">TOP SCORE:</text>
+<text id="score_challenge">CHALLENGE SCORE:</text>
+</section>
+<section name="in_game_menu">
+<text id="heading">MENU</text>
+<text id="upgrade_btn">UPGRADE NOW!</text>
+<text id="abandon_btn">ABANDON CHALLENGE</text>
+<text id="resume_btn">BACK TO GAME</text>
+<text id="volume">SOUND EFFECTS</text>
+</section>
+<section name="level_complete_panel">
+<text id="heading">LEVEL COMPLETE!</text>
+<text id="score_total">TOTAL SCORE:</text>
+<text id="score_level">LEVEL SCORE:</text>
+<text id="score_shots">Shots:</text>
+<text id="score_free_balls">Free Balls:</text>
+<text id="score_cleared">% Cleared:</text>
+<text id="score_shot">Shot Points:</text>
+<text id="score_fever">Fever Points:</text>
+<text id="score_style">Style Points:</text>
+<text id="continue_btn">CONTINUE</text>
+<text id="score_first_try">WIN ON 1ST TRY:</text>
+<text id="score_second_try">WIN ON 2ND TRY:</text>
+<text id="score_third_try">WIN ON 3RD TRY:</text>
+</section>
+<section name="level_lose_panel">
+<text id="heading">RETRY</text>
+<text id="score_total">TOTAL SCORE:</text>
+<text id="score_level">LEVEL SCORE:</text>
+<text id="score_shots">Shots:</text>
+<text id="score_free_balls">Free Balls:</text>
+<text id="score_cleared">% Cleared:</text>
+<text id="score_shot">Shot Points:</text>
+<text id="score_fever">Fever Points:</text>
+<text id="score_style">Style Points:</text>
+<text id="retry_btn">RETRY LEVEL</text>
+<text id="continue_btn">CONTINUE</text>
+</section>
+<section name="adventure_complete_panel">
+<text id="heading">LEVEL COMPLETE!</text>
+<text id="title">ADVENTURE COMPLETE!</text>
+<text id="continue_btn">CONTINUE</text>
+<text id="score_retries">RETRIES:</text>
+<text id="score_efficiency">EFFICIENCY BONUS:</text>
+<text id="score_final">FINAL SCORE:</text>
+<text id="score_level">LEVEL SCORE:</text>
+<text id="score_shots">Shots:</text>
+<text id="score_free_balls">Free Balls:</text>
+<text id="score_cleared">% Cleared:</text>
+<text id="score_shot">Shot Points:</text>
+<text id="score_fever">Fever Points:</text>
+<text id="score_style">Style Points:</text>
+<text id="score_first_try">WIN ON 1ST TRY:</text>
+<text id="score_second_try">WIN ON 2ND TRY:</text>
+<text id="score_third_try">WIN ON 3RD TRY:</text>
+</section>
+<section name="challenge_select">
+<text id="heading">CHALLENGES</text>
+<text id="back_btn">BACK</text>
+</section>
+</sections>
+</locale>
