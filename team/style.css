@@ -1,16 +1,18 @@
 @font-face {
-  font-family: 'AhMyBelovedHandwritingFont';
-  src: url('ruji.otf') format('otf');
+  font-family: 'RujisHandwritingFontv20Medium';
+      src: url('ruji.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
 }
 
 @font-face {
   font-family: 'ChirpBold';
-  src:  url('static/chirpbold.ttf') format('ttf')
+  src:  url('//abs.twimg.com/responsive-web/client-web/Chirp-Bold.a573679a.woff') format('ttf');
 }
 
 @font-face {
   font-family: 'Chirp';
-  src:  url('static/chirp.ttf') format('ttf')
+  src:  url('//abs.twimg.com/responsive-web/client-web/Chirp-Regular.60b215ba.woff') format('ttf');
 }
 
 @-webkit-keyframes shake {
@@ -124,7 +126,7 @@ body::-webkit-scrollbar {
 
 h1 {
   color: #ffffff;
-  font-family: "AhMyBelovedHandwritingFont", sans-serif;
+  font-family: "RujisHandwritingFontv20Medium",;
   -webkit-animation-name: shake;
   -webkit-animation-duration: 0.5s;
   -webkit-transform-origin:50% 50%;
@@ -141,7 +143,7 @@ h1 {
 .fakemarqueetext {
 	position: absolute;
 	animation: shakefix 0.5s linear infinite;
-	font-family: "AhMyBelovedHandwritingFont", sans-serif;
+	font-family: "RujisHandwritingFontv20Medium";
 	font-size: 10px;
 	color: #ffffff;
 	text-shadow: -4px -4px 0 #000000, 4px -4px 0 #000000, -4px 4px 0 #000000, 4px 4px 0 #000000;
@@ -166,7 +168,7 @@ h1 {
   font-weight: bold;
   text-align: center;
   text-shadow: 0px 0px 10px #6b6b6a;
-  font-family: "AhMyBelovedHandwritingFont", sans-serif;
+  font-family: "RujisHandwritingFontv20Medium";
   cursor: pointer;
 }
 
