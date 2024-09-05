@@ -1,18 +1,18 @@
 @font-face {
   font-family: 'RujisHandwritingFontv20Medium';
-      src: url('ruji.ttf') format('truetype');
+      src: url('static/ruji.ttf') format('truetype');
   font-weight: normal;
   font-style: normal;
 }
 
 @font-face {
   font-family: 'ChirpBold';
-  src:  url('//abs.twimg.com/responsive-web/client-web/Chirp-Bold.a573679a.woff') format('ttf');
+  src:  url('//abs.twimg.com/responsive-web/client-web/Chirp-Bold.a573679a.woff');
 }
 
 @font-face {
   font-family: 'Chirp';
-  src:  url('//abs.twimg.com/responsive-web/client-web/Chirp-Regular.60b215ba.woff') format('ttf');
+  src:  url('//abs.twimg.com/responsive-web/client-web/Chirp-Regular.60b215ba.woff');
 }
 
 @-webkit-keyframes shake {
