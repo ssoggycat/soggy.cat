@@ -12,7 +12,7 @@
 * regery help
 ### 🔹 – mat ([🔗](https://github.com/M5X11))
 * all of the more complicated and cool thingamabobs
-### 🐱 – yagton ([🔗](https://github.com/slaskax))
+### 🐱 – fernsy ([🔗](https://github.com/slaskax))
 * domain setup
 * github organization creator
 ### 🐶 – cv ([🔗](https://github.com/cv003))
