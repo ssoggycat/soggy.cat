@@ -10,7 +10,7 @@
 ### 🖥️ – FP ([🔗](https://github.com/system2k))
 * domain billing!!
 * regery help
-### 🔹 – mat ([🔗](https://github.com/mat5555))
+### 🔹 – mat ([🔗](https://github.com/M5X11))
 * all of the more complicated and cool thingamabobs
 ### 🐱 – yagton ([🔗](https://github.com/tlras))
 * domain setup
