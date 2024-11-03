@@ -7,19 +7,17 @@
 <sub> all of the edits in this repo reflect on the website itself so it's always up to date. </sub>
 
 ## ~ CREDITS ~
-### 🖥️ – FP ([🔗](https://github.com/system2k))
-* domain billing!!
+### 🖥️ FP ([🔗](https://github.com/system2k)) 
+* domain billing!
 * regery help
-### 🔹 – mat ([🔗](https://github.com/M5X11))
-* all of the more complicated and cool thingamabobs
-### 🐱 – fernsy ([🔗](https://github.com/slaskax))
-* domain setup
-* github organization creator
-### 🐶 – cv ([🔗](https://github.com/cv003))
+### 🔹 mat ([🔗](https://github.com/M5X11))
+* dns, major components of the website
+### 🐶 cv ([🔗](https://github.com/cv003))
 * planning
-* BAD coding
-### 🌙 – moonrays ([🔗](https://github.com/moon-rays))
-* main idea
-* GOOD coding
+* bad coding
+### 🐱 fernsy ([🔗](https://github.com/slaskax))
+* domain & organization setup
+### 🌙 moonrays ([🔗](https://github.com/moon-rays))
+* the entire frontpage!
 
 <h6 align="center">meow meow meow meow meow meow meow meow meow meow meow meow meow meow meow meow meow</h6>
