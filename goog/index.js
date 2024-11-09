@@ -30,7 +30,7 @@ function init() {
     const dracoLoader = new DRACOLoader();
 
     dracoLoader.setDecoderConfig({ type: 'js' });
-    dracoLoader.setDecoderPath('/js/threejs/draco/');
+    dracoLoader.setDecoderPath('goog/threejs/draco/');
 
     loader.setDRACOLoader(dracoLoader);
 
