@@ -21,7 +21,7 @@ document.addEventListener('DOMContentLoaded', function () {
 	
 	const picker = document.getElementById('picker');
 
-	const shouldSog = document.body.getAttribute('soggy-pagetype') == 'vtilt-js';
+	const shouldSog = document.body.getAttribute('data-soggy-pagetype') == 'vtilt-js';
 
 	const sog = shouldSog ? document.getElementById('soggycat') : null;
 	
