@@ -18,17 +18,29 @@
   <meta property="og:title" content="billy...">
   <meta property="og:image" content="/billy/billy.webp">
 </head>
-<body>
-     <img id="soggycat" src="billy.webp" data-tilt data-tilt-scale="1.06" />
 
-     <div id="sidemenu">
-     	<a href="/github/" class="menubuttonsa"> <div class="menubuttons"> <img src='/img/code.svg'/>GitHub</div> </a>
-     	<a href="nocss" class="menubuttonsa"> <div class="menubuttons"> <img src='/img/nocss.svg'/>No CSS</div> </a>
-     </div>
+<body data-soggy-pagetype="vtilt-js">
+  <img id="soggycat" src="billy.webp" data-tilt data-tilt-scale="1.06" />
 
-     <button id="circlebtn"></button>
+  <div id="sidemenu">
+  <a href="/github" class="menubuttonsa">
+    <div class="menubuttons"><img src='/img/code.svg'/>code</div></a>
+    
+  <a href="/nocss" class="menubuttonsa">
+    <div class="menubuttons small"><img src='/img/nocss.svg'/>no css</div></a>
+    
+  <a href="#" class="menubuttonsa"
+      onclick="document.getElementById('picker').click(); return false;">
+    <div class="menubuttons small"><img src='/img/upload.svg'/>upload</div></a>
+  </div>
 
-     	<script src='/static/vanillatilt.js'></script>
-     	<script src='/static/main.js'></script>
+  <button id="circlebtn"></button>
+  <span id='player' style='display: none'></span>
+  <input type="file" id="picker" style="display: none" accept="image/*" />
+
+  <button id="circlebtn"></button>
+
+  <script src='/static/vanillatilt.js'></script>
+  <script src='/static/main.js'></script>
 </body>
 </html>

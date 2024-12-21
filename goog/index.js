@@ -3,8 +3,10 @@ import { GLTFLoader } from 'GLTFLoader';
 import { DRACOLoader } from 'DRACOLoader';
 import { OrbitControls } from 'OrbitControls';
 
-let googtainer, scene, camera, controls, raycaster, renderer;
-let frame, goog;
+let googtainer, scene, camera, controls, raycaster, renderer, texloader;
+let frame, goog, googLightmapMaterial;
+
+let defaultAlbedoTex, diffuseTex, glossyTex;
 
 let targetRotationX = 0, targetRotationY = 0;
 let lastRotationX = 0, lastRotationY = 0;
@@ -34,11 +36,55 @@ function init() {
 
     loader.setDRACOLoader(dracoLoader);
 
+    texloader = new THREE.TextureLoader();
+
+    defaultAlbedoTex = texloader.load('scene/goog.webp');
+    diffuseTex = texloader.load('scene/googBake.webp');
+    glossyTex = texloader.load('scene/googBakeGlossy.webp');
+
+    defaultAlbedoTex.flipY = false;
+    diffuseTex.flipY = false;
+    glossyTex.flipY = false;
+
+    googLightmapMaterial = new THREE.ShaderMaterial({
+        uniforms: {
+            albedo: { value: defaultAlbedoTex },
+            diffuse: { value: diffuseTex },
+            glossy: { value: glossyTex }
+        },
+
+        vertexShader: `
+            varying vec2 vUv;
+            void main() {
+                vUv = vec2(uv.x, uv.y);
+                gl_Position = projectionMatrix * modelViewMatrix * vec4(position, 1.0);
+            }
+        `,
+
+        fragmentShader: `
+            varying vec2 vUv;
+            uniform sampler2D albedo;
+            uniform sampler2D diffuse;
+            uniform sampler2D glossy;
+    
+            void main() {
+                vec4 albedoColor = texture2D(albedo, vUv);
+                vec4 diffuseColor = texture2D(diffuse, vUv);
+                vec4 glossyColor = texture2D(glossy, vUv);
+
+                gl_FragColor = (albedoColor * diffuseColor) + glossyColor;
+            }
+        `
+    });
+
     loader.load('scene/scene.gltf', (gltf) => {
         scene.add(gltf.scene);
         
         frame = gltf.scene.getObjectByName("Frame");
+        frame.material.map.generateMipmaps = false; //🐱👍!!!
+
         goog = gltf.scene.getObjectByName("Goog");
+        goog.material = googLightmapMaterial
     });
 
     camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 1.2, 4);
@@ -59,7 +105,17 @@ function init() {
 
     document.addEventListener('mousemove', onDocumentMouseMove, false);
     document.addEventListener('mouseleave', mouseLeave);
+    document.addEventListener('soggyupdate', onSoggyUpdate)
+
     window.addEventListener('resize', onWindowResize, false);
+}
+
+function onSoggyUpdate(e) {
+    const newTexture = texloader.load(e.detail.result);
+    newTexture.flipY = false;
+
+    googLightmapMaterial.uniforms.albedo = newTexture;
+    googLightmapMaterial.needsUpdate = true;
 }
 
 function onWindowResize() {

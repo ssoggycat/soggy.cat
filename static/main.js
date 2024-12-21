@@ -20,7 +20,10 @@ function toggleMenu() {
 document.addEventListener('DOMContentLoaded', function () {
 	
 	const picker = document.getElementById('picker');
-	const sog = document.getElementById('soggycat');
+
+	const shouldSog = document.body.getAttribute('soggy-pagetype') == 'vtilt-js';
+
+	const sog = shouldSog ? document.getElementById('soggycat') : null;
 	
 	picker.addEventListener('change', function (event) {
 	const file = event.target.files[0];
@@ -28,6 +31,16 @@ document.addEventListener('DOMContentLoaded', function () {
 		const reader = new FileReader();
 
 		reader.onload = function (e) {
+			const soggyUpdateEvent = new CustomEvent('soggyupdate',{
+				detail: {
+					result: e.target.result
+				}
+			});
+
+			document.dispatchEvent(soggyUpdateEvent)
+
+			if (!sog) return;
+
 			sog.src = e.target.result;
 			sog.onload = function () {
 				// STEAL COLORS!!!! this almost feels like chicory
@@ -41,6 +54,7 @@ document.addEventListener('DOMContentLoaded', function () {
 				document.body.style.background = epicgradient;
 			};
 		};
+
 		reader.readAsDataURL(file);
 	}
 })});
