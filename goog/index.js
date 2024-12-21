@@ -111,6 +111,7 @@ function init() {
 }
 
 function onSoggyUpdate(e) {
+    console.log(e.detail.result);
     const newTexture = texloader.load(e.detail.result);
     newTexture.flipY = false;
 
