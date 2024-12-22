@@ -72,7 +72,10 @@ function init() {
                 vec4 diffuseColor = texture2D(diffuse, vUv);
                 vec4 glossyColor = texture2D(glossy, vUv);
 
-                gl_FragColor = (albedoColor * diffuseColor) + glossyColor;
+                float gray = 0.21 * albedoColor.r + 0.71 * albedoColor.g + 0.07 * albedoColor.b;
+                vec4 composite = (diffuseColor * gray) + glossyColor;
+
+                gl_FragColor = composite;
             }
         `
     });
@@ -111,11 +114,10 @@ function init() {
 }
 
 function onSoggyUpdate(e) {
-    console.log(e.detail.result);
-    const newTexture = new THREE.Texture(e.detail.result);
+    const newTexture = texloader.load(e.detail.result);
     newTexture.flipY = false;
 
-    googLightmapMaterial.uniforms.albedo = newTexture;
+    googLightmapMaterial.uniforms.albedo = { value: newTexture };
     googLightmapMaterial.needsUpdate = true;
 }
 
