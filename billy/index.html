@@ -1,46 +1,42 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <link rel="preconnect" href="//fonts.googleapis.com">
-  <link rel="preconnect" href="//fonts.gstatic.com" crossorigin>
-  <link href="//fonts.googleapis.com/css2?family=Spline+Sans+Mono&display=swap" rel="stylesheet">
-  <link rel="icon" href="icon.webp">
-  <link rel="canonical" href="/billy/">
-  <link rel="stylesheet" href="/static/main.css">
-  <link rel="stylesheet" href="billy.css">
   <title>billy...</title>
-  <meta charset="utf-8">
+  <link rel="icon" href="/billy/icon.webp">
+
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="robots" content="index, follow">
-  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-  <meta name="description" content="A picture of.... william?">
-  <meta property="og:description" content="A picture of.... william?">
-  <meta name="title" content="billy...">
-  <meta property="og:title" content="billy...">
+  <meta charset="utf-8">
+
+  <meta name="title" content="william">
+  <meta property="og:title" content="william">
+
+  <meta name="description" content="a picture of BILLY??">
+  <meta property="og:description" content="a picture of BILLY??">
+
   <meta property="og:image" content="/billy/billy.webp">
+  <link rel="stylesheet" href="/static/main.css">
+  <style>body{background:radial-gradient(circle,rgb(28,15,7) 20%,rgb(198,177,146) 100%); !important}</style>
+  
 </head>
+<body>
+     <img id="soggycat" src="billy.webp" data-tilt data-tilt-scale="1.06" />
 
-<body data-soggy-pagetype="vtilt-js">
-  <img id="soggycat" src="billy.webp" data-tilt data-tilt-scale="1.06" />
+   <div id="sidemenu">
+   <a href="/github" class="menubuttonsa">
+     <div class="menubuttons"><img src='/img/code.svg'/>code</div></a>
 
-  <div id="sidemenu">
-  <a href="/github" class="menubuttonsa">
-    <div class="menubuttons"><img src='/img/code.svg'/>code</div></a>
-    
-  <a href="nocss" class="menubuttonsa">
-    <div class="menubuttons small"><img src='/img/nocss.svg'/>no css</div></a>
-    
-  <a href="#" class="menubuttonsa"
+   <a href="/billy/nocss" class="menubuttonsa">
+     <div class="menubuttons small"><img src='/img/nocss.svg'/>no css</div></a>
+
+   <a href="#" class="menubuttonsa"
       onclick="document.getElementById('picker').click(); return false;">
-    <div class="menubuttons small"><img src='/img/upload.svg'/>upload</div></a>
-  </div>
+     <div class="menubuttons small"><img src='/img/upload.svg'/>upload</div></a>
+   </div>
 
-  <button id="circlebtn"></button>
-  <span id='player' style='display: none'></span>
-  <input type="file" id="picker" style="display: none" accept="image/*" />
-
-  <script src='/static/vanillatilt.js'></script>
-  <script src='/static/main.js'></script>
-  <script src="/static/color-thief.umd.js"></script>
+   <button id="circlebtn"></button>
+   <span id='player' style='display: none'></span>
+   <input type="file" id="picker" style="display: none" accept="image/*" />
+  
+     	<script src='/static/main.js'></script>
 </body>
 </html>
