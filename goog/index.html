@@ -18,10 +18,10 @@
 	<!-- links starting with "/" lead to goog.soggy.cat and not soggy.cat -->
 
 	<link rel="stylesheet" href="goog.css">
-
 </head>
+
 <body data-soggy-pagetype="three-js">
-  <script type="importmap">
+	<script type="importmap">
 		{
 			"imports": {
 				"three": "./threejs/three.module.js",
@@ -36,15 +36,27 @@
 	<div id="googtainer"></div>
 
 	<div id="sidemenu">
-	<a href="//soggy.cat/github" class="menubuttonsa">
-		<div class="menubuttons"><img src='//soggy.cat/img/code.svg'/>code</div></a>
-		
-	<a href="nocss" class="menubuttonsa">
-		<div class="menubuttons small"><img src='//soggy.cat/img/nocss.svg'/>no css</div></a>
-		
-	<a href="#" class="menubuttonsa"
-		onclick="document.getElementById('picker').click(); return false;">
-		<div class="menubuttons small"><img src='//soggy.cat/img/upload.svg'/>upload</div></a>
+		<a href="/github" class="menubuttonsa">
+			<div class="menubuttons">
+				<img src='//soggy.cat/img/code.svg'>
+				<p>code</p>
+			</div>
+		</a>
+
+		<a href="nocss" class="menubuttonsa">
+			<div class="menubuttons small">
+				<img src='//soggy.cat/img/nocss.svg'>
+				<p>no css</p>
+			</div>
+		</a>
+
+		<a href="#" class="menubuttonsa"
+			onclick="document.getElementById('picker').click(); return false;">
+			<div class="menubuttons small">
+				<img src='//soggy.cat/img/upload.svg'>
+				<p>upload</p>
+			</div>
+		</a>
 	</div>
 
 	<button id="circlebtn"></button>

@@ -1,41 +1,51 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>dry?? cat</title>
-  <link rel="icon" href="/dry/icon.webp">
+	<title>dry?? cat</title>
+	<link rel="icon" href="/dry/icon.webp">
 
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta charset="utf-8">
 
-  <meta name="title" content="dry?? cat">
-  <meta property="og:title" content="dry?? cat">
+	<meta name="title" content="dry?? cat">
+	<meta property="og:title" content="dry?? cat">
 
-  <meta name="description" content="a picture of a dry cat inside a bathtub.">
-  <meta property="og:description" content="a picture of a dry cat inside a bathtub.">
+	<meta name="description" content="a picture of a dry cat inside a bathtub.">
+	<meta property="og:description" content="a picture of a dry cat inside a bathtub.">
 
-  <meta property="og:image" content="/dry/dry.webp">
-  <link rel="stylesheet" href="/static/main.css">
+	<meta property="og:image" content="/dry/dry.webp">
+	<link rel="stylesheet" href="/static/main.css">
 </head>
-<body>
-     <!-- don't be fooled, he's not actually soggy here -->
-     <img id="soggycat" src="dry.webp" data-tilt data-tilt-scale="1.06" />
 
-   <div id="sidemenu">
-   <a href="/github" class="menubuttonsa">
-     <div class="menubuttons"><img src='/img/code.svg'/>code</div></a>
+<body data-soggy-pagetype="vtilt-js">
+	<!-- don't be fooled, he's not actually soggy here -->
+	<img id="soggycat" src="dry.webp" data-tilt data-tilt-scale="1.06" />
 
-   <a href="/dry/nocss" class="menubuttonsa">
-     <div class="menubuttons small"><img src='/img/nocss.svg'/>no css</div></a>
+	<div id="sidemenu">
+		<a href="/github" class="menubuttonsa">
+			<div class="menubuttons">
+				<img src='/img/code.svg'/>code</img>
+			</div>
+		</a>
 
-   <a href="#" class="menubuttonsa"
-      onclick="document.getElementById('picker').click(); return false;">
-     <div class="menubuttons small"><img src='/img/upload.svg'/>upload</div></a>
-   </div>
+		<a href="nocss" class="menubuttonsa">
+			<div class="menubuttons small">
+				<img src='/img/nocss.svg'/>no css</img>
+			</div>
+		</a>
 
-   <button id="circlebtn"></button>
-   <span id='player' style='display: none'></span>
-   <input type="file" id="picker" style="display: none" accept="image/*" />
-  
-     	<script src='/static/main.js'></script>
+		<a href="#" class="menubuttonsa"
+			onclick="document.getElementById('picker').click(); return false;">
+			<div class="menubuttons small">
+				<img src='/img/upload.svg'/>upload</img>
+			</div>
+		</a>
+	</div>
+
+	<button id="circlebtn"></button>
+	<span id='player' style='display: none'></span>
+	<input type="file" id="picker" style="display: none" accept="image/*" />
+
+	<script src='/static/main.js'></script>
 </body>
 </html>

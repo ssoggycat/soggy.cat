@@ -38,7 +38,7 @@ function init() {
 
     texloader = new THREE.TextureLoader();
 
-    defaultAlbedoTex = texloader.load('scene/goog.webp');
+    defaultAlbedoTex = texloader.load('img/goog.webp');
     diffuseTex = texloader.load('scene/googBake.webp');
     glossyTex = texloader.load('scene/googBakeGlossy.webp');
 
