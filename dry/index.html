@@ -19,25 +19,28 @@
 
 <body data-soggy-pagetype="vtilt-js">
 	<!-- don't be fooled, he's not actually soggy here -->
-	<img id="soggycat" src="dry.webp" data-tilt data-tilt-scale="1.06" />
+	<img id="soggycat" src="dry.webp" data-tilt data-tilt-scale="1.05" alt="a picture of a dry cat inside a bathtub."/>
 
 	<div id="sidemenu">
 		<a href="/github" class="menubuttonsa">
 			<div class="menubuttons">
-				<img src='/img/code.svg'/>code</img>
+				<img src='/img/code.svg'>
+				<p>code</p>
 			</div>
 		</a>
 
 		<a href="nocss" class="menubuttonsa">
 			<div class="menubuttons small">
-				<img src='/img/nocss.svg'/>no css</img>
+				<img src='/img/nocss.svg'>
+				<p>no css</p>
 			</div>
 		</a>
 
 		<a href="#" class="menubuttonsa"
 			onclick="document.getElementById('picker').click(); return false;">
 			<div class="menubuttons small">
-				<img src='/img/upload.svg'/>upload</img>
+				<img src='/img/upload.svg'>
+				<p>upload</p>
 			</div>
 		</a>
 	</div>
@@ -47,5 +50,8 @@
 	<input type="file" id="picker" style="display: none" accept="image/*" />
 
 	<script src='/static/main.js'></script>
+
+	<script src='/static/vanillatilt.js'></script>
+	<script src="/static/color-thief.umd.js"></script>
 </body>
 </html>
