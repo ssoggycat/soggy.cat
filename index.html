@@ -18,27 +18,27 @@
   <link rel="stylesheet" href="/static/main.css">
   
 </head>
-<body>
-  
-     <img id="soggycat" src="/img/soggycat.webp" data-tilt data-tilt-scale="1.05" alt="a picture of a wet cat inside a bathtub." />
-  
-     <div id="sidemenu">
-     <a href="/github" class="menubuttonsa">
-       <div class="menubuttons"><img src='/img/code.svg'/>code</div></a>
-       
-     <a href="/nocss" class="menubuttonsa">
-       <div class="menubuttons small"><img src='/img/nocss.svg'/>no css</div></a>
-       
-     <a href="#" class="menubuttonsa"
-        onclick="document.getElementById('picker').click(); return false;">
-       <div class="menubuttons small"><img src='/img/upload.svg'/>upload</div></a>
-     </div>
+<body data-soggy-pagetype="vtilt-js">
+      <img id="soggycat" src="/img/soggycat.webp" data-tilt data-tilt-scale="1.05" alt="a picture of a wet cat inside a bathtub." />
 
-     <button id="circlebtn" title="navigation menu"></button>
-     <span id='player' style='display: none'></span>
-     <input type="file" id="picker" style="display: none" accept="image/*" />
-  
-     <script src="/static/main.js"></script>
-  
+      <div id="sidemenu">
+      <a href="/github" class="menubuttonsa">
+        <div class="menubuttons"><img src='/img/code.svg'/>code</div></a>
+        
+      <a href="nocss" class="menubuttonsa">
+        <div class="menubuttons small"><img src='/img/nocss.svg'/>no css</div></a>
+        
+      <a href="#" class="menubuttonsa"
+        onclick="document.getElementById('picker').click(); return false;">
+        <div class="menubuttons small"><img src='/img/upload.svg'/>upload</div></a>
+      </div>
+
+      <button id="circlebtn" title="navigation menu"></button>
+      <span id='player' style='display: none'></span>
+      <input type="file" id="picker" style="display: none" accept="image/*" />
+
+      <script src='/static/vanillatilt.js'></script>
+      <script src="/static/main.js"></script>
+      <script src="/static/color-thief.umd.js"></script>
 </body>
 </html>
