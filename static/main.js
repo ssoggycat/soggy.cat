@@ -1,5 +1,5 @@
 // redirect to https
-if (window.location.protocol != "https:") {}
+if (window.location.protocol != "https:")
     window.location.protocol = "https"
 
 const circlebutton = document.getElementById('circlebtn');
