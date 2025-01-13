@@ -1,0 +1,10 @@
+body {
+    background: linear-gradient(
+        to top in oklab,
+        oklch(13% 0.015 64) 0%, oklch(0% 0.01 23) 100%
+      );
+}
+
+#googtainer{
+    filter: drop-shadow(0px 10px 52px rgba(0, 0, 0, 0.87));
+}

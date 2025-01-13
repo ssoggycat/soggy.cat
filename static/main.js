@@ -1,30 +1,28 @@
 // redirect to https
-if (window.location.protocol != "https:")
+if (window.location.protocol != "https:") {}
     window.location.protocol = "https"
 
-document.getElementById('circlebtn').addEventListener('click', toggleMenu)
-const sidemenu = document.getElementById('sidemenu')
-let menuOut = false
+const circlebutton = document.getElementById('circlebtn');
+if (circlebutton) circlebutton.addEventListener('click', toggleMenu);
+
+const sidemenu = document.getElementById('sidemenu');
+let menuOut = false;
 
 function toggleMenu() {
-    if(menuOut) {
-        sidemenu.style.width = '0'
-        menuOut = false
-    } else {
-        sidemenu.style.width = '150px'
-        menuOut = true
-    }
+	menuOut = !menuOut;
+	sidemenu.style.width = menuOut ? '150px' : '0';
 }
 
 // waits for the website to load because IT DOESN'T WORK OTHERWISE RGARGARGRAG
 document.addEventListener('DOMContentLoaded', function () {
-	
+	const shouldSog = document.body.getAttribute('data-soggy-pagetype') == 'vtilt-js';
 	const picker = document.getElementById('picker');
 
-	const shouldSog = document.body.getAttribute('data-soggy-pagetype') == 'vtilt-js';
+	if (!(picker && shouldSog)) return;
 
-	const sog = shouldSog ? document.getElementById('soggycat') : null;
-	
+	const sog = document.getElementById('soggycat');
+	const colorstealing = new ColorThief();
+
 	picker.addEventListener('change', function (event) {
 	const file = event.target.files[0];
 	if (file) {
@@ -37,14 +35,12 @@ document.addEventListener('DOMContentLoaded', function () {
 				}
 			});
 
-			document.dispatchEvent(soggyUpdateEvent)
-
-			if (!sog) return;
+			document.dispatchEvent(soggyUpdateEvent);
 
 			sog.src = e.target.result;
 			sog.onload = function () {
 				// STEAL COLORS!!!! this almost feels like chicory
-				const colorstealing = new ColorThief();
+				
 				const palette = colorstealing.getPalette(soggycat, 5);
 				const gradientc = palette.map((color, index) => {
 					const position = Math.floor((index / (palette.length - 1)) * 100);
@@ -74,7 +70,13 @@ function scamStop() {
 			console.log("blocked domain: " + domain);
 			window.location.href = "https://soggy.cat/stop";
 		}
+		
 	}
 	catch (e)
-	{console.log("no referrer")}
-}; scamStop();
+	{
+		console.log("no referrer");
+	}
+
+}; 
+
+scamStop();
