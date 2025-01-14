@@ -16,7 +16,7 @@ init();
 animate();
 
 function init() {
-    googtainer = document.getElementById("googtainer")
+    googtainer = document.getElementById("googtainer");
     
     scene = new THREE.Scene();
     renderer = new THREE.WebGLRenderer({ antialias: true });
@@ -101,17 +101,8 @@ function init() {
     raycaster = new THREE.Raycaster();
     document.addEventListener('mousemove', onDocumentMouseMove, false);
     document.addEventListener('mouseleave', mouseLeave, false);
-    document.addEventListener('soggyupdate', onSoggyUpdate, false)
     window.addEventListener('click', onMouseClick, false);
     window.addEventListener('resize', onWindowResize, false);
-}
-
-function onSoggyUpdate(e) {
-    const newTexture = texloader.load(e.detail.result);
-    newTexture.flipY = false;
-
-    googLightmapMaterial.uniforms.albedo = { value: newTexture };
-    googLightmapMaterial.needsUpdate = true;
 }
 
 function onWindowResize() {
@@ -133,7 +124,7 @@ function onMouseClick() {
     if (hoveringHyperlink) {
         window.open("discord://discord.com/channels/992118472454717530/1325113345652817971/1325114302268702773", "Discord1");
         window.setTimeout(function() {
-            window.location.replace("https://discord.com/channels/992118472454717530/1325113345652817971/1325114302268702773");
+            window.location.replace("//discord.com/channels/992118472454717530/1325113345652817971/1325114302268702773");
         }, 1000);
     }
 }

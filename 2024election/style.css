@@ -15,14 +15,14 @@ body,
 }
 
 .option-01 {
-  background-image: url("https://soggy.cat/2024election/assets/somnolentcat.png");
+  background-image: url("assets/somnolentcat.png");
    background-repeat: no-repeat;
    background-size: 100% 100%;
    background-position: center;
 }
 
 .option-02 {
-  background-image: url("https://soggy.cat/2024election/assets/sobbycat.png");
+  background-image: url("assets/sobbycat.png");
    background-repeat: no-repeat;
    background-size: 100% 100%;
    background-position: center;
@@ -41,7 +41,7 @@ body,
   animation: slideUpDown 2s infinite;
 }
 
-@-webkit-keyframes glow {
+@keyframes glow {
   from {
     text-shadow: 0 0 10px #fff, 0 0 20px #fff, 0 0 30px #8fffab, 0 0 40px #a3ffcb, 0 0 50px #99ffb8, 0 0 60px #b3ffc2, 0 0 70px #9effc8;
   }
