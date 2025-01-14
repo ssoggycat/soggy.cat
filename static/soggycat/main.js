@@ -50,7 +50,7 @@ document.addEventListener('DOMContentLoaded', function () {
 						});
 						const epicgradient = `radial-gradient(circle, ${gradientc.join(', ')})`;
 						document.body.style.background = epicgradient;
-					}
+					};
 				}
 			};
 
@@ -62,7 +62,15 @@ document.addEventListener('DOMContentLoaded', function () {
 
 // this probably could be improved by implementing a list of all known crypto sites
 // ^- i added some!
-const blocked_domains = ['nomics.com', 'cryptoslate.com', 'ftmscan.com', 'coingecko.com', 'polygonscan.com', 'dextools.io', 'zerion.io', 'cryptocompare.com', 'curve.fi', 'etherscan.io', 'uniswap.org', 'pancakeswap.finance', 'dexscreener.com', 'tradingview.com', 'cryptowatch.ch', 'blockchair.com', 'coinpaprika.com', 'tokenview.com', 'coinscan.com', 'geckoterminal.com', 'aave.com', 'binance.com', 'defipulse.com', 'yearn.finance', 'bscscan.com', 'livecoinwatch.com', 'sushiswap.fi', '1inch.io', 'coinmarketcap.com', 'zapper.fi', 'debank.com', 'tokenterminal.com', 'pump.fun']
+const blocked_domains = [
+	'nomics.com', 'cryptoslate.com', 'ftmscan.com', 'coingecko.com', 'polygonscan.com',
+	'dextools.io', 'zerion.io', 'cryptocompare.com', 'curve.fi', 'etherscan.io',
+	'uniswap.org', 'pancakeswap.finance', 'dexscreener.com', 'tradingview.com', 'cryptowatch.ch',
+	'blockchair.com', 'coinpaprika.com', 'tokenview.com', 'coinscan.com', 'geckoterminal.com',
+	'aave.com', 'binance.com', 'defipulse.com', 'yearn.finance', 'bscscan.com',
+	'livecoinwatch.com', 'sushiswap.fi', '1inch.io', 'coinmarketcap.com', 'zapper.fi',
+	'debank.com', 'tokenterminal.com', 'pump.fun'
+];
 
 function scamStop() {
 	referrer = document.referrer;

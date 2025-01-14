@@ -1,21 +1,21 @@
 @font-face {
   font-family: 'RujisHandwritingFontv20Medium';
-      src: url('static/ruji.ttf') format('truetype');
+      src: url('//soggy.cat/static/other/ruji.ttf') format('truetype');
   font-weight: normal;
   font-style: normal;
 }
 
 @font-face {
   font-family: 'ChirpBold';
-  src:  url('static/chirp.ttf');
+  src:  url('//soggy.cat/static/other/chirp.ttf');
 }
 
 @font-face {
   font-family: 'Chirp';
-  src:  url('static/chirpbold.ttf');
+  src:  url('//soggy.cat/static/other/chirpbold.ttf');
 }
 
-@-webkit-keyframes shake {
+@keyframes shake {
     0% { -webkit-transform: translate(2px, 1px) rotate(0deg); } 
     10% { -webkit-transform: translate(-1px, -2px) rotate(-1deg); }
     20% { -webkit-transform: translate(-3px, 0px) rotate(1deg); }
@@ -126,9 +126,13 @@ h1 {
   color: #ffffff;
   font-family: "RujisHandwritingFontv20Medium",;
   -webkit-animation-name: shake;
+  animation-name: shake;
   -webkit-animation-duration: 0.5s;
+  animation-duration: 0.5s;
   -webkit-transform-origin: 50% 50%;
+  transform-origin: 50% 50%;
   -webkit-animation-iteration-count: infinite;
+  animation-iteration-count: infinite;
   text-shadow: -4px -4px 0 #000000, 4px -4px 0 #000000, -4px 4px 0 #000000, 4px 4px 0 #000000;
 }
 
@@ -210,9 +214,13 @@ h1 {
   position: absolute;
   text-align: center;
   -webkit-animation-name: shake;
+  animation-name: shake;
   -webkit-animation-duration: 0.5s;
+  animation-duration: 0.5s;
   -webkit-transform-origin: 50% 50%;
+  transform-origin: 50% 50%;
   -webkit-animation-iteration-count: infinite;
+  animation-iteration-count: infinite;
 }
 
 .info {

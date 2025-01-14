@@ -10,7 +10,7 @@
 ### 🖥️ FP ([🔗](https://github.com/system2k)) 
 * domain billing!
 * regery help
-### 🔹 mat ([🔗](https://github.com/M5X11))
+### ⛅ mat ([🔗](https://github.com/M5X11))
 * dns, major components of the website
 ### 🐶 cv ([🔗](https://github.com/cv003))
 * planning

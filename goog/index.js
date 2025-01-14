@@ -16,7 +16,7 @@ init();
 animate();
 
 function init() {
-    googtainer = document.getElementById("googtainer")
+    googtainer = document.getElementById("googtainer");
     
     scene = new THREE.Scene();
     renderer = new THREE.WebGLRenderer({ antialias: true });
@@ -32,7 +32,7 @@ function init() {
     const dracoLoader = new DRACOLoader();
 
     dracoLoader.setDecoderConfig({ type: 'js' });
-    dracoLoader.setDecoderPath('threejs/draco/');
+    dracoLoader.setDecoderPath('//soggy.cat/static/threejs/draco/');
 
     loader.setDRACOLoader(dracoLoader);
 
@@ -87,7 +87,7 @@ function init() {
         frame.material.map.generateMipmaps = false; //🐱👍!!!
 
         goog = gltf.scene.getObjectByName("Goog");
-        goog.material = googLightmapMaterial
+        goog.material = googLightmapMaterial;
     });
 
     camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 1.2, 4);
@@ -108,7 +108,7 @@ function init() {
 
     document.addEventListener('mousemove', onDocumentMouseMove, false);
     document.addEventListener('mouseleave', mouseLeave);
-    document.addEventListener('soggyupdate', onSoggyUpdate)
+    document.addEventListener('soggyupdate', onSoggyUpdate);
 
     window.addEventListener('resize', onWindowResize, false);
 }
