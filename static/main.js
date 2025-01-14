@@ -1,6 +1,6 @@
 // redirect to https
-if (window.location.protocol != "https:")
-    window.location.protocol = "https"
+if (window.location.protocol != "https:") {}
+    //window.location.protocol = "https"
 
 const circlebutton = document.getElementById('circlebtn');
 if (circlebutton) circlebutton.addEventListener('click', toggleMenu);
@@ -16,44 +16,49 @@ function toggleMenu() {
 // waits for the website to load because IT DOESN'T WORK OTHERWISE RGARGARGRAG
 document.addEventListener('DOMContentLoaded', function () {
 	const shouldSog = document.body.getAttribute('data-soggy-pagetype') == 'vtilt-js';
+	const sog = document.getElementById('soggycat');
+
 	const picker = document.getElementById('picker');
 
-	if (!(picker && shouldSog)) return;
-
-	const sog = document.getElementById('soggycat');
+	if (!(picker)) return;
+	
 	const colorstealing = new ColorThief();
 
 	picker.addEventListener('change', function (event) {
-	const file = event.target.files[0];
-	if (file) {
-		const reader = new FileReader();
+		const file = event.target.files[0];
+		if (file) {
+			const reader = new FileReader();
 
-		reader.onload = function (e) {
-			const soggyUpdateEvent = new CustomEvent('soggyupdate',{
-				detail: {
-					result: e.target.result
-				}
-			});
-
-			document.dispatchEvent(soggyUpdateEvent);
-
-			sog.src = e.target.result;
-			sog.onload = function () {
-				// STEAL COLORS!!!! this almost feels like chicory
-				
-				const palette = colorstealing.getPalette(soggycat, 5);
-				const gradientc = palette.map((color, index) => {
-					const position = Math.floor((index / (palette.length - 1)) * 100);
-					return `rgba(${color[0]}, ${color[1]}, ${color[2]}, 1) ${position}%`;
+			reader.onload = function (e) {
+				const soggyUpdateEvent = new CustomEvent('soggyupdate',{
+					detail: {
+						result: e.target.result
+					}
 				});
-				const epicgradient = `radial-gradient(circle, ${gradientc.join(', ')})`;
-				document.body.style.background = epicgradient;
-			};
-		};
 
-		reader.readAsDataURL(file);
-	}
-})});
+				document.dispatchEvent(soggyUpdateEvent);
+
+				if (shouldSog) {
+					sog.src = e.target.result;
+					sog.onload = function () {
+						// STEAL COLORS!!!! this almost feels like chicory
+						
+						const palette = colorstealing.getPalette(soggycat, 5);
+						const gradientc = palette.map((color, index) => {
+							const position = Math.floor((index / (palette.length - 1)) * 100);
+							return `rgba(${color[0]}, ${color[1]}, ${color[2]}, 1) ${position}%`;
+						});
+						const epicgradient = `radial-gradient(circle, ${gradientc.join(', ')})`;
+						document.body.style.background = epicgradient;
+					}
+				}
+			};
+
+			reader.readAsDataURL(file);
+		}
+	});
+
+});
 
 // this probably could be improved by implementing a list of all known crypto sites
 // ^- i added some!
