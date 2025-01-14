@@ -15,7 +15,7 @@
 	
 	<link rel="stylesheet" href="index.css" type="text/css"/>
 	<script src="index.js"></script>
-	<script src="//soggy.cat/static/other/cursor-effects.js"></script>
+	<!--<script src="//soggy.cat/static/other/cursor-effects.js"></script>-->
 	
   </head>
   <body scroll="no" style="overflow: hidden; margin: 0px; padding: 0px;">
@@ -35,7 +35,9 @@
 	<div id="stars2"></div>
 	<div id="stars3"></div>
 	
-	<script>
+	<script type="module">
+		import { emojiCursor } from "//soggy.cat/static/other/cursor-effects.js";
+
 		new emojiCursor({ emoji: ["🐱", "🐈", "😸", "😹", "😺", "😻", "😼", "😽", "😾", "🙀", "😿","💦","💧","☔","🛁"] });
 		new emojiCursor({ emoji: ["🐈"," "] });
 		new emojiCursor({ emoji: ["💦","💧","☔","🛁"," "," "," "," "," "," "," "," "] });
@@ -44,23 +46,23 @@
 	<div class="slideshow" onclick="window.open('dark', 'darkWindow')">
 
 		<div class="image fade">
-		<img width="100px" src="assets/images/slide1.webp">
+			<img width="100px" src="assets/images/slide1.webp">
 		</div>
 		
 		<div class="image fade">
-		<img width="100px" src="assets/images/slide2.webp">
+			<img width="100px" src="assets/images/slide2.webp">
 		</div>
 		
 		<div class="image fade">
-		<img width="100px" src="assets/images/slide3.webp">
+			<img width="100px" src="assets/images/slide3.webp">
 		</div>
 		
 		<div class="image fade">
-		<img width="100px" src="assets/images/slide4.webp">
+			<img width="100px" src="assets/images/slide4.webp">
 		</div>
 		
 		<div class="image fade">
-		<img width="100px" src="assets/images/slide5.webp">
+			<img width="100px" src="assets/images/slide5.webp">
 		</div>
 	  
 	</div>
