@@ -68,14 +68,14 @@ function init() {
             uniform sampler2D glossy;
     
             void main() {
-                vec4 albedoColor = texture2D(albedo, vUv);
-                vec4 diffuseColor = texture2D(diffuse, vUv);
-                vec4 glossyColor = texture2D(glossy, vUv);
+                vec4 albedoRGBA = texture2D(albedo, vUv);
+                vec3 diffuseColor = texture2D(diffuse, vUv).rgb;
+                vec3 glossyColor = texture2D(glossy, vUv).rgb;
 
                 float gray = 0.21 * albedoColor.r + 0.71 * albedoColor.g + 0.07 * albedoColor.b;
-                vec4 composite = (diffuseColor * gray) + glossyColor;
+                vec3 composite = (diffuseColor * gray) + glossyColor;
 
-                gl_FragColor = composite;
+                gl_FragColor = vec4(composite, albedoRGBA.a);
             }
         `
     });
