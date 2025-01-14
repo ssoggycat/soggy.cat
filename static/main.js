@@ -15,15 +15,15 @@ function toggleMenu() {
 
 // waits for the website to load because IT DOESN'T WORK OTHERWISE RGARGARGRAG
 document.addEventListener('DOMContentLoaded', function () {
-	const shouldSog = document.body.getAttribute('data-soggy-pagetype') == 'vtilt-js';
+	const isVtilt = document.body.getAttribute('data-soggy-pagetype') == 'vtilt-js';
 	const sog = document.getElementById('soggycat');
 
 	const picker = document.getElementById('picker');
 
-	if (!(picker)) return;
+	let colorstealing;
+	if (isVtilt) colorstealing = new ColorThief();
 	
-	const colorstealing = new ColorThief();
-
+	if (!picker) return;
 	picker.addEventListener('change', function (event) {
 		const file = event.target.files[0];
 		if (file) {
@@ -38,7 +38,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
 				document.dispatchEvent(soggyUpdateEvent);
 
-				if (shouldSog) {
+				if (isVtilt) {
 					sog.src = e.target.result;
 					sog.onload = function () {
 						// STEAL COLORS!!!! this almost feels like chicory
