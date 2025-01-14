@@ -72,10 +72,10 @@ function init() {
                 vec3 diffuseColor = texture2D(diffuse, vUv).rgb;
                 vec3 glossyColor = texture2D(glossy, vUv).rgb;
 
-                float gray = 0.21 * albedoColor.r + 0.71 * albedoColor.g + 0.07 * albedoColor.b;
+                float gray = 0.21 * albedoRGBA.r + 0.71 * albedoRGBA.g + 0.07 * albedoRGBA.b;
                 vec3 composite = (diffuseColor * gray) + glossyColor;
 
-                gl_FragColor = vec4(composite, albedoRGBA.a);
+                gl_FragColor = vec4(composite * albedoRGBA.a, albedoRGBA.a);
             }
         `
     });
