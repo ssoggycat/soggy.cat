@@ -9,7 +9,7 @@ function preload() {
     }
 }
 
-preload("/assets/images/boom.awebp")
+preload("assets/images/boom.awebp");
 var explode = new Audio("assets/audio/boom.mp3");
 
 // credit to https://stackoverflow.com/a/25938297
@@ -50,7 +50,7 @@ function showContainer(){
   
     let explosion = document.getElementById('explode');
     explosion.style.display = 'block';
-    setTimeout(function(){explosion.style.display = 'none';}, 750)
+    setTimeout(function(){explosion.style.display = 'none';}, 750);
     // setTimeout(function(){document.write()}, 62000)
 }
 
