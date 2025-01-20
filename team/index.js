@@ -1,6 +1,6 @@
 let index = 0;
 
-var MusicLengthInSeconds = 61.967; // length of the music goes here
+var MusicLengthInSeconds = 61.9382086168; // length of the music goes here
 var images = [];
 function preload() {
     for (var i = 0; i < arguments.length; i++) {
