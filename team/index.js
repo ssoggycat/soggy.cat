@@ -18,7 +18,7 @@ var current_player = "a";
 var player_a = document.createElement("audio");
 var player_b = document.createElement("audio");
 
-player_a.src = "assets/audio/cats.ogg";
+player_a.src = "assets/audio/cats.mp3";
 player_b.src = player_a.src;
 
 function playMusic(){
