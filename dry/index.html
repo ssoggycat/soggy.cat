@@ -21,24 +21,24 @@
 	<!-- don't be fooled, he's not actually soggy here -->
 	<img id="soggycat" src="dry.webp" data-tilt data-tilt-scale="1.05" alt="a picture of a dry cat inside a bathtub."/>
 
-	<div id="sidemenu" class="sm">
-		<a href="/github" class="menubuttonsa">
-			<div class="menubuttons">
+	<div id="sidemenu" class="sm sm-closed">
+		<a aria-label="code" href="/github" target="GithubTarget">
+			<div class = "sm-button">
 				<img src='/img/code.svg'>
 				<p>code</p>
 			</div>
 		</a>
 
-		<a href="nocss" class="menubuttonsa">
-			<div class="menubuttons small">
+		<a aria-label="no css" href="nocss" target="NoCSSTarget">
+			<div class="sm-button sm-small">
 				<img src='/img/nocss.svg'>
 				<p>no css</p>
 			</div>
 		</a>
 
-		<a href="#" class="menubuttonsa"
+		<a aria-label="upload" href="#"
 			onclick="document.getElementById('picker').click(); return false;">
-			<div class="menubuttons small">
+			<div class="sm-button sm-small">
 				<img src='/img/upload.svg'>
 				<p>upload</p>
 			</div>
