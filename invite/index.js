@@ -33,11 +33,11 @@ function init() {
     texloader = new THREE.TextureLoader();
     texloader.setPath("scene/");
 
-    let albedo = texloader.load('cardAlbedo.webp');
-    let ao_roughness = texloader.load('cardAORough.webp');
-    let clearcoat_weightroughness = texloader.load('cardClearcoat.webp');
-    let normal = texloader.load('cardNormal.webp');
-    let emissive = texloader.load('cardEmissive.webp');
+    const albedo = texloader.load('cardAlbedo.webp');
+    const ao_roughness = texloader.load('cardAORough.webp');
+    const clearcoat_weightroughness = texloader.load('cardClearcoat.webp');
+    const normal = texloader.load('cardNormal.webp');
+    const emissive = texloader.load('cardEmissive.webp');
 
     albedo.flipY = false;
     ao_roughness.flipY = false;
@@ -49,10 +49,10 @@ function init() {
     ao_roughness.generateMipmaps = false;
     emissive.generateMipmaps = false;
     
-    let clearNScale = new THREE.Vector2(0.25, 0.25);
-    let normalScale = new THREE.Vector2(0.5, 0.5);
-    let envRotation = new THREE.Euler(0, -270 * (Math.PI / 180), 0);
-    let emissiveCol = new THREE.Color(0x00C3FF);
+    const clearNScale = new THREE.Vector2(0.25, 0.25);
+    const normalScale = new THREE.Vector2(0.5, 0.5);
+    const envRotation = new THREE.Euler(0, -270 * (Math.PI / 180), 0);
+    const emissiveCol = new THREE.Color(0x00C3FF);
 
     cardMaterial = new THREE.MeshPhysicalMaterial({
         map: albedo,
@@ -77,7 +77,7 @@ function init() {
 
     new EXRLoader().load('scene/reflections.exr', function(texture) {
         texture.mapping = THREE.EquirectangularReflectionMapping;
-        let envtex = new THREE.PMREMGenerator(renderer).fromEquirectangular(texture);
+        const envtex = new THREE.PMREMGenerator(renderer).fromEquirectangular(texture);
         cardMaterial.envMap = envtex.texture;
     });
 
@@ -156,7 +156,7 @@ function updateMouseMovement(clientX, clientY, forceUnhover) {
     if (hovering) {
         targetFOV = 20;
 
-        let mouseFalloff = Math.max(Math.abs(mouse.x*2.8), .5)*2;
+        const mouseFalloff = Math.max(Math.abs(mouse.x*2.8), .5)*2;
         targetRotationX = (-mouse.y * whackyY * (window.innerHeight / window.innerWidth) / mouseFalloff);
         targetRotationY = (mouse.x * whackyX);
     }
@@ -172,7 +172,7 @@ function animate() {
     requestAnimationFrame(animate);
     camStuff();
 
-    let newIntensity = Math.min(Math.max(cardMaterial.emissiveIntensity + (hoveringHyperlink ? 0.05 : -0.05), 0), 2);
+    const newIntensity = Math.min(Math.max(cardMaterial.emissiveIntensity + (hoveringHyperlink ? 0.05 : -0.05), 0), 2);
     if (newIntensity != cardMaterial.emissiveIntensity) {
         cardMaterial.emissiveIntensity = newIntensity;
     }
