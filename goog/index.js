@@ -1,9 +1,8 @@
 import * as THREE from 'three';
 import { GLTFLoader } from 'GLTFLoader';
 import { DRACOLoader } from 'DRACOLoader';
-import { OrbitControls } from 'OrbitControls';
 
-let googtainer, scene, camera, controls, raycaster, renderer, texloader;
+let googtainer, scene, camera, raycaster, renderer, texloader;
 let frame, goog, googLightmapMaterial;
 
 let defaultAlbedoTex, diffuseTex, glossyTex;
@@ -93,16 +92,9 @@ function init() {
     camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 1.2, 4);
     camera.position.set(0, 0, 2.5);
 
-    controls = new OrbitControls(camera, googtainer);
-    controls.target.set(0, 0, 0);
-    controls.enablePan = false;
-    controls.enableZoom = false;
-    controls.keys = {};
-    controls.mouseButtons = {};
     // i don't know if its even worth using orbit controls at this point :sob:
 
     camStuff();
-    controls.update();
 
     raycaster = new THREE.Raycaster();
 
@@ -146,7 +138,7 @@ function updateMouseMovement(clientX, clientY, forceUnhover) {
 
     if (!forceUnhover) {
         raycaster.setFromCamera(mouse, camera);
-
+        
         const intersects = raycaster.intersectObjects([frame, goog]);
         if (intersects.length > 0 && intersects[0].object === goog)
             hovering = true;
@@ -171,27 +163,21 @@ function animate() {
     requestAnimationFrame(animate);
 
     camStuff();
-    controls.update();
     camera.updateProjectionMatrix();
     renderer.render(scene, camera);
 }
 
 function camStuff() {
-    const lerpedX = THREE.MathUtils.lerp(lastRotationX, targetRotationX, 0.1);
     const lerpedY = THREE.MathUtils.lerp(lastRotationY, targetRotationY, 0.1);
+    const lerpedX = THREE.MathUtils.lerp(lastRotationX, targetRotationX, 0.1);
 
     const lerpedFOV = THREE.MathUtils.lerp(lastFOV, targetFOV, 0.1);
 
     lastRotationX = lerpedX;
     lastRotationY = lerpedY;
 
+    if (frame) frame.setRotationFromEuler(new THREE.Euler(-lerpedX - Math.PI / 2, Math.PI/1, lerpedY - Math.PI / 1, 'XYZ'));
     lastFOV = lerpedFOV;
-
-    controls.minAzimuthAngle = lerpedY;
-    controls.maxAzimuthAngle = lerpedY;
-
-    controls.minPolarAngle = lerpedX + (Math.PI / 2);
-    controls.maxPolarAngle = lerpedX + (Math.PI / 2);
 
     camera.fov = lerpedFOV;
 }

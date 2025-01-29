@@ -1,6 +1,6 @@
 {
 	"asset":{
-		"generator":"Khronos glTF Blender I/O v4.2.70",
+		"generator":"Khronos glTF Blender I/O v4.3.47",
 		"version":"2.0"
 	},
 	"extensionsUsed":[
@@ -17,7 +17,6 @@
 		{
 			"name":"Scene",
 			"nodes":[
-				0,
 				1
 			]
 		}
@@ -25,15 +24,12 @@
 	"nodes":[
 		{
 			"mesh":0,
-			"name":"Goog",
-			"rotation":[
-				0.7071068286895752,
-				0,
-				0,
-				0.7071068286895752
-			]
+			"name":"Goog"
 		},
 		{
+			"children":[
+				0
+			],
 			"mesh":1,
 			"name":"Frame",
 			"rotation":[
@@ -47,17 +43,7 @@
 	"materials":[
 		{
 			"doubleSided":true,
-			"extensions":{
-				"KHR_materials_unlit":{}
-			},
-			"name":"Material.002",
-			"pbrMetallicRoughness":{
-				"baseColorTexture":{
-					"index":0
-				},
-				"metallicFactor":0,
-				"roughnessFactor":0.9
-			}
+			"name":"Material.002"
 		},
 		{
 			"doubleSided":true,
@@ -67,7 +53,7 @@
 			"name":"Material.001",
 			"pbrMetallicRoughness":{
 				"baseColorTexture":{
-					"index":1
+					"index":0
 				},
 				"metallicFactor":0,
 				"roughnessFactor":0.9
@@ -138,22 +124,9 @@
 				}
 			},
 			"sampler":0
-		},
-		{
-			"extensions":{
-				"EXT_texture_webp":{
-					"source":1
-				}
-			},
-			"sampler":0
 		}
 	],
 	"images":[
-		{
-			"mimeType":"image/webp",
-			"name":"googBake",
-			"uri":"googBake.webp"
-		},
 		{
 			"mimeType":"image/webp",
 			"name":"frameBake",
@@ -246,8 +219,8 @@
 	],
 	"samplers":[
 		{
-			"magFilter":9729,
-			"minFilter":9987
+			"magFilter":9728,
+			"minFilter":9984
 		}
 	],
 	"buffers":[
