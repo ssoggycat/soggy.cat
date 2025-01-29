@@ -21,28 +21,41 @@
 <body data-soggy-pagetype="vtilt-js">
     <img id="soggycat" src="billy.webp" data-tilt data-tilt-scale="1.05" alt="a picture of BILLY??">
 
-	<div id="sidemenu">
-		<a href="/github" class="menubuttonsa">
-			<div class="menubuttons">
+	<div id="sidemenu" class="sm sm-closed">
+		<a aria-label="code" href="/github" target="GithubTarget">
+			<div class = "sm-button">
 				<img src='/img/code.svg'>
 				<p>code</p>
 			</div>
 		</a>
 
-		<a href="nocss" class="menubuttonsa">
-			<div class="menubuttons small">
+		<a aria-label="no css" href="nocss" target="NoCSSTarget">
+			<div class="sm-button sm-small">
 				<img src='/img/nocss.svg'>
 				<p>no css</p>
 			</div>
 		</a>
 
-		<a href="#" class="menubuttonsa"
+		<a aria-label="upload" href="#"
 			onclick="document.getElementById('picker').click(); return false;">
-			<div class="menubuttons small">
+			<div class="sm-button sm-small">
 				<img src='/img/upload.svg'>
 				<p>upload</p>
 			</div>
 		</a>
+
+		<div>
+			<img title='
+"i ate my goog cube dont tell anyone"
+	- @leon_jajko1 on twitter, 2025, to @ssoggycat'
+				class="sm-button" src="img/image.png" 
+				style="
+					width: 310px; 
+					height: auto;
+					border-bottom-left-radius: 0.3rem;
+					border-top-left-radius: 0.3rem;
+				">
+		</div>
 	</div>
 
     <button id="circlebtn"></button>

@@ -8,9 +8,18 @@ if (circlebutton) circlebutton.addEventListener('click', toggleMenu);
 const sidemenu = document.getElementById('sidemenu');
 let menuOut = false;
 
+function updateMenu() {
+	if (menuOut) {
+		sidemenu.classList.remove("sm-closed");
+	}
+	else {
+		sidemenu.classList.add("sm-closed");
+	}
+}
+
 function toggleMenu() {
 	menuOut = !menuOut;
-	sidemenu.style.width = menuOut ? '150px' : '0';
+	updateMenu();
 }
 
 // waits for the website to load because IT DOESN'T WORK OTHERWISE RGARGARGRAG
