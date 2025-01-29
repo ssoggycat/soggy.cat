@@ -26,8 +26,7 @@
 			"imports": {
 				"three": "//soggy.cat/static/threejs/three.module.js",
 				"GLTFLoader": "//soggy.cat/static/threejs/addons/GLTFLoader.js",
-				"DRACOLoader": "//soggy.cat/static/threejs/addons/DRACOLoader.js",
-				"OrbitControls": "//soggy.cat/static/threejs/addons/OrbitControls.js"
+				"DRACOLoader": "//soggy.cat/static/threejs/addons/DRACOLoader.js"
 			}
 		}
 	</script> 
@@ -35,24 +34,24 @@
 	<script type="module" src="index.js"></script>
 	<div id="googtainer"></div>
 
-	<div id="sidemenu">
-		<a href="/github" class="menubuttonsa">
-			<div class="menubuttons">
+	<div id="sidemenu" class="sm sm-closed">
+		<a aria-label="code" href="/github" target="GithubTarget">
+			<div class = "sm-button">
 				<img src='//soggy.cat/img/code.svg'>
 				<p>code</p>
 			</div>
 		</a>
 
-		<a href="nocss" class="menubuttonsa">
-			<div class="menubuttons small">
+		<a aria-label="no css" href="nocss" target="NoCSSTarget">
+			<div class="sm-button sm-small">
 				<img src='//soggy.cat/img/nocss.svg'>
 				<p>no css</p>
 			</div>
 		</a>
 
-		<a href="#" class="menubuttonsa"
+		<a aria-label="upload" href="#"
 			onclick="document.getElementById('picker').click(); return false;">
-			<div class="menubuttons small">
+			<div class="sm-button sm-small">
 				<img src='//soggy.cat/img/upload.svg'>
 				<p>upload</p>
 			</div>

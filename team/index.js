@@ -1,6 +1,6 @@
 let index = 0;
 
-var MusicLengthInSeconds = 61.967; // length of the music goes here
+var MusicLengthInSeconds = 61.9382086168; // length of the music goes here
 var images = [];
 function preload() {
     for (var i = 0; i < arguments.length; i++) {
@@ -9,7 +9,7 @@ function preload() {
     }
 }
 
-preload("/assets/images/boom.awebp")
+preload("assets/images/boom.awebp");
 var explode = new Audio("assets/audio/boom.mp3");
 
 // credit to https://stackoverflow.com/a/25938297
@@ -18,7 +18,7 @@ var current_player = "a";
 var player_a = document.createElement("audio");
 var player_b = document.createElement("audio");
 
-player_a.src = "assets/audio/cats.ogg";
+player_a.src = "assets/audio/cats.mp3";
 player_b.src = player_a.src;
 
 function playMusic(){
@@ -50,7 +50,7 @@ function showContainer(){
   
     let explosion = document.getElementById('explode');
     explosion.style.display = 'block';
-    setTimeout(function(){explosion.style.display = 'none';}, 750)
+    setTimeout(function(){explosion.style.display = 'none';}, 750);
     // setTimeout(function(){document.write()}, 62000)
 }
 
