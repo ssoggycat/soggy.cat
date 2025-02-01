@@ -1,84 +1,82 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-        
-    <meta charset="utf-8" />
-    <title>&#65279;</title>
-    <meta property="og:title" content="soggy world" />
-    <meta name="description" content="our very sleepy discord" />
-    
-    <link rel="icon" href="https://soggy.cat/img/icon.webp" />
-    
-    <meta name="twitter:card" content="summary"/>
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <meta name="theme-color" content="#64DAFF"/>
-    <meta http-equiv="refresh" content="0; url='discord://discord.com/invite/soggycat'" />
+	<head>
+				
+		<meta charset="utf-8" />
+		<title>&#65279;</title>
+		<meta property="og:title" content="soggy world" />
+		<meta name="description" content="our very sleepy discord" />
+		
+		<link rel="icon" href="/img/icon.webp" />
+		
+		<meta name="twitter:card" content="summary"/>
+		<meta name="viewport" content="width=device-width, initial-scale=1" />
+		<meta name="theme-color" content="#64DAFF"/>
+		<meta http-equiv="refresh" content="3; url='discord://discord.com/invite/soggycat'">
 
-    <script src="https://rawgit.com/bradley/Blotter/master/build/blotter.min.js"></script>
-    <script src="https://rawgit.com/bradley/Blotter/master/build/materials/liquidDistortMaterial.js"></script>
+		<script src="/static/blotter/blotter.min.js"></script>
+		<script src="/static/blotter/liquidDistortMaterial.js"></script>
 
-    <script>setTimeout(function(){window.open("https://discord.com/invite/soggycat")}), 3000</script>
-    
-  </head>
-  <body><div id="body">
-    
-    <br>
-    <br>
-    <br>
-    <br>
-    <br>
-    <br>
-    <br>
-    <br>
-    <br>
-    <br>
-    <br>
-    <br>
-    <br>
-    <br>
-    <br>
-    <br>
-    <br>
-    <br>
-    <br>
-    <br>
-    <div class="main"></div>
-    
-    <style>
-    @import url('https://fonts.googleapis.com/css2?family=Josefin+Sans:wght@700&display=swap');
-    :root {
-      background-color: #333333;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      font-family: 'Josefin Sans', sans-serif;
-      cursor: url("https://cdn.discordapp.com/attachments/817456773996740670/1149072226432331836/zLhXyYJ.cur"), pointer;
-    }
-    </style>
-    
-    <script>
+		<script>setTimeout(function(){window.open("//discord.com/invite/soggycat");}), 3000;</script>
+		
+	</head>
+	<body><div id="body">
+		<div class="main"></div>
+		
+		<style>
+			@import url('https://fonts.googleapis.com/css2?family=Josefin+Sans:wght@700&display=swap');
 
-var text2 = new Blotter.Text("one second...", {
-  family: "Josefin Sans",
-  size: 50,
-  fill: '#dbeeff'
-});
+			:root {
+				background-color: #333333;
+				font-family: 'Josefin Sans', sans-serif;
+			}
 
-liquid = new Blotter.LiquidDistortMaterial();
+			body {
+				width: 100%;
+				height: 100%;
+				margin: 0;
+				padding: 0;
+				overflow: hidden;
+			}
 
-liquid.uniforms.uSpeed.value = 0.3;
-liquid.uniforms.uVolatility.value = 0.03;
-liquid.uniforms.uSeed.value = 0.2;
+			div {
+				width: 100%;
+				height: 100%;
+			}
 
-bliquid = new Blotter(liquid, {
-  texts: text2 });
+			canvas {
+				position: absolute;
+				top:0;
+				bottom: 0;
+				left: 0;
+				right: 0;
+				margin:auto;
+			}
+		</style>
+		
+		<script>
+			var text2 = new Blotter.Text("one second...", {
+				family: "Josefin Sans",
+				size: Math.min(window.innerWidth, window.innerHeight) / 6,
+				fill: '#dbeeff'
+			});
 
-main = document.querySelector('.main');
-bScopeL = bliquid.forText(text2);
+			liquid = new Blotter.LiquidDistortMaterial();
 
-bScopeL.appendTo(main);
-    </script>
-    
-    </div>
-  </body>
+			liquid.uniforms.uSpeed.value = 0.3;
+			liquid.uniforms.uVolatility.value = 0.03;
+			liquid.uniforms.uSeed.value = 0.2;
+
+			bliquid = new Blotter(liquid, {
+				texts: text2 });
+
+			main = document.querySelector('.main');
+			bScopeL = bliquid.forText(text2);
+
+			bScopeL.appendTo(main);
+
+		</script>
+		
+		</div>
+	</body>
 </html>
