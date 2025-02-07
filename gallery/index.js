@@ -1,6 +1,6 @@
 import * as THREE from 'three';
 import {GLTFLoader} from 'GLTFLoader';
-import {DRACOLoader} from 'DRACOLoader'
+import {DRACOLoader} from 'DRACOLoader';
 import {StandardControls} from 'StandardControls';
 
 import * as debug from 'debug';
@@ -39,7 +39,7 @@ function init() {
 
 	scene = new THREE.Scene();
 
-	const ambient = new THREE.HemisphereLight(0x00000,0xb6f3b7,.5)
+	const ambient = new THREE.HemisphereLight(0x00000,0xb6f3b7,.5);
 	scene.add(ambient);
 
 	light = new THREE.SpotLight('#dafed6', 60);
@@ -124,7 +124,7 @@ function animate(time) {
 	cframe += 1;
 
 	if (!last_rendered_time) last_rendered_time = time;
-	let delta = (time-last_rendered_time);
+	const delta = (time-last_rendered_time);
 
 	if (controls && camera) {
 		controls.updateMovement(delta || 1,1/(250+16));
@@ -133,7 +133,7 @@ function animate(time) {
 	if (sog) {
 		sog.rotation.x += 0.005;
 		sog.rotation.y += 0.01;
-		light.target = sog
+		light.target = sog;
 	};
 
 	if (plane) {

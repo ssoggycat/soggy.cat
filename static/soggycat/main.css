@@ -106,10 +106,13 @@ body {
     min-width: 10rem;
     
     transition-duration: 600ms;
+    max-width: 100%;
 }
 
 .sm-closed {
     transform: translateX(100%);
+    visibility: hidden;
+    pointer-events: none;
 }
 
 /* Side menu children */

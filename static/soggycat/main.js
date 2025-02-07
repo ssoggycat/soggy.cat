@@ -1,6 +1,6 @@
 // redirect to https
 if (window.location.protocol != "https:") {}
-    //window.location.protocol = "https"
+//window.location.protocol = "https"
 
 const circlebutton = document.getElementById('circlebtn');
 if (circlebutton) circlebutton.addEventListener('click', toggleMenu);
@@ -11,9 +11,11 @@ let menuOut = false;
 function updateMenu() {
 	if (menuOut) {
 		sidemenu.classList.remove("sm-closed");
+		sidemenu.inert = false;
 	}
 	else {
 		sidemenu.classList.add("sm-closed");
+		sidemenu.inert = true;
 	}
 }
 

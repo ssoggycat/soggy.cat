@@ -5,7 +5,7 @@
 **wet?** nope, more like **soggy**.
 **cat?** it's a **cat** for sure! <br>
 <sub> all of the edits in this repo reflect on the website itself so it's always up to date. </sub> <br>
-<sub> ``📁 thiscat ⟶ this.soggy.cat`` </sub> <sub> ``📁 team ⟶ s.soggy.cat`` </sub> <sub> ``📁 goog ⟶ goog.soggy.cat`` </sub>
+<sub> ``📁 thiscat ⟶ this.soggy.cat`` </sub> <sub> ``📁 team ⟶ s.soggy.cat`` </sub> <sub> ``📁 goog ⟶ goog.soggy.cat`` </sub> <sub> ``📁 bot ⟶ hourly.soggy.cat`` </sub>
 
 ## ~ CREDITS ~
 ### 🖥️ FP ([🔗](https://github.com/system2k)) 
