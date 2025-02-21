@@ -46777,7 +46777,7 @@ class LoaderUtils {
 
 		try {
 
-			// merges multi-byte utf-8 characters.
+			// merges multi-byte UTF-8 characters.
 
 			return decodeURIComponent( escape( s ) );
 

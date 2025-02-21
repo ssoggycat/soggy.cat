@@ -274,12 +274,12 @@ class DRACOLoader extends Loader {
 
 		if ( useJS ) {
 
-			librariesPending.push( this._loadLibrary( 'draco_decoder.js', 'text' ) );
+			librariesPending.push( this._loadLibrary( 'draco_decoder_gltf.js', 'text' ) );
 
 		} else {
 
-			librariesPending.push( this._loadLibrary( 'draco_wasm_wrapper.js', 'text' ) );
-			librariesPending.push( this._loadLibrary( 'draco_decoder.wasm', 'arraybuffer' ) );
+			librariesPending.push( this._loadLibrary( 'draco_wasm_wrapper_gltf.js', 'text' ) );
+			librariesPending.push( this._loadLibrary( 'draco_decoder_gltf.wasm', 'arraybuffer' ) );
 
 		}
 

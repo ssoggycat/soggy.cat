@@ -8,8 +8,8 @@ const gltfLoader = new GLTFLoader();
 const dracoLoader = new DRACOLoader();
 
 
-dracoLoader.setDecoderConfig({ type: 'js' });
-dracoLoader.setDecoderPath('/gallery/threejs/draco/');
+dracoLoader.setDecoderPath('/static/threejs/draco/');
+//dracoLoader.getDecoderModule();
 
 gltfLoader.setDRACOLoader(dracoLoader);
 
