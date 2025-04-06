@@ -1,203 +1,370 @@
 <!DOCTYPE html>
-<html lang="en">
-  <head>
-	
-	<meta charset="UTF-8"/>
-	<title>&#65279;</title>
-	<meta property="og:title" content="@ssoggycat">
-	<meta name="description" content="our very sleepy crew">
-	
-	<link rel="icon" href="assets/images/soggymask.webp" />
-	
-	<meta name="twitter:card" content="summary"/>
-	<meta name="viewport" content="width=device-width, initial-scale=1" />
-	<meta name="theme-color" content="#64DAFF"/>
-	
-	<link rel="stylesheet" href="index.css" type="text/css"/>
-	<script src="index.js"></script>
-	<!--<script src="//soggy.cat/static/other/cursor-effects.js"></script>-->
-	
-  </head>
-  <body scroll="no" style="overflow: hidden; margin: 0px; padding: 0px;">
-	<!-- script> if (window.location.protocol != "https:") window.location.protocol = "https:" </script> -->
+<html>
+<head>
+  
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=1024, height=768, initial-scale=1.0, user-scalable=no, maximum-scale=1.0, minimal-ui">
+  <title> &ZeroWidthSpace; </title>
+  <meta property="og:image" content="/assets/images/embed.gif">
+  <link rel="icon" type="image/x-icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' width='1' height='1'/>">
 
-	<div class="overlay">
-		<div class="overlay-text" onclick="showContainer()">click me</div>
-	</div>
-	
-	<div class="container">
-		<div class="sliding-background"></div>
-	</div>
-	
-	<img style="display: none;" id="explode" src="assets/images/boom.awebp">
-	
-	<div id="stars"></div>
-	<div id="stars2"></div>
-	<div id="stars3"></div>
-	
-	<script type="module">
-		import { emojiCursor } from "//soggy.cat/static/other/cursor-effects.js";
+  <meta itemprop="name" content="ssoggycat software division™">
+  <meta itemprop="description" content="the BEST page ever please clicky click..">
 
-		new emojiCursor({ emoji: ["🐱", "🐈", "😸", "😹", "😺", "😻", "😼", "😽", "😾", "🙀", "😿","💦","💧","☔","🛁"] });
-		new emojiCursor({ emoji: ["🐈"," "] });
-		new emojiCursor({ emoji: ["💦","💧","☔","🛁"," "," "," "," "," "," "," "," "] });
-	</script>
+  <meta name="twitter:title" content="ssoggycat software division™">
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:image" content="summary">
+  <meta name="twitter:site" content="@ssoggycat">
+  <meta name="twitter:creator" content="@cvsilly_">
+  
+  <link href="/assets/static/style.css" rel="stylesheet" type="text/css"/>
 
-	<div class="slideshow" onclick="window.location.replace('dark')">
+</head>
+<body>
 
-		<div class="image fade">
-			<img width="100px" src="assets/images/slide1.webp">
-		</div>
-		
-		<div class="image fade">
-			<img width="100px" src="assets/images/slide2.webp">
-		</div>
-		
-		<div class="image fade">
-			<img width="100px" src="assets/images/slide3.webp">
-		</div>
-		
-		<div class="image fade">
-			<img width="100px" src="assets/images/slide4.webp">
-		</div>
-		
-		<div class="image fade">
-			<img width="100px" src="assets/images/slide5.webp">
-		</div>
-	  
-	</div>
-	
-	<div class="left">
-		<h1>managers!!</h1>
-		<br>
+<div -style="display:none" class="intro"> <!-- remove - to remove the intro overlay!! (for efficient testing) -->
+  <img class="smallsog" src="/assets/images/cheese.webp" draggable="false">
+  <a class="smallsogt">(click)</a>
 
-		<div class="twt">
+  <div class="overlay">
+    <div class="snowflakes" aria-hidden="true">
+      <!-- horror -->
+      <div class="snowflake"><img class="inner" src="/assets/images/sogflake.png" width="25px"></div>
+      <div class="snowflake"><img class="inner" src="/assets/images/sogflake.png" width="25px"></div>
+      <div class="snowflake"><img class="inner" src="/assets/images/sogflake.png" width="25px"></div>
+      <div class="snowflake"><img class="inner" src="/assets/images/sogflake.png" width="25px"></div>
+      <div class="snowflake"><img class="inner" src="/assets/images/sogflake.png" width="25px"></div>
+      <div class="snowflake"><img class="inner" src="/assets/images/sogflake.png" width="25px"></div>
+      <div class="snowflake"><img class="inner" src="/assets/images/sogflake.png" width="25px"></div>
+      <div class="snowflake"><img class="inner" src="/assets/images/sogflake.png" width="25px"></div>
+      <div class="snowflake"><img class="inner" src="/assets/images/sogflake.png" width="25px"></div>
+    </div>
+  </div>
+  <div class="flash"></div>
+</div>
 
-			<!--
-			<div class="info" onclick="window.open('//twitter.com/_ktg5', '_ktg5')">
-				<img class="pfp" src="//unavatar.io/twitter/_ktg5">
-				<br>
-				<a class="name">ktg5</a>
-				<br>
-				<a class="at">@_ktg5</a>
-			</div>
-			<br>
+<div class="site">
 
-			<div class="info" onclick="window.open('//twitter.com/friendlypaths_', 'friendlypaths_')">
-				<img class="pfp" src="//unavatar.io/twitter/friendlypaths_">
-				<br>
-				<a class="name">friendlypaths</a>
-				<br>
-				<a class="at">@friendlypaths_</a>
-			</div>
-			<br>
-			-->
+  <div class="sogs left2"></div>
+  <div class="sogs right2"></div>
 
-			<div class="info" onclick="window.open('//twitter.com/cvsilly_', 'cvsilly_')">
-				<img class="pfp" src="assets/images/cv.png">
-				<br>
-				<a class="name">cv</a>
-				<br>
-				<a class="at">@cvsilly_</a>
-			</div>
-			<br>
+    <div class="pet" style="top:20px;transform:skew(3deg,3deg)"></div>
 
-			<div class="info" onclick="window.open('//twitter.com/sho_buh', 'sho_buh')">
-				<img class="pfp" src="assets/images/shobe.jpg">
-				<br>
-				<a class="name">shobe</a>
-				<br>
-				<a class="at">@sho_buh</a>
-			</div>
+    <a class="title">ssoggycat</a>
 
-		</div>
-	</div>
-	
-	<div class="right">
-		<h1>tweetdeck mods!!!</h1>
-		<br>
-		
-		<div class="twt">
+  <div class="buddypals"> <!-- i used "buddy" because i literally could not find a gender neutral term :bitingnails: -->
+  <div class="big">
 
-			<div class="info" onclick="window.open('//twitter.com/soggyenthusiast', 'soggyenthusiast')">
-				<img class="pfp" src="assets/images/mat.jpg">
-				<br>
-				<a class="name">Soggy cat enthusiast</a>
-				<br>
-				<a class="at">@soggyenthusiast</a>
-			</div>
-			<br>
-			
-			<div class="info" onclick="window.open('//twitter.com/coachfancy', 'coachfancy')">
-				<img class="pfp" src="assets/images/fancycoach.jpg">
-				<br>
-				<a class="name">Soggy Cat Enjoyer Enjoyer</a>
-				<br>
-				<a class="at">@CoachFancy</a>
-			</div>
-			<br>
-			
-			<div class="info" onclick="window.open('//twitter.com/nullcultured', 'nullcultured')">
-				<img class="pfp" src="assets/images/goob.jpg">
-				<br>
-				<a class="name">goob</a>
-				<br>
-				<a class="at">@nullcultured</a>
-			</div>
+    <a class="buddy left" style="width:200px" href="//x.com/cvsilly_">
+      <img src="/assets/images/pfp/cv.webp">
+      <span class="bigtext">cv</span>
+      <span class="smalltext">cvgd • he/they</span>
+    </a>
+    <a class="buddy right" style="width:150px;margin-top:100px" href="//discord.com/users/397799821500612638">
+      <img src="/assets/images/pfp/mat.webp">
+      <span class="bigtext">Mat</span>
+      <span class="smalltext">m5x11 • she/her</span>
+    </a>
 
-		</div>
-	</div>
-	
-	<div class ="fakemarquee">
-		<p class="fakemarqueetext">"Soggy Cat" is a whimsical term used to describe the comical and often endearing sight of domestic felines that have become wet or damp due to exposure to water, whether through rain, bathing, or other means. While cats are generally known for their aversion to water and meticulous grooming habits, instances of soggy cats can lead to humorous and charming situations. The image of a soggy cat with its fur clinging awkwardly to its body and its usually sleek appearance disrupted by water droplets has become a popular subject in internet memes, social media posts, and humorous artwork. Despite their initial discomfort, many cats display remarkable adaptability, often demonstrating a mix of curiosity and cautious exploration when encountering wet environments. This phenomenon highlights the intriguing and often unpredictable interactions between these enigmatic creatures and the elements of nature. </pre>    
-	</div>
-	
-	<video class="stars" loop autoplay muted playsinline>
-		<source src="assets/images/stars.webm" type="video/webm">
-		<source src="assets/images/stars.mp4" type="video/mp4">
-	</video>
+  </div>
+  <div class="big" style="max-width:450px">
 
-	<img class="dance" src="assets/images/stupidlittlecat.awebp">
-	
-	<div class="snowflakes" aria-hidden="true">
-		<div class="snowflake">
-			<img width="30px" src="assets/images/soggymask.webp">
-		</div>
-		<div class="snowflake">
-			<img width="30px" src="assets/images/soggymask.webp">
-		</div>
-		<div class="snowflake">
-			<img width="30px" src="assets/images/soggymask.webp">
-		</div>
-		<div class="snowflake">
-			<img width="30px" src="assets/images/soggymask.webp">
-		</div>
-		<div class="snowflake">
-			<img width="30px" src="assets/images/soggymask.webp">
-		</div>
-		<div class="snowflake">
-			<img width="30px" src="assets/images/soggymask.webp">
-		</div>
-		<div class="snowflake">
-			<img width="30px" src="assets/images/soggymask.webp">
-		</div>
-		<div class="snowflake">
-			<img width="30px" src="assets/images/soggymask.webp">
-		</div>
-		<div class="snowflake">
-			<img width="30px" src="assets/images/soggymask.webp">
-		</div>
-		<div class="snowflake">
-			<img width="30px" src="assets/images/soggymask.webp">
-		</div>
-		<div class="snowflake">
-			<img width="30px" src="assets/images/soggymask.webp">
-		</div>
-		<div class="snowflake">
-			<img width="30px" src="assets/images/soggymask.webp">
-		</div>
-	</div>
+    <a class="plus" style="width:50px" href="/dark">
+      <span>+</span>
+    </a>
 
-	<script src="//soggy.cat/static/other/neko.js"></script>
-	</body>
+    <a class="small buddy" style="width:50px" href="//x.com/looouuuiiiss_">
+      <img src="/assets/images/pfp/louis.webp">
+      <span class="smalltext padtop">louis</span>
+    </a>
+    <a class="small buddy" style="width:50px">
+      <img src="/assets/images/pfp/nev.webp">
+      <span class="smalltext padtop">nev</span>
+    </a>
+    <a class="small buddy" style="width:50px">
+      <img src="/assets/images/pfp/fancycoach.webp">
+      <span class="smalltext padtop">coach</span>
+    </a>
+    <a class="small buddy" style="width:50px" href="//x.com/sho_buh">
+      <img src="/assets/images/pfp/shobe.webp">
+      <span class="smalltext padtop">shobe</span>
+    </a>
+
+  </div>
+
+  <div class="buttons">
+    <a class="button b1" href="//x.com/ssoggycat">
+      <svg class="icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 850 850"><path d="M52 38h232l9 12 14 20 12 17 11 16 13 18 16 23 11 16 12 17 12 17 2 3 15-1 33-2h16l32 2 28 4 28 6 25 7 5 2 5-1 9-11 11-12 9-11 7-7 7-8 12-14 9-10 9-11 14-15 7-8 9-10 9-11 10-11 9-11 15-16 8-10h69l-2 5-7 7-9 11-11 12-9 11-14 15-7 8-12 14-9 10-9 11-13 14-7 8-12 14-9 10-9 11-14 15-7 8-12 14-2 3 4 1 15 8 22 14 18 13 18 14 10 9 8 7 7 7 5 5 16 16 9 11 8 9 13 18 14 21 15 26 14 29 10 26 7 22 5 19v7l-5-5-12-13-7-8-12-11-17-14-21-14-17-10-27-13-33-11-21-5-20-3 9 10 10 15 8 16 6 16 5 23 1 12v16l-2 18-6 23-8 18-5-5-8-10-9-10-11-9-11-7 13 19 12 17 13 18 13 19 14 20 10 14 14 20 16 23 12 17 14 20 14 20 12 17 16 23 12 17 10 14v1H599l-9-12-16-23-14-20-13-18-10-15-3 3-15 24-16 26-12 19-15 24-3 3 1-32v-19l-2-33-5-35-8-34-12-36-11-26-8-17-10-18-13-21-13-18-11-14h-3l-9 10-9 11-11 12-9 11-7 7-9 11-12 13-9 11-11 12-7 8-10 11-9 11-11 12-9 11-13 14-7 8-9 10-9 11-10 11-9 11-16 17-9 11-10 11-9 11-14 15-9 11-3 1H52l2-4 12-14 10-11 9-11 14-15 9-11 12-13 9-11 11-12 7-8 10-11 9-11 10-11 9-11 15-16 9-11 12-13 9-11 12-13 7-8 10-11 2-4h-34l-17-3-20-6-17-8-11-7-9-7-14-12-9-10-12-17-11-23-5-16-3-15-2-26-16-10-23-12-25-10-18-6-7-2v-2l16-7 18-5 19-3h27l17 2-12-9-18-11-23-12-16-7-1-2 15-3 18-2 28-1 31 2 13 1 4-5h2l2-4h2v-2h2v-2h2l2-4 8-7 13-12 14-11 18-13 2-1-2-5-13-19-13-18-14-20-16-23-12-17-12-17-14-20-11-16-13-18-16-23-14-20-9-13Zm95 52 2 5 11 15 13 18 12 17 13 18 12 17 12 17 13 18 13 18 7 10 19-9 27-11 36-12-4-7-13-18-11-16-12-16-12-17-14-20-13-18-6-9Zm488 448Zm1 1Zm16 113-7 21-8 16-9 14-9 11-6 6-5-12-7-16-10-16-9-11-4-3-10 16 1 5 13 18 12 17 13 18 13 18 11 16h105l-2-5-12-16-13-18-16-23-13-18-13-18-12-17Z" fill="#1c9aef"/><path d="M52 38h232l9 12 14 20 12 17 11 16 13 18 16 23 11 16 12 17 12 17 2 5-37 7-20 5-3-1-14-20-14-20-12-16-12-17-14-20-13-18-5-7v-2H147l13 19 14 19 12 17 13 18 12 17 12 17 13 18 13 18 6 8v3l-22 12-19 12-3-1-11-16-12-17-14-20-12-17-11-16-13-18-16-23-16-23-12-17-12-17-14-20-14-20Z" fill="#fbfbfb"/><path d="m635 539 4 4 11 16 12 17 13 18 13 19 14 20 10 14 14 20 16 23 12 17 14 20 14 20 12 17 16 23 12 17 10 14v1H599l-9-12-16-23-14-20-13-18-10-15 1-6 12-19 14-22 2-3h3l11 16 13 18 12 17 13 18 13 18v2h105l-12-17-13-18-12-17-12-17-13-18-13-18-9-13 2-13 1-7v-32l-5-25-7-19-8-15Z" fill="#fcfcfc"/><path d="M737 38h69l-2 5-7 7-9 11-11 12-9 11-14 15-7 8-12 14-9 10-9 11-13 14-7 8-12 14-9 10-9 11-14 15-7 8-12 14-11 12-7 8-9 10-7 8-9 10-9 11-10 11-9 11-7 7-7 8-9 10-9 11-9 10-5 6-5-5-13-18-14-20 6-7 7-8 12-14 10-11 9-11 13-14 9-11 13-14 9-11 10-11 9-11 11-12 9-11 7-7 7-8 12-14 9-10 9-11 14-15 7-8 9-10 9-11 10-11 9-11 15-16Z" fill="#fcfdfd"/><path d="m367 511 4 2 8 10-1 4-9 10-9 11-11 12-9 11-7 7-9 11-12 13-9 11-11 12-7 8-10 11-9 11-11 12-9 11-13 14-7 8-9 10-9 11-10 11-9 11-16 17-9 11-10 11-9 11-14 15-9 11-3 1H52l2-4 12-14 10-11 9-11 14-15 9-11 12-13 9-11 11-12 7-8 10-11 9-11 10-11 9-11 15-16 9-11 12-13 9-11 12-13 7-8 10-11 4-5 25-6 16-6 17-9 15-11 12-11 8-8 10-14Z" fill="#fcfcfc"/></svg>
+      <span>twitter&#46;&#46;</span>
+    </a>
+    <a class="button b2" href="//discord.gg/soggycat">
+      <svg class="icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><path fill="#5865F2" d="M105 0h302c58 0 105 47 105 105v302c0 58-47 105-105 105H105C47 512 0 465 0 407V105C0 47 47 0 105 0z"/><g><g><path fill="#fff" fill-rule="nonzero" d="M369 153a270 270 0 0 0-67-20 187 187 0 0 0-9 17 250 250 0 0 0-37-3c-12 0-25 1-37 3l-9-17a272 272 0 0 0-67 20c-42 63-54 125-48 185a271 271 0 0 0 82 41c7-9 13-18 18-28a174 174 0 0 1-28-13l7-6a194 194 0 0 0 164 0l7 6a175 175 0 0 1-28 13 198 198 0 0 0 18 28 270 270 0 0 0 82-41c7-70-11-131-48-185zM202 301c-16 0-29-15-29-33s12-32 29-32 30 14 29 32c0 18-13 33-29 33zm108 0c-16 0-29-15-29-33s13-32 29-32c17 0 30 14 29 32 0 18-13 33-29 33z"/></g></g></svg>
+      <span>discord</span>
+    </a>
+    <a class="button b3" href="//drive3.sogfulday.today">
+      <svg class="icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 88 78"><path d="m6.6 66.8 3.9 6.7a9 9 0 0 0 3.2 3.3L27.6 53H0a9 9 0 0 0 1.2 4.5z" fill="#0066da"/><path d="M43.6 25 30 1.2a9 9 0 0 0-3.3 3.3l-25.4 44A9 9 0 0 0 0 53h27.5z" fill="#00ac47"/><path d="M73.5 76.8a9 9 0 0 0 3.3-3.3l1.6-2.8 7.7-13.2a9 9 0 0 0 1.2-4.5H59.8l5.9 11.5z" fill="#ea4335"/><path d="M43.6 25 57.5 1.2A8.8 8.8 0 0 0 52.9 0H34.4a9 9 0 0 0-4.5 1.2z" fill="#00832d"/><path d="M59.8 53H27.5L13.7 76.8c1.4.8 3 1.2 4.6 1.2H69a10 10 0 0 0 4.5-1.2z" fill="#2684fc"/><path d="m73.4 26.5-12.7-22a9 9 0 0 0-3.3-3.3L43.7 25l16.1 28h27.5a9 9 0 0 0-1.2-4.5z" fill="#ffba00"/></svg>
+      <span>soggy drive</span>
+    </a>
+    <a class="button b4">
+      <svg class="icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 36 36"><g fill="#be1931"><path d="M21 27c-2 0-3-1-3-3v-4c0-2 1-3 3-3 1 0 6-1 6-5 0-2-2-4-5-4-2 0-4 2-4 3a3 3 0 1 1-6 0c0-5 5-9 10-9 8 0 11 6 11 11 0 4-2 7-6 9l-3 1v1c0 2-1 3-3 3z"/><circle cx="21" cy="32" r="3"/><circle cx="6" cy="32" r="3"/><path d="M9 24a3 3 0 1 1-6 0V5a3 3 0 1 1 6 0z"/></g></svg>
+      <span>the secret fourth thing..</span>
+    </a>
+  </div>
+
+  </div>
+
+    <div class="footerb">
+      <a href="//s.soggy.cat" popup="s.soggy.cat" copiable="true">
+        <img src="/assets/images/88x31/ssoggycat-button.gif" width="88" height="31">
+      </a>
+      <a href="//s.soggy.cat" popup="s.soggy.cat" copiable="true">
+        <img class="gbh" src="/assets/images/88x31/ssoggycat-gameboyhorror-static.gif" width="88" height="31">
+        <style>.gbh:hover{content:url("/assets/images/88x31/ssoggycat-gameboyhorror.gif")}</style>
+      </a>
+      <a href="//cerezapizza.straw.page" popup="cerezapizza.straw.page" copiable="true">
+        <img src="/assets/images/88x31/cerezapizza-sog.gif" width="88" height="31">
+      </a>
+      <a href="//yesterweb.org/no-to-web3/" popup="yesterweb.org/no-to-web3" copiable="true">
+        <img src="/assets/images/88x31/yesterweb-web3.gif" width="88" height="31">
+      </a>
+      <iframe class="increment" src="//incr.easrng.net/badge?key=sog" width="88" height="31" frameborder="0" loading="lazy"></iframe>
+    </div>
+    <div class="footerbcopied"><a>copied!</a></div>
+
+    <div class="footer">
+      <a href="/info">info</a> |
+      <a href="//github.com/ssoggycat/soggy.cat">github</a> |
+      <a href="//github.com/sponsors/ssoggycat">support</a> |
+      <a href="//ssoggycat.straw.page">strawpage</a> |
+      <a href="old">old</a>
+    </div>
+
+    <video autoplay loop muted playsinline preload="none" class="bg">
+      <source src="/assets/videos/stars.mp4" type="video/mp4">
+      <source src="/assets/videos/stars.webm" type="video/webm">
+    </video>
+
+    <video playsinline class="cocaine">
+      <source src="/assets/videos/cocaine.mp4" type="video/mp4">
+    </video>
+
+    <div class="lol"><img class="lolimg" src="/assets/images/devtools.webp" draggable="false"></div>
+
+    <div class="pet" style="bottom:20px;transform:skew(-3deg,-3deg)"></div>
+</div>
+
+  <div class="volumeslider">
+    <img class="toggle" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAGQAAABJAQMAAADxHhH/AAAABlBMVEUAAAD///+l2Z/dAAAAAXRSTlMAQObYZgAAAR9JREFUKM9908FxBSEIAFAdDx4twVJsLBMtzVIogaMHZgmo/Gjy5+/FeS6LOwLOnoBzMY1LdOm5dWYIbIqaobatpCp9K0/BqYxbRZXGFg/nMdGCnwqPHSwafiuqyG0lmqpbKHpcWaogydmVNsVdVNtS4CYqPasqL0Hu+obZiTKkpUeVIIEczYyqiHGpuxEhLMm+CMOYgqkRRlD1KfK3KKBJfvqQu1Xd1xS8Ufmj70P5UnmnsMQiMPlbzwdJGeKv0B+S9RadiiOpmLsq4b5rVGWrA6lKP6tSZ8W8qNFZzS7itruAgSTEbWUkbWu29iQtlfUSfanI+kyEfsuzRMJrPFT9pUr6talM4dnlacq2Myzs8H6qtlN868M00ocphn/6AVui/EBqm5eNAAAAAElFTkSuQmCC" width="20px" alt="mute / unmute" style="cursor:pointer;">
+    <input class="slider" type="range" min="0" max="1" step="0.01" value="0.5">
+  </div>
+
+  <div class="song">♪ milkypossum ~ BUTT3RFLI3S >w<</div>
+
+  <!-- simply hide js-dependent elements and voila! 
+       not the best approach but it's definitely easier than rewriting a bunch of code -->
+  <noscript> 
+    <style>
+      .intro, .ghost, .b4, .volumeslider, .increment, .sogs {display: none}
+    </style>
+  </noscript>
+
+  <script>
+
+    document.addEventListener('contextmenu', event => { event.preventDefault() });
+    // document.addEventListener("keydown", e => {if (e.key === "F12" || (e.ctrlKey && e.shiftKey && e.key === "I")) {e.preventDefault()}})
+
+    // feeling evil sorry
+    setInterval(() => {
+      let start = performance.now(); debugger; let end = performance.now();
+      if (end - start > 50) {
+        document.querySelector(".lol").style.display = "flex"
+      } else {
+        document.querySelector(".lol").style.display = "none"
+      }
+    }, 1000) 
+
+    const sog = document.querySelector(".smallsog"); const flash = document.querySelector(".flash");
+    const slider = document.querySelector(".slider");
+
+    let muted = false;
+    let introactivated = false;
+    
+    var context = new (window.AudioContext || window.webkitAudioContext)();
+    var volume = context.createGain(); volume.gain.value = 0.5; volume.connect(context.destination);
+    var buffer = null; var song = null; var request = new XMLHttpRequest();
+
+    request.open("GET", "/assets/audio/butt3rfli3s.mp3", true);
+    // newgrounds.com/audio/listen/1163253
+    request.responseType = "arraybuffer";
+    request.onload = function () {
+      context.decodeAudioData(request.response, function (decodedBuffer) {
+        buffer = decodedBuffer;
+      });
+    };
+    request.send();
+    function WEEE() {
+      if (!buffer) return;
+      song = context.createBufferSource(); song.buffer = buffer; song.connect(volume);
+      song.loop = true; song.loopStart = 1.415; // seamless loop to keep it running infinitely..
+      song.loopEnd = buffer.duration; song.start(0);
+    }
+
+    setTimeout(function() {if (!introactivated) {document.querySelector(".smallsogt").style.opacity = "0.5"}}, 2000);
+
+    // intro click!!
+    document.addEventListener("click", function(event) {
+      if (event.target.classList.contains("smallsog") && !introactivated) {
+      introactivated = true;
+      WEEE(); sogdvd();
+      sog.style.animation = "slide 2s cubic-bezier(0.550, 0.085, 0.680, 0.530) forwards";
+      sog.style.pointerEvents = "none";
+      flash.style.transition = "opacity 1.5s ease-in";
+      flash.style.opacity = "1";
+      document.querySelector(".bg").load();
+      document.querySelector(".song").style.display = "block";
+      document.querySelector(".smallsogt").style.opacity = "0";
+
+      setTimeout(function() {
+        document.querySelector(".overlay").style.display = "none";
+        document.querySelector(".smallsogt").style.display = "none";
+        document.querySelector(".bg").play();
+        flash.style.transition = "opacity 2s ease-in-out";
+        flash.style.opacity = "0";
+      }, 1500)}
+    });
+
+    // song input
+    slider.addEventListener('input', function() {
+      volume.gain.value = slider.value;
+      if (slider.value == 0) {
+      document.querySelector(".toggle").src = "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAGQAAABJAQMAAADxHhH/AAAABlBMVEUAAAD///+l2Z/dAAAAAXRSTlMAQObYZgAAAPtJREFUKM/F0cFtBCEMBVAQB46UQCehsZWYdEY6IR2QG5EIzgdnB7uAaP8B6UlG2Mb8V3yVCk0qKWUlkrJKTsn/KH1LhS+p/ClFH1uh8APvW3Ep0J/SEtG0zVVchxxRhzrLEzVooshsVYiMnSyzVP1Y6gbCGKEvVaib3ONW2YojtaMwczmVlug6Qkv3ZqE8txorDanYl9xT89ZAJUnhBaVyZCnXIzdjf+qBwcJYqqzm51HA+FKWrluxmlxvYdGpQZN1oW8ITSzhQ8bWYHnWhN6wD8gSEctAJmGWh1nZp6fC4uQqFZVCk/Jdyg0pO5XQm4hWVkpKUSl085r8AvmduczGaHMhAAAAAElFTkSuQmCC";
+      muted = true;
+      } else {
+      document.querySelector(".toggle").src = "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAGQAAABJAQMAAADxHhH/AAAABlBMVEUAAAD///+l2Z/dAAAAAXRSTlMAQObYZgAAAR9JREFUKM9908FxBSEIAFAdDx4twVJsLBMtzVIogaMHZgmo/Gjy5+/FeS6LOwLOnoBzMY1LdOm5dWYIbIqaobatpCp9K0/BqYxbRZXGFg/nMdGCnwqPHSwafiuqyG0lmqpbKHpcWaogydmVNsVdVNtS4CYqPasqL0Hu+obZiTKkpUeVIIEczYyqiHGpuxEhLMm+CMOYgqkRRlD1KfK3KKBJfvqQu1Xd1xS8Ufmj70P5UnmnsMQiMPlbzwdJGeKv0B+S9RadiiOpmLsq4b5rVGWrA6lKP6tSZ8W8qNFZzS7itruAgSTEbWUkbWu29iQtlfUSfanI+kyEfsuzRMJrPFT9pUr6talM4dnlacq2Myzs8H6qtlN868M00ocphn/6AVui/EBqm5eNAAAAAElFTkSuQmCC";
+      muted = false;
+      }
+    });
+    // song toggle
+    document.querySelector(".toggle").addEventListener('click', function() {
+      if (muted) {
+      volume.gain.value = slider.value;
+      document.querySelector(".toggle").src = "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAGQAAABJAQMAAADxHhH/AAAABlBMVEUAAAD///+l2Z/dAAAAAXRSTlMAQObYZgAAAR9JREFUKM9908FxBSEIAFAdDx4twVJsLBMtzVIogaMHZgmo/Gjy5+/FeS6LOwLOnoBzMY1LdOm5dWYIbIqaobatpCp9K0/BqYxbRZXGFg/nMdGCnwqPHSwafiuqyG0lmqpbKHpcWaogydmVNsVdVNtS4CYqPasqL0Hu+obZiTKkpUeVIIEczYyqiHGpuxEhLMm+CMOYgqkRRlD1KfK3KKBJfvqQu1Xd1xS8Ufmj70P5UnmnsMQiMPlbzwdJGeKv0B+S9RadiiOpmLsq4b5rVGWrA6lKP6tSZ8W8qNFZzS7itruAgSTEbWUkbWu29iQtlfUSfanI+kyEfsuzRMJrPFT9pUr6talM4dnlacq2Myzs8H6qtlN868M00ocphn/6AVui/EBqm5eNAAAAAElFTkSuQmCC";
+      } else {
+      volume.gain.value = 0;
+      document.querySelector(".toggle").src = "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAGQAAABJAQMAAADxHhH/AAAABlBMVEUAAAD///+l2Z/dAAAAAXRSTlMAQObYZgAAAPtJREFUKM/F0cFtBCEMBVAQB46UQCehsZWYdEY6IR2QG5EIzgdnB7uAaP8B6UlG2Mb8V3yVCk0qKWUlkrJKTsn/KH1LhS+p/ClFH1uh8APvW3Ep0J/SEtG0zVVchxxRhzrLEzVooshsVYiMnSyzVP1Y6gbCGKEvVaib3ONW2YojtaMwczmVlug6Qkv3ZqE8txorDanYl9xT89ZAJUnhBaVyZCnXIzdjf+qBwcJYqqzm51HA+FKWrluxmlxvYdGpQZN1oW8ITSzhQ8bWYHnWhN6wD8gSEctAJmGWh1nZp6fC4uQqFZVCk/Jdyg0pO5XQm4hWVkpKUSl085r8AvmduczGaHMhAAAAAElFTkSuQmCC";
+      }
+      muted = !muted;
+    });
+
+  // twitter to nitter if in incognito mode (does this even work?)
+  document.addEventListener("DOMContentLoaded", function() {
+    if (navigator.webdriver || !window.indexedDB) {
+      document.querySelectorAll('a[href*="://x.com/"]').forEach(link => {
+        link.href = link.href.replace('://x.com/', '://xcancel.com/');
+      });
+    }
+  });
+
+  // bouncy little guys
+  function sogdvd() {
+      const sogImageSrc = '/assets/images/cheese.webp';
+
+      function createsogs(container) {
+        for (let i = 0; i < 6; i++) {
+          const img = document.createElement('img');
+          img.src = sogImageSrc; img.classList.add('sog');
+          img.style.position = 'absolute'; img.style.width = '50px'; img.style.height = '50px';
+
+          const sogdiv = container.getBoundingClientRect();
+          const randomTop = Math.random() * (sogdiv.height - 50);
+          const randomLeft = Math.random() * (sogdiv.width - 50);
+
+          img.style.top = `${randomTop}px`; img.style.left = `${randomLeft}px`;
+          img.dataset.dx = Math.random() > 0.5 ? 1 : -1; img.dataset.dy = Math.random() > 0.5 ? 1 : -1;
+          img.dataset.angle = Math.random() * 360;
+
+          container.appendChild(img);
+        }
+      }
+
+      function animatesogs(container) {
+        const sogs = container.querySelectorAll('.sog');
+        const sogdiv = container.getBoundingClientRect();
+
+        sogs.forEach((sog) => {
+          const rect = sog.getBoundingClientRect();
+          let dx = parseFloat(sog.dataset.dx); let dy = parseFloat(sog.dataset.dy); let angle = parseFloat(sog.dataset.angle);
+
+          if (rect.left <= sogdiv.left || rect.right >= sogdiv.right) { dx *= -1 }
+          if (rect.top <= sogdiv.top || rect.bottom >= sogdiv.bottom) { dy *= -1 }
+
+          sog.style.left = `${parseFloat(sog.style.left) + dx}px`;
+          sog.style.top = `${parseFloat(sog.style.top) + dy}px`;
+          sog.style.transform = `rotate(${(angle += 2) % 360}deg)`;
+
+          sog.dataset.dx = dx; sog.dataset.dy = dy; sog.dataset.angle = angle;
+        });
+
+        requestAnimationFrame(() => animatesogs(container));
+      }
+
+      document.addEventListener('DOMContentLoaded', () => {
+        document.querySelectorAll('.sogs').forEach((container) => {
+          createsogs(container); animatesogs(container);
+        });
+      });
+    }; sogdvd()
+
+    // big text motion blur
+    const title = document.querySelector(".title");
+    document.body.style.overflow = "hidden";
+
+    function ghost(x, y) {
+      let ghost = document.createElement("div");
+      ghost.textContent = title.textContent; ghost.className = "ghost";
+
+      let titleStyles = window.getComputedStyle(title);
+      let width = title.getBoundingClientRect().width;
+
+      ghost.style.left = `${x + width / 2}px`;
+      ghost.style.top = `${y}px`;
+      ghost.style.transform = titleStyles.transform;
+
+      document.body.appendChild(ghost);
+      setTimeout(() => ghost.remove(), 500);
+    }
+    let angle = 0;
+    function animate() {
+      ghost(title.getBoundingClientRect().left, title.getBoundingClientRect().top);
+      angle += 0.05; requestAnimationFrame(animate);
+    }; animate()
+
+    // the secret fourth thing (i don't know what to put there it's a placeholder lol)
+    document.querySelector(".b4").addEventListener("click", function (event) {
+      const video = document.querySelector(".cocaine");
+      if (song) {song.stop(0); song = null}
+
+      // uhh the perfect loop function from earlier needs to be run again to resume properly
+      video.style.display = "block"; 
+      video.play(); 
+      video.onended = function () {
+      video.style.display = "none";
+      if (buffer) {
+        song = context.createBufferSource();
+        song.buffer = buffer; song.connect(volume);
+        song.loop = true; song.loopStart = 1.415;
+        song.loopEnd = buffer.duration; song.start(0, context.currentTime % buffer.duration);
+      }};
+    });
+
+    document.addEventListener("mousedown", e => {
+        if (e.button !== 2) return;
+        let el = e.target.closest("[copiable='true']"); if (!el) return;
+        navigator.clipboard.writeText(el.outerHTML);
+        document.querySelector(".footerbcopied").style.opacity = "1";
+        setTimeout(function(){document.querySelector(".footerbcopied").style.opacity = "0"}, 1000);
+      })
+
+  </script>
+</body>
 </html>

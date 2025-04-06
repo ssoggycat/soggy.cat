@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html>
+<head>
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, height=device-height, initial-scale=1.0, user-scalable=no, maximum-scale=1.0, minimal-ui">
+    <title>soggy world currency converter</title>
+    <meta property="og:image" content="/assets/images/embed.gif">
+    <link rel="icon" type="image/x-icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' width='1' height='1'/>">
+
+    <meta itemprop="name" content="soggy world currency converter">
+    <meta itemprop="description" content="the BEST page ever please clicky click..">
+
+    <meta name="twitter:title" content="ssoggycat software division™">
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:image" content="summary">
+    <meta name="twitter:site" content="@ssoggycat">
+    <meta name="twitter:creator" content="@cvsilly_">
+
+    <style>
+        body {
+            margin: 0;
+            background-color: #313338;
+            font-family: Verdana, Geneva, Tahoma, sans-serif;
+        }
+
+        .stuff {
+            justify-content: center; align-items: center;
+            display: flex;
+            width: 100vw; height: 100vh;
+        }
+
+        .box {
+            border-radius: 15px;
+            width: 300px; height: 100px;
+            background-color: rgba(0,0,0,0.5);
+            position: fixed; display: flex; 
+            justify-content: center; align-items: center;
+            padding: 10px
+        }
+
+        .value {
+            width: 120px; height: 100px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center; text-align: center;
+        }
+
+        .num {
+            color: white;
+            font-size: clamp(1rem, 5vw, 2rem); /* this doesn't work :youtubebiteemoji: */
+            font-size: 17.5px;
+            overflow-wrap: break-word;
+            white-space: nowrap;
+            overflow: hidden;
+        }
+
+        .input {
+            height: 30px; width: 120px;
+            background-color: #313338;
+            color: white;
+            /* font-family: 'Courier New', Courier, monospace; */
+            border-radius: 7.5px;
+            position: absolute; display: flex;
+            border-color: rgba(0,0,0,0.5);
+            text-align: left;
+            bottom: -15px;
+            font-size: 12px;
+            outline: none; border: none;
+        }
+
+        .num:focus, .input:focus {  
+            outline: none; border: none;
+            border-color: transparent;
+            box-shadow: none;
+        }
+
+        .divider {
+            color: white;
+            margin: 10px;
+            font-size: 50px;
+        }
+    </style>
+    <script>
+        const favicons = [
+            "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAMAAABEpIrGAAAAIGNIUk0AAHomAACAhAAA+gAAAIDoAAB1MAAA6mAAADqYAAAXcJy6UTwAAABOUExURQAAADYoHpeEY7ykjJKHcayYdoZzU2dhVJ2kj8G5pf///wEBAX1KPNzJtOvTu+nazLS0oNK/sMe7q8m9re/v7+3j2cCCec+1n51YTQAAAA+/27kAAAABdFJOUwBA5thmAAAAAWJLR0QAiAUdSAAAAAd0SU1FB+kCFxQZMOxnTrQAAAGYSURBVDjLlZOJcsIwDESj+pCPmNiOofz/l3YlB0p6TKciMzCzj9XKkZflXETL7/X2rD9klPkmW6c1ZY/60opFdI6ZA81iPkcjJjBEMRHlLMRqTjqRKxdDvKUarBBsWnz6H4D1W9LinLm3uNdHQAW8DymBsM5mwff6APZCs+8YTCUpvUKWR4FyQY9M2Ur7LZFGNA0tpsVeihWHXMX9OnSGKvJhAcDMlGljHkN+ZqsACAUuO6byjnuqvF2z2E2H2QN6k7GLYZlyBOmBCNJAAO4gLMYqJrIrQDbOtjd85AEgDoEVaJHGdU+Jag1VkXpksALE2+0mGWoKFoA8NRxjMvn3Fu/3OxwwyW67yrE3BSp0HAHe9qpA2gBoA53CtICX72VdmAGgRQ2xI8M8hmWp8jaxMQyOx3VgDIcU2kQB3SF23o8h54DTMqJ/ArovK/x76Q1/l4QC2F5fFmrFniKJhDQBsSbyunJeSwEQZ30urVEAC+MEEOJ1rbOmFALfCgS7nIr4uDN6QZDviy5XTx2Ugv+PtxNTTGj5T30A2PEZ7SI+wEcAAAA2dEVYdGNvbW1lbnQAR0lGIGNvbXByZXNzZWQgd2l0aCBodHRwczovL2V6Z2lmLmNvbS9vcHRpbWl6ZYAi/7MAAAAldEVYdGRhdGU6Y3JlYXRlADIwMjUtMDItMjNUMjA6MTY6MzUrMDA6MDA/HPCYAAAAJXRFWHRkYXRlOm1vZGlmeQAyMDI1LTAyLTIzVDIwOjE2OjM1KzAwOjAwTkFIJAAAACh0RVh0ZGF0ZTp0aW1lc3RhbXAAMjAyNS0wMi0yM1QyMDoyNTo0OCswMDowMACT3CAAAAAASUVORK5CYII=", 
+            "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAMAAABEpIrGAAAAIGNIUk0AAHomAACAhAAA+gAAAIDoAAB1MAAA6mAAADqYAAAXcJy6UTwAAABjUExURQAAALykjNK/sMG5pcm9rbS0oMe7q52kj5KHcZeEY2dhVKyYdjYoHpKHcbykjIZzU8+1n+vTu8G5pf///9zJtJ2kjwEBAcm9re/v77S0oMe7q9K/sO3j2Z1YTX1KPOnazAAAAK9ba0YAAAAJdFJOUwAAAAAAAAAAAHNkm6EAAAABYktHRACIBR1IAAAAB3RJTUUH6QIXFBkw7GdOtAAAAblJREFUOMt9k9tywjAMRF2I00bxjdhyYgLt//9lV3JgOlNa8QB4T7SSpRjzI6ZpIvNnTI94LdOs8SfiHM0+qOpfEU6DfHDOUwT7Wk+Xxbns9Q9O3556JD2LpUTHACpgdHM6H3pNoQPBrVmCK7IZcx5sB3wpkCtO17ytuRUA130x9gBqKqV7uHxzpDX4fVnNYIdBb+AAaiU8DQAlMIB2HnqKqZTCAqDAtvhMAIIAw5GCAaRusd1ozvJj7QCIXoJ6UJg475wl13Vf9+swqAc9gLAnStokAOhX24F9FQt2JFnhkHOpviBFGcfTOBqzCLwGiukCZJ5zQ6kCL6IfFvvCAErBvFEDvpvEu7X2/SiSCeNOl+l+5wwbWMDD2vN4Ou6BAIQQpvsnAM7zsuIDA70peDToUfdJ7uH6NS9w4FGvAcvAu9cMkF1t+bbFmZmbkRp0WL7JKLBGlG7ocoshQOcnYKj1dYiY5va1ORYAGT7GYx9qH7Y44D4zqc7GWPvxWCndSAIRCdOckzqYpw5CEAUiIYO0gFP7Y63r4QFA2hWDF4s/wQAdYuq/dc2hGf55O/FiSYr4z/ttkOHX2TcvmSmZidSiqAAAACV0RVh0ZGF0ZTpjcmVhdGUAMjAyNS0wMi0yM1QyMDoxNjozNSswMDowMD8c8JgAAAAldEVYdGRhdGU6bW9kaWZ5ADIwMjUtMDItMjNUMjA6MTY6MzUrMDA6MDBOQUgkAAAAKHRFWHRkYXRlOnRpbWVzdGFtcAAyMDI1LTAyLTIzVDIwOjI1OjQ4KzAwOjAwAJPcIAAAAABJRU5ErkJggg==", 
+            "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAMAAABEpIrGAAAAIGNIUk0AAHomAACAhAAA+gAAAIDoAAB1MAAA6mAAADqYAAAXcJy6UTwAAAB1UExURQAAAGdhVDYoHpeEY6yYdpKHcbykjIZzU9K/sMG5pQEBAc+1n8m9rbS0oNzJtMe7q52kjwEBATYoHpeEY4ZzU6yYdrykjGdhVNK/sLS0oJKHccG5pf///8m9re3j2enazNzJtJ2kj8e7q+/v78+1n31KPAAAALCGbIIAAAARdFJOUwAAAAAAAAAAAAAAAAAAAAAAwx3N7gAAAAFiS0dEAIgFHUgAAAAHdElNRQfpAhcUGTDsZ060AAABvUlEQVQ4y4WTAZObIBCFgYupGlBcVIKcPby0//8v9i2Q9GbSXHGYzOR9vn2sixBf1kTOiW/WNM3LS0JmgNZXhFJZJ+8YePuHzgAx4AGcmmcdADlP7hrIF16cH/oPyf8QLY7cFicCIJGp7areX84FWDfy8T140St5EaLTpgDNMBRg34h+fsQNwIjXTQX6yzDIAiw0XcO0CtW0nRbaaJ07cAd8OogQcv1UFoDpdLF4G4bBZiAGohQZODOgq4UFcFEKPYDIDvuudAGwSwSu4b3jt3nvyKjbUetcQ1ZgOwLEa7hxiRH6aArQai5h1ZpSTD4ttyN8NgMshnEExe3Ajz5LACn69CukELp8CNZribaz0m9HiltcA9bJ8LK8a0jLIaGiBPS9YXtt2KT2Qcp8zMOvGTh1Gg/HNKWTRirJnVz86grA7mNuA4bBtg0cuJMow0XEyVprBGfIH6sxdR52AOE9HOIM3T4AIY26A+RuHzEDcGjGOg+9rMCKoEhxCOg4nzH30ewr4DF1M0KKXEGYv6Pb9/exd/5AhtwgYb6M9QOY5/nABNgXF2cCwBfnWYdHuXpw+Ob6wuL3PP/nej/pfwDcyShRdB//OAAAACV0RVh0ZGF0ZTpjcmVhdGUAMjAyNS0wMi0yM1QyMDoxNjozNSswMDowMD8c8JgAAAAldEVYdGRhdGU6bW9kaWZ5ADIwMjUtMDItMjNUMjA6MTY6MzUrMDA6MDBOQUgkAAAAKHRFWHRkYXRlOnRpbWVzdGFtcAAyMDI1LTAyLTIzVDIwOjI1OjQ4KzAwOjAwAJPcIAAAAABJRU5ErkJggg==", 
+            "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAMAAABEpIrGAAAAIGNIUk0AAHomAACAhAAA+gAAAIDoAAB1MAAA6mAAADqYAAAXcJy6UTwAAABjUExURQAAAGdhVDYoHgEBAbykjIZzU9K/sMG5pc+1n8m9rbS0oJKHcdzJtJeEY52kj8e7q4ZzU5eEY6yYdmdhVDYoHsG5pdK/sJKHcdzJtLykjAEBAcm9rZ2kj7S0oMe7q8+1nwAAAI7s/sMAAAAQdFJOUwAAAAAAAAAAAAAAAAAAAAAeKT/bAAAAAWJLR0QAiAUdSAAAAAd0SU1FB+kCFxQZMOxnTrQAAAGgSURBVDjLhZMLr6MgEIVFu1pGLvK04Ov+/3+5ZxCbNjG7xrQJ5/MMDGea5vsx1trmX4+1zvk7QVy6dTbc6G3bNF0pAD2EG/0EYO/cDdAWAC+0GPmHVx9v/Y9gAK+vgJ95uR+q3j0fnwBKvBKvD5JOYFSqArkASwWoAt1TKfEG/OzZYYUgScrSgQsQDcRX8kvYGKBBnhY/SildgBgBsEOMiStUCw3gyQcV6+kAoDhIJs4tcA0hfhjIaTVhTuuyTFKWGqICo6acjIfmGPBhohPoJZfQ7UMpADkBAJXWXU1TP03cDvzJh2Bgzwc+zuaY5z0PrNcS/aCFGPUG4BeUWecjBNJEpOsmNW9yjClGqO7cpCSCSe2D4OsSKID7PlxwfMwBBUqnUINggEahhDGIHJpxoD9TaQNioPsRDqXVALyzHsfgDmIP5bJGuvIAC++tDX7PH0AjqL2AbTcllCUw41Tz0IkLyJvzIHDfJQ80XpH6BuBQJuOtg+hqqjdnrfE11vQR6zfAhL+Zi2twthcc7ganqOfsOnOrf0y3D8t/xvvb4C8FByKAeo8RWwAAACV0RVh0ZGF0ZTpjcmVhdGUAMjAyNS0wMi0yM1QyMDoxNjozNSswMDowMD8c8JgAAAAldEVYdGRhdGU6bW9kaWZ5ADIwMjUtMDItMjNUMjA6MTY6MzUrMDA6MDBOQUgkAAAAKHRFWHRkYXRlOnRpbWVzdGFtcAAyMDI1LTAyLTIzVDIwOjI1OjQ4KzAwOjAwAJPcIAAAAABJRU5ErkJggg==", 
+            "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAMAAABEpIrGAAAAIGNIUk0AAHomAACAhAAA+gAAAIDoAAB1MAAA6mAAADqYAAAXcJy6UTwAAABvUExURQAAADYoHoZzU2dhVAEBAc+1n7ykjJKHcdzJtJeEY52kj9K/sMm9rcG5pce7q7S0oIZzU5eEY5KHcayYdrykjDYoHmdhVNzJtH1KPAEBAdK/sOvTu8m9rce7q8+1n7S0oMG5pcCCeZ1YTZ2kjwAAANdEc0wAAAAQdFJOUwAAAAAAAAAAAAAAAAAAAAAeKT/bAAAAAWJLR0QAiAUdSAAAAAd0SU1FB+kCFxQZMOxnTrQAAAGWSURBVDjLfVMLe4IwDKyDTRQ3+66UR5n+//+4S4JOJzOfYL/c9XJNg1J/Qmtt1L9hbvEats65FYpHln7GYKVDeC5uIp4QLKEUv9gGT7iFTyk+Mt4qvE4hdJyNue+NrJzg9fuHUoO7CsScktTQSQjbplE+ZUcCeGzf+9B1XCuLAAhD7scghCFPuuNyU2KJ6o6AjagAQrcQCgi7pmmwK/dWKiBrGI8pscR+IbBNTYcsZjluJgJZaAZisEuNWtl5OsYIgSwWFgJUNW8DELlhaJlqDyDA2JjGJZcy3Bl0gZfq89B+fc1lLmV2rD8RUHAvSME5l2gBEk6bvnGVpAAC0aOYRIkyz8UmbDmfzxNdFzH4mDsxSeKo4d3ptMwDtWyUTh6HgYpQ3kCbCAYSFqo0DPt2q/yFw52MhjaNHf50mqnV9fZYCYF9ylzJUFm57+q4UdYRocyCg8AzZS8yMBVGjhkXmIhigwlxGbmaZpIVyJyIxIehrBVJOJFYwSUY9neE7unDEAVzJax8e1Z7c7XYqdWw1wrqRTyCP4DBO7xnEssdAAAAJXRFWHRkYXRlOmNyZWF0ZQAyMDI1LTAyLTIzVDIwOjE2OjM1KzAwOjAwPxzwmAAAACV0RVh0ZGF0ZTptb2RpZnkAMjAyNS0wMi0yM1QyMDoxNjozNSswMDowME5BSCQAAAAodEVYdGRhdGU6dGltZXN0YW1wADIwMjUtMDItMjNUMjA6MjU6NDgrMDA6MDAAk9wgAAAAAElFTkSuQmCC",
+            "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAMAAABEpIrGAAAAIGNIUk0AAHomAACAhAAA+gAAAIDoAAB1MAAA6mAAADqYAAAXcJy6UTwAAABOUExURQAAAGdhVM+1n5KHcTYoHjYoHoZzU5eEY7ykjGdhVJKHcayYdn1KPLS0oAEBAce7q9K/sNzJtOvTu8G5pcm9rZ2kj8+1n8CCeZ1YTQAAAFj+oAYAAAAFdFJOUwAAAAAAwmsGsQAAAAFiS0dEAIgFHUgAAAAHdElNRQfpAhcUGTDsZ060AAABdElEQVQ4y32TjXbCIAyF6zYgAavQltr3f9LdG7BrPc7oodp83PwQhuFsbvjffNjtnVtEQviAOFX1IabmxvPFfVVHA4SfcCcRPfhHudJ9c80keuWGP+CeSdw6oGXKJrj75yXnvPudTrkEdyBGWfKSowUhJABaSnIQgERPgxGCobH0BlAg16Zwc4kCT6mDgBF8L1NZfQdKBwyJfKeMsK6+V7Mywj3jAyhZHxTbpixRmUJhDAILRap1MuZuBpT1YikYM2vbjm0074S/vhrABd1nVPOuSENN+3tIgkbxO0ZPUVT9eBiQKHVhEubGggTKOm/bFgi4KwLOVsZohSIMznle0nVLkgSVxlFaH1qOkGjjwsmxhzaACqPUWrF0BwkeV63tMOBrxAgJJIfRC3befajMQ6JLcCbDeSAa0rIM3gcVfx6pBmBF8l3iPJNPjYr6OoCjP839Djxvj3u9g1ZK2hXCmzvKQq1A5Pn2ciIOjstaNXy2n9O/X3AQIL4XlO6FAAAAJXRFWHRkYXRlOmNyZWF0ZQAyMDI1LTAyLTIzVDIwOjE2OjM1KzAwOjAwPxzwmAAAACV0RVh0ZGF0ZTptb2RpZnkAMjAyNS0wMi0yM1QyMDoxNjozNSswMDowME5BSCQAAAAodEVYdGRhdGU6dGltZXN0YW1wADIwMjUtMDItMjNUMjA6MjU6NDgrMDA6MDAAk9wgAAAAAElFTkSuQmCC", 
+            "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAMAAABEpIrGAAAAIGNIUk0AAHomAACAhAAA+gAAAIDoAAB1MAAA6mAAADqYAAAXcJy6UTwAAABvUExURQAAADYoHrykjJKHcdzJtOvTu9K/sGdhVM+1n8G5pce7q8m9rayYdn1KPLS0oJ2kj4ZzU5eEY2dhVLykjDYoHrS0oH1KPJ2kj8m9rce7qwEBAayYdpKHccG5pdK/sOvTu9zJtM+1n8CCeZ1YTQAAAKf0L0oAAAAQdFJOUwAAAAAAAAAAAAAAAAAAAAAeKT/bAAAAAWJLR0QAiAUdSAAAAAd0SU1FB+kCFxQZMOxnTrQAAAGOSURBVDjLdZNru4IgEITJTKtzyeUSIkbU+f//8cwuWvmUqHxwXoYBFqWerSOiTq02bQz0VURra7UW4iPi6AzC2kLQm+77wPowwEVTHN+IS0oJxGCLC0X+uVnqyUy6HYPu7AIwhoGki27N1aAH8CBcHxjwJcULUM1AejogZs5UgG29MEhei8N45TQ6qU21ayZgIso6zPVmGWOgngEhLjyFZgAkgLbe7SFXKoRQAM3rpJwTnYGpbV3zHJVODPArxwGDnKM1OQOo9606xDKcEQkAh5QA+AoGzR6AjJaOrIS9Ie8l+erYHL+26htTuB4PXo09SPf7PRmNKb5h0LSIybqTj+iWMv2RMciqfrDMw7zMKUccjYlnnCbCYid/q8c+9LKVUFExXBGIq9p2ASAV3qIzoHFYp9N8GE5CxNDHsUPRdV05zXY+Teej6/Ghm4qyAHNBjKzFID0sxGF4LRhlRJsAnsIuS46LLpLzQvB4KclF64oFOJniw9WZARC80k93T2L6VZkJduEE6/eb7//bv38GjDanxg4cqwAAACV0RVh0ZGF0ZTpjcmVhdGUAMjAyNS0wMi0yM1QyMDoxNjozNSswMDowMD8c8JgAAAAldEVYdGRhdGU6bW9kaWZ5ADIwMjUtMDItMjNUMjA6MTY6MzUrMDA6MDBOQUgkAAAAKHRFWHRkYXRlOnRpbWVzdGFtcAAyMDI1LTAyLTIzVDIwOjI1OjQ4KzAwOjAwAJPcIAAAAABJRU5ErkJggg==", 
+            "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAMAAABEpIrGAAAAIGNIUk0AAHomAACAhAAA+gAAAIDoAAB1MAAA6mAAADqYAAAXcJy6UTwAAABpUExURQAAAGdhVDYoHoZzU7S0oJeEY31KPJ2kj8m9rce7q6yYdpKHccG5pdK/sLykjOvTu9zJtAEBAc+1n8CCeZKHcZeEYzYoHoZzU2dhVMe7q8m9rZ2kj8G5pbykjKyYdgEBAbS0oM+1nwAAAOx0OpUAAAAUdFJOUwAAAAAAAAAAAAAAAAAAAAAAAAAAQW/hoQAAAAFiS0dEAIgFHUgAAAAHdElNRQfpAhcUGTDsZ060AAABpUlEQVQ4y4WTgZqqIBCFASEFBVkXUdHMff+X3DOofXnbvjuVpfNzDsxMjF0j9OxTcLrE/hPAuaCvYQyMFX/kpbqRwtSThFJv+bLSWSHNERKmfiMaa21WWGIkBUMPxTVvHQGJAM0LcQGcI8CSRQZaJwSy4knISu9ASmmMfXwC7gSsfQIx3qNXO1D7i8ChMIbRiS/BLROutQfwYjGMa+gA1C0B/gQy8Xis0zIGAFwQwH3b0RGY1voAAgHT3aobVrPae/Jw3BKAN+yxh3W6e2+E8x6A7zhrTF7eaD1vS0oQmHELoHQQsB2ALIAL1k7LvP3MHere2NJpq6uaGVjICi+JIm4LKXxbx2Fh2qNDlJf4YJMAfvpeOSeUZzccszmPSftgj3VJQAK6yblDJaV71qE6C4VjjFwZ6gPnF6DZgW0YoyKAo1lleTZD0iYIgAOAoti7yc9uytLIiuhtWfoeCmoHzoGokZdG54FJ88BI4et1YJjLBH7M652mOju8ziSGzihJFiAGVhSvuRwFSWRgXmGh3v86BxB2Bc7+iAwwEvgU/wX2CP8++AVPgSAcKQXBjgAAACV0RVh0ZGF0ZTpjcmVhdGUAMjAyNS0wMi0yM1QyMDoxNjozNSswMDowMD8c8JgAAAAldEVYdGRhdGU6bW9kaWZ5ADIwMjUtMDItMjNUMjA6MTY6MzUrMDA6MDBOQUgkAAAAKHRFWHRkYXRlOnRpbWVzdGFtcAAyMDI1LTAyLTIzVDIwOjI1OjQ4KzAwOjAwAJPcIAAAAABJRU5ErkJggg==", 
+            "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAMAAABEpIrGAAAAIGNIUk0AAHomAACAhAAA+gAAAIDoAAB1MAAA6mAAADqYAAAXcJy6UTwAAAB1UExURQAAAGdhVDYoHrS0oJeEY31KPJ2kj8m9rce7q8G5pdK/sLykjJKHcdzJtOvTu8+1n6yYdoZzU5eEY7ykjDYoHgEBAYZzU6yYdpKHcWdhVNK/sMm9rdzJtJ2kj+/v78e7q8G5pf///+nazLS0oO3j2evTuwAAAGVr9P4AAAASdFJOUwAAAAAAAAAAAAAAAAAAAAAAAJVzPT8AAAABYktHRACIBR1IAAAAB3RJTUUH6QIXFBkw7GdOtAAAAcVJREFUOMt1k4tyqyAQhkHaiKiJlQVZCCbWnvd/xbOLsU3SFC8zzn7+exfi6YyjBSdeHckvP46Th1eElFX5P4wI6PEXod7eZdGfEACsdU/EodZFYQweHGBMzxKNMYYUpgnOzoGNKZNE9Wg3LQlYnGeES0oJ7oG2ZcAIcn5dZkSyJ0/AN6FqvQFo59lBiASQj6pqd8D8KHwCYCJidVB1/YOAER5S+GIqlSCq9mhuwM1FcDHEHUAG+h0ohKAkfQLOMq0XdLI/njgFobUuwDljyhHcWgAPXd+zj1YaBuhO1uZl3lxcUg4E9CcpmqH83mhNdhuXSHWii+6WBMyJgCJAr8uVkM8l2DVeLQPa6LoTA7lQNV2KgbH4J2INOBy3Dgm2K3pSniafNmKNCO+UZrOnyXHwOBWAY6Q0q06133WouQ7oPW7mUigpH4CmNOv6tQSOgEoNVXU47M1QHIQAn5b57AuQqVmV3LupDoOqD6SA/h9VcyIksMI+EB3Z1aCFoyBo2nLIMeP9wIi2EIKjjFxPQh5GjodueFO8NsUB2cPT3H+wRFksnCa2/9qcGzD5cXPxYvcKQBKkkMPL9VXbcvstwr8PAXD//R/XCTAuUJ9pwwAAACV0RVh0ZGF0ZTpjcmVhdGUAMjAyNS0wMi0yM1QyMDoxNjozNSswMDowMD8c8JgAAAAldEVYdGRhdGU6bW9kaWZ5ADIwMjUtMDItMjNUMjA6MTY6MzUrMDA6MDBOQUgkAAAAKHRFWHRkYXRlOnRpbWVzdGFtcAAyMDI1LTAyLTIzVDIwOjI1OjQ4KzAwOjAwAJPcIAAAAABJRU5ErkJggg==", 
+            "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAMAAABEpIrGAAAAIGNIUk0AAHomAACAhAAA+gAAAIDoAAB1MAAA6mAAADqYAAAXcJy6UTwAAABjUExURQAAALykjLS0oMm9rce7q2dhVNK/sMG5payYdpKHcYZzU5eEYwEBAbykjJKHcWdhVDYoHn1KPKyYdse7q+/v79zJtMm9rdK/sMG5pbS0oP///+nazJ2kj+3j2c+1n8CCeQAAAJirEEcAAAAKdFJOUwAAAAAAAAAAAABzoBhoAAAAAWJLR0QAiAUdSAAAAAd0SU1FB+kCFxQZMOxnTrQAAAGpSURBVDjLdZOLkuIgEEWZmN1xITSEQAjY6v//5dwmZEpdJWDF3EM/QamXoY0xk/o0RJVh7VvZHIPIef9BJyw/ee/m+VUPRIGc7IUOgpY3+72PacIAYNa8Per4pJcMIKZEIEze8HTxq+neJipVRoGFJUNfaQeGDuilXurWYmCR11wOIAugubIXQCJoBtbdxHBSibBvuiRyEiRS4A7wAQQBYrG6bpIC7XL3MZzwInavV+0i7946sTikMI4pJZg1XLcGTBNl7JG5kPr683fEX8kSWdR6cQhCgKYjyu/zCRayNvLDl70MqIJMWQDGcckbGgFCgoyVkYO1O8HqLC6ydfMth/udKruYdbFbn1KIcchr8C7dwjxTJXe94l3EAxhOnNH+cJduA0hRgO7B7YVaJUtjnBcg1gbsWfRK6gbgjJSaYy0ae5uPrfRmtf7A9t5tAZkZiRT90G6tvaGMbqJKATJMUD8P/5RCh7TBgxjCLVgrAJZ+OHKTowawYdEbwE+HEoA2vgFdftKVEgA2jgjLq/57cZoDAd7dTIkCN1N0+ng75/Ac/n9mmJ7u7Q/lxTKDV62m1QAAACV0RVh0ZGF0ZTpjcmVhdGUAMjAyNS0wMi0yM1QyMDoxNjozNSswMDowMD8c8JgAAAAldEVYdGRhdGU6bW9kaWZ5ADIwMjUtMDItMjNUMjA6MTY6MzUrMDA6MDBOQUgkAAAAKHRFWHRkYXRlOnRpbWVzdGFtcAAyMDI1LTAyLTIzVDIwOjI1OjQ4KzAwOjAwAJPcIAAAAABJRU5ErkJggg=="
+        ];
+        let index = 0; const delay = 50;
+        function favicongif() {
+            const link = document.querySelector("link[rel='icon']") || document.createElement("link");
+            link.rel = "icon";
+            link.href = favicons[index];
+            document.head.appendChild(link);
+            index = (index + 1) % favicons.length;
+            setTimeout(favicongif, delay);
+        }; favicongif();
+
+        document.addEventListener("DOMContentLoaded", () => {
+            const numOne = document.querySelector(".num.one"); const numTwo = document.querySelector(".num.two");
+            const selectOne = document.querySelectorAll(".input")[0]; const selectTwo = document.querySelectorAll(".input")[1];
+
+            function convert() {
+                let valueOne = parseFloat(numOne.innerText) || 0;
+                let rateOne = 1 / parseFloat(selectOne.value); let rateTwo = 1 / parseFloat(selectTwo.value);
+                let result = valueOne * (rateOne / rateTwo);
+                numTwo.innerText = parseFloat(result.toFixed(6)); // stackoverflow lied to me parseint breaks everything
+            }
+            
+            numOne.addEventListener("input", convert);
+            selectOne.addEventListener("change", convert); selectTwo.addEventListener("change", convert);
+        });
+    </script>
+</head>
+<body>
+<div class="stuff">
+    <div class="box">
+        <div class="value">
+            <a class="num one" contenteditable="true" onkeypress="return (this.innerText.length <= 10)">1</a>
+            <select class="input">
+                <option value="1">USD | $</option>
+                <option value="0.25">Soggybucks | ₷</option>
+                <option value="20">Googbucks | GGB</option>
+                <option value="0.0065">Cannybucks (old)</option>
+                <option disabled>── abolished / insignificant ──</option>
+                <option value="2.0833" style="color:darkgrey">Evilbeastbucks | EEB</option>
+                <option disabled>Drybucks</option>
+                <option value="800" style="color:darkgrey">Mikebucks</option>
+            </select>
+        </div>
+        <div class="divider">is</div>
+        <div class="value">
+            <a class="num two">0.25</a>
+            <select class="input">
+                <option value="1">USD | $</option>
+                <option value="0.25" selected>Soggybucks | ₷</option>
+                <option value="20">Googbucks | GGB</option>
+                <option value="0.0065">Cannybucks (old)</option>
+                <option disabled>── abolished / insignificant ──</option>
+                <option value="2.0833" style="color:darkgrey">Evilbeastbucks | EEB</option>
+                <option disabled>Drybucks</option>
+                <option value="800" style="color:darkgrey">Mikebucks</option>
+            </select>
+        </div>
+    </div>
+</div>
+</body>
+</html>

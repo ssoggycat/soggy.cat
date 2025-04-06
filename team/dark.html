@@ -1,0 +1,65 @@
+<html lang="en">
+
+<head>
+  <meta content="text/html; charset=UTF-8" http-equiv="Content-Type">
+  <title> &ZeroWidthSpace; </title>
+  <link rel="icon" type="image/x-icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' width='1' height='1'/>">
+</head>
+
+<body>
+
+  <div id="center">
+    <div class="sog">
+      <img class="sog1" src="../assets/images/darksog.webp">
+      <img class="sog2" src="../assets/images/brightsog.webp">
+    </div>
+  </div>
+
+  <style>
+    body {
+      background-color: black;
+      padding: 0; margin: 0;
+    }
+
+    #center {
+      display: flex; align-items: center; justify-content: center;
+      width: 100%; height: 100%;
+    }
+    .sog {
+      min-width: 320px; max-width: 100%;
+      min-height: 320px; max-height: 100%;
+      position: relative; color: black; cursor: pointer;
+    }
+    .sog img {
+      position: absolute; object-fit: contain;
+      height: 100%; width: 100%;
+      
+    }
+    .sog.playing .sog1 {opacity: 0}
+    .sog2 {opacity: 0; z-index: 2}
+
+  </style>
+  <script>
+
+    const sog = new Audio("data:audio/ogg;base64,T2dnUwACAAAAAAAAAACHoS6NAAAAACcl2KABE09wdXNIZWFkAQI4AYC7AAAAAABPZ2dTAAAAAAAAAAAAAIehLo0BAAAAyzTYFgGTT3B1c1RhZ3MMAAAATGF2ZjYxLjMuMTAzAwAAABwAAABlbmNvZGVyPUxhdmM2MS41LjEwNCBsaWJvcHVzMQAAAHRpdGxlPUZOQUY6IEZsYXNobGlnaHQgLSBHYW1pbmcgU291bmQgRWZmZWN0IChIRCkeAAAAYXJ0aXN0PUNvbW11bmlzdCBTb3VuZCBFZmZlY3RzT2dnUwAENSQAAAAAAACHoS6NAgAAADL50O4KK05TVEYyKygqLXwH/KMVwHJSBBdnmyUyqsQVmD+PYZKuWPw02gV9aZM6XwyUqs6qo+aCDb98p/yb/v8g1V2u9sLSZKnhgiOK3g9aWolU+M2vxFN/djuRRxChgq7K6wlfUTzZstWsk/H6loKrGRUOb4wCgIYUtCqwo+otelYvYA1JMkV8p/0ugHxBbcqb9+wRAX20xbYgLwvD6wjdyw8hK5zo4BPF8qtt51D32ekJJYj9DdXjVaDY/MRumdSF1xlklc5z7i+ez/2K7dhAYQTWqRkx9EXwmnyn/PZlbI+Byh6u6K/b6vlc8++3BYc8NVgi1+3HS3U+ElY2U80SnH9KlrSKtoNTFbDaqkSN5H49VsN5ZPBp4kuDMA5IHPak0kvaTZAugrZozlu8BXyH/YPywzPQMPwgcwHjCo5g5HRxfPITHtO0+DdzadK36QZFur8V3koX0nhRKuYnMfmEYSYuQyArf1ve70fWAwbz5x0OsAp8CABQL8AfL1jiEKzyHNjzFQnxT8cxWo0fwFyptgW6307OgjNfkqDI5c4Tj3qfqv/y2nwH/MI6cIGI8wU6qK33vFv4Ta2RE/ePLya2bOYGZI+mQEIJ9oV82ktAPbR8B/2JYteGya9xfuGLSkBNWpYACwR+iE5V+MByKyQ8LsvCu1Bk5RzlfAhg3Ik2OuVA0OyvIA9OSKer/dX3Mue2hyDMw+11car1B00sLNdx0ZdkfAf9QjtF+WT6kHY+vcwair0XdbIujwgLGu+6MI6mVgeS/jT2fHSL65PeY1AF");
+    const dry = new Audio("data:audio/ogg;base64,T2dnUwACAAAAAAAAAAAS8ilvAAAAAIqBbyQBE09wdXNIZWFkAQI4AYC7AAAAAABPZ2dTAAAAAAAAAAAAABLyKW8BAAAAviy4TgGTT3B1c1RhZ3MMAAAATGF2ZjYxLjMuMTAzAwAAABwAAABlbmNvZGVyPUxhdmM2MS41LjEwNCBsaWJvcHVzMQAAAHRpdGxlPUZOQUY6IEZsYXNobGlnaHQgLSBHYW1pbmcgU291bmQgRWZmZWN0IChIRCkeAAAAYXJ0aXN0PUNvbW11bmlzdCBTb3VuZCBFZmZlY3RzT2dnUwAELDAAAAAAAAAS8ilvAgAAALy/n9wNMUM+RkA/ODlDOzY2PnyH/JNn4mh+C3cJ1wBuoFWTRlvCEeTHPXAsaIMleKXzibdrmD08JntINUQ8+LAEAJ98h/0IuBuOUNWSzm0J0oHl4AceibpBErg3rd1kMkpTSfEXtnKxJhpgvBi93db1alFRB78I+41W5+aoUXHjtB/XdcCffIgB0g7fMTkHbbl96M2uq45rcZW2pWoc107yHuhunQbUz21GDiiRvW907xSJ8lza8qTj27QFHcEtn05VzS98CAMvtssb80YILbuGZKF1DAyU4R8FimxzhWFXm2nBrAczdmyCEpmDdw8et3zgCZedMtOkYAqx/n9h6YbS5y2Ckaq/P4wAfAgC64C8wuDT9saQxkNzusvYCv16veVubdCpuBZ3hPM/Dgcy671QEOTuHB88OQCqdO6AMa/Bt5EPVOkDa7z8pXwIArDlun3DoEYogrMGTBXAmIQ/mZ/L0yuwi/TigzHhBhTkC6i+oO4/YxyEKSBXwI6Z5mENdh+oGYdj72rIX3wIAnBq8Qc3gAQClS6eOgdItqMcPIA8TXoM0JK4I4KCdXtZoVfOr6f06Il4biEzvsCC2bCDefCgfAgCXSKjPJJcORB7J7hukI0ogFAdMEKfjVGfBqR+taDEbwItDpDL9JqjXk2aM83dMauHpAmDwUCzfAgCYtUNbuZutvpSu0bzx1mJc7/myIRr30VzmH4iSOavO2mSj3n1PuviUUePakTEmkTmD5OjZ5a1YdAXg9WZ0a8j0XwIAprMHzZVWxd2a0qvY1sVz2Tv2+DKTXRSWDYEL8qLB+q0BUqEDeVdSzogfvvd9BC4MK7gt2nvvOAAfAgBwWlfGsgztgTNc6RWZSDrCjamfjfiX/b1bTlWAVqDURKW1ZylkKLswVOuP+Cx+nzFBcNgfAgCMqxnTRaQcifE0N2/PPqN2yJVWNQ4rwa0w00wzMQdQy4m1nYZOQKgxzSzBV3TxHHv+j7wfAgBv3+6tvi4DkZlwWwJSZ6JJ1HeGG63PQT7pMZeM8go3+Sd7e1+6zk7I4M9pKpwnqH7A0+5WcrqCkawW2U=");
+
+    sog.volume = dry.volume = 0.5;
+    sog.loop = dry.loop = false;
+
+    document.addEventListener("click", function (e) {
+      const scarysog = e.target.closest(".sog");
+      if (!scarysog) return;
+      if (!scarysog.classList.contains("playing")) {
+        document.title = "?"; dry.pause(); dry.currentTime = 0; sog.play();
+        scarysog.classList.add("playing"); scarysog.querySelector(".sog2").style.opacity = 1;
+      } else {
+        document.title = " ︎"; sog.pause(); sog.currentTime = 0; dry.play();
+        scarysog.classList.remove("playing"); scarysog.querySelector(".sog2").style.opacity = 0;
+      }
+    });
+
+  </script>
+</body>
+
+</html>

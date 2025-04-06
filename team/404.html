@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+
+<!-- https://bsky.app/profile/wukko.me/post/3lgnhf7crvs2s -->
+ 
+<html>
+<head>
+
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, height=device-height, initial-scale=1.0, user-scalable=no, maximum-scale=1.0, minimal-ui">
+  <title>&nbsp;</title>
+  <link rel="icon" type="image/x-icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' width='1' height='1'/>">
+
+  <meta itemprop="name" content="404">
+  <meta itemprop="description" content="this page doesn't even exist man!! scram">
+
+  <style>
+    body {
+      margin: 0;
+      height: 100vh;
+      display: flex;
+      justify-content: center; align-items: center;
+      background-color: #ffffff;
+      cursor: none;
+    }
+
+    video {width: auto; height: 30%; display: none}
+    canvas {width: auto; height: 30%}
+    audio {display: none}
+
+    .waiting {
+        position: fixed; display: flex; flex-direction: column; justify-content: center;
+        align-items: center; width: 100%; height: 100vh; background-color: black; color: white;
+        opacity: 0.5; z-index: 2000; cursor: pointer; font-family: 'Segoe UI', 'Open Sans', 'Helvetica Neue', sans-serif;
+      }
+    .atext {
+      color: #d7d7d7; font-size: 12.5px;
+      user-select: none; z-index: 2500;
+    }
+    .amini {
+      color: rgba(133, 133, 133, 0.5); font-size: 10.5px;
+      font-style: none; text-decoration: dotted; user-select: none; position: absolute; bottom: 15px; z-index: 2500;
+    }
+    .dilemma {
+      position: fixed;
+      max-width: 60%; height: auto; max-height: 90%; object-fit: contain;
+      z-index: 3000; display: none;
+      /* cursor: pointer; */
+    }
+
+    .bgtext {
+      position: fixed;
+      color: rgba(133, 133, 133, 0.05);
+      font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+      font-size: calc(250px + (100vw - 1000px) * 0.1);
+      transform: skewX(-15deg);
+      z-index: -999; user-select: none;
+    }
+
+    .subtitles {
+      position: fixed; text-align: center;
+      bottom: 10px; left: 0; width: 100%; font-size: 1rem;
+      color: black;
+      pointer-events: none;
+      z-index: 1000; padding: 10px; letter-spacing: -0.5px;
+      font-family: Arial, sans-serif; font-style: italic; font-stretch: condensed;
+    }
+
+    @keyframes swirl {
+      0% {transform: rotate(-540deg) scale(0); opacity: 0}
+      100% {transform: rotate(0) scale(1); opacity: 1}
+    }
+    @keyframes fadeout {
+      0% {opacity: 1}
+      100% {opacity: 0}
+    }
+
+    /* subtitles */
+
+    @keyframes shake {
+      0% {transform: translate(0)}
+      20% {transform: translate(-1px, 1px)}
+      40% {transform: translate(-1px, -1px)}
+      60% {transform: translate(1px, 1px)}
+      80% {transform: translate(1px, -1px)}
+      100% {transform: translate(0)}
+    }
+    .red {color: rgb(255, 0, 0)}
+    .bred {color: rgb(245, 77, 77)}
+    .shake {display: inline-block; animation: shake 0.2s linear infinite both; position: relative}
+
+    /* "purify" the page from browser / extension control bloat */
+
+    video::-webkit-media-controls-panel {display: none !important}
+    video::-internal-media-controls-overlay-cast-button {display: none !important}
+    video::-webkit-media-controls {filter: invert(1) hue-rotate(180deg)}
+    video::-webkit-media-controls-panel {background: transparent}
+
+    html > div[style] {
+      display: none !important
+    }
+
+  </style>
+  <script>
+
+    document.addEventListener("DOMContentLoaded", function() {
+      
+      const video = document.querySelector(".video");
+      const audio = document.querySelector(".audio");
+
+      const waiting = document.querySelector(".waiting");
+      const subtitles = document.querySelector(".subtitles");
+      const dilemma = document.querySelector(".dilemma");
+
+      const track = video.textTracks[0];
+
+      // async function autoplaycheck() {
+      //   try {
+      //     waiting.style.display = "none";
+      //     await audio.play(); video.play();
+      //   } catch (err) {console.log("FUCK")}
+      // }; autoplaycheck();
+
+      video.removeAttribute("controlslist");
+      video.setAttribute("controlslist", "nodownload nofullscreen noremoteplayback");
+
+      document.querySelector(".waiting").addEventListener("click", (event) => {
+        if (!event.target.classList.contains("amini")) {
+          waiting.style.display = "none";
+          video.play();
+          document.documentElement.requestFullscreen();
+        }
+      });
+
+      document.querySelector(".amini").addEventListener("click", () => {
+        document.querySelector(".audio2").play();
+        dilemma.style.display = "block"; dilemma.style.animation = "swirl 9s linear both";
+        waiting.style.pointerEvents = "none";
+        setTimeout(function() {
+          dilemma.style.animation = "fadeout 1s linear both";
+          setTimeout(() => { dilemma.style.display = 'none'; waiting.style.pointerEvents = "auto"}, 1000);
+        }, 9500);
+      });
+
+      setInterval(() => {
+        document.title = Array.from({
+          length: Math.floor(Math.random() * 10) + 1
+        }, () =>
+          String.fromCodePoint(Math.floor(Math.random() * (0x2FFF - 0x20)) + 0x20)
+        ).join("")
+      }, 100);
+
+      video.onplay = () => audio.play();
+      video.onpause = () => audio.pause();
+      video.onseeked = () => (audio.currentTime = video.currentTime);
+
+      track.mode = 'hidden';
+      track.oncuechange = () => {
+        const cue = track.activeCues[0]; 
+        if (cue) {subtitles.innerHTML = cue.text} 
+        else {subtitles.innerHTML = ""}
+      };
+      video.onended = () => {
+        document.exitFullscreen();
+        location.href = "/";
+      };
+
+      // make the video transparent by copying it to a canvas element
+      // and removing all pixels below a specific rgb threshold. thanks chatgpt!
+
+      const canvas = document.getElementById("canvas");
+        const ctx = canvas.getContext("2d");
+
+        video.addEventListener("loadeddata", () => {
+            canvas.width = video.videoWidth;
+            canvas.height = video.videoHeight;
+        });
+
+        function remove() {
+            ctx.drawImage(video, 0, 0, canvas.width, canvas.height);
+            let frame = ctx.getImageData(0, 0, canvas.width, canvas.height);
+            let data = frame.data;
+            for (let i = 0; i < data.length; i += 4) {
+                let r = data[i], g = data[i + 1], b = data[i + 2];
+                if (r > 250 && g > 250 && b > 250) {
+                    data[i + 3] = 0;
+                }
+            }
+            ctx.putImageData(frame, 0, 0);
+            requestAnimationFrame(remove);
+        }; video.addEventListener("play", remove);
+    });
+
+  </script>
+
+</head>
+<body>
+
+  <div class="waiting">
+
+    <img class="paw" width="50px" draggable="false" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAGQAAABkBAMAAACCzIhnAAAAFVBMVEVHcEwAAAAAAAAAAAAAAAAAAACvr69Q1mh4AAAABXRSTlMAInbotbWASwEAAALlSURBVFjDrZi5kuIwEIY9A8ohIKdqX4Bk8kkmF0frDaT3f4Qd2zr+PmSL2lUAVeDPrb5bmqZ/Xwcqy48iRO8yF0BoiPhAYkyM+30wzSvOyH0E+SEKKVVoTPlCLMyYKgy5DqnCkFuzyHcfSW0tJrvsWFwjbs/iXxK57Do2qxLXL6IBx1aEAMkStxFav1cibDr2Y31lzA/GKmPlxcPn8/k0fWqkFwvFki+F9GLBgVmK2qEZru7saibiIHLoI6mDOLQpQ4qQbPkb7qsZ0kCqY73K3eVnhtQXBS4Fc6QhqSKkEe4v2N+KxIZ4CylPrWJJIEXKEV28alws1cKZIzwRI6gNCLdYQXKmoESJSCnZSBKJfSRqhAi11xvTYUUKuSmEGBIBEWHp6j9MSqSGlB9OHYQ4kqBeTD2EuG1xo9kAjsmPJPMNrDFXB4aETSRCyeQI7SFPNDIioXmKE4ula8DAjjFGk/j3ISK5+Toxv/KWqxERZZANi5wrR2zLEgs8LxGsj1Vr0QxZInMZBQmy5RIOFCkZTDKQGoogL2wg0CrAvIAEfMmCHHV8gHtwcmoF8CJlYAxEE5kHBIbgK2Jr4qzMfhHxOUwhqjI70a1/A8kRq2+qZioC3GUjn3JbHtqOjThB3LGJRNbYCgLuqiVBILH5yed9MdVFfYfPMjy2fUWc1KoyIkxPiMRcDnh7kwhrljNx0vMcTxfCcTrXDzVC8KS88+mQj1ykd0bVxsEcBav+mEYkBkpvIpF5DRBj3rS6geczqNcnE4m8cGw1hlqn28HEkYdEjgqZBOI3Ju3aW/aQqszTHMEtpE0eHUSYZR+JxhnUVZftI8ROc2NIPq11kMls+Wuu1Tlm4/iJBfb1BoICwyACTOogqt/xXqwRZyHYWU3EYtjAZ1xXhLSxyESMFovIw7p9sEe91ElxIUbJMc+6B6INQfZRVzJBGG7sfggJP3qnNH7ro5nXm/dKvOcMQqOXXn/evyb7v+svVPjIIpnDc10AAAAASUVORK5CYII=">
+    <a class="atext">click to play</a>
+
+    <a class="amini">huh? why is this needed?</a>
+    <audio class="audio2">
+      <source src="/assets/audio/fanfare.opus" type="audio/ogg">
+    </audio>
+
+  </div>
+  <img class="dilemma" draggable="false" src="/assets/images/autoplay.webp">
+
+  <a class="bgtext">404</a>
+
+  <video class="video" controls preload="metadata">
+    <source src="/assets/videos/404.mp4" type="video/mp4">
+    <track label="English" kind="subtitles" srclang="en" src="/assets/static/404.vtt" default>
+  </video>
+  <canvas id="canvas"></canvas>
+  <div class="subtitles"></div>
+
+  <audio class="audio">
+    <source src="/assets/audio/fromthestart.opus" type="audio/ogg">
+  </audio>
+
+</body>
+</html>

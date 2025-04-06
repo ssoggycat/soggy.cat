@@ -1,2 +1,9 @@
 # s.soggy.cat
-subdomain for credits and miscellaneous, coded by mat n me
+
+now *cool* and **awesome** and ***fresh***!! 
+
+not really, but this is still infinitely better than whatever monstrosity we had before..
+
+![](/oldpage.png)
+### GULP..
+
