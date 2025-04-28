@@ -1,0 +1,31 @@
+!!inter
+^ custom classes (see in source) !
+
+**note!** most of this should be replaced with commonmark implementations!
+# title
+## section
+### large text
+#### big text
+normal text
+_italic text_
+**bold text**
+**_bold AND italic text_** (first bold, then italic)
+~~strike-through~~
+//brrrr//
+:::horror:::
+^superscript^
+~subscript~ (can misalign lines)
+((glowing text))
+[#64daff colored text]
+[link](https://soggy.cat)
+#site link #(main)
+#[site link disguised as external link]#(main)
+{popup / help}{hello!!!!!!!!}
+||spoiler text||
+> greentext
+----
+``monospace``
+[code blocks are on a vacation]
+-# small discord text
+-## tiny text
+!(alt text)(https://files.catbox.moe/yn2768.jpg) [90%, 90%, center]

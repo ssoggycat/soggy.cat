@@ -1,73 +1,119 @@
 <!DOCTYPE html>
-<html>
-<head>
+<html lang="en">
+	<head>
+		<title>s.soggy.cat • info</title>
+		<link
+			rel="icon"
+			href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAMAAAAoLQ9TAAAARVBMVEUOCxGlmX+Nf2x6aVGUhW6cj3dtX0mglH0bFBaCdGCWi3MsIR03Kyaom4RJPTNBMitlVELFuq7b0sqwpZmXjHqrn4hVRjnn4hK4AAAArUlEQVQY0yWOSZJFIQgEEVTAeXre/6gfu3OXFRUFgGw4gzkJpwj4rD44QLCAuLr6GdU5SBYECsenhGc7l18jILUsObc4wwgYobXei5H7XunQAGZ/Wy+9z/kFihfYo0qJG5WV4rgQda3IR3M94PEOyGOttXF0ZkBtDUTaXLOOm0LBUTIAiO3t4BMOLVnMRcq32ZOqtld4nevtJSVU+nfJdEyT3da/wGaKoA+T4vkB79cJLNFgVsoAAAAASUVORK5CYII="
+		/>
 
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width" />
-  <link rel="icon" href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAMAAAAoLQ9TAAAARVBMVEUOCxGlmX+Nf2x6aVGUhW6cj3dtX0mglH0bFBaCdGCWi3MsIR03Kyaom4RJPTNBMitlVELFuq7b0sqwpZmXjHqrn4hVRjnn4hK4AAAArUlEQVQY0yWOSZJFIQgEEVTAeXre/6gfu3OXFRUFgGw4gzkJpwj4rD44QLCAuLr6GdU5SBYECsenhGc7l18jILUsObc4wwgYobXei5H7XunQAGZ/Wy+9z/kFihfYo0qJG5WV4rgQda3IR3M94PEOyGOttXF0ZkBtDUTaXLOOm0LBUTIAiO3t4BMOLVnMRcq32ZOqtld4nevtJSVU+nfJdEyT3da/wGaKoA+T4vkB79cJLNFgVsoAAAAASUVORK5CYII=" />
+		<meta name="description" content=""/>
 
-  <title>s.soggy.cat • info</title>
+		<meta charset="UTF-8"/>
+		<meta name="viewport" content="width=device-width"/>
+		<link href="static/sidemenu.css" rel="stylesheet"/>
+		<link href="static/style.css" rel="stylesheet"/>
+	</head>
 
-  <link href="../info/static/style.css" rel="stylesheet" type="text/css" />
-  <script src="../info/static/script.js"></script>
+	<body>
+		<img class="bg" draggable="false" src="assets/grand2.webp"/>
+		<div class="dither"></div>
 
-</head>
-<body>
-  
-<div class="markdown"></div>
+		<div class="markdown-stupid-container">
+			<div class="markdown"></div>
 
-<div class="popupc"></div>
+			<div style="display: none" class="popup">
+				<div class="popup-fade">
+					<div class="popup-content-container">
+					</div>
+					<hr style="margin: 4px 0; background-color: rgba(255,255,255,0.25);">
+					<p class="small" style="text-align: center; font-size: 0.6666em; color: rgba(255,255,255,0.25)">Hold Shift to hide this popup</p>
+				</div>
+			</div>
+		</div>
 
-<img class="bg" src="../info/assets/bg.webp" />
-<div class="loading"><img width="75px" src="../info/assets/loading.png"></div>
-<div class="eviltint"></div>
+		<div class="loading" style="z-index: 999999">
+			<img id="loadimg" width="75px" src="assets/loading.png"/>
+		</div>
+		<div class="eviltint"></div>
 
-<div class="butt dysl" style="display:none">Aa</div>
-<div class="butt listb"><p>≡</p></div>
-<div class="list" style="display:none">
-  <a class="menutitle">collect my pages</a>
-  <hr>
+		<div id="sidemenu" class="sm sm-closed" style="min-width: 13.5rem; transition: none;" inert>
+			<a aria-label="frontpage" data-page="" onclick="load('main')">
+				<div class="sm-button sm-small">
+					<p>frontpage</p>
+				</div>
+			</a>
 
-  <div class="option" onclick="load('../main.html')">
-    <a>frontpage</a>
-    <!--a class="tiny">main</a-->
-  </div>
+			<a aria-label="cv" data-page="cv" onclick="load('cv');">
+				<div class="sm-button sm-small">
+					<p>cv</p>
+				</div>
+			</a>
 
-  <div class="option" onclick="load('cv.html')">
-    <a class="small">cv</a>
-  </div>
-  <!--div class="option" onclick="load('mat.html')">
-    <a class="small">mat</a>
-  </div>
-  <div class="option" onclick="load('biscuit.html')">
-    <a class="small">biscuit - shark's owner</a>
-  </div-->
+			<a aria-label="mat" data-page="mat" onclick="load('mat');">
+				<div class="sm-button sm-small">
+					<p>mat</p>
+				</div>
+			</a>
 
-  <div class="option" onclick="load('posts.html')">
-    <a class="small">~the art of soggyposting~</a>
-  </div>
-  <div class="option" onclick="load('domains.html')">
-    <a class="small">websites list</a>
-  </div>
-  <!--div class="option" onclick="load('gimmick.html')">
-    <a class="small">what are you, a gimmick account?</a>
-  </div-->
+			<hr class="sm-coloring"/>
 
-  <div class="option">
-    <a class="small" style="font-size:10px;opacity:0.3;color:white;text-decoration:none;" 
-    href="https://x.com/messages/compose?recipient_id=1517610355999973377&text=HELLO%20SSOGGYCAT%20ON%20X%20THE%20EVERYTHING%20PLATFORM.%20i%20would%20like%20to%20suggest%20a%20page%20about%20THIS%3A"
-    >more coming later..</a>
-  </div>
-</div>
+			<a aria-label="posts" data-page="posts" onclick="load('posts');">
+				<div class="sm-button sm-small">
+					<p>life of a soggypost</p>
+				</div>
+			</a>
 
-<div class="firstvisit" -style="display:none">
-  <div class="close">✕</div>
-  <img draggable="false" src="../assets/images/pfp/goob.webp">
-  <div class="goobspeech">
-    <a>hello! i'm <b>goob!</b> did you know that giving me your <a class="shaking">money</a> is a really good idea? <br> <marquee scrolldelay="40" truespeed><a class="glow" style="color:greenyellow">ℝ₹₵Ħ</a> people tend to <i>learn from their mistakes</i> and <i>give back</i> to the poor. rich people are far more useful to the society than the lower class, so maximizing the amount of rich people is essential for world peace.</marquee> so please, give me your <a class="shaking">data</a>, so i can <a class="shaking">sell</a> it</a>
-    <div class="choice"><div class="one">ok</div> <div class="two">NO!!</div></div>
-  </div>
-</div> <div class="log"></div>
-</div>
+			<a aria-label="websites" data-page="websites" onclick="load('websites');">
+				<div class="sm-button sm-small">
+					<p>websites</p>
+				</div>
+			</a>
 
-</body></html>
+			<a aria-label="selling out" data-page="sellingout" onclick="load('sellingout');">
+				<div class="sm-button sm-small">
+					<p>ever selling out?</p>
+				</div>
+			</a>
+
+			<a aria-label="about biscuit" class="smlink" href="https://cdn.sogfulday.today/faq/cv.png" target="BiscuitTarget">
+				<div class="sm-button sm-small">
+					<p>about biscuit →</p>
+				</div>
+			</a>
+		</div>
+
+		<button type="button" id="circlebtn" title="the cooler stuff! navigation menu"></button>
+
+		<div class="firstvisit">
+			<div class="close" id="closeCookies">✕</div>
+			<img width="64" height="64" draggable="false" src="../assets/images/pfp/goob.webp"/>
+			<div class="goobspeech">
+				<a>
+					hello! i'm <b>goob!</b> did you know that giving me your <a class="shaking">money</a> is a really good idea?
+					<br/>
+					<div style="overflow: hidden; width: 240px; position: absolute">
+						<div class="marquee">
+							<a class="glow" style="color: greenyellow">ℝ₹₵Ħ</a> people tend to <i>learn from their mistakes</i> and <i>give back</i> to the poor. rich people are far
+							more useful to the society than the lower class, so maximizing the amount of rich people is essential for world peace.
+						</div>
+					</div>
+					<br/>
+
+					so please, give me your <a class="shaking">data</a>, so i can <a class="shaking">sell</a> it
+				</a>
+				<div class="choice">
+					<div class="one" id="acceptCookies">ok</div>
+					<div class="two" id="declineCookies">NO!!</div>
+				</div>
+			</div>
+		</div>
+
+		<!-- MOVE THIS LATER TOO!! -->
+		<script defer src="static/sidemenu.js"></script>
+		<script defer src="static/commonmark.min.js"></script>
+		<script defer src="static/mobilecheck.js"></script>
+		<script defer src="static/popup.js"></script>
+		<script defer src="static/script.js"></script>
+	</body>
+</html>
