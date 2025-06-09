@@ -27,7 +27,8 @@ body {
 	display: flex;
 	justify-content: center;
 	align-items: center;
-	
+
+	background-color: rgba(255,204,95,1);
 	background: radial-gradient(circle, rgba(86,197,199,1) 0%, rgba(255,239,185,1) 30%, 
 				rgba(188,144,201,1) 53%, rgba(255,154,154,1) 78%, rgba(255,204,95,1) 100%);
 }
