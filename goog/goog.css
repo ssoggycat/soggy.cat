@@ -1,4 +1,8 @@
-body {
+.body {
+    background-color: #40736a;
+}
+
+.gradient-background {
     background: linear-gradient(rgb(0, 0, 0) 0%, rgb(42, 73, 77) 70%, rgb(64,115,106) 100%);
 }
 

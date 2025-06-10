@@ -4,9 +4,9 @@
 	<title>soggy cat</title>
 	<link rel="icon" href="favicon.ico">
 
-	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 	<meta charset="UTF-8">
-	
+
 	<meta name="title" content="soggy cat">
 	<meta property="og:title" content="soggy cat">
 
@@ -14,14 +14,15 @@
 	<meta property="og:description" content="a picture of a wet cat inside a bathtub.">
 
 	<meta property="og:image" content="/img/soggycat.webp">
-
-	<meta name="color-scheme" content="light" />
-	<meta name="theme-color" content="#ffcc5f" />
+	<meta name="color-scheme" content="light"/>
+	<meta name="theme-color" content="#ffcc5f"/>
 
 	<link rel="stylesheet" href="/static/soggycat/main.css">
+	<link rel="stylesheet" href="/static/soggycat/sidemenu.css">
 </head>
 
 <body data-soggy-pagetype="vtilt-js">
+	<div class="gradient-background"></div>
 	<img id="soggycat" src="/img/soggycat.webp" data-tilt data-tilt-scale="1.05" alt="a picture of a wet cat inside a bathtub.">
 
 	<div id="sidemenu" class="sm sm-closed" inert>
@@ -47,17 +48,10 @@
 			</div>
 		</a>
 
-		<div>
-			<img title='
-"i ate my goog cube dont tell anyone"
+		<div class="disappointment">
+			<img title='"i ate my goog cube dont tell anyone"
 	- @leon_jajko1 on twitter, 2025, to @ssoggycat'
-				class="sm-button" src="img/image.png" 
-				style="
-					width: 310px; 
-					height: auto;
-					border-bottom-left-radius: 0.3rem;
-					border-top-left-radius: 0.3rem;
-				">
+				class="sm-button" src="img/consumer.webp">
 		</div>
 	</div>
 
@@ -66,7 +60,8 @@
 	<input type="file" id="picker" style="display: none" accept="image/*" />
 
 	<script src="/static/soggycat/main.js"></script>
-	
+	<script src="/static/soggycat/sidemenu.js"></script>
+
 	<script src='/static/other/vanillatilt.js'></script>
 	<script src="/static/other/color-thief.umd.js"></script>
 </body>

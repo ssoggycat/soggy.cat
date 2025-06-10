@@ -1,14 +1,11 @@
 # contributions of soggeth - go wild
 don't though
 
-# Neat guide to keep everything consistent!!
-1. **\<img>** Elements always end with a >, with no spaces to separate > and other characters [^1]
-2. For proper indentation *in VS Code*, set indentation to "Tab Size: 4"
-3. For proper indentation *ino ther programs*.. uhhg.. figure out how to do the same thing! thanku!!!
-4. If a line or multiple lines aren't readable or are confusing because they lack indentation, add indentation
-5. You MUST cherish and love soggy cat before you can contribute. fake soggers will be exiled and humiliated
+# NOTICE:
+## this is outdated
 
-[^1]: This seems to be unneeded in the guide, but i put it there anyway for good luck and prosperity.
+# Neat guide to keep everything consistent!!
+just ask us. either to review what you're cooking or ask us to finish this
 
 # Examples
 ### An example of good code:
@@ -37,7 +34,6 @@ don't though
 	</a>
 </div>
 ```
-*An outdated version of the side menu div for the website!*
 
 ### An example of bad code:
 ```html

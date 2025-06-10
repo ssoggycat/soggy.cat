@@ -19,22 +19,33 @@
 :root {
 	color-scheme: light;
 }
+
 html, body {
-	height: 100%; 
-	padding: 0px; 
+	overflow:hidden;
+	overscroll-behavior: none;
+
+	height: 100%;
+	padding: 0px;
 	margin: 0px;
 }
 
 body {
-	overflow: hidden;
-	overscroll-behavior: none;
+	padding: env(safe-area-inset-top, 0px) env(safe-area-inset-right, 0px)
+    env(safe-area-inset-bottom, 0px) env(safe-area-inset-left, 0px);
+
 	display: flex;
 	justify-content: center;
 	align-items: center;
+	background-color: rgb(255,204,95);
+}
 
-	background-color: rgba(255,204,95,1);
-	background: radial-gradient(circle, rgba(86,197,199,1) 0%, rgba(255,239,185,1) 30%, 
-				rgba(188,144,201,1) 53%, rgba(255,154,154,1) 78%, rgba(255,204,95,1) 100%);
+.gradient-background {
+	z-index: -9999;
+	position: fixed;
+	width: 100%;
+	height: 100%;
+	background: radial-gradient(circle, rgb(86,197,199) 0%, rgb(255,239,185) 30%,
+				rgb(188,144,201) 53%, rgb(255,154,154) 78%, rgb(255,204,95) 100%);
 }
 
 /* outperformed by new changes? */
@@ -52,127 +63,4 @@ body {
 
 	max-width: 75vw;
 	max-height: 75vh;
-}
-
-/* IMPORTANT!!!
-IMPORTANT!!
-READ THIS!!
-DO NOT SKIP PAST THIS!!
-GENUINELY!!
-
-IF YOU WANT TO CHANGE ANYTHING BELOW THIS.
-YOU SHOULD INSTEAD GO TO sidemenu.css,
-DELETE EVERYTHING BELOW HERE, AND PORT ALL OF IT OVER TO THE NEW SEPARATE SIDEMENU CODE & STYLING!!
-DONT REPEAT YOURSELF!!!!!!
-
-/* ############################### */
-
-#circlebtn {
-	position: absolute;
-	right: 1vh;
-	bottom: 1vh;
-
-	background-color: rgba(255,255,255, 0.25);
-	cursor: pointer;
-	-webkit-backdrop-filter: blur(3vh);
-	backdrop-filter: blur(3vh);
-	box-shadow: 1vh 2vh 3vh rgb(41, 41, 41, 0.25);
-	
-	width: 4vh;
-	height: 4vh;
-	border-radius: 50%;
-	border-style: none;
-	
-	transition-duration: 230ms;
-}
-
-#circlebtn:hover {
-	background-color: rgba(255,255,255, 0.5);
-
-	width: 4.5vh;
-	height: 4.5vh;
-}
-
-#circlebtn:active {
-	background-color: rgba(255,255,255, 0.25);
-	transform: translateY(0.5vh) scale(0.95);
-	
-	transition-duration: 50ms;
-}
-
-/* ############################### */
-
-.sm {
-	position: absolute;
-	right: 0;
-	bottom: 6vh;
-
-	display: flex;
-	flex-direction: column;
-	
-	background-color: rgba(255,255,255, 0.25);
-	border-top-left-radius: 1.0rem;
-	border-bottom-left-radius: 1.0rem;
-	backdrop-filter: blur(3vh);
-	-webkit-backdrop-filter: blur(3vh);
-	box-shadow: 1vh 2vh 3vh rgb(41, 41, 41, 0.25);
-
-	padding: 0.166rem 0.333rem;
-	padding-right: 0;
-	min-width: 10rem;
-	
-	transition-duration: 600ms;
-	max-width: 100%;
-}
-
-.sm-closed {
-	transform: translateX(100%);
-	visibility: hidden;
-	pointer-events: none;
-}
-
-/* Side menu children */
-.sm > * {
-	margin: 0.1666rem 0;
-	margin-right: 0;
-
-	font-family: 'Spline Sans Mono', monospace;
-	text-decoration: none;
-	color: black;
-
-	--button-size: 3rem;
-	--text-size: 1.5rem;
-	--hover-size: 0.25rem;
-}
-
-/* Side menu button presets */
-.sm-small {
-	--button-size: 1.75rem;
-	--text-size: 0.95rem;
-	--hover-size: 0.125rem;
-}
-
-/* Side menu button */
-.sm-button {
-	display: flex;
-	align-items: center;
-	white-space: nowrap;
-
-	background-color: white;
-	border-top-left-radius: 1.25rem;
-	border-bottom-left-radius: 1.25rem;
-	
-	height: var(--button-size);
-	font-size:  var(--text-size);
-
-	transition-duration: 200ms;
-}
-
-.sm-button img {
-	height: 50%; margin: 0.5rem; transition-duration: 200ms
-}
-
-.sm-button:hover {
-	height: calc(var(--button-size) + var(--hover-size));
-	font-size: calc(var(--text-size) + var(--hover-size));
 }

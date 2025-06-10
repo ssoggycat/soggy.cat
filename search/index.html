@@ -4,7 +4,7 @@
 	<title>soggy cat</title>
 	<link rel="icon" href="/favicon.ico">
 
-	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 	<meta charset="UTF-8">
 
 	<meta name="title" content="soggy cat">
@@ -14,13 +14,18 @@
 	<meta property="og:description" content="a picture of a wet cat inside a bathtub.">
 
 	<meta property="og:image" content="/img/soggycat.webp">
+	<meta name="color-scheme" content="light"/>
+	<meta name="theme-color" content="#ffcc5f"/>
+
 	<link rel="stylesheet" href="/static/soggycat/main.css">
+	<link rel="stylesheet" href="/static/soggycat/sidemenu.css">
 </head>
 
 <body data-soggy-pagetype="vtilt-js">
 	<script async src="https://cse.google.com/cse.js?cx=b26ceb7e0f04a405f">
 	</script><div class="gcse-search"></div>
 
+	<div class="gradient-background"></div>
 	<img id="soggycat" src="https://soggy.cat/img/soggycat.webp" data-tilt data-tilt-scale="1.06" />
 
 	<div id="sidemenu" class="sm sm-closed" inert>
@@ -52,7 +57,7 @@
 	<input type="file" id="picker" style="display: none" accept="image/*" />
 
 	<script src="/static/soggycat/main.js"></script>
-	
+
 	<script src='/static/other/vanillatilt.js'></script>
 	<script src="/static/other/color-thief.umd.js"></script>
 </body>

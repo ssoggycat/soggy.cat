@@ -4,7 +4,7 @@
 	<title>Goog...</title>
 	<link rel="icon" href="img/goog.webp">
 
-	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 	<meta charset="UTF-8">
 
 	<meta name="title" content="Goog...">
@@ -14,8 +14,13 @@
 	<meta property="og:description" content="Goog...">
 
 	<meta property="og:image" content="img/goog.webp">
+	<meta name="color-scheme" content="light"/>
+	<meta name="theme-color" content="#40736a"/>
+
+	<link rel="stylesheet" href="//soggy.cat/static/soggycat/sidemenu.css">
 	<link rel="stylesheet" href="//soggy.cat/static/soggycat/main.css">
 	<!-- links starting with "/" lead to goog.soggy.cat and not soggy.cat -->
+	<!-- THIS MAY CHANGE!! at least, /static specifically could redirect to soggy.cat -->
 
 	<link rel="stylesheet" href="goog.css">
 </head>
@@ -29,7 +34,9 @@
 				"DRACOLoader": "//soggy.cat/static/threejs/addons/DRACOLoader.js"
 			}
 		}
-	</script> 
+	</script>
+
+	<div class="gradient-background"></div>
 
 	<script type="module" src="index.js"></script>
 	<div id="googtainer"></div>
