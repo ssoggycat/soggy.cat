@@ -1,9 +1,7 @@
 <!DOCTYPE html>
 
 <!-- https://bsky.app/profile/wukko.me/post/3lgnhf7crvs2s -->
-
-<!-- /!\ warn: https://soggy.cat used (page can be accessed from any subdomain in this repo) -->
-
+ 
 <html lang="en">
 <head>
 
@@ -102,9 +100,9 @@
   </style>
   <script>
 
-    if (!(location.hostname === "soggy.cat" && location.pathname === "/404")) {
-      location.href = "https://soggy.cat/404";
-    }
+    if (!(location.hostname === "soggy.cat" && location.pathname === "/404") &&
+      !/^\d{1,3}(\.\d{1,3}){3}$/.test(location.hostname)
+    ) {location.href = "https://soggy.cat/404"}
 
     document.addEventListener("DOMContentLoaded", function() {
       
@@ -194,6 +192,29 @@
         }; video.addEventListener("play", remove);
     });
 
+    // awkward sync fix
+    function sync() {
+      if (Math.abs(audio.currentTime - video.currentTime) > 0.05) {
+        audio.currentTime = video.currentTime;
+      }
+      if (!video.paused && !audio.paused) {
+        requestAnimationFrame(syncAudio);
+      }
+    }
+    video.addEventListener("play", () => {
+      audio.play();
+      sync();
+    });
+    video.addEventListener("pause", () => audio.pause());
+    video.addEventListener("seeking", () => {
+      audio.currentTime = video.currentTime;
+    });
+    video.addEventListener("timeupdate", () => {
+      if (Math.abs(audio.currentTime - video.currentTime) > 0.1) {
+        audio.currentTime = video.currentTime;
+      }
+    });
+    
   </script>
 
 </head>
@@ -201,28 +222,28 @@
 
   <div class="waiting">
 
-    <img class="paw" width="50px" draggable="false" src="https://soggy.cat/assets/images/paw.png">
+    <img class="paw" width="50px" draggable="false" src="../assets/images/paw.png">
     <a class="atext">click to play</a>
 
     <a class="amini">huh? why is this needed?</a>
     <audio class="audio2">
-      <source src="https://soggy.cat/assets/audio/fanfare.opus" type="audio/ogg">
+      <source src="../assets/audio/fanfare.opus" type="audio/ogg">
     </audio>
 
   </div>
-  <img class="dilemma" draggable="false" src="https://soggy.cat/assets/images/autoplay.webp">
+  <img class="dilemma" draggable="false" src="../assets/images/autoplay.webp">
 
   <a class="bgtext">404</a>
 
   <video class="video" controls preload="metadata">
-    <source src="https://soggy.cat/assets/videos/404.mp4" type="video/mp4">
-    <track label="English" kind="subtitles" srclang="en" src="https://soggy.cat/assets/static/404.vtt" default>
+    <source src="../assets/videos/404.mp4" type="video/mp4">
+    <track label="English" kind="subtitles" srclang="en" src="../assets/static/404.vtt" default>
   </video>
   <canvas id="canvas"></canvas>
   <div class="subtitles"></div>
 
   <audio class="audio">
-    <source src="https://soggy.cat/assets/audio/fromthestart.opus" type="audio/ogg">
+    <source src="../assets/audio/fromthestart.opus" type="audio/ogg">
   </audio>
 
 </body>
