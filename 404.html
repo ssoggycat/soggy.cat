@@ -102,6 +102,10 @@
   </style>
   <script>
 
+    if (!(location.hostname === "soggy.cat" && location.pathname === "/404")) {
+      location.href = "https://soggy.cat/404";
+    }
+
     document.addEventListener("DOMContentLoaded", function() {
       
       const video = document.querySelector(".video");
@@ -197,7 +201,7 @@
 
   <div class="waiting">
 
-    <img class="paw" width="50px" draggable="false" src="https://s.soggy.cat/assets/images/paw.png">
+    <img class="paw" width="50px" draggable="false" src="https://soggy.cat/assets/images/paw.png">
     <a class="atext">click to play</a>
 
     <a class="amini">huh? why is this needed?</a>
