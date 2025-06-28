@@ -1,0 +1,133 @@
+@font-face {
+    font-family: "comic sans"; font-weight: 400;
+    src: url("/assets/fonts/tiny/comicsans.woff2") format("woff2");
+  }
+
+body {
+    width: 100vw; height: 100vh; display: flex;
+    justify-content: center; align-items: center;
+    background-color: #F1DAC4;
+    flex-direction: column; text-align: center;
+    margin: 0; overflow: hidden;
+}
+
+a, p, h1, h2, h3, h4 {
+    color: rgb(0, 0, 0);
+    /* -webkit-text-stroke: 4px rgb(255, 255, 255); */
+    paint-order: stroke fill;
+    font-family: "comic sans", sans-serif;
+}
+h1, h2, h3, h4 {
+    font-style: italic;
+    text-decoration: wavy; text-decoration-line: underline;
+    text-decoration-color: rgba(0, 0, 0, 0.11); text-underline-offset: 0.2em;
+
+}
+sup {
+    font-size: 8px;
+}
+:any-link {
+    text-decoration-line: underline;
+    text-decoration-color: rgba(0, 0, 0, 0.3);
+    text-underline-offset: 0.2em;
+}
+
+.ring {
+    position: absolute; display: flex;
+    width: 100vw; height: 100vw;
+    animation: spin 30s linear infinite;
+    user-select: none; pointer-events: none; -webkit-user-drag: none;
+    opacity: 0.3; perspective: 1000px;
+}
+@keyframes spin {to {transform: rotateY(1440deg) rotateX(360deg)}}
+
+.ring img {
+    position: absolute;
+    top: 50%; left: 50%;
+    width: 20px; height: 20px;
+    transform: translate(-50%, -50%) rotate(calc(var(--r) * 72deg)) translate(15em, 0); 
+    user-select: none; pointer-events: none; -webkit-user-drag: none;
+    z-index: -999;
+}
+
+.bigbox {
+    gap: 35px; padding: 20px;
+    display: flex; flex-direction: row;
+    justify-content: center;
+}
+.box {
+    display: flex; flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+}
+
+form {
+    width: 200px;
+    line-height: 0;
+}
+input, textarea {
+    font-family: "comic sans";
+    margin: 5px; font-size: 9px;
+    outline: none; background-color: inherit;
+    border: 1px solid rgba(0, 0, 0, 0.15);
+    border-radius: 2px; color: #838383
+}
+input[name="name"], input[name="url"] {
+    width: 40%; height: 10px;
+}
+textarea {
+    width: 90%; resize: none;
+}
+.back {
+    position: fixed;
+    left: 10px; bottom: 10px;
+    font-size: 13px; color: #838383;
+    text-decoration: none; z-index: 1000;
+}
+
+.sogs {
+    position: fixed;
+    left: 0; bottom: 0;
+    width: 100vw; height: 100px;
+    z-index: 1;
+}
+.waddle {
+    position: absolute; bottom: 0;
+    width: 100px; height: 100px;
+    will-change: transform;
+    user-select: none; cursor: pointer;
+    animation-timing-function: linear;
+}
+.waddle img {width: 100px; height: 100px}
+
+.sogone {
+    animation: waddlelr 14s linear infinite, jump 3.4s ease-in-out infinite;
+    animation-delay: 0s, 4.2s;
+}
+.sogtwo {
+    animation: waddlerl 21s linear infinite, jump 3.5s ease-in-out infinite;
+    animation-delay: 0s, 5s;
+}
+.sogthree {
+    animation: waddlelr 19s linear infinite, jump 3.1s ease-in-out infinite;
+    animation-delay: 0s, 4.6s;
+}
+@keyframes waddlelr {
+    0% {left: 0; transform: scaleX(1) translateY(0)}
+    49.999% {left: calc(100vw - 64px); transform: scaleX(1) translateY(0)}
+    50% {left: calc(100vw - 64px); transform: scaleX(-1) translateY(0)}
+    100% {left: 0; transform: scaleX(-1) translateY(0)}
+}
+@keyframes waddlerl {
+    0% {left: calc(100vw - 64px); transform: scaleX(-1) translateY(0)}
+    49.999% {left: 0; transform: scaleX(-1) translateY(0)}
+    50% {left: 0; transform: scaleX(1) translateY(0)}
+    100% {left: calc(100vw - 64px); transform: scaleX(1) translateY(0)}
+}
+@keyframes jump {
+    0%, 100% {transform: translateY(0)}
+    20% {transform: translateY(-50px)}
+    40% {transform: translateY(0)}
+    60% {transform: translateY(-5px)}
+    80% {transform: translateY(0)}
+}

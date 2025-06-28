@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8" />
+	<title>&#65279;</title>
+
+	<meta property="og:title" content="soggy world" />
+	<meta name="description" content="our very sleepy discord" />
+	<meta name="twitter:card" content="summary"/>
+	<meta name="viewport" content="width=device-width, initial-scale=1" />
+	<meta name="theme-color" content="#64DAFF"/>
+
+	<link rel="icon" href="/icon.webp" />
+
+	<noscript>
+		<meta http-equiv="refresh" content="3;url=https://discord.com/invite/soggycat">
+	</noscript>
+
+	<script src="/assets/static/blotter/blotter.min.js"></script>
+	<script src="/assets/static/blotter/liquidDistortMaterial.js"></script>
+
+	<script>
+		const invite = "discord://discord.com/invite/soggycat"
+		const fallback = "https://discord.com/invite/soggycat"
+		
+		window.addEventListener("load", () => {
+			let opened = false
+		
+			try {
+				const w = window.open(invite)
+				opened = true
+		
+				setTimeout(() => {
+					if (!w || w.closed || typeof w.closed == "undefined")
+						window.open(fallback, "_blank")
+					}, 1500)
+			} catch (e) {window.open(fallback, "_blank")}
+		})
+		</script>
+		
+</head>
+<body>
+
+	<div class="main"></div>
+
+	<style>
+		body {background-color: #333; font-family: 'Josefin Sans', sans-serif}
+
+		body, div {
+			width: 100%; height: 100%;
+			margin: 0; padding: 0;
+			overflow: hidden;
+		}
+		canvas {
+			position: absolute;
+			top: 0; bottom: 0; left: 0; right: 0;
+			margin: auto;
+		}
+	</style>
+	<script>
+		let text = new Blotter.Text("one second...", {
+			size: Math.min(window.innerWidth, window.innerHeight) / 6,
+			fill: "#dbeeff"
+		})
+
+		let material = new Blotter.LiquidDistortMaterial()
+		material.uniforms.uSpeed.value = 0.3
+		material.uniforms.uVolatility.value = 0.03
+		material.uniforms.uSeed.value = 0.2
+
+		let blotter = new Blotter(material, { texts: text })
+		let scope = blotter.forText(text)
+		scope.appendTo(document.querySelector(".main"))
+	</script>
+</body>
+</html>

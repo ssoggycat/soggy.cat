@@ -1,8 +1,11 @@
 <!DOCTYPE html>
+
+<!-- /!\ warn: https://soggy.cat used (page can be accessed from goog.soggy.cat) -->
+ 
 <html lang="en">
 <head>
 	<title>Goog...</title>
-	<link rel="icon" href="img/goog.webp">
+	<link rel="icon" href="https://soggy.cat/assets/images/goog.webp">
 
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<meta charset="UTF-8">
@@ -13,8 +16,8 @@
 	<meta name="description" content="Goog...">
 	<meta property="og:description" content="Goog...">
 
-	<meta property="og:image" content="img/goog.webp">
-	<link rel="stylesheet" href="//soggy.cat/static/soggycat/main.css">
+	<meta property="og:image" content="https://soggy.cat/assets/images/goog.webp">
+	<link rel="stylesheet" href="https://soggy.cat/assets/static/soggycat/main.css">
 	<!-- links starting with "/" lead to goog.soggy.cat and not soggy.cat -->
 
 	<link rel="stylesheet" href="goog.css">
@@ -24,9 +27,9 @@
 	<script type="importmap">
 		{
 			"imports": {
-				"three": "//soggy.cat/static/threejs/three.module.js",
-				"GLTFLoader": "//soggy.cat/static/threejs/addons/GLTFLoader.js",
-				"DRACOLoader": "//soggy.cat/static/threejs/addons/DRACOLoader.js"
+				"three": "https://soggy.cat/assets/static/threejs/three.module.js",
+				"GLTFLoader": "https://soggy.cat/assets/static/threejs/addons/GLTFLoader.js",
+				"DRACOLoader": "https://soggy.cat/assets/static/threejs/addons/DRACOLoader.js"
 			}
 		}
 	</script> 
@@ -35,16 +38,16 @@
 	<div id="googtainer"></div>
 
 	<div id="sidemenu" class="sm sm-closed" inert>
-		<a aria-label="code" href="//soggy.cat/github" target="GithubTarget">
+		<a aria-label="code" href="/github" target="GithubTarget">
 			<div class = "sm-button">
-				<img src='//soggy.cat/img/code.svg'>
+				<img src="https://soggy.cat/assets/svgs/code.svg">
 				<p>code</p>
 			</div>
 		</a>
 
 		<a aria-label="no css" href="nocss" target="NoCSSTarget">
 			<div class="sm-button sm-small">
-				<img src='//soggy.cat/img/nocss.svg'>
+				<img src="https://soggy.cat/assets/svgs/nocss.svg">
 				<p>no css</p>
 			</div>
 		</a>
@@ -52,7 +55,7 @@
 		<a aria-label="upload" href="#"
 			onclick="document.getElementById('picker').click(); return false;">
 			<div class="sm-button sm-small">
-				<img src='//soggy.cat/img/upload.svg'>
+				<img src="https://soggy.cat/assets/svgs/upload.svg">
 				<p>upload</p>
 			</div>
 		</a>
@@ -62,6 +65,6 @@
 	<span id='player' style='display: none'></span>
 	<input type="file" id="picker" style="display: none" accept="image/*" />
 
-	<script src='//soggy.cat/static/soggycat/main.js'></script>
+	<script src='https://soggy.cat/assets/static/soggycat/main.js'></script>
 </body>
 </html>

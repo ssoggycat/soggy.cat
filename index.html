@@ -9,61 +9,52 @@
 
 	<meta name="title" content="soggy cat">
 	<meta property="og:title" content="soggy cat">
-
 	<meta name="description" content="a picture of a wet cat inside a bathtub.">
 	<meta property="og:description" content="a picture of a wet cat inside a bathtub.">
 
-	<meta property="og:image" content="/img/soggycat.webp">
-	<link rel="stylesheet" href="/static/soggycat/main.css">
+	<meta property="og:image" content="/assets/images/soggycat.webp">
+	<link rel="stylesheet" href="/assets/static/soggycat/main.css">
 </head>
 
 <body data-soggy-pagetype="vtilt-js">
-	<img id="soggycat" src="/img/soggycat.webp" data-tilt data-tilt-scale="1.05" alt="a picture of a wet cat inside a bathtub.">
+	<img id="soggycat" src="/assets/images/soggycat.webp" data-tilt data-tilt-scale="1.05" alt="a picture of a wet cat inside a bathtub.">
 
 	<div id="sidemenu" class="sm sm-closed" inert>
 		<a aria-label="code" href="/github" target="GithubTarget">
 			<div class = "sm-button">
-				<img src='/img/code.svg'>
+				<img src="/assets/svgs/code.svg">
 				<p>code</p>
 			</div>
 		</a>
 
-		<a aria-label="no css" href="nocss" target="NoCSSTarget">
+		<a aria-label="no css" href="/nocss" target="NoCSSTarget">
 			<div class="sm-button sm-small">
-				<img src='/img/nocss.svg'>
+				<img src="/assets/svgs/nocss.svg">
 				<p>no css</p>
 			</div>
 		</a>
 
-		<a aria-label="upload" href="#"
-			onclick="document.getElementById('picker').click(); return false;">
+		<a aria-label="upload" href="#" onclick="document.getElementById('picker').click(); return false;">
 			<div class="sm-button sm-small">
-				<img src='/img/upload.svg'>
+				<img src="/assets/svgs/upload.svg">
 				<p>upload</p>
 			</div>
 		</a>
-
-		<div>
+		
+		<!--div>
 			<img title='
-"i ate my goog cube dont tell anyone"
-	- @leon_jajko1 on twitter, 2025, to @ssoggycat'
-				class="sm-button" src="img/image.png" 
-				style="
-					width: 310px; 
-					height: auto;
-					border-bottom-left-radius: 0.3rem;
-					border-top-left-radius: 0.3rem;
-				">
-		</div>
+			"i ate my goog cube dont tell anyone"
+			- @leon_jajko1 on twitter, 2025, to @ssoggycat'
+			class="sm-button" src="img/image.png" style="width: 310px; height: auto; border-bottom-left-radius: 0.3rem; border-top-left-radius: 0.3rem;"></div-->
 	</div>
 
 	<button id="circlebtn" title="the cooler stuff! navigation menu"></button>
 	<span id='player' style='display: none'></span>
 	<input type="file" id="picker" style="display: none" accept="image/*" />
 
-	<script src="/static/soggycat/main.js"></script>
+	<script src="/assets/static/soggycat/main.js"></script>
 	
-	<script src='/static/other/vanillatilt.js'></script>
-	<script src="/static/other/color-thief.umd.js"></script>
+	<script src='/assets/static/other/vanillatilt.js'></script>
+	<script src="/assets/static/other/color-thief.umd.js"></script>
 </body>
 </html>

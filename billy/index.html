@@ -14,24 +14,24 @@
 	<meta property="og:description" content="a picture of BILLY??">
 
 	<meta property="og:image" content="/billy/billy.webp">
-	<link rel="stylesheet" href="/static/soggycat/main.css">
+	<link rel="stylesheet" href="/assets/static/soggycat/main.css">
 	<link rel="stylesheet" href="billy.css">
 </head>
 
 <body data-soggy-pagetype="vtilt-js">
-    <img id="soggycat" src="billy.webp" data-tilt data-tilt-scale="1.05" alt="a picture of BILLY??">
+    <img id="soggycat" src="/assets/images/billy.webp" data-tilt data-tilt-scale="1.05" alt="a picture of BILLY??">
 
 	<div id="sidemenu" class="sm sm-closed" inert>
 		<a aria-label="code" href="/github" target="GithubTarget">
 			<div class = "sm-button">
-				<img src='/img/code.svg'>
+				<img src="/assets/svgs/code.svg">
 				<p>code</p>
 			</div>
 		</a>
 
 		<a aria-label="no css" href="nocss" target="NoCSSTarget">
 			<div class="sm-button sm-small">
-				<img src='/img/nocss.svg'>
+				<img src="/assets/svgs/nocss.svg">
 				<p>no css</p>
 			</div>
 		</a>
@@ -39,7 +39,7 @@
 		<a aria-label="upload" href="#"
 			onclick="document.getElementById('picker').click(); return false;">
 			<div class="sm-button sm-small">
-				<img src='/img/upload.svg'>
+				<img src="/assets/svgs/upload.svg">
 				<p>upload</p>
 			</div>
 		</a>
@@ -49,9 +49,9 @@
     <span id='player' style='display: none'></span>
     <input type="file" id="picker" style="display: none" accept="image/*" />
 
-	<script src="/static/soggycat/main.js"></script>
+	<script src="/assets/static/soggycat/main.js"></script>
 	
-	<script src='/static/other/vanillatilt.js'></script>
-	<script src="/static/other/color-thief.umd.js"></script>
+	<script src='/assets/static/other/vanillatilt.js'></script>
+	<script src="/assets/static/other/color-thief.umd.js"></script>
 </body>
 </html>

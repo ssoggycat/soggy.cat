@@ -1,6 +1,8 @@
 ![popcap logo](https://raw.githubusercontent.com/cv003/popcap/testing/assets/popcap.png)
 # popcap loader
 a widget-like thingamabob that runs some of the popcap flash games on any website :bowtie: <br>
+<sup>this is not a part of s.soggy.cat, i just needed a good place for hotlinking..</sup>
+<br><br>
 use the scrollbar (or swipe in directions) to nagivate through the list of 11 games. <br>
 <sub>all assets are stored at https://s.soggy.cat.</sub>
 ## usage

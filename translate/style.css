@@ -1,0 +1,110 @@
+:root
+{
+	--water-color: #4b75e5;
+	--bg-color: #eee9d7;
+	--text-color: #212121;
+	--hover-color: #3a5fcf;
+}
+
+@font-face
+{
+	font-family: 'OutwardRound';
+	src: url('/assets/fonts/outward-round.ttf') format('truetype');
+}
+
+body
+{
+	margin: 0;
+	padding: 0;
+	background-color: var(--bg-color);
+}
+
+.title
+{
+	color: var(--text-color);
+	margin-top: 10vh;
+	font-family: 'OutwardRound';
+	font-size: 7em;
+}
+
+.vertical-container
+{
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+	height: 50vh;
+	width: 100%;
+	overflow: hidden;
+}
+
+.bottom-container
+{
+	background-color: var(--water-color);
+	margin-top: 5vh;
+	height: 45vh;
+}
+
+#waves
+{
+    position: absolute;
+    top: 51%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 100vw;
+	height: 10vh;
+}
+
+.sog-image
+{
+	width: 30%;
+	margin-top: -10vh;
+	max-width: 400px;
+	min-width: 200px;
+	height: auto;
+}
+
+#to_sog
+{
+	background-color: var(--bg-color);
+	color: var(--text-color);
+	padding: 10px;
+	border: none;
+	border-radius: 5px;
+	width: 40vw;
+	min-width: 300px;
+	height: 30vh;
+	max-height: 300px;
+	min-height: 150px;
+	resize: none;
+	outline: none;
+}
+
+.buttons-container
+{
+	display: flex;
+	flex-direction: row;
+	align-items: center;
+	justify-content: space-between;
+	width: 40vw;
+	min-width: 300px;
+	margin-top: 3vh;
+}
+
+.buttons-container > button
+{
+	background-color: var(--bg-color);
+	color: var(--text-color);
+	padding: 10px;
+	border: none;
+	border-radius: 5px;
+	min-width: 75px;
+	width: 10vw;
+	height: 5vh;
+	outline: none;
+}
+
+.buttons-container > button:hover
+{
+	background-color: var(--hover-color);
+}

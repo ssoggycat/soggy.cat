@@ -13,7 +13,8 @@
 	font-weight: normal; font-style: normal;
 }
 
-/* the implementation for the dyslexic font was rotting away in the corner and it started breaking stuff*/
+/* the implementation for the dyslexic font was rotting away in the corner and it started breaking stuff */
+
 @keyframes shake{
 	0% {transform:translate(0)}
 	10% {transform:translate(-1px,-1px)}
@@ -40,13 +41,8 @@ body {
 }
 
 @keyframes cursor-help {
-	0% {
-		cursor: url("../assets/cursor/help1.png") 13 13, help
-	}
-
-	50% {
-		cursor: url("../assets/cursor/help2.png") 13 13, help
-	}
+	0% {cursor: url("../assets/cursor/help1.png") 13 13, help}
+	50% {cursor: url("../assets/cursor/help2.png") 13 13, help}
 }
 @keyframes cursor-normal {
 	0% {
@@ -62,11 +58,6 @@ body {
 	cursor: url("../assets/cursor/normal1.png") 13 13, default;
 }
 
-/* wonder.ani */
-/* #1 */ /* .popup, .popupc {animation: cursor 1250ms infinite; cursor: url("data:image/gif;base64,R0lGODlhIAAgAPU7AAAAAAYGBggICA8PDxMTExcXFxoaGh8fHyMjIyQkJCoqKi4uLjExMTc3Nzs7Ozw8PEFBQUdHR0lJSU9PT1JSUlRUVFpaWl1dXWBgYGRkZGtra2xsbHBwcHV1dXl5eXx8fIKCgoWFhYiIiIyMjJCQkJSUlJmZmZ+fn6Kioqampqmpqa6urrGxsbe3t7m5ub6+vsPDw8fHx8vLy8/Pz9HR0dfX19nZ2dzc3OHh4enp6ezs7AAAAAAAAAAAAAAAAAAAACH/C05FVFNDQVBFMi4wAwEAAAAh+QQFAAA7ACwAAAAAIAAgAAAG/8CdcEgsGoWAZJLRAOyUyiJ0SjAQBooIBkNx7iyLxMCAOCwtlNFBwW48CtVJmrIxeHcbjgWyaCAIDxs1OCsNfREIEH8CBxgPEXdDABmGBw8OEzIzNzQSbQl9BwdVSUdPZZUHITA0NhSgi2QJCKWmpwwFAQENKjKcFxK6HViikUcABK9XAiCaNCFhuru0tpKJw6Iu2jMmE2QCXAoE1dYOGgwdLTE1MzETEBRgYwnkSGwcNDEsg+0xHRcWZBkzBaBBhU0yTuRb52LTCw1iBhJMJwPGCnUxXqzgh6gekgoRHpjIl+KDiJMpZqgrUUBSFCPd+pxQQTMDl5k0UWyYMqWIBNsHKBiQOHEyxIcJHEAk1TBCSY6nT7vcKYhLwYqSSjNEQIohTxKoYHPU2uGGjwGmGTx86BACYB4TX5/WAADWC4BZC6qUCFGCg98OeTiYgHHiKxSoXqwU4CDuwcm/kE2AaMETceIrohAsuKDUgwbAIEis+KDwsGUhiwKgGqEWcOCc2p7QPY2EQKkkrfV4YP3CYginT18ShOD5M1sPKEpkKBx3wFiCCda2lv4ZLk+PAJCqjQJgdzAoHm9pKRI6rliJxwooeCBFhPnn1Qp+k/Ie/THhLsGHr6d/v38jQQAAOw=="), help} */
-
-/* link.cur */
-/* #1 */
 p:link,
 a:link,
 .fslink,
@@ -143,7 +134,7 @@ a:link,
 .inter {
 	font-family: inter;                           /* wtf!!! cv in font!!! GET OUT!!! */
 	font-feature-settings: 'liga' 1, 'calt' 1, 'dlig' 1, 'cv01' 1, 'cv13' 1, 'ss01' 1, 'ss02' 1;
-}
+}                                                 /* MUAHAHAH!!! */
 
 .bg {
 	position: fixed;
@@ -477,7 +468,6 @@ img {
 .vertical > * {
 	margin: 0;
 }
-
 
 /* scrapped idea: https://codepen.io/philippkuehn/pen/QbrOaN */
 

@@ -30,7 +30,7 @@ function init() {
 	const loader = new GLTFLoader();
 	const dracoLoader = new DRACOLoader();
 
-	dracoLoader.setDecoderPath('//soggy.cat/static/threejs/draco/');
+	dracoLoader.setDecoderPath('/assets/static/threejs/draco/');
 
 	loader.setDRACOLoader(dracoLoader);
 
@@ -41,7 +41,7 @@ function init() {
 	frameTex.flipY = false;
 	frameTex.generateMipmaps = false;
 
-	const defaultAlbedoTex = texloader.load('img/goog.webp');
+	const defaultAlbedoTex = texloader.load('goog.webp');
 	diffuseTex = texloader.load('scene/googBake.webp');
 	glossyTex = texloader.load('scene/googBakeGlossy.webp');
 

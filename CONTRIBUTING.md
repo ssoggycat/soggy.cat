@@ -16,14 +16,14 @@ don't though
 <div id="sidemenu">
 	<a href="/github" class="menubuttonsa">
 		<div class="menubuttons">
-			<img src='/img/code.svg'>
+			<img src='/assets/images/code.svg'>
 			<p>code</p>
 		</div>
 	</a>
 
 	<a href="nocss" class="menubuttonsa">
 		<div class="menubuttons small">
-			<img src='/img/nocss.svg'>
+			<img src='/assets/svgs/nocss.svg'>
 			<p>no css</p>
 		</div>
 	</a>
@@ -31,7 +31,7 @@ don't though
 	<a href="#" class="menubuttonsa"
 		onclick="document.getElementById('picker').click(); return false;">
 		<div class="menubuttons small">
-			<img src='/img/upload.svg'>
+			<img src='/assets/images/upload.svg'>
 			<p>upload</p>
 		</div>
 	</a>
