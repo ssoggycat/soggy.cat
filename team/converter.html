@@ -11,7 +11,7 @@
     <meta itemprop="name" content="soggy world currency converter">
     <meta itemprop="description" content="the BEST page ever please clicky click..">
 
-    <meta name="twitter:title" content="ssoggycat software division™">
+    <meta name="twitter:title" content="ssoggycat">
     <meta name="twitter:card" content="summary">
     <meta name="twitter:image" content="summary">
     <meta name="twitter:site" content="@ssoggycat">
@@ -34,7 +34,7 @@
             border-radius: 15px;
             width: 300px; height: 100px;
             background-color: rgba(0,0,0,0.5);
-            position: fixed; display: flex; 
+            position: fixed; display: flex;
             justify-content: center; align-items: center;
             padding: 10px
         }
@@ -69,7 +69,7 @@
             outline: none; border: none;
         }
 
-        .num:focus, .input:focus {  
+        .num:focus, .input:focus {
             outline: none; border: none;
             border-color: transparent;
             box-shadow: none;
@@ -103,7 +103,7 @@
                 let result = valueOne * (rateOne / rateTwo);
                 numTwo.innerText = parseFloat(result.toFixed(6)); // stackoverflow lied to me parseint breaks everything
             }
-            
+
             numOne.addEventListener("input", convert);
             selectOne.addEventListener("change", convert); selectTwo.addEventListener("change", convert);
         });

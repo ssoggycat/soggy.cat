@@ -1,6 +1,6 @@
 @font-face {
     font-family: "comic sans"; font-weight: 400;
-    src: url("/assets/fonts/tiny/comicsans.woff2") format("woff2");
+    src: url("../assets/fonts/tiny/comicsans.woff2") format("woff2");
   }
 
 body {
@@ -130,4 +130,21 @@ textarea {
     40% {transform: translateY(0)}
     60% {transform: translateY(-5px)}
     80% {transform: translateY(0)}
+}
+
+.wip {
+    position: fixed;
+    top: 0; left: 0;
+    width: 100vw; height: 100vh;
+    background: rgba(0,0,0,0.85);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 9999;
+}
+.wipt {
+    color: #fff;
+    font-size: 2em;
+    text-align: center;
+    font-family: "comic sans", sans-serif;
 }

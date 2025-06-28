@@ -188,7 +188,7 @@ a {
 }
 .b2 {
   background-color: #282b30;
-  background-image: url("/assets/images/discordbg.webp");
+  background-image: url("assets/images/discordbg.webp");
   background-position: center; background-repeat: no-repeat;
   background-size: cover;
   font-family: "discord", sans-serif;
@@ -218,7 +218,7 @@ a {
 .join {top: 0; right: 0}
 .b3 {
   background-color: #DFE3E8;
-  background-image: url("/assets/images/drivebg.webp");
+  background-image: url("assets/images/drivebg.webp");
   background-position: center; background-repeat: no-repeat;
   background-size: cover;
   color: black;

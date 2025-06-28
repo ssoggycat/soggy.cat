@@ -4,8 +4,8 @@
 		<title>soggy cat webring</title>
 		<meta charset="UTF-8">
 
-		<meta property="og:image" content="assets/images/embed.gif">
-		<link rel="icon" type="image/x-icon" href="https://soggy.cat/assets/svgs/blank.svg">
+		<meta property="og:image" content="../assets/images/embed.gif">
+		<link rel="icon" type="image/x-icon" href="../assets/svgs/blank.svg">
 
 		<meta itemprop="name" content="soggy cat webring">
 		<meta itemprop="description" content="the BEST page ever please clicky click..">
@@ -13,35 +13,16 @@
 		<link href="style.css" rel="stylesheet" type="text/css"/>
 	</head>
 	<body>
-	
-		<div class="ring">
-			<img src="s.webp" style="--r:0">  <img src="s.webp" style="--r:0.1">
-			<img src="s.webp" style="--r:0.2"><img src="s.webp" style="--r:0.3"><img src="s.webp" style="--r:0.4">
-			<img src="s.webp" style="--r:0.5"><img src="s.webp" style="--r:0.6"><img src="s.webp" style="--r:0.7">
-			<img src="s.webp" style="--r:0.8"><img src="s.webp" style="--r:0.9"><img src="s.webp" style="--r:1">
-			<img src="s.webp" style="--r:1.1"><img src="s.webp" style="--r:1.2"><img src="s.webp" style="--r:1.3">
-			<img src="s.webp" style="--r:1.4"><img src="s.webp" style="--r:1.5"><img src="s.webp" style="--r:1.6">
-			<img src="s.webp" style="--r:1.7"><img src="s.webp" style="--r:1.8"><img src="s.webp" style="--r:1.9">
-			<img src="s.webp" style="--r:2">  <img src="s.webp" style="--r:2.1"><img src="s.webp" style="--r:2.2">
-			<img src="s.webp" style="--r:2.3"><img src="s.webp" style="--r:2.4"><img src="s.webp" style="--r:2.5">
-			<img src="s.webp" style="--r:2.6"><img src="s.webp" style="--r:2.7"><img src="s.webp" style="--r:2.8">
-			<img src="s.webp" style="--r:2.9"><img src="s.webp" style="--r:3">  <img src="s.webp" style="--r:3.1">
-			<img src="s.webp" style="--r:3.2"><img src="s.webp" style="--r:3.3"><img src="s.webp" style="--r:3.4">
-			<img src="s.webp" style="--r:3.5"><img src="s.webp" style="--r:3.6"><img src="s.webp" style="--r:3.7">
-			<img src="s.webp" style="--r:3.8"><img src="s.webp" style="--r:3.9"><img src="s.webp" style="--r:4">
-			<img src="s.webp" style="--r:4.1"><img src="s.webp" style="--r:4.2"><img src="s.webp" style="--r:4.3">
-			<img src="s.webp" style="--r:4.4"><img src="s.webp" style="--r:4.5"><img src="s.webp" style="--r:4.6">
-			<img src="s.webp" style="--r:4.7"><img src="s.webp" style="--r:4.8"><img src="s.webp" style="--r:4.9">
-		</div>
 
-		<!-- i have graduated from css clicker college -->
-		<audio style="display:none" src="../assets/audio/meow.mp3" preload="auto"></audio>
-		<iframe name="meow" style="display:none"></iframe>
+		<div class="wip"><div class="wipt">THIS ISN'TD ONE YET I FORGOT TO DO IT GO AWAY</div></div>
+	
+		<div class="ring" id="ring"></div>
+		<audio id="meow-" style="display:none" src="../assets/audio/meow.mp3" preload="auto"></audio>
 
 		<div class="sogs">
-			<a class="waddle sogone" href="../assets/audio/meow.mp3" target="meow"><img src="../assets/images/sog.webp"></a>
-			<a class="waddle sogtwo" href="../assets/audio/meow.mp3" target="meow"><img src="../assets/images/sog.webp"></a>
-			<a class="waddle sogthree" href="../assets/audio/meow.mp3" target="meow"><img src="../assets/images/sog.webp"></a>
+			<a class="waddle sogone" href="#" data-sog><img src="../assets/images/sog.webp"></a>
+			<a class="waddle sogtwo" href="#" data-sog><img src="../assets/images/sog.webp"></a>
+			<a class="waddle sogthree" href="#" data-sog><img src="../assets/images/sog.webp"></a>
 		</div>
 
 		<h1>soggy ring</h1>
@@ -53,15 +34,13 @@
 		<div class="bigbox">
 			<div class="box">
 				<h2>ring widgets</h2>
-
 				<a href="https://soggy.fanclub.rocks/random.php"><img></a>
-		
 			</div>
 			<div class="box">
 				<h2>members</h2>
-				<br><img src="/assets/images/tumbleweed.gif" width="125px"><br>
+				<br><img src="../assets/images/tumbleweed.gif" width="125px"><br>
 				<div>
-					<!--a>ssoggycat – <a href="https://s.soggy.cat">s.soggy.cat</a></a> <br-->
+					<!--a>ssoggycat – <a href="https://s.soggy.cot">s.soggy.cot</a></a> <br-->
 				</div>
 
 				<h4>apply</h4>
@@ -71,7 +50,6 @@
 					<textarea name="msg" placeholder="you can leave any other notes here.. (custom css, aggressive barking etc)"></textarea><br>
 					<input type="submit" value="send">
 				</form>
-
 			</div>
 		</div>
 
@@ -79,5 +57,29 @@
 			<a class="back" href="/"><- back</a>
 		</div>
 
+		<script>
+			// tha ring
+			const ring = document.getElementById('ring');
+			const imgCount = 50;
+			for (let i = 0; i < imgCount; i++) {
+				const img = document.createElement('img');
+				img.src = 's.webp';
+				img.style.setProperty('--r', (i * 0.1).toFixed(1));
+				img.classList.add('ring-img');
+				img.addEventListener('click', playMeow);
+				ring.appendChild(img);
+			}
+			const audio = document.getElementById('meow');
+			function playMeow(e) {
+				audio.currentTime = 0;
+				audio.play();
+			}
+			document.querySelectorAll('[data-sog]').forEach(a => {
+				a.addEventListener('click', function(e) {
+					e.preventDefault();
+					playMeow();
+				});
+			});
+		</script>
 	</body>
 </html>
