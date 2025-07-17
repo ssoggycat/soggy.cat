@@ -7,3 +7,5 @@ then add it to the page list inside index.html for people to be able to navigate
 also refer to the markdown inside example.html.
 -# be aware that some combinations will break due to sloppy regex expressions.
 <br>
+
+-# switch this to commonmark later! im not sure how we're gonna apply the little fancy thingimabobs but yea.

@@ -389,7 +389,7 @@ function sogmark(input, element) {
 		.replace(/~~(.*?)~~/g, '<s>$1</s>') // strike-through
 		.replace(/(^|[^:])\/\/(.*?)\/\//g, '$1<span class="shaking">$2</span>') // shake
 		.replace(/:::\s?(.*?)\s?:::/g, '<span class="anxious">$1</span>') // anxious
-		.replace(/:\s?([a-z0-9_-]+)\s?:/g, '<img src="/info/assets/emojis/$1.webp" alt="$1" width="20px" height="20px">') // emojis
+		.replace(/:\s?([a-z0-9_-]+)\s?:/g, '<img src="/static/ssoggycat/team/info/images/emojis/$1.webp" alt="$1" width="20px" height="20px">') // emojis
 		.replace(/\[#([0-9a-fA-F]{6}) (.*?)\]/g, '<span style="color:#$1;">$2</span>') // colored
 
 		.replace(/^-# (.+)$/gm, '<span class="small">$1</span>') // small

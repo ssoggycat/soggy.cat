@@ -28,7 +28,7 @@ this page covers them all in excruciating detail! enjoy!
 <br>
 :sog: [_sogfulday.today_](https://sogfulday.today) - mat's tinkering domain (with a great frontpage and error page)
 -# [_cdn.sogfulday.today_](https://cdn.sogfulday.today/gifs/dancing.gif) - important screenshots, random gifs and other files for preservation
--# <a class="fslink" data-page="boowomp" onclick="let boowomp = new Audio('assets/boowomp.mp3'); boowomp.play(); visits.add('boowomp')">_sww.sogfulday.today_<span>↗</span></a> - empty right now, could be used for some kind of fediverse instance in the distant future
+-# <a class="fslink" data-page="boowomp" onclick="let boowomp = new Audio('/static/other/team/info/audio/boowomp.mp3'); boowomp.play(); visits.add('boowomp')">_sww.sogfulday.today_<span>↗</span></a> - empty right now, could be used for some kind of fediverse instance in the distant future
 -# [_drive, drive2, & drive3.sogfulday.today_](https://drive3.sogfulday.today) - older shortcuts to the soggy drives. preferably don't use these!
 <br>
 :sog: [_🐱💧.to_](https://xn--5o8hmh.to/) - test domain, a redirect to the bluesky account

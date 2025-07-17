@@ -1,15 +1,15 @@
 @font-face { /* chirp font (twitter for web) */
-	font-family: "default"; src: url("/assets/fonts/chirp.woff") format("woff");
+	font-family: "default"; src: url("/static/other/team/fonts/chirp.woff") format("woff");
 	font-weight: normal; font-style: normal;
 }
 
 @font-face { /* inter */
-    font-family: "inter"; src: url("/assets/fonts/InterVariable.woff2") format("woff");
+    font-family: "inter"; src: url("/static/other/team/fonts/InterVariable.woff2") format("woff");
     font-weight: normal; font-style: normal;
 }
 
 @font-face { /* blackspace omori font */
-	font-family: "anxious"; src: url("/assets/fonts/anxious.ttf") format("truetype");
+	font-family: "anxious"; src: url("/static/other/team/fonts/anxious.ttf") format("truetype");
 	font-weight: normal; font-style: normal;
 }
 
@@ -41,21 +41,21 @@ body {
 }
 
 @keyframes cursor-help {
-	0% {cursor: url("../assets/cursor/help1.png") 13 13, help}
-	50% {cursor: url("../assets/cursor/help2.png") 13 13, help}
+	0% {cursor: url("/static/ssoggycat/team/info/images/cursor/help1.png") 13 13, help}
+	50% {cursor: url("/static/ssoggycat/team/info/images/cursor/help2.png") 13 13, help}
 }
 @keyframes cursor-normal {
 	0% {
-		cursor: url("../assets/cursor/normal1.png") 13 13, default;
+		cursor: url("/static/ssoggycat/team/info/images/cursor/normal1.png") 13 13, default;
 	}
 	50% {
-		cursor: url("../assets/cursor/normal2.png") 13 13, default;
+		cursor: url("/static/ssoggycat/team/info/images/cursor/normal2.png") 13 13, default;
 	}
 }
 
 :root, body, .bg {
 	animation: cursor-normal 1s infinite;
-	cursor: url("../assets/cursor/normal1.png") 13 13, default;
+	cursor: url("/static/ssoggycat/team/info/images/cursor/normal1.png") 13 13, default;
 }
 
 p:link,
@@ -68,7 +68,7 @@ a:link,
 .butt,
 .close,
 #acceptCookies, #declineCookies,
-.spoiler {cursor: url("../assets/cursor/link.png") 13 13, pointer}
+.spoiler {cursor: url("/static/ssoggycat/team/info/images/cursor/link.png") 13 13, pointer}
 
 .sm-button, .sm-coloring {
 	background-color: #b8b8b8e7;
@@ -167,7 +167,7 @@ a:link,
 	width: 100vw;
 	height: 100vh;
 	background-color: white;
-	background-image: url("../assets/gaussian.png");
+	background-image: url("/static/ssoggycat/team/info/images/gaussian.png");
 	background-size: 256px;
 	mix-blend-mode: multiply;
 	z-index: -9998;
@@ -394,7 +394,7 @@ img {
 
 .popup, .popup-content-attached, .popup > * {
 	animation: cursor-help 3s infinite !important;
-	cursor: url("../assets/cursor/help1.png") 13 13, default;
+	cursor: url("/static/ssoggycat/team/info/images/cursor/help1.png") 13 13, default;
 }
 
 .popup-content-attached {
