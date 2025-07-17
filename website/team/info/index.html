@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<title>s.soggy.cat • info</title>
+		<link rel="icon" href="icon.png"/>
+
+		<meta name="description" content=""/>
+
+		<meta charset="UTF-8"/>
+		<meta name="viewport" content="width=device-width"/>
+		<link href="static/sidemenu.css" rel="stylesheet"/>
+		<link href="static/style.css" rel="stylesheet"/>
+	</head>
+
+	<body>
+		<img class="bg" draggable="false" src="assets/grand2.webp"/>
+		<div class="dither"></div>
+
+		<div class="markdown-stupid-container">
+			<div class="markdown"></div>
+
+			<div style="display: none" class="popup">
+				<div class="popup-fade">
+					<div class="popup-content-container">
+					</div>
+					<hr style="margin: 4px 0; background-color: rgba(255,255,255,0.25);">
+					<p class="small" style="text-align: center; font-size: 0.6666em; color: rgba(255,255,255,0.25)">Hold Shift to hide this popup</p>
+				</div>
+			</div>
+		</div>
+
+		<div class="loading" style="z-index: 999999">
+			<img id="loadimg" width="75px" src="assets/loading.png"/>
+		</div>
+		<div class="eviltint"></div>
+
+		<div id="sidemenu" class="sm sm-closed" style="min-width: 13.5rem; transition: none;" inert>
+			<a aria-label="frontpage" data-page="" onclick="load('main')">
+				<div class="sm-button sm-small">
+					<p>frontpage</p>
+				</div>
+			</a>
+
+			<a aria-label="cv" data-page="cv" onclick="load('cv');">
+				<div class="sm-button sm-small">
+					<p>cv</p>
+				</div>
+			</a>
+
+			<a aria-label="mat" data-page="mat" onclick="load('mat');">
+				<div class="sm-button sm-small">
+					<p>mat</p>
+				</div>
+			</a>
+
+			<hr class="sm-coloring"/>
+
+			<a aria-label="posts" data-page="posts" onclick="load('posts');">
+				<div class="sm-button sm-small">
+					<p>life of a soggypost</p>
+				</div>
+			</a>
+
+			<a aria-label="websites" data-page="websites" onclick="load('websites');">
+				<div class="sm-button sm-small">
+					<p>websites</p>
+				</div>
+			</a>
+
+			<a aria-label="selling out" data-page="sellingout" onclick="load('sellingout');">
+				<div class="sm-button sm-small">
+					<p>ever selling out?</p>
+				</div>
+			</a>
+
+			<a aria-label="about biscuit" class="smlink" href="https://cdn.sogfulday.today/faq/cv.png" target="BiscuitTarget">
+				<div class="sm-button sm-small">
+					<p>about biscuit →</p>
+				</div>
+			</a>
+		</div>
+
+		<button type="button" id="circlebtn" title="the cooler stuff! navigation menu"></button>
+
+		<div class="firstvisit">
+			<div class="close" id="closeCookies">✕</div>
+			<img width="64" height="64" draggable="false" src="../assets/images/pfp/goob.webp"/>
+			<div class="goobspeech">
+				<a>
+					hello! i'm <b>goob!</b> did you know that giving me your <a class="shaking">money</a> is a really good idea?
+					<br/>
+					<div style="overflow: hidden; width: 240px; position: absolute">
+						<div class="marquee">
+							<a class="glow" style="color: greenyellow">ℝ₹₵Ħ</a> people tend to <i>learn from their mistakes</i> and <i>give back</i> to the poor. rich people are far
+							more useful to the society than the lower class, so maximizing the amount of rich people is essential for world peace.
+						</div>
+					</div>
+					<br/>
+
+					so please, give me your <a class="shaking">data</a>, so i can <a class="shaking">sell</a> it
+				</a>
+				<div class="choice">
+					<div class="one" id="acceptCookies">ok</div>
+					<div class="two" id="declineCookies">NO!!</div>
+				</div>
+			</div>
+		</div>
+
+		<!-- MOVE THIS LATER TOO!! -->
+		<script defer src="static/sidemenu.js"></script>
+		<script defer src="static/commonmark.min.js"></script>
+		<script defer src="static/mobilecheck.js"></script>
+		<script defer src="static/popup.js"></script>
+		<script defer src="static/script.js"></script>
+	</body>
+</html>

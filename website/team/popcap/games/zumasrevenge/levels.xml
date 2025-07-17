@@ -1,0 +1,250 @@
+<Config>
+	
+<Defaults cannonangle="15" cannon="1" cannonstack="false" lazer="4" lazerstack="false" BossTauntChance="5000" powerdelay="1500" powercooldown="1000" ColorNukeAfterZuma="true" ColorNukeTimeAfterZuma="100" MaxZumaPctForColorNuke="0" ClearCurvePoints="2000" ClearCurveRolloutPct="10" ClearCurveSpeedMult="4.0" UniquePowerupColor="true" PowerupCapAffectsTriggered="true" MultBallLife="1000" MultBallPoints="1000" MultiplierDuration="1200" NumForMultBase="15" NumForMultInc="3" MaxNumForMult="35" GauntletSessionLength="18000" MinMultSpawnDist="3" PointsForBronze="5000" PointsForSilver="10000" PointsForGold="15000" PointTimeAdd="650" NumPointsForTimeAdd="5000" PowerIncAtZumaPct="85" PowerInc="7" PZT="0" PZTSpeedInc="0" PZTSlowInc="0" PowerSpawnDelay="700" MultTimeAdd="0" ChallengeTFreq="500" PointsForExtraLife="50000" BossesCanAttackAffectedFrog="false" BossAttackDelayAfterHitFrog="700" BeatGamePointsForLife="2000"/>
+
+
+
+
+
+
+<!-- Stage1 -->
+
+<Level id="level1a" dispname="Level 1a" background="level1" curve1="level1a" challengepoints="70000" acechallenge="90000" tfreq="1000" partime="4000" gauntlet="1">
+		<Gun type="normal" gx1="430" gy1="320"/>
+		<Tunnel layer="1" pri="1" x="467" y="156" chute="level1_tunnel1"/>
+		<TreasurePoint x="38" y="65" dist1="41"/>
+		<TreasurePoint x="726" y="510" dist1="10"/>
+		
+	</Level>
+
+	<Level id="level2a" dispname="Level 2a" background="level2" challengepoints="55000" acechallenge="80000" curve1="level2a" tfreq="1000" partime="5000" gauntlet="1">
+		<Gun type="normal" gx1="420" gy1="310"/>
+		<Tunnel layer="1" pri="1" x="190" y="29" chute="level2_tunnel1"/>
+		<Tunnel layer="1" pri="1" x="457" y="89" chute="level2_tunnel2"/>
+		<TreasurePoint x="41" y="458" dist1="34"/>
+		<TreasurePoint x="544" y="89" dist1="10"/>
+		<TreasurePoint x="726" y="479" dist1="51"/>		
+	</Level>
+
+	<Level id="level3a" dispname="Level 3a" background="level3" curve1="level3a" curve2="level3a2" challengepoints="55000" acechallenge="80000" tfreq="1000" partime="6000" gauntlet="1" curve1skullangle="179" curve2skullangle="179">
+		<Gun type="normal" gx1="400" gy1="260"/>
+		<Tunnel layer="1" pri="1" x="77" y="0" chute="level3_tunnel1"/>
+		<Tunnel layer="1" pri="1" x="409" y="0" chute="level3_tunnel2"/>
+		<TreasurePoint x="32" y="81" dist1="10"/>
+		<TreasurePoint x="155" y="486" dist1="54"/>
+		<TreasurePoint x="718" y="81" dist1="10"/>
+		<TreasurePoint x="570" y="486" dist1="54"/>
+	</Level>
+
+
+
+	<Level id="level4a" dispname="Level 4a" background="level4" challengepoints="60000" acechallenge="85000" curve1="level4a" tfreq="1000" partime="7000" gauntlet="1">
+		<Gun type="normal" gx1="330" gy1="368"/>
+		<PowerupRegion start="60" end="75" chance="2" curve="1"/>
+		<PowerupRegion start="3" end="25" chance="3" curve="1"/>
+		<Tunnel layer="1" pri="1" x="0" y="91" chute="level4_tunnel1"/>
+		<Tunnel layer="1" pri="1" x="241" y="225" chute="level4_tunnel2"/>
+		<TreasurePoint x="669" y="155" dist1="22"/>
+		<TreasurePoint x="20" y="512" dist1="72"/>
+		<TreasurePoint x="623" y="438" dist1="27"/>
+	</Level>
+	
+
+	<Level id="level5a" dispname="Level 5a" background="level5" curve1="level5a" challengepoints="65000" acechallenge="95000" tfreq="1000" partime="7000" gauntlet="1">
+		<Gun type="normal" gx1="188" gy1="264" gx2="616" gy2="358.5"/>
+		<PowerupRegion start="3" end="35" chance="2" curve="1"/>
+		<PowerupRegion start="61" end="99" chance="3" curve="1"/>
+		<Tunnel layer="1" pri="1" x="256" y="304" chute="level5_tunnel1"/>
+		<TreasurePoint x="248" y="509" dist1="75"/>
+		<TreasurePoint x="501" y="66" dist1="60"/>
+		<TreasurePoint x="724" y="502" dist1="15"/>
+	</Level>
+
+
+
+
+
+<!-- Stage2 -->	
+
+
+
+
+
+<Level id="level1b" dispname="Level 1b" background="level1" curve1="level1b" challengepoints="70000" acechallenge="90000" tfreq="1000" partime="8000" gauntlet="1">
+		<Gun type="normal" gx1="430" gy1="320"/>
+		<Tunnel layer="1" pri="1" x="467" y="156" chute="level1_tunnel1"/>
+		<TreasurePoint x="38" y="65" dist1="41"/>
+		<TreasurePoint x="726" y="510" dist1="10"/>
+		
+	</Level>
+
+	<Level id="level2b" dispname="Level 2b" background="level2" challengepoints="55000" acechallenge="80000" curve1="level2b" tfreq="1000" partime="8000" gauntlet="1">
+		<Gun type="normal" gx1="420" gy1="310"/>
+		<Tunnel layer="1" pri="1" x="190" y="29" chute="level2_tunnel1"/>
+		<Tunnel layer="1" pri="1" x="457" y="89" chute="level2_tunnel2"/>
+		<TreasurePoint x="41" y="458" dist1="34"/>
+		<TreasurePoint x="544" y="89" dist1="10"/>
+		<TreasurePoint x="726" y="479" dist1="51"/>		
+	</Level>
+
+	<Level id="level3b" dispname="Level 3b" background="level3" curve1="level3b" curve2="level3b2" challengepoints="55000" acechallenge="80000" tfreq="1000" partime="8000" gauntlet="1" curve1skullangle="179" curve2skullangle="179">
+		<Gun type="normal" gx1="400" gy1="260"/>
+		<Tunnel layer="1" pri="1" x="77" y="0" chute="level3_tunnel1"/>
+		<Tunnel layer="1" pri="1" x="409" y="0" chute="level3_tunnel2"/>
+		<TreasurePoint x="32" y="81" dist1="10"/>
+		<TreasurePoint x="155" y="486" dist1="54"/>
+		<TreasurePoint x="718" y="81" dist1="10"/>
+		<TreasurePoint x="570" y="486" dist1="54"/>
+	</Level>
+
+
+
+	<Level id="level4b" dispname="Level 4b" background="level4" challengepoints="60000" acechallenge="85000" curve1="level4b" tfreq="1000" partime="11000" gauntlet="1">
+		<Gun type="normal" gx1="330" gy1="368"/>
+		<PowerupRegion start="60" end="75" chance="2" curve="1"/>
+		<PowerupRegion start="3" end="25" chance="3" curve="1"/>
+		<Tunnel layer="1" pri="1" x="0" y="91" chute="level4_tunnel1"/>
+		<Tunnel layer="1" pri="1" x="241" y="225" chute="level4_tunnel2"/>
+		<TreasurePoint x="669" y="155" dist1="22"/>
+		<TreasurePoint x="20" y="512" dist1="72"/>
+		<TreasurePoint x="623" y="438" dist1="27"/>
+	</Level>
+	
+
+	<Level id="level5b" dispname="Level 5b" background="level5" curve1="level5b" challengepoints="65000" acechallenge="95000" tfreq="1000" partime="12000" gauntlet="1">
+		<Gun type="normal" gx1="189" gy1="267" gx2="620" gy2="358"/>
+		<PowerupRegion start="3" end="35" chance="2" curve="1"/>
+		<PowerupRegion start="61" end="99" chance="3" curve="1"/>
+		<Tunnel layer="1" pri="1" x="256" y="304" chute="level5_tunnel1"/>
+		<TreasurePoint x="248" y="509" dist1="75"/>
+		<TreasurePoint x="501" y="66" dist1="60"/>
+		<TreasurePoint x="724" y="502" dist1="15"/>
+	</Level>
+
+
+
+
+
+
+<!-- Stage3 -->	
+
+
+
+
+
+<Level id="level1c" dispname="Level 1c" background="level1" curve1="level1c" challengepoints="70000" acechallenge="90000" tfreq="1000" partime="14000" gauntlet="1">
+		<Gun type="normal" gx1="430" gy1="320"/>
+		<Tunnel layer="1" pri="1" x="467" y="156" chute="level1_tunnel1"/>
+		<TreasurePoint x="38" y="65" dist1="41"/>
+		<TreasurePoint x="726" y="510" dist1="10"/>
+		
+	</Level>
+
+	<Level id="level2c" dispname="Level 2c" background="level2" challengepoints="55000" acechallenge="80000" curve1="level2c" tfreq="1000" partime="16000" gauntlet="1">
+		<Gun type="normal" gx1="420" gy1="310"/>
+		<Tunnel layer="1" pri="1" x="190" y="29" chute="level2_tunnel1"/>
+		<Tunnel layer="1" pri="1" x="457" y="89" chute="level2_tunnel2"/>
+		<TreasurePoint x="41" y="458" dist1="34"/>
+		<TreasurePoint x="544" y="89" dist1="10"/>
+		<TreasurePoint x="726" y="479" dist1="51"/>		
+	</Level>
+
+	<Level id="level3c" dispname="Level 3c" background="level3" curve1="level3c" curve2="level3c2" challengepoints="55000" acechallenge="80000" tfreq="1000" partime="16000" gauntlet="1" curve1skullangle="179" curve2skullangle="179">
+		<Gun type="normal" gx1="400" gy1="260"/>
+		<Tunnel layer="1" pri="1" x="77" y="0" chute="level3_tunnel1"/>
+		<Tunnel layer="1" pri="1" x="409" y="0" chute="level3_tunnel2"/>
+		<TreasurePoint x="32" y="81" dist1="10"/>
+		<TreasurePoint x="155" y="486" dist1="54"/>
+		<TreasurePoint x="718" y="81" dist1="10"/>
+		<TreasurePoint x="570" y="486" dist1="54"/>
+	</Level>
+
+
+
+	<Level id="level4c" dispname="Level 4c" background="level4" challengepoints="60000" acechallenge="85000" curve1="level4c" tfreq="1000" partime="16000" gauntlet="1">
+		<Gun type="normal" gx1="330" gy1="368"/>
+		<PowerupRegion start="60" end="75" chance="2" curve="1"/>
+		<PowerupRegion start="3" end="25" chance="3" curve="1"/>
+		<Tunnel layer="1" pri="1" x="0" y="91" chute="level4_tunnel1"/>
+		<Tunnel layer="1" pri="1" x="241" y="225" chute="level4_tunnel2"/>
+		<TreasurePoint x="669" y="155" dist1="22"/>
+		<TreasurePoint x="20" y="512" dist1="72"/>
+		<TreasurePoint x="623" y="438" dist1="27"/>
+	</Level>
+	
+
+	<Level id="level5c" dispname="Level 5c" background="level5" curve1="level5c" challengepoints="65000" acechallenge="95000" tfreq="1000" partime="16000" gauntlet="1">
+		<Gun type="normal" gx1="189" gy1="267" gx2="620" gy2="358"/>
+		<PowerupRegion start="3" end="35" chance="2" curve="1"/>
+		<PowerupRegion start="61" end="99" chance="3" curve="1"/>
+		<Tunnel layer="1" pri="1" x="256" y="304" chute="level5_tunnel1"/>
+		<TreasurePoint x="248" y="509" dist1="75"/>
+		<TreasurePoint x="501" y="66" dist1="60"/>
+		<TreasurePoint x="724" y="502" dist1="15"/>
+	</Level>
+
+
+
+
+
+<!-- Stage4 -->	
+
+
+
+
+
+<Level id="level1d" dispname="Level 1d" background="level1" curve1="level1d" challengepoints="70000" acechallenge="90000" tfreq="1000" partime="19000" gauntlet="1">
+		<Gun type="normal" gx1="430" gy1="320"/>
+		<Tunnel layer="1" pri="1" x="467" y="156" chute="level1_tunnel1"/>
+		<TreasurePoint x="38" y="65" dist1="41"/>
+		<TreasurePoint x="726" y="510" dist1="10"/>
+		
+	</Level>
+
+	<Level id="level2d" dispname="Level 2d" background="level2" challengepoints="55000" acechallenge="80000" curve1="level2d" tfreq="1000" partime="19000" gauntlet="1">
+		<Gun type="normal" gx1="420" gy1="310"/>
+		<Tunnel layer="1" pri="1" x="190" y="29" chute="level2_tunnel1"/>
+		<Tunnel layer="1" pri="1" x="457" y="89" chute="level2_tunnel2"/>
+		<TreasurePoint x="41" y="458" dist1="34"/>
+		<TreasurePoint x="544" y="89" dist1="10"/>
+		<TreasurePoint x="726" y="479" dist1="51"/>		
+	</Level>
+
+	<Level id="level3d" dispname="Level 3d" background="level3" curve1="level3d" curve2="level3d2" challengepoints="55000" acechallenge="80000" tfreq="1000" partime="20000" gauntlet="1" curve1skullangle="179" curve2skullangle="179">
+		<Gun type="normal" gx1="400" gy1="260"/>
+		<Tunnel layer="1" pri="1" x="77" y="0" chute="level3_tunnel1"/>
+		<Tunnel layer="1" pri="1" x="409" y="0" chute="level3_tunnel2"/>
+		<TreasurePoint x="32" y="81" dist1="10"/>
+		<TreasurePoint x="155" y="486" dist1="54"/>
+		<TreasurePoint x="718" y="81" dist1="10"/>
+		<TreasurePoint x="570" y="486" dist1="54"/>
+	</Level>
+
+
+
+	<Level id="level4d" dispname="Level 4d" background="level4" challengepoints="60000" acechallenge="85000" curve1="level4d" tfreq="1000" partime="20000" gauntlet="1">
+		<Gun type="normal" gx1="330" gy1="368"/>
+		<PowerupRegion start="60" end="75" chance="2" curve="1"/>
+		<PowerupRegion start="3" end="25" chance="3" curve="1"/>
+		<Tunnel layer="1" pri="1" x="0" y="91" chute="level4_tunnel1"/>
+		<Tunnel layer="1" pri="1" x="241" y="225" chute="level4_tunnel2"/>
+		<TreasurePoint x="669" y="155" dist1="22"/>
+		<TreasurePoint x="20" y="512" dist1="72"/>
+		<TreasurePoint x="623" y="438" dist1="27"/>
+	</Level>
+	
+
+	<Level id="level5d" dispname="Level 5d" background="level5" curve1="level5d" challengepoints="65000" acechallenge="95000" tfreq="1000" partime="20000" gauntlet="1">
+		<Gun type="normal" gx1="189" gy1="267" gx2="620" gy2="358"/>
+		<PowerupRegion start="3" end="35" chance="2" curve="1"/>
+		<PowerupRegion start="61" end="99" chance="3" curve="1"/>
+		<Tunnel layer="1" pri="1" x="256" y="304" chute="level5_tunnel1"/>
+		<TreasurePoint x="248" y="509" dist1="75"/>
+		<TreasurePoint x="501" y="66" dist1="60"/>
+		<TreasurePoint x="724" y="502" dist1="15"/>
+	</Level>
+
+
+
+
+</Config>

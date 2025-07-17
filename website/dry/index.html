@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<title>dry?? cat</title>
+	<link rel="icon" href="/static/ssoggycat/dry/images/icon.webp"/>
+
+	<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover"/>
+	<meta charset="UTF-8"/>
+
+	<meta name="title" content="dry?? cat"/>
+	<meta property="og:title" content="dry?? cat"/>
+
+	<meta name="description" content="a picture of a dry cat inside a bathtub."/>
+	<meta property="og:description" content="a picture of a dry cat inside a bathtub."/>
+
+	<meta property="og:image" content="/static/ssoggycat/dry/images/dry.webp"/>
+	<meta name="color-scheme" content="light"/>
+	<meta name="theme-color" content="#ffcc5f"/>
+
+	<link rel="stylesheet" href="/static/ssoggycat/shared/web/main.css"/>
+	<link rel="stylesheet" href="/static/ssoggycat/sidemenu/web/sidemenu.css"/>
+</head>
+
+<body data-soggy-pagetype="vtilt-js">
+	<!-- don't be fooled, he's not actually soggy here -->
+	<div class="gradient-background"></div>
+	<img id="soggycat" src="/static/ssoggycat/dry/images/dry.webp" width="900" height="830" alt="a picture of a dry cat inside a bathtub." loading="eager" decoding="async" data-tilt data-tilt-scale="1.05"/>
+
+	<div id="sidemenu" class="sm sm-closed" inert>
+		<a aria-label="code" href="/github" target="GithubTarget">
+			<div class = "sm-button">
+				<img src="/static/other/sidemenu/svgs/code.svg" width="15" height="15" loading="lazy" decoding="async"/>
+				<p>code</p>
+			</div>
+		</a>
+
+		<a aria-label="no css" href="nocss" target="NoCSSTarget">
+			<div class="sm-button sm-small">
+				<img src="/static/other/sidemenu/svgs/nocss.svg" width="15" height="15" loading="lazy" decoding="async"/>
+				<p>no css</p>
+			</div>
+		</a>
+
+		<a aria-label="upload" href="#" onclick="document.getElementById('picker').click(); return false;">
+			<div class="sm-button sm-small">
+				<img src="/static/other/sidemenu/svgs/upload.svg" width="15" height="15" loading="lazy" decoding="async"/>
+				<p>upload</p>
+			</div>
+		</a>
+	</div>
+
+	<button id="circlebtn" type="button" aria-label="Navigation"></button>
+	<span id="player" style="display: none"></span>
+	<input type="file" id="picker" style="display: none" accept="image/*"/>
+
+	<script src="/static/other/shared/web/vanillatilt.js" defer></script>
+	<script src="/static/other/shared/web/color-thief.umd.js" defer></script>
+
+	<script src="/static/ssoggycat/shared/web/main.js" defer></script>
+	<script src="/static/ssoggycat/sidemenu/web/sidemenu.js" defer></script>
+</body>
+</html>

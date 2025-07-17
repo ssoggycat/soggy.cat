@@ -1,0 +1,11 @@
+{
+    "livePreview.serverRoot": "website",
+    "files.eol": "\n",
+    "files.insertFinalNewline": true,
+    "files.trimFinalNewlines": true,
+    "files.trimTrailingWhitespace": true,
+    "editor.trimAutoWhitespace": true,
+    "editor.indentSize": "tabSize",
+    "editor.tabSize": 4,
+    "editor.insertSpaces": false
+}

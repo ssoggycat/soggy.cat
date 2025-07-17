@@ -1,0 +1,28 @@
+//BEJEWELLED 2 CONFIG OPTIONS
+
+
+//url for upsell buttons
+
+&upselllink=http://www.doublegames.com/download_game/pc/en/bejeweled-2-deluxe&
+
+
+//turn music in the game true / false
+
+&enable_music=true&
+
+
+//enable api intergration true / false
+//switches on calls to the msn api
+
+&zone_api=false&
+
+
+//switch cheats on for testing
+//when true can hold shift and click to create bombs, ctrl and click to create hypers
+
+&cheatsOn=true&
+
+
+//all loaded - this config info must be present
+
+&configloaded=true&
