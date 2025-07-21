@@ -1,0 +1,540 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, height=device-height, initial-scale=1.0, user-scalable=no, maximum-scale=1.0, minimal-ui">
+    <title>soggle!</title>
+    <link rel="icon" type="image/x-icon" href="icon.png">
+
+    <meta itemprop="name" content="soggle!">
+    <meta itemprop="description" content="guess images of shark by their small fragment">
+
+    <meta name="twitter:title" content="ssoggycat">
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:image" content="summary">
+    <meta name="twitter:site" content="@ssoggycat">
+    <meta name="twitter:creator" content="@cvsilly_">
+
+    <style>
+        @font-face {
+            font-family: "karnak condensed"; font-weight: 200 700;
+            src: url("../assets/fonts/karnakcondensed.woff") format("woff");
+        }
+        @font-face {
+            font-family: "karnak"; font-weight: 200 700;
+            src: url("../assets/fonts/karnak.woff") format("woff");
+        }
+        @font-face {
+            font-family: "clear sans"; font-weight: 200 700;
+            src: url("../assets/fonts/clearsans.woff") format("woff");
+        }
+
+        /*//////////////////////////////////////////////////////////////////////*/
+
+        body {
+            display: flex; margin: 0;
+            justify-content: center; align-items: center;
+            background-color: #121213;
+        }
+        .top {
+            display: flex; position: fixed;
+            justify-content: center; align-items: center;
+            width: 100vw; height: 60px; 
+            top: 0; gap: 3px;
+            border-bottom: 1px solid #212121;
+        }
+
+        .overlay {
+            display: flex; position: fixed;
+            justify-content: center; align-items: center;
+            top: 0; left: 0; z-index: 9999;
+            width: 100%; height: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+            transition: opacity 0.25s;
+        }
+        .popup {
+            display: flex; flex-direction: column;
+            justify-content: flex-start;
+            width: 400px; max-width: 70vw;
+            max-height: 80vh; padding: 30px;
+            background-color: #121213;
+            overflow-y: auto; box-sizing: border-box;
+        }
+        .sogface {
+            height: 2em;
+        }
+
+        img, canvas, .popup {
+            border-radius: 10px;
+        }
+
+        /*//////////////////////////////////////////////////////////////////////*/
+
+        a, span {
+            color: white;
+            font-family: "clear sans", sans-serif;
+        }
+        :any-link {
+            color: #6ba1dd; 
+        }
+
+        .title {
+            font-family: "karnak condensed", sans-serif;
+            font-size: 2em;
+        }
+        .subtitle {
+            font-family: "karnak", sans-serif;
+            font-size: 1.5em;
+        }
+        .small {font-size: 0.75em}
+        .tiny {font-size: 0.5em}
+        .dark {
+            color: #999;
+        }
+
+        /*//////////////////////////////////////////////////////////////////////*/
+
+        .close {
+            display: flex; top: 0;
+            justify-content: right;
+        }
+        button {
+            background: none; appearance: none; border: none;
+            padding: 0; outline: none; box-shadow: none;
+            cursor: pointer; user-select: none;
+        }
+        .buttons {
+            display: flex; position: absolute;
+            align-items: center; justify-content: right;
+            right: 1em; height: 100%; top: 0;
+        }
+
+        .leftbutton {
+            font-family: "karnak", sans-serif;
+            font-size: 0.75em; 
+            background: #18181a; color: white;
+            padding: 10px; border: 1.5px solid #212121;
+            transition: all 0.2s;
+        }
+        .skip:disabled {
+            background: #0f0f0f; color: #555;
+            cursor: not-allowed;
+        }
+
+        /*//////////////////////////////////////////////////////////////////////*/
+
+        .input {
+            display: flex; bottom: 20px;
+            font-family: "karnak", sans-serif;
+            font-size: 1em;
+            background: #18181a; color: white; 
+            padding: 10px; border: 1.5px solid #212121;
+            width: 100%; outline: none;
+            transition: border-color 0.2s;
+        }
+        .input::placeholder {
+            color: #666;
+            transition: color 0.2s;
+        }
+        .input.error {border-color: #dd4444}
+        .input.error::placeholder {color: #dd4444}
+
+        .submit {
+            display: flex; bottom: 20px;
+            font-family: "karnak", sans-serif;
+            font-size: 2em;
+            background: #18181a; color: white; 
+            justify-content: center; align-items: center;
+            padding: 10px; border: 1.5px solid #212121;
+            width: 2em;  outline: none;
+        }
+
+        /*//////////////////////////////////////////////////////////////////////*/
+
+        .example {
+            font-family: "karnak", sans-serif;
+            font-size: 0.75em; 
+            background: #18181a; color: white;
+            padding: 3px; border: 1.5px solid #212121;
+        }
+        .dude {
+            width: 100vw; height: 100vh;
+            z-index: 99999; display: none; opacity: 0;
+        }
+
+        .bottom {
+            display: flex; position: fixed;
+            bottom: 2em; width: 20em; height: 3em;
+            transition: transform 0.2s;
+        }
+
+        .imagebox {
+            display: flex; position: absolute;
+            justify-content: center; align-items: center; 
+            top: 50%; left: 50%; transform: translate(-50%, -50%);
+            max-width: 70%; max-height: 70%;
+            width: 1000px; height: 1000px;
+            pointer-events: none; user-select: none;
+            z-index: -1;
+        }
+        .imagebox canvas {max-width: 100%; max-height: 100%}
+
+        @keyframes shake {
+            0%, 100% {transform: translateX(0)}
+            25% {transform: translateX(-2.5px)}
+            75% {transform: translateX(2.5px)}
+        }
+        .shake {animation: shake 0.1s ease-in-out 10}
+
+    </style>
+
+</head>
+<body>
+
+    <div class="top">
+        <a class="title">Soggle</a>
+        <img class="sogface" src="../assets/images/sogface.webp">
+
+        <div class="buttons">
+            <button class="info">
+                <img src="../assets/svgs/info.svg" height="30">
+            </button>
+        </div>
+    </div>
+
+    <img class="dude" src="../assets/images/dude.webp" draggable="false">
+    <audio class="meow" style="display:none" src="../assets/audio/meow.mp3" preload="auto"></audio>
+
+    <div class="overlay infooverlay" style="display: none;">
+        <div class="infopopup popup">
+
+            <div class="close">
+                <button class="infocloseb">
+                    <img src="../assets/svgs/close.svg" height="30">
+                </button>
+            </div>
+
+            <a class="title">Soggle</a>
+            <a class="subtitle small">wordle but sog. do you get it. do you?</a>
+            <br>
+            <span>guess one of 380+ images of shark by their fragments!</span>
+            <br>
+            <span>this game is based on the <a href="https://drive3.soggy.cat">soggy drive</a>'s file naming system, which is most commonly used across reposts.</span>
+            <span>you should familiarize yourself with it before even considering playing this!</span>
+            <span class="tiny dark">(it's a really bad concept for a game, but hey, there had to be a soggy cat wordle at some point)</span>
+            <br>
+            <a class="subtitle">how to play</a>
+            <span>you will be shown a small fragment of a sog.</span>
+            <span>if you recognize what it is, input the filename. <a class="dark">(ex. "pillow<s class="darker">.jpg</s>")</a></span>
+            <br>
+            <span>if not, you can press the <button class="example" style="vertical-align: middle;">skip (+¼)</button> button to reveal an additional fragment!
+            </span>
+            <br>
+            <span>there's no daily game system, so you can just <button class="example" style="vertical-align: middle;">shuffle</button> for a new soggle.</span>
+        </div>
+    </div>
+
+    <div class="overlay winoverlay" style="display: none;">
+        <div class="winpopup popup">
+
+            <div class="close">
+                <button class="wincloseb">
+                    <img src="../assets/svgs/close.svg" height="30">
+                </button>
+            </div>
+
+            <br>
+            <img src="../assets/images/riches.webp" width="100%">
+        </div>
+    </div>
+
+    <div class="imagebox">
+        <canvas class="sog" width="1000" height="1000"></canvas>
+    </div>
+
+    <div class="bottom">
+        <button class="leftbutton shuffle">shuffle</button>
+        <button class="leftbutton skip" style="margin-right:10px;">skip (+¼)</button>
+        <input class="input" type="text" placeholder="name it!">
+        <button class="submit">↵</button>
+    </div>
+
+    <script>
+        const ctx = document.querySelector(".sog").getContext("2d");
+        const skiplabels = {16: "⅛", 8: "¼", 4: "¼", 2: "½"};
+        const positions = ["top", "bottom", "left", "right"];
+
+        const baseUrls = ["https://raw.githubusercontent.com/ssoggycat/drive-3/refs/heads/main/soggy%20cat/"]
+        const images = [
+            "3am_sighting.jpg", "a_new_guest.jpg", "AAAHHH.jpg", "alien_2.jpg", "alien_3.jpg", "alien_4.jpg", "alien.jpg", "angry_2.png", "angry_cuddled_2.jpg", "angry_cuddled.jpg", "angry_sob.jpg", "angry.jpg", "angry.png", "angy.jpg", "are_you_fr.jpg", "autumn_2.jpg", "autumn.jpg", "aww_look_at_him.jpg", 
+            "baby.jpg", "baffled.jpg", "baggage.jpg", "ball.png", "balls.png", "bathtub_stand.jpg", "beauty_2.jpg", "beauty.jpg", "big_ass_nose.jpg", "big_nose.jpg", "bit_happy_2.jpg", "bit_happy.jpg", "bite_2.jpg", "bite.jpg", "blanket_2.jpg", "blanket.png", "blankets.jpg", "bleh.jpg", "blink.jpg", "blurry.png", "bruh.jpg", "bugs_when_you_lift_up_the_rock.jpg", "burger_2.jpg", "burger.jpg", 
+            "camera.jpg", "casual.jpg", "casually_sitting.jpg", "chad.jpg", "cheese_2.png", "cheese.jpg", "chiffy.jpg", "childrens_zone.jpg", "chill.jpg", "close_peek.jpg", "close_up.png", "close-up.jpg", "comfy_blanket.jpg", "confused.jpg", "contained.png", "cool_collar.jpg", "couch.jpg", "creature.jpg", "creepy.jpg", "creepypasta.jpg", "critical_hit.jpg", "crying.jpg", "cuddled_2.jpg", "cuddled.jpg", 
+            "damn_thats_crazy.jpg", "darkness.jpg", "deep_sea_creature_2.jpg", "deep_sea_creature.jpg", "dem_paws_2.jpg", "dem_paws.jpg", "demon.jpg", "derp.jpg", "did_you_really_just_do_that.jpg", "disappointed.png", "disapproval.jpg", "DISGUSTED.jpg", "drowning_in_plushies.jpg", "drunk.png", "dry_standing.jpg", "dumb_2.jpg", "dumb_sit.png", "dumb.png", "dundundun.jpg", 
+            "ear_grab.jpg", "earless.png", "eepy.jpg", "egg_broke.jpg", "egg.jpg", "elevated.jpg", "empty_stare.png", "enraged.jpg", "epic_selfie_2.jpg", "epic_selfie.jpg", "erm.jpg", "erm.png", "err.jpg", "even_uglier.jpg", "EVIL_CREATURE.png", "evil_goblin.jpg", "EVIL.jpg", "ew.jpg", "eyebrow_raise.jpg", 
+            "fack_u.jpg", "far_away.jpg", "fart_2.jpg", "fart.jpg", "fatass_2.jpg", "fatass.jpg", "fear.jpg", "fear.png", "felinus.jpg", "final_footage.png", "finger.jpg", "flat.png", "fluffy_guy.jpg", "fluffy.jpg", "four_doritos_long_2.jpg", "four_doritos_long.jpg", "four_step_stool.jpg", "fresh.jpg", "froggy.jpg", "from_the_shadows.png", "fuck_yuo.jpg", "fucked_up.png", 
+            "gamer.jpg", "gang.png", "garage_2.jpg", "garage.jpg", "gay.jpg", "giant.jpg", "giraffe.jpg", "gn.jpg", "golly_jeepers.jpg", "goog_2.png", "goog.png", "grab_the_cat.jpg", "green_eye.jpg", "green_eyed_2.png", "green_eyed.png", "grin.jpg", "groceries.jpg", "grr.jpg", "guh.png", "guuuuh.jpg", "gwah_2.jpg", "gwah_3.jpg", "gwah.jpg", 
+            "half_view.jpg", "hamburger.png", "hand_lick.jpg", "happy_face.jpg", "he_has_one_braincell.jpg", "hello_there.jpg", "hello.jpg", "hey.jpg", "hgfdhgfhg.jpg", "hidden.png", "hide.jpg", "hiding.jpg", "hii.jpg", "holding_the_bathtub.jpg", "horrific_2.jpg", "horrific_3.jpg", "horrific.jpg", "horror_2.jpg", "horror.png", "huh.jpg", "hunter.jpg", 
+            "i_got_cash_on_me.jpg", "i_will_find_you.jpg", "idiot.jpg", "idk.jpg", "in_bed_2.jpg", "in_bed.jpg", "it_says_gullible_on_the_ceiling.jpg",
+            "jawline.jpg", "just_chillin_brah.jpg", "just_minutes_before_the_sog.jpg", 
+            "kiss.jpg", 
+            "lay_2.jpg", "lay_me_down.png", "lay.jpg", "laying.jpg", "let_me_out.jpg", "lets_see_if_this_is_true_or_rubbish.jpg", "lick.jpg", "literally_DEAD.png", "loaf_shaped.jpg", "long.jpg", "long.png", "look_away.jpg", "look_back.jpg", "look.jpg", "look.png", "looking_outside.jpg", "looking_up.jpg", "lovely_blanket.jpg", 
+            "m.jpg", "mad_2.jpg", "mad.jpg", "meow.jpg", "mewing.jpeg", "mewing.jpg", "miau_2.jpg", "miau.jpg", "mid_fart.jpg", "mimimi.jpg", "moments_before_disaster.jpg", "mrow.jpg", "murder_2.jpg", "murder.jpg", 
+            "nap.jpg", "near_death_footage.png", "new_york_apartment.jpg", "no_ears.jpg", "nom.jpg", "non-deep_sea_creature.jpg", "nose_to_the_right.jpg", "nose_to_the_top.jpg", "not_aaah.png", "not_so_evil_anymore.png", 
+            "okay_sure.jpg", "one_ruffle_cheddar_long.jpg", "outside.jpg", 
+            "package.jpg", "panic.jpg", "pants.jpg", "pat_from_the_back.jpg", "paw_2.jpg", "paw_licking.jpg", "paw.jpg", "paws.jpg", "peering_closer_to_the_enemy.jpg", "penis.jpg", "pent_up.jpg", "pet_on_the_back.jpg", "pet_pet_pet.jpg", "pet.jpg", "pillow.jpg", "pinned_down.jpg", "piss.jpg", "plastic_cup.png", "playground_2.jpg", "playground.jpg", "plead.jpg", "pluh.png", "plushie_2.jpg", "plushie.jpg", "pog.png", "polite.jpg", "popsicle.jpg", "prayers.jpg", "preparation.jpg", "prepared.jpg", "proud_stand.jpg", "psychopath.jpg", "purr.png", "pushing_away.jpg", 
+            "quicksand_2.jpg", "quicksand_3.jpg", "quicksand.jpg", 
+            "raaah.jpg", "RAAH.jpg", "rapidly_approaching.jpg", "rich.jpg", "rich.png", "rubber_ducky.jpg", "sad_face.png", 
+            "sad.png", "scared.jpg", "SCREAM_FOR_HELP.jpg", "scream.jpg", "selfie.png", "shock.jpg", "shocking.jpg", "shoes.png", "shut_up.jpg", "side_of_the_road.jpg", "side_sleep.jpg", "sigma.jpg", "sit.png", "skinwalker_pretending_to_be_a_cat.jpg", "sleeping.jpg", "sleepy.jpg", "slide_to_the_left.jpg", "smirk.jpg", "smoke_weed_every_day.jpg", "snake.jpg", "sneak.jpg", "sniff_2.jpg", "sniff_3.jpg", "sniff.png", "SNOOORT.jpg", "snooping_around.jpg", "snore.jpg", "snowed_up_2.png", "snowed_up.jpg", "so_damn_long.jpg", "sob.jpg", "sobbing.jpg", "soft_covers.jpg", "sog_look.png", "sog_stare.jpg", "soggy.jpg", "spooky.jpg", "stand.jpg", "standing_out_there.jpg", "standing.jpg", "stare.jpg", "stares_at_you.jpg", "staring.jpg", "staring.png", "stealth.jpg", "sticking_out_tongue.jpg", "striking_a_pose.jpg", "stupid.jpg", "sun_rays.jpg", "supa_angry.jpg", "suspension.jpg", 
+            "teehee.jpg", "terrifying.jpg", "THE_BEAST_HAS_AWOKEN.jpg", "the_creature.jpg", "the_thing.jpg", "thing.jpg", "thug_gangster_ass_shit_2.jpg", "thug_gangster_ass_shit.jpg", "tilt.jpg", "tired.jpg", "tongue.jpg", "trampoline_fear_2.jpg", "trampoline_fear.jpg", "trampoline_trapped.jpg", "trampoline.png", "trauma.jpg", "traumatized.jpg", "true_fear.jpg", "trying_to_sleep.jpg", 
+            "ugly.jpg", "UGLY.png", "uh_um.jpg", "um_hello.png", "underground_monster.jpg", "unsightly_beast.jpg", "unsure.jpg", 
+            "very_chill.jpg", "very_ugly.jpg", 
+            "waddle.jpg", "walking_away.jpg", "weird_sit.jpg", "weirdo.jpg", "went_outside.jpg", "wha.jpg", "whagt.jpg", "what_are_you_talking_about.png", "what_do_you_want.jpg", "what_if_i_just_bite_you_for_no_reason.jpg", "WHAT.jpg", "what.png", "whats_that.jpg", "who_are_you.jpg", "whoa.jpg", "whuh...png", "WHUHH.jpg", "why_does_he_look_like_that.jpg", "why_the_big_nose.png", "why_the_wide_face.jpg", "wide_lay.jpg", "wink_3.jpg", "wink.jpg", "wise_thinker.jpg", "wise.png", "woah.jpg", "woah.png", "womp_womp.png", "wonderful_bench.jpg", "wtf_did_you_just_say.jpg", "wtf.jpg", 
+            "yay.jpg", "yeah_okay.jpg", "yellow_eyed.jpg", "you_all_sicken_me.jpg", "YOU.jpg", "youre_gonna_talk_to_me_like_that_huh.jpg", "yucky.jpg", "yummers.jpg", "yummy.jpg", 
+            "zzz.jpg", "zzzzzz.jpg",
+
+        ];
+
+        // prerequisites
+        let game = {
+            image: null,
+            imagename: "",
+            fraction: 8,
+            position: ""
+        };
+        function random(arr) {
+            return arr[Math.floor(Math.random() * arr.length)];
+        }
+
+        async function loadimage(imagename) {
+            return new Promise((resolve, reject) => {
+                const img = new Image();
+                img.crossOrigin = "anonymous";
+                // this should work consistently when swapping between base urls, i thinq
+                const imagenamefix = imagename.replace(/_/g, "%20");
+                let urlIndex = 0;
+
+                const loadurl = () => {
+                    if (urlIndex >= baseUrls.length) {
+                        reject(new Error("all urls failed"));
+                        return;
+                    }
+                    img.src = baseUrls[urlIndex] + imagenamefix; urlIndex++;
+                    
+                    const timeout = setTimeout(() => {
+                        img.onload = img.onerror = null;
+                        loadurl();
+                    }, 3000);
+                    img.onload = () => {clearTimeout(timeout); resolve(img)};
+                    img.onerror = () => {clearTimeout(timeout); loadurl()};
+                }; loadurl();
+            });
+        }
+
+        function newfragment() {
+            if (!game.image) return;
+            
+            const canvas = document.querySelector(".sog");
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            
+            const img = game.image;
+            const scale = Math.min(1000 / img.width, 1000 / img.height);
+            const scaledwidth = img.width * scale; const scaledheight = img.height * scale;
+            const offsetX = (1000 - scaledwidth) / 2; const offsetY = (1000 - scaledheight) / 2;
+
+            let sx = 0, sy = 0, sw = img.width, sh = img.height;
+            let dx = offsetX, dy = offsetY, dw = scaledwidth, dh = scaledheight;
+
+            const f = game.fraction;
+            
+            if (game.position === "top" || game.position === "bottom") {
+                sh = img.height / f;
+                dh = scaledheight / f;
+                if (game.position === "bottom") {
+                    sy = img.height * (f - 1) / f;
+                    dy = offsetY + scaledheight * (f - 1) / f;
+                }
+            } else if (game.position === "left" || game.position === "right") {
+                sw = img.width / f;
+                dw = scaledwidth / f;
+                if (game.position === "right") {
+                    sx = img.width * (f - 1) / f;
+                    dx = offsetX + scaledwidth * (f - 1) / f;
+                }
+            }
+
+            ctx.drawImage(img, sx, sy, sw, sh, dx, dy, dw, dh);
+        }
+
+        function updateskip() {
+            const skipbutton = document.querySelector(".skip");
+            const nextfraction = game.fraction / 2;
+            if (nextfraction < 2) {
+                skipbutton.disabled = true;
+                skipbutton.textContent = "max";
+            } else {
+                skipbutton.textContent = `skip (+${skiplabels[nextfraction]})`;
+                skipbutton.disabled = false;
+            }
+        }
+
+        async function newgame() {
+            for (let attempts = 0; attempts < images.length; attempts++) {
+                const imagename = random(images);
+                try {
+                    const img = await loadimage(imagename);
+                    game.image = img;
+                    game.imagename = imagename.replace(/\.(jpg|jpeg|png|webp|mp4|jfif)$/i, "").replace(/_/g, " ");
+                    game.fraction = 8;
+                    game.position = random(positions);
+                    
+                    const input = document.querySelector(".input");
+                    input.value = "";
+                    input.placeholder = "name it!";
+                    input.classList.remove("error");
+                    
+                    updateskip();
+                    newfragment();
+                    return;
+                } catch (err) {
+                    console.error(`failed to load ${imagename}:`, err);
+                }
+            }
+            document.querySelector(".input").placeholder = "no images available";
+        }
+
+        function checkAnswer() {
+            const input = document.querySelector(".input");
+            const answer = input.value.trim().toLowerCase();
+            const correct = game.imagename.toLowerCase();
+            
+            if (answer === correct) {
+                alert(`image name: "${game.imagename}"`);
+                game.fraction = 1; input.value = "";
+                newfragment(); document.querySelector(".meow").play();
+                const winoverlay = document.querySelector(".winoverlay");
+                const winpopup = document.querySelector(".winpopup");
+                winoverlay.style.display = "flex";
+                winpopup.style.transition = "transform 0.25s";
+                winpopup.style.transform = "translateY(-30px)";
+                winoverlay.style.opacity = "1";
+                winoverlay.style.pointerEvents = "auto";
+                requestAnimationFrame(() => {winpopup.style.transform = ""});
+            } else {
+                input.classList.add("error");
+                input.placeholder = "incorrect"; input.value = "";
+                document.querySelector(".bottom").classList.add("shake");
+                
+                setTimeout(() => {
+                    input.classList.remove("error");
+                    input.placeholder = "name it!";
+                    document.querySelector(".bottom").classList.remove("shake");
+                }, 500);
+            }
+        }
+
+        //////////////////////////////////////////////////////////////////////////
+
+        document.querySelector(".sogface").addEventListener("click", () => {
+            document.querySelector(".meow").play();
+        });
+
+        document.querySelector(".shuffle").addEventListener("click", () => {
+            window.location.reload();
+        });
+
+        document.querySelector(".skip").addEventListener("click", () => {
+            if (game.image && game.fraction > 2) {
+                game.fraction = game.fraction / 2;
+                newfragment(); updateskip();
+            }
+        });
+
+        document.querySelector(".submit").addEventListener("click", checkAnswer);
+        document.querySelector(".input").addEventListener("keypress", (e) => {
+            if (e.key === "Enter" || e.keyCode === 13) checkAnswer();
+        });
+        
+        // if the player forgets just remind them :  ) 
+        document.querySelector(".input").addEventListener("input", function() {
+            this.value = this.value.replace(/\.(jpg|jpeg|png|webp|mp4|jfif)$/i, "");
+        });
+
+
+        //////////////////////////////// info tab ////////////////////////////////
+
+        document.querySelectorAll(".example").forEach(el => {
+            el.addEventListener("click", () => {
+            const disappointment = document.querySelector(".dude");
+            disappointment.style.display = "block";
+            setTimeout(() => {
+                disappointment.style.transition = "opacity 10s";
+                disappointment.style.opacity = "1";
+            }, 700);
+            setTimeout(() => {
+                disappointment.style.display = "none";
+                disappointment.style.opacity = "0";
+                disappointment.style.transition = "";
+                el.remove();
+            }, 8000);
+            });
+        });
+
+        document.addEventListener("DOMContentLoaded", () => {
+            if (!localStorage.getItem("visited")) {
+            localStorage.setItem("visited", "1");
+            const infooverlay = document.querySelector(".infooverlay");
+            const infopopup = document.querySelector(".infopopup");
+            infooverlay.style.display = "flex";
+            infopopup.style.transition = "transform 0.25s";
+            infopopup.style.transform = "translateY(-30px)";
+            infooverlay.style.opacity = "1";
+            infooverlay.style.pointerEvents = "auto";
+            requestAnimationFrame(() => {infopopup.style.transform = ""});
+            }
+        });
+
+        document.querySelector(".info").addEventListener("click", () => {
+            const infooverlay = document.querySelector(".infooverlay");
+            const infopopup = document.querySelector(".infopopup");
+            infooverlay.style.display = "flex";
+            infopopup.style.transition = "transform 0.25s";
+            infopopup.style.transform = "translateY(-30px)";
+            infooverlay.style.opacity = "1";
+            infooverlay.style.pointerEvents = "auto";
+            requestAnimationFrame(() => {infopopup.style.transform = ""});
+        });
+
+        document.querySelector(".infocloseb").addEventListener("click", () => {
+            const infooverlay = document.querySelector(".infooverlay");
+            const infopopup = document.querySelector(".infopopup");
+            infopopup.style.transition = "transform 0.25s";
+            infopopup.style.transform = "translateY(30px)";
+            infooverlay.style.opacity = "0";
+            infooverlay.style.pointerEvents = "none";
+            setTimeout(() => {
+                infooverlay.style.display = "none";
+                infopopup.style.transition = "";
+                infopopup.style.transform = "";
+            }, 250);
+        });
+        document.querySelector(".wincloseb").addEventListener("click", () => {
+            const winoverlay = document.querySelector(".winoverlay");
+            const winpopup = document.querySelector(".winpopup");
+            winpopup.style.transition = "transform 0.25s";
+            winpopup.style.transform = "translateY(30px)";
+            winoverlay.style.opacity = "0";
+            winoverlay.style.pointerEvents = "none";
+            setTimeout(() => {
+                winoverlay.style.display = "none";
+                winpopup.style.transition = "";
+                winpopup.style.transform = "";
+            }, 250);
+        });
+
+        //////////////////////////////////////////////////////////////////////////
+
+        newgame();
+
+    </script>
+</body>

@@ -10,6 +10,7 @@ const discord = document.querySelector(".discord");
 let muted = false;
 let introactivated = false;
 let audioload = false;
+let pendingintro = false;
 
 var context = new (window.AudioContext || window.webkitAudioContext)();
 var volume = context.createGain();
@@ -24,7 +25,6 @@ for (let i = 0; i < 9; i++) {
     document.querySelector(".snowflakes").appendChild(clone);
 }
 
-// instant song queueing, any delay and the intro is cooked
 function songfix() {
   const audioRequest = new XMLHttpRequest();
   audioRequest.open("GET", "assets/audio/butt3rfli3s.mp3", true);
@@ -33,10 +33,17 @@ function songfix() {
     context.decodeAudioData(audioRequest.response, function (decodedBuffer) {
       buffer = decodedBuffer;
       audioload = true;
+      if (pendingintro) {
+        pendingintro = false;
+        introactivated = true;
+        WEEE();
+        intro();
+      }
     });
   };
   audioRequest.send();
 }
+
 function WEEE() {
   if (!buffer || !audioload) return;
   if (song) {
@@ -52,7 +59,6 @@ function WEEE() {
   song.start(0);
 }
 
-// MAIN PART
 function intro() {
   sogdvd();
   sog.style.animation = "slide 2s cubic-bezier(0.550, 0.085, 0.680, 0.530) forwards";
@@ -63,34 +69,29 @@ function intro() {
   document.querySelector(".song").style.display = "block";
   document.querySelector(".smallsogt").style.opacity = "0";
 
-  setTimeout(function () {
+  setTimeout(function() {
     document.querySelector(".overlay").style.display = "none";
     document.querySelector(".smallsogt").style.display = "none";
+    document.querySelector(".skipintro").style.display = "none";
     document.querySelector(".bg").play();
     flash.style.transition = "opacity 2s ease-in-out";
     flash.style.opacity = "0";
   }, 1500);
 }
+
 document.addEventListener("DOMContentLoaded", function () {
   songfix();
   setTimeout(function () {
-    if (!introactivated) {
+    if (!introactivated && !pendingintro) {
       document.querySelector(".smallsogt").style.opacity = "0.5";
     }
   }, 2000);
 });
-
-// click the bart (sog)
 document.addEventListener("click", function (event) {
-  if (event.target.classList.contains("smallsog") && !introactivated) {
-    introactivated = true;
+  if (event.target.classList.contains("smallsog") && !introactivated && !pendingintro) {
     if (context.state === "suspended") {context.resume()}
-    if (audioload) {WEEE(); intro()} else {startIntro();
-      const songwait = setInterval(function() {
-        if (audioload) {clearInterval(songwait); WEEE();
-        }
-      }, 10);
-    }
+    if (audioload) {introactivated = true; WEEE(); intro()}
+    else {pendingintro = true}
   }
 });
 

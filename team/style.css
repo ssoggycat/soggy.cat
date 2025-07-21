@@ -317,7 +317,9 @@ a {
   border-radius: 4px; margin-bottom: 4px; z-index: 1200000;
 }
 
-.increment {background-image: url("assets/images/88x31/easrng-increment.gif")}
+.increment {
+  background-image: url("assets/images/88x31/easrng-increment.gif");
+}
 
 .lol {
   position: fixed; background-color: rgba(0, 0, 0, 0.5);
