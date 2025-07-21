@@ -4,7 +4,7 @@
 
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, height=device-height, initial-scale=1.0, user-scalable=no, maximum-scale=1.0, minimal-ui">
-    <title>soggle!</title>
+    <title>Soggle!</title>
     <link rel="icon" type="image/x-icon" href="icon.png">
 
     <meta itemprop="name" content="soggle!">
@@ -409,7 +409,6 @@
             const correct = game.imagename.toLowerCase();
             
             if (answer === correct) {
-                alert(`image name: "${game.imagename}"`);
                 game.fraction = 1; input.value = "";
                 newfragment(); document.querySelector(".meow").play();
                 const winoverlay = document.querySelector(".winoverlay");
