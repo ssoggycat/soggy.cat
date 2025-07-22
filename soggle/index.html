@@ -36,6 +36,8 @@
             display: flex; margin: 0;
             justify-content: center; align-items: center;
             background-color: #121213;
+            scrollbar-width: thin;
+            scrollbar-color: #212121 #121213;
         }
         .top {
             display: flex; position: fixed;
@@ -43,6 +45,11 @@
             width: 100vw; height: 60px; 
             top: 0; gap: 3px;
             border-bottom: 1px solid #212121;
+        }
+        .bottom {
+            display: flex; position: fixed;
+            bottom: 2em; width: 20em; height: 3em;
+            transition: transform 0.2s;
         }
 
         .overlay {
@@ -108,16 +115,26 @@
             display: flex; position: absolute;
             align-items: center; justify-content: right;
             right: 1em; height: 100%; top: 0;
+            gap: 10px;
         }
 
         .leftbutton {
             font-family: "karnak", sans-serif;
-            font-size: 0.75em; 
+            font-size: 0.75em; align-items: center;
             background: #18181a; color: white;
             padding: 10px; border: 1.5px solid #212121;
             transition: all 0.2s;
         }
-        .skip:disabled {
+        .rightbutton {
+            position: fixed; right: 1em;
+            font-family: "karnak", sans-serif;
+            font-size: 0.75em; width: 4em; height: 4em;
+            background: #18181a; color: white;
+            padding: 10px; border: 1.5px solid #212121;
+            color: #dd4444;
+            transition: all 0.2s;
+        }
+        .hinthard:disabled {
             background: #0f0f0f; color: #555;
             cursor: not-allowed;
         }
@@ -128,7 +145,7 @@
             display: flex; bottom: 20px;
             font-family: "karnak", sans-serif;
             font-size: 1em;
-            background: #18181a; color: white; 
+            background: #18181a !important; color: white !important; 
             padding: 10px; border: 1.5px solid #212121;
             width: 100%; outline: none;
             transition: border-color 0.2s;
@@ -163,12 +180,6 @@
             z-index: 99999; display: none; opacity: 0;
         }
 
-        .bottom {
-            display: flex; position: fixed;
-            bottom: 2em; width: 20em; height: 3em;
-            transition: transform 0.2s;
-        }
-
         .imagebox {
             display: flex; position: absolute;
             justify-content: center; align-items: center; 
@@ -179,6 +190,40 @@
             z-index: -1;
         }
         .imagebox canvas {max-width: 100%; max-height: 100%}
+
+        .shuffle-win {
+            position: fixed !important;
+            top: 50% !important;
+            left: 50% !important;
+            transform: translate(-50%, -50%) !important;
+            z-index: 10000 !important;
+            background: #18181a !important;
+            color: white !important;
+            font-family: "karnak", sans-serif !important;
+            font-size: 1.2em !important;
+            padding: 15px 30px !important;
+            border: 2px solid #6ba1dd !important;
+            border-radius: 10px !important;
+            box-shadow: 0 0 20px rgba(107, 161, 221, 0.3) !important;
+        }
+
+        .answer-text {
+            position: fixed;
+            font-family: "karnak", sans-serif;
+            font-size: 1em;
+            color: #6ba1dd;
+            background: #18181a;
+            padding: 8px 15px;
+            border: 1.5px solid #212121;
+            border-radius: 10px;
+            z-index: 1000;
+            opacity: 0;
+            transition: opacity 0.3s;
+        }
+
+        .answer-text.show {
+            opacity: 1;
+        }
 
         @keyframes shake {
             0%, 100% {transform: translateX(0)}
@@ -218,20 +263,24 @@
             <a class="title">Soggle</a>
             <a class="subtitle small">wordle but sog. do you get it. do you?</a>
             <br>
-            <span>guess one of 380+ images of shark by their fragments!</span>
+            <span>get 380+ titles of images of shark right!</span>
             <br>
             <span>this game is based on the <a href="https://drive3.soggy.cat">soggy drive</a>'s file naming system, which is most commonly used across reposts.</span>
-            <span>you should familiarize yourself with it before even considering playing this!</span>
-            <span class="tiny dark">(it's a really bad concept for a game, but hey, there had to be a soggy cat wordle at some point)</span>
+            <span>you should familiarize yourself with it before even considering playing this..</span>
+            <span class="tiny dark">(it's a pretty bad concept for a game, but hey, there had to be a soggy cat wordle at some point)</span>
             <br>
             <a class="subtitle">how to play</a>
-            <span>you will be shown a small fragment of a sog.</span>
-            <span>if you recognize what it is, input the filename. <a class="dark">(ex. "pillow<s class="darker">.jpg</s>")</a></span>
+            <span>if you remember the image's name from the drive, input its filename. <a class="dark">(ex. "pillow<s class="darker">.jpg</s>")</a></span>
             <br>
-            <span>if not, you can press the <button class="example" style="vertical-align: middle;">skip (+¼)</button> button to reveal an additional fragment!
+            <span>if not, you can press the <button class="example" style="vertical-align: middle;">hint</button> button to reveal the length!
             </span>
             <br>
-            <span>there's no daily game system, so you can just <button class="example" style="vertical-align: middle;">shuffle</button> for a new soggle.</span>
+            <span>if you're stuck, you can <button class="example" style="vertical-align: middle;">shuffle</button> for a new soggle.</span>
+            <br>
+            <a class="subtitle">hard mode</a>
+            <span><button class="example" style="vertical-align: middle; color: #dd4444">hard mode</button> crops the image into a small segment!</span>
+            <span>it starts off at ⅛th, but you can use the <button class="example" style="vertical-align: middle;">hint</button> button to reveal up to half of it.</span>
+
         </div>
     </div>
 
@@ -253,16 +302,23 @@
         <canvas class="sog" width="1000" height="1000"></canvas>
     </div>
 
+    <div class="answer-text answertext"></div>
+
     <div class="bottom">
         <button class="leftbutton shuffle">shuffle</button>
-        <button class="leftbutton skip" style="margin-right:10px;">skip (+¼)</button>
-        <input class="input" type="text" placeholder="name it!">
+        <button class="leftbutton hint">hint</button>
+        <button class="leftbutton hinthard" style="display: none;">hint (+¼)</button>
+
+        <input class="input" type="text" placeholder="name it!" list="imagenames">
+        <datalist id="imagenames"></datalist>
         <button class="submit">↵</button>
+
+        <button class="rightbutton hard">hard mode</button>
     </div>
 
     <script>
         const ctx = document.querySelector(".sog").getContext("2d");
-        const skiplabels = {16: "⅛", 8: "¼", 4: "¼", 2: "½"};
+        const hinthardlabels = {16: "⅛", 8: "¼", 4: "¼", 2: "½"};
         const positions = ["top", "bottom", "left", "right"];
 
         const baseUrls = ["https://raw.githubusercontent.com/ssoggycat/drive-3/refs/heads/main/soggy%20cat/"]
@@ -292,18 +348,28 @@
             "waddle.jpg", "walking_away.jpg", "weird_sit.jpg", "weirdo.jpg", "went_outside.jpg", "wha.jpg", "whagt.jpg", "what_are_you_talking_about.png", "what_do_you_want.jpg", "what_if_i_just_bite_you_for_no_reason.jpg", "WHAT.jpg", "what.png", "whats_that.jpg", "who_are_you.jpg", "whoa.jpg", "whuh...png", "WHUHH.jpg", "why_does_he_look_like_that.jpg", "why_the_big_nose.png", "why_the_wide_face.jpg", "wide_lay.jpg", "wink_3.jpg", "wink.jpg", "wise_thinker.jpg", "wise.png", "woah.jpg", "woah.png", "womp_womp.png", "wonderful_bench.jpg", "wtf_did_you_just_say.jpg", "wtf.jpg", 
             "yay.jpg", "yeah_okay.jpg", "yellow_eyed.jpg", "you_all_sicken_me.jpg", "YOU.jpg", "youre_gonna_talk_to_me_like_that_huh.jpg", "yucky.jpg", "yummers.jpg", "yummy.jpg", 
             "zzz.jpg", "zzzzzz.jpg",
-
         ];
 
         // prerequisites
         let game = {
             image: null,
             imagename: "",
-            fraction: 8,
-            position: ""
+            fraction: 1,
+            position: "",
+            haswon: false
         };
+
         function random(arr) {
             return arr[Math.floor(Math.random() * arr.length)];
+        }
+
+        function populateDatalist() {
+            const datalist = document.getElementById("imagenames");
+            images.forEach(imageName => {
+                const option = document.createElement("option");
+                option.value = imageName.replace(/\.(jpg|jpeg|png|webp|mp4|jfif)$/i, "").replace(/_/g, " ");
+                datalist.appendChild(option);
+            });
         }
 
         async function loadimage(imagename) {
@@ -366,26 +432,27 @@
             ctx.drawImage(img, sx, sy, sw, sh, dx, dy, dw, dh);
         }
 
-        function updateskip() {
-            const skipbutton = document.querySelector(".skip");
+        function updatehinthard() {
+            const hinthardbutton = document.querySelector(".hinthard");
             const nextfraction = game.fraction / 2;
             if (nextfraction < 2) {
-                skipbutton.disabled = true;
-                skipbutton.textContent = "max";
+                hinthardbutton.disabled = true;
+                hinthardbutton.textContent = "max";
             } else {
-                skipbutton.textContent = `skip (+${skiplabels[nextfraction]})`;
-                skipbutton.disabled = false;
+                hinthardbutton.textContent = `hint (+${hinthardlabels[nextfraction]})`;
+                hinthardbutton.disabled = false;
             }
         }
 
-        async function newgame() {
+        async function newgame(fraction = 1) {
+            game.haswon = false;
             for (let attempts = 0; attempts < images.length; attempts++) {
                 const imagename = random(images);
                 try {
                     const img = await loadimage(imagename);
                     game.image = img;
                     game.imagename = imagename.replace(/\.(jpg|jpeg|png|webp|mp4|jfif)$/i, "").replace(/_/g, " ");
-                    game.fraction = 8;
+                    game.fraction = fraction;
                     game.position = random(positions);
                     
                     const input = document.querySelector(".input");
@@ -393,15 +460,44 @@
                     input.placeholder = "name it!";
                     input.classList.remove("error");
                     
-                    updateskip();
+                    updatehinthard();
                     newfragment();
                     return;
                 } catch (err) {
-                    console.error(`failed to load ${imagename}:`, err);
+                    console.error(`failed to load this goober - ${imagename}:`, err);
                 }
             }
-            document.querySelector(".input").placeholder = "no images available";
+            document.querySelector(".input").placeholder = "no images available?!";
         }
+
+        function showanswer(crossed = false) {
+            const answertext = document.querySelector(".answertext");
+            const input = document.querySelector(".input");
+            const inputrect = input.getBoundingClientRect();
+
+            let displayname;
+            if (crossed) {
+                displayname = game.imagename.replace(/[^\s]/g, "-");
+                const length = game.imagename.replace(/\s/g, "").length;
+                answertext.textContent = `${displayname} (${length} symbols)`;
+            } else {
+                answertext.textContent = `the image was: ${game.imagename}`;
+            }
+
+            answertext.style.left = `${inputrect.left + inputrect.width / 2}px`;
+            answertext.style.top = `${inputrect.top - 50}px`;
+            answertext.style.transform = 'translateX(-50%)';
+            answertext.classList.add('show');
+
+            setTimeout(() => {
+                answertext.classList.remove('show');
+            }, 2000);
+        }
+
+        // Show crossed-out answer when hint is clicked
+        document.querySelector(".hint").addEventListener("click", () => {
+            showanswer(true);
+        });
 
         function checkAnswer() {
             const input = document.querySelector(".input");
@@ -410,7 +506,9 @@
             
             if (answer === correct) {
                 game.fraction = 1; input.value = "";
-                newfragment(); document.querySelector(".meow").play();
+                game.haswon = true;
+                newfragment(); updatehinthard();
+                
                 const winoverlay = document.querySelector(".winoverlay");
                 const winpopup = document.querySelector(".winpopup");
                 winoverlay.style.display = "flex";
@@ -439,13 +537,20 @@
         });
 
         document.querySelector(".shuffle").addEventListener("click", () => {
-            window.location.reload();
+            if (!game.haswon) {
+                showanswer();
+                setTimeout(() => {
+                    window.location.reload();
+                }, 1000);
+            } else {
+                window.location.reload();
+            }
         });
 
-        document.querySelector(".skip").addEventListener("click", () => {
+        document.querySelector(".hinthard").addEventListener("click", () => {
             if (game.image && game.fraction > 2) {
                 game.fraction = game.fraction / 2;
-                newfragment(); updateskip();
+                newfragment(); updatehinthard();
             }
         });
 
@@ -453,12 +558,30 @@
         document.querySelector(".input").addEventListener("keypress", (e) => {
             if (e.key === "Enter" || e.keyCode === 13) checkAnswer();
         });
+
+        const hardbutton = document.querySelector(".hard");
+        let hardMode = false;
+        hardbutton.addEventListener("click", () => {
+            hardMode = !hardMode;
+            if (hardMode) {
+                hardbutton.textContent = "normal mode";
+                hardbutton.style.color = "white";
+                document.querySelector(".hinthard").style.display = "flex";
+                document.querySelector(".hint").style.display = "none";
+                newgame(16);
+            } else {
+                hardbutton.textContent = "hard mode";
+                hardbutton.style.color = "#dd4444";
+                document.querySelector(".hint").style.display = "flex";
+                document.querySelector(".hinthard").style.display = "none";
+                newgame(1);
+            }
+        });
         
         // if the player forgets just remind them :  ) 
         document.querySelector(".input").addEventListener("input", function() {
             this.value = this.value.replace(/\.(jpg|jpeg|png|webp|mp4|jfif)$/i, "");
         });
-
 
         //////////////////////////////// info tab ////////////////////////////////
 
@@ -480,16 +603,19 @@
         });
 
         document.addEventListener("DOMContentLoaded", () => {
-            if (!localStorage.getItem("visited")) {
-            localStorage.setItem("visited", "1");
-            const infooverlay = document.querySelector(".infooverlay");
-            const infopopup = document.querySelector(".infopopup");
-            infooverlay.style.display = "flex";
-            infopopup.style.transition = "transform 0.25s";
-            infopopup.style.transform = "translateY(-30px)";
-            infooverlay.style.opacity = "1";
-            infooverlay.style.pointerEvents = "auto";
-            requestAnimationFrame(() => {infopopup.style.transform = ""});
+            populateDatalist();
+
+            let visited = false;
+            if (!visited) {
+                visited = true;
+                const infooverlay = document.querySelector(".infooverlay");
+                const infopopup = document.querySelector(".infopopup");
+                infooverlay.style.display = "flex";
+                infopopup.style.transition = "transform 0.25s";
+                infopopup.style.transform = "translateY(-30px)";
+                infooverlay.style.opacity = "1";
+                infooverlay.style.pointerEvents = "auto";
+                requestAnimationFrame(() => {infopopup.style.transform = ""});
             }
         });
 
@@ -520,6 +646,7 @@
         document.querySelector(".wincloseb").addEventListener("click", () => {
             const winoverlay = document.querySelector(".winoverlay");
             const winpopup = document.querySelector(".winpopup");
+            
             winpopup.style.transition = "transform 0.25s";
             winpopup.style.transform = "translateY(30px)";
             winoverlay.style.opacity = "0";
@@ -537,3 +664,4 @@
 
     </script>
 </body>
+</html>
