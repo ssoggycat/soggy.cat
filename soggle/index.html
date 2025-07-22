@@ -363,7 +363,7 @@
             return arr[Math.floor(Math.random() * arr.length)];
         }
 
-        function populateDatalist() {
+        function adddata() {
             const datalist = document.getElementById("imagenames");
             images.forEach(imageName => {
                 const option = document.createElement("option");
@@ -560,10 +560,10 @@
         });
 
         const hardbutton = document.querySelector(".hard");
-        let hardMode = false;
+        let hardmode = false;
         hardbutton.addEventListener("click", () => {
-            hardMode = !hardMode;
-            if (hardMode) {
+            hardmode = !hardmode;
+            if (hardmode) {
                 hardbutton.textContent = "normal mode";
                 hardbutton.style.color = "white";
                 document.querySelector(".hinthard").style.display = "flex";
@@ -603,11 +603,10 @@
         });
 
         document.addEventListener("DOMContentLoaded", () => {
-            populateDatalist();
-
-            let visited = false;
+            adddata();
+            const visited = localStorage.getItem("visited");
             if (!visited) {
-                visited = true;
+                localStorage.setItem("visited", "true");
                 const infooverlay = document.querySelector(".infooverlay");
                 const infopopup = document.querySelector(".infopopup");
                 infooverlay.style.display = "flex";
