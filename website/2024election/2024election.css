@@ -15,14 +15,14 @@ body,
 }
 
 .option-01 {
-  background-image: url("/assets/images/somnolentcat.png");
+  background-image: url("/static/ssoggycat/2024election/images/somnolentcat.png");
    background-repeat: no-repeat;
    background-size: 100% 100%;
    background-position: center;
 }
 
 .option-02 {
-  background-image: url("/assets/images/sobbycat.png");
+  background-image: url("/static/ssoggycat/2024election/images/sobbycat.png");
    background-repeat: no-repeat;
    background-size: 100% 100%;
    background-position: center;
@@ -71,11 +71,7 @@ body,
 }
 
 label {
-  display: -webkit-flex;
-  display: -moz-flex;
   display: flex;
-  -webkit-flex-direction: column;
-  -moz-flex-direction: column;
   flex-direction: column;
   background-position: center center;
   background-size: cover;

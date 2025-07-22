@@ -7,6 +7,23 @@ don't though
 # Neat guide to keep everything consistent!!
 just ask us. either to review what you're cooking or ask us to finish this
 
+# im using these standards right now so follow them too
+- i don't have any other consistent ordering for `<head>` but these four are ordered. <br>
+	<sub> this is a bit broken because the icon doesn't gonna anywhere but that isn't the focus of this </sub>
+	```html
+	<meta charset="UTF-8"/>
+	<meta name="viewport" content="width=device-width, initial-scale=1"/>
+
+	<title>VOTE NOW</title>
+	<link rel="icon" href="/static/ssoggycat/team/images/soggymask.webp"/>
+	```
+
+	charset, then viewport, then title, then link<br>
+	(no pages currently follow this standard)
+- get eslint we have a config
+- static is a mess but don't put assets anywhere else except for anything important like stylesheets only used on one page or scripts only used on one page...
+
+
 # Examples
 ### An example of good code:
 ```html
