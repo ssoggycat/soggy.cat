@@ -220,6 +220,38 @@
             gap: 0
         }
 
+        /*//////////////////////////////////////////////////////////////////////*/
+
+        .suggestions {
+            position: absolute; background: #18181a; 
+            border: 1.5px solid #212121; border-top: none;
+            max-height: 200px; overflow-y: auto;
+            width: 100%; z-index: 10000; left: 0; top: 100%;
+            box-sizing: border-box; border-radius: 0 0 10px 10px;
+            transition: top 0.1s, bottom 0.1s;
+        }
+        .suggestions.above {
+            border-radius: 10px 10px 0 0; border-bottom: none;
+            border-top: 1.5px solid #212121;
+            top: auto; bottom: 100%;
+        }
+        .suggestion-item {
+            padding: 10px; cursor: pointer;
+            font-family: "karnak", sans-serif;
+            color: white; background: #18181a;
+            border-bottom: 1px solid #212121;
+            transition: background 0.1s, color 0.1s;
+        }
+
+        .suggestion-item:last-child {border-bottom: none}
+        .suggestion-item.active, .suggestion-item:hover {background: #23232a}
+        .suggestion-item.incorrect {
+            color: #fff; background: #3a181a;
+            border-left: 4px solid #dd4444;
+        }
+
+        /*//////////////////////////////////////////////////////////////////////*/
+
         @media (min-width: 601px) {
             .hint {
                 max-width: 4em !important;
@@ -315,7 +347,7 @@
             <span class="tiny dark">(it"s a pretty bad concept for a game, but hey, there had to be a soggy cat wordle at some point)</span>
             <br>
             <a class="subtitle">how to play</a>
-            <span>if you remember the image"s name from the drive, input its filename. <a class="dark">(ex. "pillow<s class="darker">.jpg</s>")</a></span>
+            <span>if you remember the image's name from the drive, input its filename. <a class="dark">(ex. "pillow<s class="darker">.jpg</s>")</a></span>
             <br>
             <span>if not, you can press the <button class="example">hint</button> button to reveal the length!</span>
             <br>
@@ -349,8 +381,8 @@
         </div>
         <div class="inputbox">
             <div class="input-group">
-                <input class="input" type="text" placeholder="name it!" list="imagenames">
-                <datalist id="imagenames"></datalist>
+                <input class="input" type="text" placeholder="name it!">
+                <div class="suggestions" style="display:none;"></div>
                 <button class="submit">↵</button>
             </div>
         </div>
@@ -467,17 +499,6 @@
             return arr[Math.floor(Math.random() * arr.length)];
         }
 
-        function adddata() {
-            const datalist = document.getElementById("imagenames");
-            datalist.innerHTML = "";
-            images.forEach(imagename => {
-                const option = document.createElement("option");
-                const cleanname = imagename.replace(/\.(jpg|jpeg|png|webp|mp4|jfif)$/i, "").replace(/_/g, " ");
-                option.value = cleanname;
-                datalist.appendChild(option);
-            });
-        }
-
         async function loadimage(imagename) {
             return new Promise((resolve, reject) => {
                 const img = new Image();
@@ -487,7 +508,7 @@
 
                 const loadurl = () => {
                     if (urlindex >= baseurl.length) {
-                        reject(new Error("all urls failed"));
+                        reject(new Error("all urls failed?!"));
                         return;
                     }
                     img.src = baseurl[urlindex] + imagenamefix; 
@@ -618,7 +639,6 @@
             }, 2000);
         }
 
-
         document.querySelector(".hint").addEventListener("click", () => {
             showanswer(true);
         });
@@ -666,7 +686,6 @@
                     game.guesscount++;
                     savegamestate();
                     updateguesscounter();
-                    adddata();
                 }
                 input.classList.add("error");
                 input.placeholder = "[𝐋𝐎𝐔𝐃 𝐈𝐍𝐂𝐎𝐑𝐑𝐄𝐂𝐓 𝐁𝐔𝐙𝐙𝐄𝐑]";
@@ -738,6 +757,112 @@
             this.value = this.value.replace(/\.(jpg|jpeg|png|webp|mp4|jfif)$/i, "");
         });
 
+        //////////////////////// custom input list ///////////////////////////////
+
+        const inputelement = document.querySelector(".input");
+        const suggestions = document.querySelector(".suggestions");
+        let cleansuggestions = [];
+        let currentsuggestion = -1;
+
+        function cleanimagename(imagename) {
+            return imagename.replace(/\.(jpg|jpeg|png|webp|mp4|jfif)$/i, "").replace(/_/g, " ");
+        }
+
+        function showsuggestions(value) {
+            const val = value.trim().toLowerCase();
+            if (!val) {
+                suggestions.style.display = "none";
+                suggestions.innerHTML = "";
+                return;
+            }
+            cleansuggestions = images
+                .map(cleanimagename)
+                .filter(name => name.toLowerCase().includes(val))
+                // .slice(0, 10);
+            if (cleansuggestions.length === 0) {
+                suggestions.style.display = "none";
+                suggestions.innerHTML = "";
+                return;
+            }
+            suggestions.innerHTML = cleansuggestions.map((s, i) => {
+                const isIncorrect = incorrectanswers.has(s.toLowerCase());
+                return `<div class="suggestion-item${i === currentsuggestion ? " active" : ""}${isIncorrect ? " incorrect" : ""}">${s}</div>`;
+            }).join("");
+
+            repositionsuggestions();
+            suggestions.style.display = "block";
+        }
+
+        function repositionsuggestions() {
+            suggestions.classList.remove("above");
+            suggestions.style.top = "";
+            suggestions.style.bottom = "";
+            const inputrect = inputelement.getBoundingClientRect();
+            const menuheight = Math.min(200, 40 * cleansuggestions.length);
+            const spacebelow = window.innerHeight - inputrect.bottom;
+            const spaceabove = inputrect.top;
+            if (spacebelow < menuheight && spaceabove > spacebelow) {
+                suggestions.classList.add("above");
+            } else {
+                suggestions.classList.remove("above");
+            }
+        }
+
+        inputelement.addEventListener("input", function(e) {
+            this.value = this.value.replace(/\.(jpg|jpeg|png|webp|mp4|jfif)$/i, "");
+            currentsuggestion = -1;
+            showsuggestions(this.value);
+        });
+
+        inputelement.addEventListener("keydown", function(e) {
+            if (suggestions.style.display === "block") {
+                if (e.key === "ArrowDown") {
+                    e.preventDefault();
+                    currentsuggestion = Math.min(currentsuggestion + 1, cleansuggestions.length - 1);
+                    updatecurrentsuggestion();
+                } else if (e.key === "ArrowUp") {
+                    e.preventDefault();
+                    currentsuggestion = Math.max(currentsuggestion - 1, 0);
+                    updatecurrentsuggestion();
+                } else if (e.key === "Enter") {
+                    if (currentsuggestion >= 0 && cleansuggestions[currentsuggestion]) {
+                        e.preventDefault();
+                        selectsuggestion(cleansuggestions[currentsuggestion]);
+                    }
+                } else if (e.key === "Escape") {
+                    suggestions.style.display = "none";
+                }
+            }
+        });
+
+        function updatecurrentsuggestion() {
+            const items = suggestions.querySelectorAll(".suggestion-item");
+            items.forEach((item, idx) => {
+                item.classList.toggle("active", idx === currentsuggestion);
+            });
+        }
+        function selectsuggestion(s) {
+            inputelement.value = s;
+            suggestions.style.display = "none";
+            inputelement.focus();
+        }
+        suggestions.addEventListener("mousedown", function(e) {
+            if (e.target.classList.contains("suggestion-item")) {
+                e.preventDefault(); // Prevent input from losing focus
+                selectsuggestion(e.target.textContent);
+            }
+        });
+        document.addEventListener("click", function(e) {
+            if (!suggestions.contains(e.target) && e.target !== inputelement) {
+                suggestions.style.display = "none";
+            }
+        });
+        window.addEventListener("resize", () => {
+            if (suggestions.style.display === "block") {
+                repositionsuggestions();
+            }
+        });
+
         //////////////////////////////// info tab ////////////////////////////////
 
         document.querySelectorAll(".example").forEach(el => {
@@ -758,7 +883,6 @@
         });
 
         document.addEventListener("DOMContentLoaded", async () => {
-            adddata();
             const visited = window.visited;
             if (!localStorage.getItem("visited")) {
                 localStorage.setItem("visited", "true");
@@ -772,16 +896,16 @@
                 requestAnimationFrame(() => {infopopup.style.transform = ""});
             }
             let sitemuted = false;
-            const volumebutton = document.querySelector('.volume');
-            const volumeicon = volumebutton.querySelector('img');
-            volumebutton.addEventListener('click', () => {
+            const volumebutton = document.querySelector(".volume");
+            const volumeicon = volumebutton.querySelector("img");
+            volumebutton.addEventListener("click", () => {
                 sitemuted = !sitemuted;
-                document.querySelectorAll('audio').forEach(audio => {
+                document.querySelectorAll("audio").forEach(audio => {
                     audio.muted = sitemuted;
                 });
                 volumeicon.src = sitemuted
-                    ? 'assets/svgs/muted.svg'
-                    : 'assets/svgs/unmuted.svg';
+                    ? "assets/svgs/muted.svg"
+                    : "assets/svgs/unmuted.svg";
             });
             if (!(await loadgamestate())) {
                 await newgame();
@@ -813,7 +937,48 @@
             }, 250);
         });
 
-        //////////////////////////////////////////////////////////////////////////
+        ///////////////////////// discord shenanigans ////////////////////////////
+
+        function setpreview(ispreview) {
+            let banner = document.querySelector(".preview");       
+            if (!banner) {
+                banner = document.createElement("div");
+                banner.className = "preview"; banner.style.position = "fixed";
+                banner.style.top = "0"; banner.style.left = "0";
+                banner.style.width = "100vw"; banner.style.height = "100vh";
+                banner.style.background = "#141414 url('assets/images/bannersoggle.webp') center center / contain no-repeat";
+                banner.style.zIndex = "999999"; banner.style.display = "none";
+                document.body.appendChild(banner);
+            }
+            banner.style.display = ispreview ? "block" : "none";
+        }
+
+        function activitydetect() {
+            const attemptdetect = () => {
+                // SDK v2
+                if (window.DiscordSDK && window.DiscordSDK.activity) {
+                    window.DiscordSDK.activity.onPreviewStateUpdate((ispreview) => {
+                        setpreview(ispreview);
+                    });
+                    window.DiscordSDK.activity.getPreviewState().then(setpreview);
+                    return true;
+                }
+                // SDK v1
+                if (window.DiscordActivity && window.DiscordActivity.onActivityPreviewStateUpdate) {
+                    window.DiscordActivity.onActivityPreviewStateUpdate((ispreview) => {
+                        setpreview(ispreview);
+                    });
+                    // if the rest fails
+                    if (typeof window.DiscordActivity.isActivityPreview === "boolean") {
+                        setpreview(window.DiscordActivity.isActivityPreview);
+                    }
+                    return true;
+                }
+                return false;
+            };
+
+            if (!attemptdetect()) {setTimeout(activitydetect, 500)}
+        }; activitydetect();
 
     </script>
 </body>
