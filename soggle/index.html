@@ -555,11 +555,13 @@
                         incorrectanswers = new Set(state.incorrectanswers || []);
                         const hardbutton = document.querySelector(".hardmodebutton");
                         if (state.hardmode) {
+                            // Hard mode ON
                             hardbutton.textContent = "normal mode";
                             hardbutton.style.color = "white";
                             document.querySelector(".hinthard").style.display = "flex";
                             document.querySelector(".hint").style.display = "none";
                         } else {
+                            // Hard mode OFF
                             hardbutton.textContent = "hard mode";
                             hardbutton.style.color = "#dd4444";
                             document.querySelector(".hint").style.display = "flex";
@@ -943,42 +945,29 @@
             let banner = document.querySelector(".preview");       
             if (!banner) {
                 banner = document.createElement("div");
-                banner.className = "preview"; banner.style.position = "fixed";
-                banner.style.top = "0"; banner.style.left = "0";
-                banner.style.width = "100vw"; banner.style.height = "100vh";
+                banner.className = "preview";
+                banner.style.position = "fixed";
+                banner.style.top = "0";
+                banner.style.left = "0";
+                banner.style.width = "100vw";
+                banner.style.height = "100vh";
                 banner.style.background = "#141414 url('assets/images/bannersoggle.webp') center center / contain no-repeat";
-                banner.style.zIndex = "999999"; banner.style.display = "none";
+                banner.style.zIndex = "999999";
+                banner.style.display = "none";
                 document.body.appendChild(banner);
             }
             banner.style.display = ispreview ? "block" : "none";
         }
 
-        function activitydetect() {
-            const attemptdetect = () => {
-                // SDK v2
-                if (window.DiscordSDK && window.DiscordSDK.activity) {
-                    window.DiscordSDK.activity.onPreviewStateUpdate((ispreview) => {
-                        setpreview(ispreview);
-                    });
-                    window.DiscordSDK.activity.getPreviewState().then(setpreview);
-                    return true;
-                }
-                // SDK v1
-                if (window.DiscordActivity && window.DiscordActivity.onActivityPreviewStateUpdate) {
-                    window.DiscordActivity.onActivityPreviewStateUpdate((ispreview) => {
-                        setpreview(ispreview);
-                    });
-                    // if the rest fails
-                    if (typeof window.DiscordActivity.isActivityPreview === "boolean") {
-                        setpreview(window.DiscordActivity.isActivityPreview);
-                    }
-                    return true;
-                }
-                return false;
-            };
-
-            if (!attemptdetect()) {setTimeout(activitydetect, 500)}
-        }; activitydetect();
+        function tinypreview() {
+            const tinywidth = 320;
+            const tinyheight = 180;
+            const istiny = window.innerWidth <= tinywidth && window.innerHeight <= tinyheight;
+            setpreview(istiny);
+        }
+        window.addEventListener("resize", tinypreview);
+        window.addEventListener("DOMContentLoaded", tinypreview);
+        tinypreview();
 
     </script>
 </body>
