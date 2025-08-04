@@ -194,7 +194,7 @@ a {
   font-family: "discord", sans-serif;
   font-size: 30px;
 }
-.discord {
+/* .discord {
   position: fixed; display: flex;
   width: 100vw; height: 100vh;
   justify-content: center; align-items: center;
@@ -215,7 +215,7 @@ a {
   pointer-events: none; cursor: pointer;
 }
 .close {top: 0; left: 0}
-.join {top: 0; right: 0}
+.join {top: 0; right: 0} */
 .b3 {
   background-color: #DFE3E8;
   background-image: url("assets/images/drivebg.webp");

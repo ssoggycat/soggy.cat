@@ -56,6 +56,7 @@ function WEEE() {
   song.loop = true;
   song.loopStart = 1.415;
   song.loopEnd = buffer.duration;
+  document.title = "♪ BUTT3RFLI3S >w< - milkypossum";
   song.start(0);
 }
 
@@ -256,7 +257,7 @@ document.addEventListener("mousedown", (e) => {
   }, 1000);
 });
 
-// discord widget
+/* discord widget
 document.querySelector(".b2").addEventListener("click", function () {
     discord.style.opacity = "1";
     discord.style.pointerEvents = "all";
@@ -275,14 +276,14 @@ document.querySelector(".close").addEventListener("click", function () {
         document.querySelector(".dbutton").style.pointerEvents = "none";
         volume.disconnect();
         volume.connect(context.destination);
-});
+}); */
 
-// bah bai!
+/* bah bai!
 window.addEventListener("beforeunload", function () {
     flash.style.backgroundColor = "black";
     flash.style.transition = "opacity 0.35s ease-in-out";
     flash.style.opacity = "1";
-});
+}); */
 
 // skip
 document.querySelector(".skipintro").addEventListener("click", function () {
