@@ -97,7 +97,7 @@
         .subtitle {font-family: "karnak", sans-serif; font-size: 1.5em;}
         .small {font-size: 0.75em;}
         .tiny {font-size: 0.5em;}
-        .dark {color: #999;}
+        .dark {color: #999}
 
         /*//////////////////////////////////////////////////////////////////////*/
 
@@ -130,6 +130,14 @@
         .shuffle {
             height: auto !important;
             font-size: 0.8em !important;
+        }
+
+        .caption {
+            display: flex; position: fixed;
+            justify-content: center; align-items: center;
+            left: 0; right: 0;
+            top: 70px; margin-top: 0.25em;
+            text-align: center;
         }
 
         /* fml */
@@ -323,6 +331,7 @@
             </button>
         </div>
     </div>
+    <a class="caption dark">what kind of soggy is this?</a>
 
     <img class="dude" src="assets/images/dude.webp" draggable="false">
     <audio class="meow" style="display:none" src="assets/audio/meow.mp3" preload="auto"></audio>
@@ -567,6 +576,7 @@
                             document.querySelector(".hint").style.display = "flex";
                             document.querySelector(".hinthard").style.display = "none";
                         }
+                        document.querySelector(".caption").textContent = "what kind of soggy is this?";
                         updatehinthard();
                         updateguesscounter();
                         newfragment();
@@ -587,6 +597,7 @@
             game.haswon = false;
             game.guesscount = 0;
             incorrectanswers.clear();
+            document.querySelector(".caption").textContent = "what kind of soggy is this?";
             for (let attempts = 0; attempts < images.length; attempts++) {
                 const imagename = random(images);
                 try {
@@ -657,11 +668,13 @@
             const input = document.querySelector(".input");
             const answer = input.value.trim().toLowerCase();
             const correct = game.imagename.toLowerCase();
+            const caption = document.querySelector(".caption");
             
             if (answer === correct) {
                 game.fraction = 1; 
                 input.value = "";
                 game.haswon = true;
+                caption.innerHTML = `this is a&nbsp;<i>${game.imagename}</i>`;
                 newfragment(); updatehinthard();
                 document.querySelector(".meow").play()
                 savegamestate();
