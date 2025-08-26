@@ -1,0 +1,121 @@
+﻿<?xml version="1.0" encoding="UTF-8" ?>
+<data>
+	<MainMenu>
+		<PreEnter> </PreEnter>
+		<Choose>Choose your game!</Choose>
+		<GameModeClassic>The untimed classic game!</GameModeClassic>
+		<GameModeBlitz>Three minute action challenge!</GameModeBlitz>
+		<GameModeChallenge>Challenge mode awaits you in the Full Version of Bejeweled Twist!</GameModeChallenge>
+		<GameModeZen>Zen mode awaits you in the Full Version of Bejeweled Twist!</GameModeZen>
+		<Loading>LOADING</Loading>
+	</MainMenu>
+	
+	<HowToPlay>
+		<DontShowThisAgain>Don't Show This Again</DontShowThisAgain>
+		<Continue>Continue</Continue>
+		<HowToPlay>TWIST GEMS TO MAKE A SET OF 3 OR MORE IN A ROW.</HowToPlay>
+		<BackToGame>Back To game</BackToGame>
+	</HowToPlay>
+	
+	<Other>
+		<Gems>Gems</Gems>
+		<Cascades>Cascades</Cascades>
+		<minutes1>1 MINUTES</minutes1>
+		<minutes2>2 MINUTES</minutes2>
+		<minutes3>3 MINUTES</minutes3>
+		<minutes4>4 MINUTES</minutes4>
+	</Other>
+	
+	<GameUpsell>
+		<Challenge>
+			<Show>true</Show>
+			<Title>CHALLENGE MODE</Title>
+			<IntroUp>Think you’re smart? Challenge mode has over 80 brain-busting puzzles to test your skill.</IntroUp>
+			<IntroDwon>Challenge mode is only available in the full version of Bejeweled Twist.</IntroDwon>
+		</Challenge>
+		<Zen>
+			<Show>true</Show>
+			<Title>ZEN MODE</Title>
+			<IntroUp>You can’t lose in this unlimited, relaxing game mode. Explore the galaxy!</IntroUp>
+			<IntroDwon>Zen mode is only available in the full version of Bejeweled Twist.</IntroDwon>
+		</Zen>
+		<Classic>
+			<Show>true</Show>
+			<Title>CLASSIC MODE</Title>
+			<IntroUp>In the full version you can match your wits with the Doom gem - and score 1,000 points!</IntroUp>
+			<IntroDwon>Classic mode is only available in the full version of Bejeweled Twist.</IntroDwon>
+		</Classic>
+		<Blitz>
+			<Show>true</Show>
+			<Title>BLITZ MODE</Title>
+			<IntroUp>The full version of Bejeweled Twist gives you more time to score! </IntroUp>
+			<IntroDwon>Blitz mode is only available in the full version of Bejeweled Twist.</IntroDwon>
+		</Blitz>
+		<FullUpsell>
+			<Show>true</Show>
+			<Span>3</Span>
+			<Title>Buy the full version and have even more fun with all this:</Title>
+			<FruitDance>Match or destroy a Fruit Gem to see the amazing Mega Fruit Bonus!</FruitDance>
+			<PersonalStats>Track your high scores, your best combos and cascades.</PersonalStats>
+			<SuperNovaGem>Rumor has it this gem is created by matching 6 gems in a line. </SuperNovaGem>
+			<ChallengeMode>Over 80 unique Bejeweled Twist puzzles you can unlock after you reach Rank 3.</ChallengeMode>
+			<ZenMode>Relax in a stress-free mode where Locked, Bomb and Doom gems don’t exist.</ZenMode>
+			<RankBar>As you complete levels, challenges or games you can earn stars for your Rank Bar.</RankBar>
+			<UpsellButton>Try the Full Version!</UpsellButton>
+			<BackToGame>Back To game</BackToGame>
+		</FullUpsell>
+	</GameUpsell>
+	
+	<HighScore>
+		<Heading>High Score</Heading>
+		<HeadingClassic>Classic</HeadingClassic>
+		<HeadingBlitz>Blitz</HeadingBlitz>
+	</HighScore>
+	
+	<Option>
+		<HowToPaly>How to Play</HowToPaly>
+		<MainMenu>Main Menu</MainMenu>
+		<BackToGame>Back to Game</BackToGame>
+		<Heading>Options</Heading>
+		<OptionUpsellButton>
+			<Text>Try the Full Version!</Text>
+		</OptionUpsellButton>
+		<SoundRadioLabel>Sounds</SoundRadioLabel>
+		<HintsRadioLabel>Hints</HintsRadioLabel>
+	</Option>
+	
+	<Tips>
+		<TipsLabel>Tips</TipsLabel>
+		<TipsOffLabel>Tips Off</TipsOffLabel>
+		<TipsOnLabel>Tips On</TipsOnLabel>
+		<BacktoGameLabel>Back to Game</BacktoGameLabel>
+		<LockedGem>
+			<Title>LOCKED GEM</Title>
+			<Text>This LOCKED GEM can't be moved, but you can still match it!</Text>
+		</LockedGem>
+		<LightningGem>
+			<Title>LIGHTNING GEM</Title>
+			<Text>You made a LIGHTNING GEM by matching 5 gems in a row!</Text>
+		</LightningGem>
+		<FlameGem>
+			<Title>FLAME GEM</Title>
+			<Text>You made a FLAME GEM by matching 4 in a row! It will explode when matched!</Text>
+		</FlameGem>
+		<BombGem>
+			<Title>BOMB GEM</Title>
+			<Text>Watch out for this Bomb Gem! Match it before it ticks down to zero!</Text>
+		</BombGem>
+		<BombGemZero>
+			<Title>BOMB GEM</Title>
+			<Text>Oh no! The Bomb Gem ticked down to zero… but you have one last chance to defuse it!</Text>
+		</BombGemZero>
+		<CoalGem>
+			<Title>COAL GEM</Title>
+			<Text>COAL GEMS can’t be matched, but you can destroy them with flame gems or lightning gems.</Text>
+		</CoalGem>
+		<FruitGem>
+			<Title>FRUIT GEM</Title>
+			<Text>Rare gem earned by maxing the Chain Meter. Match it for a surprise!</Text>
+		</FruitGem>
+	</Tips>	
+</data>

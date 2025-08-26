@@ -1,0 +1,477 @@
+@font-face { /* chirp font (twitter for web) */
+	font-family: "default"; src: url("/static/other/team/fonts/chirp.woff") format("woff");
+	font-weight: normal; font-style: normal;
+}
+
+@font-face { /* inter */
+    font-family: "inter"; src: url("/static/other/team/fonts/InterVariable.woff2") format("woff");
+    font-weight: normal; font-style: normal;
+}
+
+@font-face { /* blackspace omori font */
+	font-family: "anxious"; src: url("/static/other/team/fonts/anxious.ttf") format("truetype");
+	font-weight: normal; font-style: normal;
+}
+
+/* the implementation for the dyslexic font was rotting away in the corner and it started breaking stuff */
+
+@keyframes shake{
+	0% {transform:translate(0)}
+	10% {transform:translate(-1px,-1px)}
+	20% {transform:translate(1px,-1px)}
+	30% {transform:translate(-1px,1px)}
+	40% {transform:translate(1px,1px)}
+	50% {transform:translate(-1px,-1px)}
+	60% {transform:translate(1px,-1px)}
+	70% {transform:translate(-1px,1px)}
+	80% {transform:translate(-1px,-1px)}
+	90% {transform:translate(1px,-1px)}
+	100% {transform:translate(0)}
+}
+
+body {
+	overflow: hidden;
+	font-family: "default";
+	color: white;
+	background-color: rgb(0, 0, 0);
+	margin: 0;
+	padding: 0;
+	display: flex;
+	justify-content: center;
+}
+
+@keyframes cursor-help {
+	0% {cursor: url("/static/ssoggycat/team/info/images/cursor/help1.png") 13 13, help}
+	50% {cursor: url("/static/ssoggycat/team/info/images/cursor/help2.png") 13 13, help}
+}
+@keyframes cursor-normal {
+	0% {
+		cursor: url("/static/ssoggycat/team/info/images/cursor/normal1.png") 13 13, default;
+	}
+	50% {
+		cursor: url("/static/ssoggycat/team/info/images/cursor/normal2.png") 13 13, default;
+	}
+}
+
+:root, body, .bg {
+	animation: cursor-normal 1s infinite;
+	cursor: url("/static/ssoggycat/team/info/images/cursor/normal1.png") 13 13, default;
+}
+
+p:link,
+a:link,
+.fslink,
+:any-link,
+.sm > *,
+#circlebtn,
+.slink,
+.butt,
+.close,
+#acceptCookies, #declineCookies,
+.spoiler {cursor: url("/static/ssoggycat/team/info/images/cursor/link.png") 13 13, pointer}
+
+.sm-button, .sm-coloring {
+	background-color: #b8b8b8e7;
+	color: #2e2e2e;
+}
+
+.sm-extra {
+	text-decoration: underline;
+	background-color: #e7e7e7;
+	color: #2c2c2c;
+}
+
+.sm-selected {
+	background-color: white;
+	color: black;
+
+	--button-size: 2.5rem;
+	--text-size: 1.2rem;
+	--hover-size: 0rem;
+}
+
+@keyframes marquee {
+	0% {
+		transform: translateX(260px);
+	}
+
+	100% {
+		transform: translateX(-1150px);
+	}
+}
+
+.marquee {
+	white-space: nowrap;
+	animation: marquee 13s linear infinite;
+}
+
+.markdown-stupid-container {
+	overflow-y: scroll;
+	position: fixed;
+	height: 100vh;
+	width: 100vw;
+	scrollbar-width: none;
+}
+
+.markdown-stupid-container::-webkit-scrollbar {
+	display: none;
+}
+
+.markdown {
+	height: auto;
+	width: 75vw;
+	max-width: 60rem;
+	display: block;
+	margin: 20px auto;
+}
+
+@media (max-width: 900px) {
+	.markdown {
+		hyphens: auto;
+	}
+}
+
+.inter {
+	font-family: inter;                           /* wtf!!! cv in font!!! GET OUT!!! */
+	font-feature-settings: 'liga' 1, 'calt' 1, 'dlig' 1, 'cv01' 1, 'cv13' 1, 'ss01' 1, 'ss02' 1;
+}                                                 /* MUAHAHAH!!! */
+
+.bg {
+	position: fixed;
+	top: 0;
+	left: 0;
+	width: 100vw;
+	height: 100vh;
+	object-fit: cover;
+	filter: blur(8px) brightness(0.5);
+	z-index: -9999;
+	pointer-events: none;
+	user-select: none;
+	-moz-user-select: none;
+	-webkit-user-select: none;
+}
+
+@keyframes noise {
+  0% {
+    background-position: 0 0;
+  }
+  100% {
+    background-position: 256px 256px;
+  }
+}
+
+.dither {
+	position: fixed;
+	top: 0;
+	left: 0;
+	width: 100vw;
+	height: 100vh;
+	background-color: white;
+	background-image: url("/static/ssoggycat/team/info/images/gaussian.png");
+	background-size: 256px;
+	mix-blend-mode: multiply;
+	z-index: -9998;
+	pointer-events: none;
+	user-select: none;
+	-moz-user-select: none;
+	-webkit-user-select: none;
+	image-rendering: optimizeSpeed;
+	image-rendering: crisp-edges;
+	image-rendering: pixelated;
+
+	animation: noise 1s steps(8, jump-start) infinite;
+}
+
+.butt {
+	color: white;
+	position: fixed;
+	width: 25px; height: 25px; bottom: 10px;
+	padding: 4px; border-radius: 5px;
+	/* outline: 0.5px solid #777; */
+	background-color: rgba(0, 0, 0, 0.3);
+	user-select: none;
+	z-index: 1100;
+	display: flex; justify-content: center; align-items: center;
+	line-height: 1; text-align: center;
+}
+
+.loading {
+	color: white;
+	position: fixed;
+	height: 100vh; width: 100vw;
+	background-color: rgb(0, 0, 0);
+	z-index: 1000;
+	display: flex;
+	pointer-events: none;
+	justify-content: center;
+	align-items: center;
+	image-rendering: optimizeSpeed;
+	image-rendering: crisp-edges;
+	image-rendering: pixelated;
+	transition-duration: 0.25s;
+	transition-timing-function: ease-out;
+}
+
+.firstvisit {
+	position: fixed; display: flex;
+	border-radius: 20px;
+	bottom: 20px; padding: 10px; gap: 10px;
+	width: 360px; height: 100px;
+	background-color: rgba(0, 0, 0, 0.5);
+	backdrop-filter: blur(8px);
+	z-index: 1100; align-items: center;
+
+	transition-duration: 1s;
+	transition-timing-function: ease-out;
+}
+
+.firstvisit-closed {
+	opacity: 0;
+	visibility: hidden;
+}
+.firstvisit img {
+	height: 100%;
+	width: auto;
+	border-radius: 10px;
+}
+.firstvisit .goobspeech {
+	font-size: 0.75em;
+}
+
+.close {
+	display: flex; position: absolute;
+	top: -10px; right: -10px;
+	width: 20px; height: 20px;
+	justify-content: center; align-items: center;
+	border-radius: 10px; padding: 5px;
+	backdrop-filter: blur(3px);
+	background-color: rgba(156,0,0,0.25);
+	user-select: none;
+}
+
+.firstvisit .choice {display: flex; padding: 5px; justify-content: center}
+#acceptCookies, #declineCookies {
+	display: flex;
+	background-color: rgba(39,39,39,0.5);
+	border-radius: 5px;
+	width: 100px; height: 20px;
+	margin-right: 5px;
+	margin-left: 5px;
+	justify-content: center; align-items: center;
+	user-select: none;
+}
+
+.eviltint {
+	position: fixed;
+	height: 100vh; width: 100vw;
+	z-index: 10000; display: flex;
+	background: red;
+	opacity: 0;
+	visibility: hidden;
+	pointer-events: none;
+}
+
+.log {
+	position: absolute; display: flex;
+	font-size: 12px;
+	color: rgb(34,224,34);
+	background-color: rgba(0,0,0,0.8);
+	font-family: "Courier New", Courier, monospace;
+	left: 0; top: 0; margin: 10px;
+}
+
+/* ############################################### */
+
+h1, h2 {
+	font-weight: normal;
+	line-height: 1;
+	padding-bottom: 7px;
+	border-bottom: 1px solid #bfc2c4;
+	margin-bottom: 10px; margin-top: 10px;
+}
+
+h3, h4, a, span, blockquote, p {
+	margin-top: 5px;
+	margin-bottom: 5px;
+}
+
+h1 {font-size: 2em} /* title */
+h2 {font-size: 1.75em} /* section */
+
+h3 { /* giant text */
+	font-size: 1.5em;
+	font-weight: bold !important;
+	margin-bottom: 5px; margin-top: 5px;
+}
+h4 { /* big text */
+	font-size: 1.25em;
+	font-weight: normal !important;
+	margin-bottom: 5px; margin-top: 5px;
+}
+
+ul, ol {
+	margin-top: 5px; margin-bottom: 5px;
+	/* margin-left: -10px; */
+}
+
+a:link:not(.slink):not(.smlink), .fslink {
+	text-decoration: underline;
+	color: #aadcff
+}
+a:visited:not(.smlink), .fslink-visited {color: #bfc2c4}
+a span {font-size: 8.5px; vertical-align: text-top}
+p {margin: auto}
+
+.slink {
+	color: #EAF6FF;
+	text-decoration: underline dotted;
+}
+
+.slink-visited {
+	color: #bfc2c4;
+}
+
+.small, .tiny {
+	font-size: 0.75em;
+	color: #aaaaaa;
+	text-shadow: 0 2px 8px #000000ce;
+	display: block;
+}
+/* .tiny {font-size: 0.75em; color: #aaaaaa; display: block} */
+
+.option .small, .option .tiny {
+	margin-top: 0; margin-bottom: 0;
+}
+
+.shaking {
+	animation: shake 0.4s linear infinite alternate both;
+	display: inline-block;
+}
+.anxious {font-family: "anxious"; font-size: 1.2em}
+.glow {text-shadow: 0 0 5px currentColor, 0 0 10px currentColor}
+
+.spoiler {
+	background: black;
+	color: rgba(255,255,255,0);
+	transition: 0.2s;
+	user-select: none;
+}
+.spoiler:hover {
+	color: white;
+	background: none;
+	user-select: auto
+}
+
+/* greentext */
+blockquote {margin: 0; color: #89c76c}
+hr { /* separator */
+	border: 0;
+	height: 1px;
+	background: #bfc2c4;
+	margin: 10px 0;
+}
+pre { /* code block */
+	background: #010101;
+	color: white;
+	padding: 6px;
+	border-radius: 5px;
+}
+code {
+	font-family: Consolas, monospace;
+	font-size: 12px;
+}
+
+img {
+	vertical-align: middle;
+}
+.image {
+	display: flex;
+	max-height: 50vh;
+	max-width: 100%;
+}
+
+/* when hovering over specific words */
+
+.popup, .popup-content-attached, .popup > * {
+	animation: cursor-help 3s infinite !important;
+	cursor: url("/static/ssoggycat/team/info/images/cursor/help1.png") 13 13, default;
+}
+
+.popup-content-attached {
+	text-decoration: underline double rgba(193, 229, 255, 0.5) 1px;
+}
+
+.popup {
+	overflow-x: hidden;
+	overflow-y: auto;
+	position: absolute;
+	top: 0; left: 0;
+	width: auto;
+	height: auto;
+	margin: 0;
+
+	background-color: rgba(0, 0, 0, 0.5);
+	color: white;
+	padding: 9px;
+	border-radius: 15px;
+	border: solid rgba(255,255,255,0.07) 1px;
+	font-size: 1rem;
+	backdrop-filter: blur(8px);
+	min-width: 10rem; max-width: 30rem;
+	z-index: 9999;
+	transition:
+		top 0.3s cubic-bezier(.43,-0.2,0,1.27),
+		left 0.3s cubic-bezier(.43,-0.2,0,1.27);
+
+	pointer-events: auto !important;
+}
+
+.popup-hidden {
+	backdrop-filter: blur(0);
+	background: rgba(0, 0, 0, 0);
+	visibility: hidden;
+	border: solid transparent 1px;
+}
+
+.popup-fade {
+	opacity: 1;
+}
+
+.popup-fade-hidden {
+	opacity: 0;
+	visibility: hidden;
+}
+
+.popup .popup-media {
+	height: auto;
+	display: block;
+}
+
+/* unique cases where the entire page needs to be vertically centered (not marked down) */
+.vertical {
+	position: fixed;
+	top: 0;
+	left: 0;
+	width: 100vw;
+	height: 100vh;
+	gap: 4px;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	flex-direction: column;
+}
+
+.vertical br {
+	margin: 0.5em 0;
+}
+
+.vertical > * {
+	margin: 0;
+}
+
+/* scrapped idea: https://codepen.io/philippkuehn/pen/QbrOaN */
+
+/* ############################################### */
+
+/* highlight.js */
+pre code.hljs{display:block;overflow-x:auto;padding:1em}code.hljs{padding:3px 5px}.hljs{color:#888}.hljs-comment{color:#ccc}.hljs-punctuation,.hljs-tag{color:#888}.hljs-tag .hljs-attr,.hljs-tag .hljs-name{color:#888}.hljs-attribute,.hljs-doctag,.hljs-keyword,.hljs-meta .hljs-keyword,.hljs-name,.hljs-selector-tag{font-weight:700}.hljs-deletion,.hljs-number,.hljs-quote,.hljs-selector-class,.hljs-selector-id,.hljs-string,.hljs-template-tag,.hljs-type{color:#f99}.hljs-section,.hljs-title{color:#f99;font-weight:700}.hljs-link,.hljs-operator,.hljs-regexp,.hljs-selector-attr,.hljs-selector-pseudo,.hljs-symbol,.hljs-template-variable,.hljs-variable{color:#ff8f8f}.hljs-literal{color:#695}.hljs-addition,.hljs-built_in,.hljs-bullet,.hljs-code{color:#9f3}.hljs-meta{color:#6ef}.hljs-meta .hljs-string{color:#8df}.hljs-emphasis{font-style:italic}.hljs-strong{font-weight:700}

@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<root>
+  <!-- flashvar fallback values -->
+  <var id="language"          >en</var>
+  <var id="country"           >US</var>
+  <var id="showAds"           >true</var>
+  <var id="hasDownloadable"   >true</var>
+  <var id="downloadableURL"   >http://www.doublegames.com/bejeweled-twist.html</var>
+  <var id="cheatsEnabled"     >false</var>
+
+  <!-- general configuration values -->
+  <var id="api_realgames"     >false</var>
+  <var id="api_msn"           >false</var>
+  <var id="api_gamescafe"     >false</var>
+</root>

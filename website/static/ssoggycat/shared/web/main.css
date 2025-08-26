@@ -1,0 +1,50 @@
+:root {
+	color-scheme: light;
+}
+
+html, body {
+	overflow:hidden;
+	overscroll-behavior: none;
+
+	height: 100%;
+	padding: 0px;
+	margin: 0px;
+}
+
+body {
+	padding: env(safe-area-inset-top, 0px) env(safe-area-inset-right, 0px)
+    env(safe-area-inset-bottom, 0px) env(safe-area-inset-left, 0px);
+
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	background-color: rgb(255,204,95);
+}
+
+.gradient-background {
+	z-index: -9999;
+	position: fixed;
+	width: 100%;
+	height: 100%;
+	background: radial-gradient(circle, rgb(86,197,199) 0%, rgb(255,239,185) 30%,
+				rgb(188,144,201) 53%, rgb(255,154,154) 78%, rgb(255,204,95) 100%);
+}
+
+/* outperformed by new changes? */
+/* a (hopefully) working fix for mobile.. nest hub and similar are still broken asf */
+/*
+@media screen and (max-width: 480px) {
+	#sidemenu {max-width: 80%; overflow-x: hidden}
+	#circlebtn {right: 5px; bottom: 5px}
+}
+*/
+
+#soggycat {
+	border-radius: 1.5vh;
+	box-shadow: 1.5vh 1.5vh 3vh rgb(41, 41, 41, 0.25);
+
+	width: auto;
+	height: auto;
+	max-width: 75vw;
+	max-height: 75vh;
+}

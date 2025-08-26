@@ -1,0 +1,6 @@
+<div class="vertical">
+	there's not much interesting there, other than an admin panel which you won't have access to :sog:.
+	go there manually if you really want to. but don't expect much
+	<br><br>
+	<button onclick="history.back()">go back</button>
+</div>

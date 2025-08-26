@@ -1,0 +1,49 @@
+Page "Challenges"
+{
+	Desc: "Beat levels with special rules and put your skills to the ultimate test!"
+	Trophy "300,000"
+	{
+		Id: 47
+		ScoreReq: 300000
+		Levels: scary
+		SmallDesc: "Score 300,000 pts"
+		Desc: "Score over 300,000 points on this level to win this challenge."
+	}	
+	
+	Trophy "35 Goal Pegs"
+	{
+	
+		Id: 48
+		NumOrange: 35
+		Levels: wiggles
+		SmallDesc: "Hit 35 Orange Pegs"
+		Desc: "This level has 35 orange pegs! Can you still hit them all?" 
+	}
+	
+	Trophy "Clear it!"
+	{
+		Id: 49
+		Levels: slides
+		ClearLevel: true
+		SmallDesc: "Clear All Pegs"
+		Desc: "You need to clear every single brick and peg to win!"
+	}			
+	
+	Trophy "350,000"
+	{
+		Id: 50
+		Levels: sonofowl
+		ScoreReq: 350000
+		Desc: "Score over 350,000 points in a single level!"
+		SmallDesc: "Score 350,000 pts"
+	}
+	
+	Trophy "3 balls!"
+	{
+		Id: 51
+		Balls: 3
+		Levels: doublebucket
+		SmallDesc: "Beat the level"
+		Desc: "You only have 3 balls to beat this whole level!"
+	}		
+}

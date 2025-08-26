@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Soggy Translate</title>
+	<script src="main.js" defer></script>
+	<link rel="stylesheet" href="style.css">
+</head>
+<body>
+	<div class="vertical-container">
+		<p class="title">Soggy Translate</p>
+		<img src="/assets/images/translatesog.webp" alt="soggy" class="sog-image">
+	</div>
+	<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320" id="waves" preserveAspectRatio="none">
+		<path fill="#4b75e5" fill-opacity="1" d="M0,64L13.3,90.7C26.7,117,53,171,80,176C106.7,181,133,139,160,128C186.7,117,213,139,240,144C266.7,149,293,139,320,133.3C346.7,128,373,128,400,154.7C426.7,181,453,235,480,234.7C506.7,235,533,181,560,138.7C586.7,96,613,64,640,48C666.7,32,693,32,720,69.3C746.7,107,773,181,800,224C826.7,267,853,277,880,245.3C906.7,213,933,139,960,106.7C986.7,75,1013,85,1040,122.7C1066.7,160,1093,224,1120,240C1146.7,256,1173,224,1200,218.7C1226.7,213,1253,235,1280,208C1306.7,181,1333,107,1360,64C1386.7,21,1413,11,1427,5.3L1440,0L1440,320L1426.7,320C1413.3,320,1387,320,1360,320C1333.3,320,1307,320,1280,320C1253.3,320,1227,320,1200,320C1173.3,320,1147,320,1120,320C1093.3,320,1067,320,1040,320C1013.3,320,987,320,960,320C933.3,320,907,320,880,320C853.3,320,827,320,800,320C773.3,320,747,320,720,320C693.3,320,667,320,640,320C613.3,320,587,320,560,320C533.3,320,507,320,480,320C453.3,320,427,320,400,320C373.3,320,347,320,320,320C293.3,320,267,320,240,320C213.3,320,187,320,160,320C133.3,320,107,320,80,320C53.3,320,27,320,13,320L0,320Z"></path>	</svg>
+	<div class="vertical-container bottom-container">
+		<div class="input-container">
+			<textarea id="to_sog" placeholder="Enter text to Sog/Unsog"></textarea>
+		</div>
+		<div class="buttons-container">
+			<button id="sog-button" onclick="sog()">Sog</button>
+			<button id="copy-button" onclick="unsog()">Unsog</button>
+			<button id="clear-button" onclick="clear_text()">Clear</button>
+		</div>
+	</div>
+</body>
+</html>

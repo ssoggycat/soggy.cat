@@ -9,60 +9,40 @@ import globals from 'globals';
 
 import stylistic from '@stylistic/eslint-plugin';
 
+const common = {
+	ignores: ['**/threejs/**/*', '**/node_modules/**/*', '**/.pages_cache/**/*'],
+	languageOptions: {
+		parser: babelParser,
+		parserOptions: {
+			requireConfigFile: false,
+			babelOptions: {
+				babelrc: false,
+				configFile: false,
+				presets: ['@babel/preset-env'],
+			},
+		},
+		ecmaVersion: 2022,
+		sourceType: 'module',
+		globals: {
+			...globals.browser,
+			...globals.es2022,
+		},
+	},
+	linterOptions: {
+		reportUnusedDisableDirectives: true,
+	},
+};
+
 export default [
 	{
 		files: ['**/*.js', '**/*.mjs', '**/*.html'],
-		ignores: ['**/threejs/**/*', '**/node_modules/**/*', '**/.pages_cache/**/*'],
+		...common,
 		plugins: {
 			js,
 			htmlInline,
-			'@stylistic': stylistic,
-		},
-		languageOptions: {
-			parser: babelParser,
-			parserOptions: {
-				requireConfigFile: false,
-				babelOptions: {
-					babelrc: false,
-					configFile: false,
-					presets: ['@babel/preset-env'],
-				},
-			},
-			ecmaVersion: 2022,
-			sourceType: 'module',
-			globals: {
-				...globals.browser,
-				...globals.es2022,
-			},
-		},
-		linterOptions: {
-			reportUnusedDisableDirectives: true,
 		},
 		rules: {
 			...js.configs.recommended.rules,
-			...stylistic.configs['disable-legacy'].rules,
-			...stylistic.configs.recommended.rules,
-			'@stylistic/indent': ['error', 'tab', { SwitchCase: 1 }],
-			'@stylistic/indent-binary-ops': ['error', 'tab'],
-			'@stylistic/no-tabs': 'off',
-			'@stylistic/semi': 'error',
-			'@stylistic/semi-style': 'error',
-			'@stylistic/no-extra-semi': 'error',
-			'@stylistic/switch-colon-spacing': 'error',
-			'@stylistic/implicit-arrow-linebreak': 'error',
-			'@stylistic/function-call-argument-newline': ['error', 'consistent'],
-			'@stylistic/comma-dangle': ['error', {
-				arrays: 'always-multiline',
-				objects: 'always-multiline',
-				imports: 'always-multiline',
-				exports: 'always-multiline',
-				functions: 'never',
-				importAttributes: 'always-multiline',
-				dynamicImports: 'never',
-			}],
-			'@stylistic/function-call-spacing': 'error',
-			'@stylistic/wrap-regex': 'off',
-			'@stylistic/linebreak-style': ['off', 'unix'], // ENABLE THIS AFTER FINISHING SOGGY.CAT COMMIT
 			'prefer-const': 'error',
 			'for-direction': 'error',
 			'no-const-assign': 'error',
@@ -89,6 +69,38 @@ export default [
 		},
 	},
 	{
+		files: ['**/*.js', '**/*.mjs'],
+		...common,
+		plugins: {
+			'@stylistic': stylistic,
+		},
+		rules: {
+			...stylistic.configs['disable-legacy'].rules,
+			...stylistic.configs.recommended.rules,
+			'@stylistic/indent': ['error', 'tab', { SwitchCase: 1 }],
+			'@stylistic/indent-binary-ops': ['error', 'tab'],
+			'@stylistic/no-tabs': 'off',
+			'@stylistic/semi': 'error',
+			'@stylistic/semi-style': 'error',
+			'@stylistic/no-extra-semi': 'error',
+			'@stylistic/switch-colon-spacing': 'error',
+			'@stylistic/implicit-arrow-linebreak': 'error',
+			'@stylistic/function-call-argument-newline': ['error', 'consistent'],
+			'@stylistic/comma-dangle': ['error', {
+				arrays: 'always-multiline',
+				objects: 'always-multiline',
+				imports: 'always-multiline',
+				exports: 'always-multiline',
+				functions: 'never',
+				importAttributes: 'always-multiline',
+				dynamicImports: 'never',
+			}],
+			'@stylistic/function-call-spacing': 'error',
+			'@stylistic/wrap-regex': 'off',
+			'@stylistic/linebreak-style': ['error', 'unix'], // ENABLE THIS AFTER FINISHING SOGGY.CAT COMMIT
+		},
+	},
+	{ //
 		files: ['**/*.html'],
 
 		...html.configs['flat/recommended'],
@@ -111,10 +123,15 @@ export default [
 		},
 		rules: {
 			...html.configs['flat/recommended'].rules,
-			'@html-eslint/indent': ['error', 'tab'],
+			'@html-eslint/indent': ['error', 'tab', {
+				tagChildrenIndent: {
+					html: 0,
+				},
+			}],
+			'@html-eslint/prefer-https': 'error',
 			'@html-eslint/use-baseline': 'warn',
 			'@html-eslint/require-meta-description': 'warn',
-			'@html-eslint/require-open-graph-protocol': 'warn',
+			'@html-eslint/require-open-graph-protocol': 'off',
 			'@html-eslint/require-closing-tags': ['error', { selfClosing: 'always' }],
 			'@html-eslint/require-explicit-size': 'error',
 			'@html-eslint/require-li-container': 'error',
@@ -126,6 +143,7 @@ export default [
 			'@html-eslint/no-obsolete-tags': 'error',
 			'@html-eslint/no-duplicate-attrs': 'error',
 			'@html-eslint/no-script-style-type': 'error',
+			'@html-eslint/require-doctype': 'error',
 			'@html-eslint/require-img-alt': 'off',
 			'@html-eslint/no-duplicate-id': 'error',
 		},

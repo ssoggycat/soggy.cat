@@ -1,0 +1,32 @@
+* text=auto eol=lf
+
+# text
+*.html text eol=lf
+*.css text eol=lf
+*.js text eol=lf
+*.svg text eol=lf
+*.sgmd text eol=lf
+
+*.md text eol=lf
+*.txt text eol=lf
+
+# images
+*.png binary
+*.jpg binary
+*.webp binary
+*.gif binary
+*.ico binary
+
+# audio
+*.mp3 binary
+*.ogg binary
+*.opus binary
+
+# fonts
+*.ttf binary
+*.woff binary
+*.woff2 binary
+
+# what the hell, sure.
+*.wasm binary
+*.bat text eol=crlf

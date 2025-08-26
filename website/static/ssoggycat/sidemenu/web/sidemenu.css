@@ -1,0 +1,175 @@
+@font-face {
+    font-family: 'Spline Sans Mono';
+    font-style: normal;
+    font-weight: 400;
+    font-display: swap;
+    src: url("/static/other/sidemenu/fonts/spline.woff2") format('woff2');
+    unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
+
+@font-face {
+    font-family: 'Spline Sans Mono';
+    font-style: normal;
+    font-weight: 400;
+    font-display: swap;
+    src: url("/static/other/sidemenu/fonts/spline2.woff2") format('woff2');
+    unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+
+#circlebtn {
+	padding: 0;
+	position: fixed;
+	right: calc(env(safe-area-inset-right) / 2 + 1vh);
+	bottom: calc(env(safe-area-inset-bottom) / 2 + 1vh);
+
+	background-color: rgba(255,255,255, 0.25);
+	cursor: pointer;
+
+	backdrop-filter: blur(0.175rem);
+	box-shadow: 1vh 2vh 3vh rgb(41, 41, 41, 0.25);
+
+	width: 3vmin;
+	height: 3vmin;
+	border-radius: 50%;
+	border-style: none;
+
+	transition-duration: 230ms;
+}
+
+@media (hover: hover) {
+	#circlebtn:hover {
+		background-color: rgba(255,255,255, 0.5);
+
+		width: 3.5vmin;
+		height: 3.5vmin;
+	}
+}
+
+#circlebtn:active {
+	background-color: rgba(255,255,255, 0.25);
+	transform: translateY(0.5vh) scale(0.95);
+
+	transition-duration: 50ms;
+}
+
+/* ############################### */
+
+.sm {
+	position: fixed;
+	right: 0;
+	bottom: calc(env(safe-area-inset-bottom) + 5vh);
+
+	will-change: transform;
+	display: flex;
+	flex-direction: column;
+
+	background-color: rgba(255,255,255, 0.25);
+	border-top-left-radius: 1.0rem;
+	border-bottom-left-radius: 1.0rem;
+	backdrop-filter: blur(0.175rem);
+
+	box-shadow: 1vh 2vh 3vh rgb(41, 41, 41, 0.25);
+
+	padding: 0.166rem 0.333rem;
+	padding-right: 0;
+	min-width: 10rem;
+
+	transition-duration: 600ms;
+	max-width: 100%;
+}
+
+.disappointment > .sm-button {
+	width: 310px !important;
+	height: auto !important;
+	border-bottom-left-radius: 0.3rem !important;
+	border-top-left-radius: 0.3rem !important;
+}
+
+@media (max-width: 1100px) {
+	.disappointment {
+		display: none !important;
+		height: 0 !important;
+		margin: 0 !important;
+		padding: 0 !important;
+	}
+
+	#circlebtn {
+		width: 9vmin;
+		height: 9vmin;
+	}
+
+	.sm {
+		bottom: calc(env(safe-area-inset-bottom) / 2 + 12.25vmin);
+	}
+
+	@media (hover: hover) {
+		#circlebtn:hover {
+			width: 9.5vmin;
+			height: 9.5vmin;
+		}
+	}
+}
+
+.sm-closed {
+	transform: translateX(100%);
+	visibility: hidden;
+	pointer-events: none;
+}
+
+/* Side menu children */
+.sm > * {
+	cursor: pointer;
+	margin: 0.1666rem 0;
+	margin-right: 0;
+
+	font-family: 'Spline Sans Mono', monospace;
+	text-decoration: none;
+	color: black;
+
+	--button-size: 3rem;
+	--text-size: 1.5rem;
+	--hover-size: 0.25rem;
+}
+
+/* Side menu button presets */
+.sm-small {
+	--button-size: 1.75rem;
+	--text-size: 0.95rem;
+	--hover-size: 0.125rem;
+}
+
+/* Side menu button */
+.sm-button {
+	display: flex;
+	flex-direction: row;
+	align-items: center;
+	white-space: nowrap;
+
+	background-color: white;
+	border-top-left-radius: 1.25rem;
+	border-bottom-left-radius: 1.25rem;
+
+	height: var(--button-size);
+	font-size:  var(--text-size);
+
+	transition-duration: 200ms;
+}
+
+.sm-button img {
+	height: 50%;
+	width: auto;
+	margin: 0.5rem;
+	margin-right: 0;
+	transition-duration: 200ms;
+}
+
+.sm-button p {
+	margin: unset;
+	margin-left: 0.5rem;
+	margin-right: 0.5rem;
+}
+
+.sm-button:hover {
+	height: calc(var(--button-size) + var(--hover-size));
+	font-size: calc(var(--text-size) + var(--hover-size));
+}
