@@ -16,7 +16,7 @@ animate();
 
 function init() {
 	googtainer = document.getElementById("googtainer");
-	
+
 	scene = new THREE.Scene();
 	renderer = new THREE.WebGLRenderer({antialias: true});
 	renderer.toneMapping = THREE.AgXToneMapping;
@@ -30,20 +30,20 @@ function init() {
 	const loader = new GLTFLoader();
 	const dracoLoader = new DRACOLoader();
 
-	dracoLoader.setDecoderPath('assets/static/threejs/draco/');
+	dracoLoader.setDecoderPath('/static/other/shared/web/threejs/draco/');
 
 	loader.setDRACOLoader(dracoLoader);
 
 	texloader = new THREE.TextureLoader();
 
-	const frameTex = texloader.load('scene/frameBake.webp'); 
+	const frameTex = texloader.load('/static/ssoggycat/goog/scenes/main/frameBake.webp');
 	frameTex.colorSpace = THREE.SRGBColorSpace;
 	frameTex.flipY = false;
 	frameTex.generateMipmaps = false;
 
-	const defaultAlbedoTex = texloader.load('assets/images/goog.webp');
-	diffuseTex = texloader.load('scene/googBake.webp');
-	glossyTex = texloader.load('scene/googBakeGlossy.webp');
+	const defaultAlbedoTex = texloader.load('/static/ssoggycat/goog/images/goog.webp');
+	diffuseTex = texloader.load('/static/ssoggycat/goog/scenes/main/googBake.webp');
+	glossyTex = texloader.load('/static/ssoggycat/goog/scenes/main/googBakeGlossy.webp');
 
 	defaultAlbedoTex.flipY = false;
 	defaultAlbedoTex.generateMipmaps = false;
@@ -53,14 +53,14 @@ function init() {
 	glossyTex.generateMipmaps = false;
 
 	const frameMaterial = new THREE.MeshBasicMaterial({
-		map: frameTex
+		map: frameTex,
 	});
 
 	googLightmapMaterial = new THREE.ShaderMaterial({
 		uniforms: {
 			albedo: { value: defaultAlbedoTex },
 			diffuse: { value: diffuseTex },
-			glossy: { value: glossyTex }
+			glossy: { value: glossyTex },
 		},
 
 		vertexShader: `
@@ -76,7 +76,7 @@ function init() {
 			uniform sampler2D albedo;
 			uniform sampler2D diffuse;
 			uniform sampler2D glossy;
-	
+
 			void main() {
 				vec4 albedoRGBA = texture2D(albedo, vUv);
 				vec3 diffuseColor = texture2D(diffuse, vUv).rgb;
@@ -89,12 +89,12 @@ function init() {
 
 				gl_FragColor = vec4(composite * albedoRGBA.a, albedoRGBA.a);
 			}
-		`
+		`,
 	});
 
-	loader.load('scene/scene.glb', (gltf) => {
+	loader.load('/static/ssoggycat/goog/scenes/main/scene.glb', (gltf) => {
 		scene.add(gltf.scene);
-		
+
 		frame = gltf.scene.getObjectByName("Frame");
 		frame.material = frameMaterial;
 
@@ -151,7 +151,7 @@ function updateMouseMovement(clientX, clientY, forceUnhover) {
 
 	if (!forceUnhover) {
 		raycaster.setFromCamera(mouse, camera);
-		
+
 		const intersects = raycaster.intersectObjects([frame, goog]);
 		if (intersects.length > 0 && intersects[0].object === goog)
 			hovering = true;

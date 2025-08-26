@@ -3,38 +3,38 @@
 <html lang="en">
 <head>
 	<title>Goog...</title>
-	<link rel="icon" href="assets/images/goog.webp">
+	<link rel="icon" href="assets/images/goog.webp"/>
 
-	<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover"/>
+	<meta charset="UTF-8"/>
 
-	<meta name="title" content="Goog...">
-	<meta property="og:title" content="Goog...">
+	<meta name="title" content="Goog..."/>
+	<meta property="og:title" content="Goog..."/>
 
-	<meta name="description" content="Goog...">
-	<meta property="og:description" content="Goog...">
+	<meta name="description" content="Goog..."/>
+	<meta property="og:description" content="Goog..."/>
 
-	<meta property="og:image" content="assets/images/goog.webp">
+	<meta property="og:image" content="assets/images/goog.webp"/>
 	<meta name="color-scheme" content="light"/>
 	<meta name="theme-color" content="#40736a"/>
 
-	<link rel="stylesheet" href="assets/static/soggycat/sidemenu.css">
-	<link rel="stylesheet" href="assets/static/soggycat/main.css">
+	<link rel="stylesheet" href="/static/ssoggycat/sidemenu/web/sidemenu.css"/>
+	<link rel="stylesheet" href="/static/ssoggycat/shared/web/main.css"/>
 	<!-- links starting with "/" lead to goog.soggy.cat and not soggy.cat -->
 	<!-- THIS MAY CHANGE!! at least, /static specifically could redirect to soggy.cat -->
-	
+
 	<!-- needed files are inside /goog/ for now so that it could work on both the subdomain and the main domain -->
 
-	<link rel="stylesheet" href="goog.css">
+	<link rel="stylesheet" href="goog.css"/>
 </head>
 
 <body data-soggy-pagetype="three-js">
 	<script type="importmap">
 		{
 			"imports": {
-				"three": "./assets/static/threejs/three.module.js",
-				"GLTFLoader": "./assets/static/threejs/addons/GLTFLoader.js",
-				"DRACOLoader": "./assets/static/threejs/addons/DRACOLoader.js"
+				"three": "/static/other/shared/web/threejs/three.module.js",
+				"GLTFLoader": "/static/other/shared/web/threejs/addons/GLTFLoader.js",
+				"DRACOLoader": "/static/other/shared/web/threejs/addons/DRACOLoader.js"
 			}
 		}
 	</script>
@@ -47,14 +47,14 @@
 	<div id="sidemenu" class="sm sm-closed" inert>
 		<a aria-label="code" href="/github" target="GithubTarget">
 			<div class = "sm-button">
-				<img src="assets/svgs/code.svg">
+				<img src="/static/other/sidemenu/svgs/code.svg"/>
 				<p>code</p>
 			</div>
 		</a>
 
 		<a aria-label="no css" href="nocss" target="NoCSSTarget">
 			<div class="sm-button sm-small">
-				<img src="assets/svgs/nocss.svg">
+				<img src="/static/other/sidemenu/svgs/nocss.svg"/>
 				<p>no css</p>
 			</div>
 		</a>
@@ -62,16 +62,16 @@
 		<a aria-label="upload" href="#"
 			onclick="document.getElementById('picker').click(); return false;">
 			<div class="sm-button sm-small">
-				<img src="assets/svgs/upload.svg">
+				<img src="/static/other/sidemenu/svgs/upload.svg"/>
 				<p>upload</p>
 			</div>
 		</a>
 	</div>
 
 	<button id="circlebtn"></button>
-	<span id='player' style='display: none'></span>
-	<input type="file" id="picker" style="display: none" accept="image/*" />
+	<span id="player" style="display: none"></span>
+	<input type="file" id="picker" style="display: none" accept="image/*"/>
 
-	<script src='assets/static/soggycat/main.js'></script>
+	<script src="/static/soggycat/shared/web/main.js"></script>
 </body>
 </html>

@@ -129,7 +129,7 @@ export default [
 				},
 			}],
 			'@html-eslint/prefer-https': 'error',
-			'@html-eslint/use-baseline': 'warn',
+			'@html-eslint/use-baseline': ['warn', { available: 'newly' }],
 			'@html-eslint/require-meta-description': 'warn',
 			'@html-eslint/require-open-graph-protocol': 'off',
 			'@html-eslint/require-closing-tags': ['error', { selfClosing: 'always' }],
