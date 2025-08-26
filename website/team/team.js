@@ -62,7 +62,7 @@ function intro() {
 	document.querySelector(".bg").load();
 	document.querySelector(".song").style.display = "block";
 	document.querySelector(".smallsogt").style.opacity = "0";
-
+	document.querySelector(".skipintro").style.display = "none";
 	setTimeout(function () {
 		document.querySelector(".overlay").style.display = "none";
 		document.querySelector(".smallsogt").style.display = "none";
@@ -255,7 +255,7 @@ document.addEventListener("mousedown", (e) => {
 	}, 1000);
 });
 
-// discord widget
+/* discord widget
 document.querySelector(".b2").addEventListener("click", function () {
 		discord.style.opacity = "1";
 		discord.style.pointerEvents = "all";
@@ -275,13 +275,15 @@ document.querySelector(".close").addEventListener("click", function () {
 				volume.disconnect();
 				volume.connect(context.destination);
 });
+*/
 
-// bah bai!
+/* bah bai!
 window.addEventListener("beforeunload", function () {
 		flash.style.backgroundColor = "black";
 		flash.style.transition = "opacity 0.35s ease-in-out";
 		flash.style.opacity = "1";
 });
+*/
 
 // skip
 document.querySelector(".skipintro").addEventListener("click", function () {
