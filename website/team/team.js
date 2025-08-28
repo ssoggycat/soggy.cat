@@ -49,6 +49,7 @@ function WEEE() {
 	song.loop = true;
 	song.loopStart = 1.415;
 	song.loopEnd = buffer.duration;
+	document.title = "♪ BUTT3RFLI3S >w< - milkypossum";
 	song.start(0);
 }
 
