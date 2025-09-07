@@ -87,7 +87,7 @@
         /*//////////////////////////////////////////////////////////////////////*/
 
         a, span, br {
-            color: white; 
+            color: white;
             font-family: "clear sans", sans-serif;
             user-select: none;
         }
@@ -103,7 +103,7 @@
 
         .close {display: flex; top: 0; justify-content: right;}
         button {
-            min-height: 3em; min-width: 3em !important; 
+            min-height: 3em; min-width: 3em !important;
             background: none; appearance: none; border: none;
             padding: 0; outline: none; box-shadow: none;
             cursor: pointer; user-select: none;
@@ -224,14 +224,14 @@
         .answer.show {opacity: 1;}
 
         .button-group {
-            display: flex; flex-direction: row; 
+            display: flex; flex-direction: row;
             gap: 0
         }
 
         /*//////////////////////////////////////////////////////////////////////*/
 
         .suggestions {
-            position: absolute; background: #18181a; 
+            position: absolute; background: #18181a;
             border: 1.5px solid #212121; border-top: none;
             max-height: 200px; overflow-y: auto;
             width: 100%; z-index: 10000; left: 0; top: 100%;
@@ -349,7 +349,7 @@
             <a class="title">Soggle</a>
             <a class="subtitle small">wordle but sog. do you get it. do you?</a>
             <br>
-            <span>get 380+ titles of images of shark right!</span>
+            <span>try and get 380+ titles of images of shark right!</span>
             <br>
             <span>this game is based on the <a href="https://drive3.soggy.cat">soggy drive</a>'s file naming system, which is most commonly used across reposts.</span>
             <span>you should familiarize yourself with it before even considering playing this..</span>
@@ -466,7 +466,7 @@
             "DISGUSTED.webp", "damn thats crazy.webp", "dance.webp", "darkness.webp", "deep sea creature 2.webp", "deep sea creature.webp", "dem paws 2.webp", "dem paws.webp", "demon under your bed.webp", "demon.webp", "derp.webp", "disappointed.webp", "disapproval.webp", "drowning in plushies.webp", "dry standing.webp", "dumb 2.webp", "dumb sit.webp", "dumb.webp",
             "EVIL CREATURE.webp", "EVIL.webp", "ear grab.webp", "earless.webp", "eepy.webp", "egg broke.webp", "egg.webp", "empty stare.webp", "enraged.webp", "epic selfie 2.webp", "epic selfie.webp", "erm.webp", "err.webp", "even uglier.webp", "evil goblin.webp", "ew.webp", "eyebrow raise.webp",
             "fack u.webp", "far away.webp", "fart 2.webp", "fart.webp", "fatass 2.webp", "fatass.webp", "fear.webp", "felinus.webp", "final footage.webp", "finger.webp", "flat.webp", "fluffy guy.webp", "fluffy.webp", "four doritos long 2.webp", "four doritos long.webp", "four step stool.webp", "fresh.webp", "from the shadows.webp", "fuck yuo.webp", "fucked up.webp",
-            "gamer.webp", "gang.webp", "garage 2.webp", "garage.webp", "gay.webp", "giant.webp", "giraffe.webp", "gn.webp", "golly jeepers.webp", "goog .webp", "goog.webp", "grab the cat.webp", "grab!!.webp", "green eye.webp", "green eyed 2.webp", "green eyed.webp", "grin.webp", "groceries.webp", "grr.webp", "guuuuh.webp", "guweh.webp", "gwah 2.webp", "gwah 3.webp", "gwah.webp",
+            "gamer.webp", "gang.webp", "garage 2.webp", "garage.webp", "gay.webp", "giant.webp", "giraffe.webp", "gn.webp", "golly jeepers.webp", "goog.webp", "grab the cat.webp", "grab!!.webp", "green eye.webp", "green eyed 2.webp", "green eyed.webp", "grin.webp", "groceries.webp", "grr.webp", "guuuuh.webp", "guweh.webp", "gwah 2.webp", "gwah 3.webp", "gwah.webp",
             "half view.webp", "hamburger.webp", "hand lick.webp", "happy face.webp", "he has one braincell.webp", "hello there.webp", "hello.webp", "hey.webp", "hide.webp", "hiding.webp", "hii.webp", "holding the bathtub.webp", "horrific 2.webp", "horrific 3.webp", "horrific.webp", "horror.webp", "huh.webp", "hunter.webp",
             "IT'S SNOWING IT'S SNOWING IT'S SNOWING.webp", "i got cash on me.webp", "i will find you.webp", "idiot.webp", "idk.webp", "impatient son.webp", "in bed 2.webp", "in bed.webp", "insane.webp", "it says gullible on the ceiling.webp",
             "jawline.webp", "just chillin brah.webp", "just minutes before the sog.webp",
@@ -520,16 +520,16 @@
                         reject(new Error("all urls failed?!"));
                         return;
                     }
-                    img.src = baseurl[urlindex] + imagenamefix; 
+                    img.src = baseurl[urlindex] + imagenamefix;
                     urlindex++;
-                    
+
                     const timeout = setTimeout(() => {
                         img.onload = img.onerror = null;
                         loadurl();
                     }, 3000);
                     img.onload = () => {clearTimeout(timeout); resolve(img)};
                     img.onerror = () => {clearTimeout(timeout); loadurl()};
-                }; 
+                };
                 loadurl();
             });
         }
@@ -657,21 +657,21 @@
         });
 
         /*                                                       /
-        
-        
+
+
                   WIN FUNCTION BELOW!!!!!!!! YOU IDIOT
                (just to cv, not anyone else reading this)
-        
-        
+
+
         /                                                       */
         function checkanswer() {
             const input = document.querySelector(".input");
             const answer = input.value.trim().toLowerCase();
             const correct = game.imagename.toLowerCase();
             const caption = document.querySelector(".caption");
-            
+
             if (answer === correct) {
-                game.fraction = 1; 
+                game.fraction = 1;
                 input.value = "";
                 game.haswon = true;
                 caption.innerHTML = `this is a&nbsp;<i>${game.imagename}</i>`;
@@ -695,7 +695,7 @@
             } else {
                 if (isanimating) return;
                 isanimating = true;
-                
+
                 if (answer) {
                     incorrectanswers.add(answer);
                     game.guesscount++;
@@ -705,8 +705,8 @@
                 input.classList.add("error");
                 input.placeholder = "[𝐋𝐎𝐔𝐃 𝐈𝐍𝐂𝐎𝐑𝐑𝐄𝐂𝐓 𝐁𝐔𝐙𝐙𝐄𝐑]";
                 input.value = "";
-                document.querySelector(".buzzer").pause(); 
-                document.querySelector(".buzzer").currentTime = 0; 
+                document.querySelector(".buzzer").pause();
+                document.querySelector(".buzzer").currentTime = 0;
                 document.querySelector(".buzzer").play();
                 setTimeout(() => {
                     input.classList.remove("error");
@@ -736,7 +736,7 @@
         document.querySelector(".hinthard").addEventListener("click", () => {
             if (game.image && game.fraction > 2) {
                 game.fraction = game.fraction / 2;
-                newfragment(); 
+                newfragment();
                 updatehinthard();
                 savegamestate();
             }
@@ -766,7 +766,7 @@
             }
             savegamestate();
         });
-        
+
         // prevent file extensions in input, just in case the player forgot
         document.querySelector(".input").addEventListener("input", function() {
             this.value = this.value.replace(/\.(jpg|jpeg|png|webp|mp4|jfif)$/i, "");
@@ -924,7 +924,7 @@
             });
             if (!(await loadgamestate())) {
                 await newgame();
-            }
+			}
         });
 
         document.querySelector(".info").addEventListener("click", () => {
@@ -955,7 +955,7 @@
         ///////////////////////// discord shenanigans ////////////////////////////
 
         function setpreview(ispreview) {
-            let banner = document.querySelector(".preview");       
+            let banner = document.querySelector(".preview");
             if (!banner) {
                 banner = document.createElement("div");
                 banner.className = "preview";
