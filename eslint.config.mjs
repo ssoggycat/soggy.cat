@@ -132,7 +132,7 @@ export default [
 			'@html-eslint/use-baseline': ['warn', { available: 'newly' }],
 			'@html-eslint/require-meta-description': 'warn',
 			'@html-eslint/require-open-graph-protocol': 'off',
-			'@html-eslint/require-closing-tags': ['error', { selfClosing: 'always' }],
+			'@html-eslint/require-closing-tags': ['error', { selfClosing: 'never' }],
 			'@html-eslint/require-explicit-size': 'error',
 			'@html-eslint/require-li-container': 'error',
 			'@html-eslint/require-meta-charset': 'error',

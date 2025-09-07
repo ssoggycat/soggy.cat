@@ -1,11 +1,22 @@
 {
-    "livePreview.serverRoot": "website",
-    "files.eol": "\n",
-    "files.insertFinalNewline": true,
-    "files.trimFinalNewlines": true,
-    "files.trimTrailingWhitespace": true,
-    "editor.trimAutoWhitespace": true,
-    "editor.indentSize": "tabSize",
-    "editor.tabSize": 4,
-    "editor.insertSpaces": false
+	"livePreview.serverRoot": "website",
+
+	"files.eol": "\n",
+	"files.insertFinalNewline": true,
+	"files.trimFinalNewlines": true,
+	"files.trimTrailingWhitespace": true,
+
+	"editor.trimAutoWhitespace": true,
+	"editor.detectIndentation": false,
+	"editor.indentSize": "tabSize",
+	"editor.tabSize": 4,
+	"editor.insertSpaces": false,
+
+	"eslint.useFlatConfig": true,
+	"eslint.validate": [
+		"javascript",
+		"typescript",
+		"html",
+		"css"
+	],
 }
