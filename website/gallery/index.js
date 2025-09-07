@@ -8,7 +8,7 @@ const gltfLoader = new GLTFLoader();
 const dracoLoader = new DRACOLoader();
 
 
-dracoLoader.setDecoderPath('/assets/static/threejs/draco/');
+dracoLoader.setDecoderPath('/static/other/shared/web/threejs/draco/');
 //dracoLoader.getDecoderModule();
 
 gltfLoader.setDRACOLoader(dracoLoader);
@@ -54,12 +54,12 @@ function init() {
 
 	light.angle = Math.PI/3.5;
 	light.penumbra = .75;
-	
+
 	light.position.z = 3;
 	light.position.y = 4;
 
 	scene.add(light);
-	
+
 	gltfLoader.load("assets/models/soggy.gltf", (gltf) => {
     	root = gltf.scene;
    		scene.add(root);
@@ -111,15 +111,15 @@ function init() {
 }
 
 function onWindowResize() {
-	
+
 	camera.aspect = window.innerWidth / window.innerHeight;
 	camera.updateProjectionMatrix();
-	
+
 	renderer.setSize( window.innerWidth, window.innerHeight );
 
 }
 
-function animate(time) {	
+function animate(time) {
 
 	cframe += 1;
 
@@ -129,7 +129,7 @@ function animate(time) {
 	if (controls && camera) {
 		controls.updateMovement(delta || 1,1/(250+16));
 	};
-	
+
 	if (sog) {
 		sog.rotation.x += 0.005;
 		sog.rotation.y += 0.01;
@@ -142,9 +142,9 @@ function animate(time) {
 		cubeCamera.position.z = camera.position.z;
 	};
 
-	
-	
-	
+
+
+
 
 	last_rendered_time = time;
 	requestAnimationFrame(animate);

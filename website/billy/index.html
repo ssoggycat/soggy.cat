@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
 	<title>billy...</title>
-	<link rel="icon" href="/billy/icon.webp">
+	<link rel="icon" href="/static/other/billy/images/icon.webp">
 
 	<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 	<meta charset="UTF-8">
@@ -13,50 +13,48 @@
 	<meta name="description" content="a picture of BILLY??">
 	<meta property="og:description" content="a picture of BILLY??">
 
-	<meta property="og:image" content="/billy/billy.webp">
+	<meta property="og:image" content="/static/other/billy/images/billy.webp">
 	<meta name="color-scheme" content="light"/>
 	<meta name="theme-color" content="#c6b192"/>
 
-	<link rel="stylesheet" href="/assets/static/soggycat/main.css">
-	<link rel="stylesheet" href="/assets/static/soggycat/sidemenu.css">
+	<link rel="stylesheet" href="/static/ssoggycat/shared/web/main.css">
+	<link rel="stylesheet" href="/static/ssoggycat/sidemenu/web/sidemenu.css">
 	<link rel="stylesheet" href="billy.css">
 </head>
 
 <body data-soggy-pagetype="vtilt-js">
 	<div class="gradient-background"></div>
-    <img id="soggycat" src="/assets/images/billy.webp" data-tilt data-tilt-scale="1.05" alt="a picture of BILLY??">
+    <img id="soggycat" src="/static/other/billy/images/billy.jpg" data-tilt data-tilt-scale="1.05" alt="a picture of BILLY??">
 
 	<div id="sidemenu" class="sm sm-closed" inert>
 		<a aria-label="code" href="/github" target="GithubTarget">
 			<div class = "sm-button">
-				<img src="/assets/svgs/code.svg">
+				<img src="/static/other/sidemenu/svgs/code.svg" width="15" height="15" loading="lazy" decoding="async"/>
 				<p>code</p>
 			</div>
 		</a>
 
 		<a aria-label="no css" href="nocss" target="NoCSSTarget">
 			<div class="sm-button sm-small">
-				<img src="/assets/svgs/nocss.svg">
+				<img src="/static/other/sidemenu/svgs/nocss.svg" width="15" height="15" loading="lazy" decoding="async"/>
 				<p>no css</p>
 			</div>
 		</a>
 
-		<a aria-label="upload" href="#"
-			onclick="document.getElementById('picker').click(); return false;">
-			<div class="sm-button sm-small">
-				<img src="/assets/svgs/upload.svg">
-				<p>upload</p>
-			</div>
-		</a>
+		<div class="disappointment">
+			<img title='"i ate my goog cube dont tell anyone"
+	- @leon_jajko1 on twitter, 2025, to @ssoggycat'
+				class="sm-button" src="/static/ssoggycat/main/images/consume.webp" width="200" height="189" loading="lazy" decoding="async"/>
+		</div>
 	</div>
 
     <button id="circlebtn"></button>
     <span id='player' style='display: none'></span>
     <input type="file" id="picker" style="display: none" accept="image/*" />
 
-	<script src="/static/soggycat/main.js"></script>
+	<script src="/static/other/shared/web/vanillatilt.js" defer></script>
 
-	<script src='/static/other/vanillatilt.js'></script>
-	<script src="/static/other/color-thief.umd.js"></script>
+	<script src="/static/ssoggycat/shared/web/main.js" defer></script>
+	<script src="/static/ssoggycat/sidemenu/web/sidemenu.js" defer></script>
 </body>
 </html>

@@ -81,7 +81,7 @@
         }
     </style>
     <script>
-        const favicons = Array.from({length: 10}, (_, i) => `assets/images/coin/frame${i + 1}.png`);
+        const favicons = Array.from({length: 10}, (_, i) => `/static/ssoggycat/team/images/coin/frame${i + 1}.png`);
         let index = 0; const delay = 50;
         function favicongif() {
             const link = document.querySelector("link[rel='icon']") || document.createElement("link");
