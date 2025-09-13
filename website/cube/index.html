@@ -5,22 +5,26 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>shit yourself</title>
     <link rel="icon" href="favicon.ico">
-  
+
     <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
     <meta charset="UTF-8">
-  
+
     <meta name="title" content="soggy cube">
     <meta property="og:title" content="soggy cube">
-  
+
     <meta name="description" content="a photo of a wet cat inside of a cube.">
     <meta property="og:description" content="a photo of a wet cat inside of a cube.>
-  
+
     <meta name="color-scheme" content="light">
     <meta name="theme-color" content="#faacac">
+
+	<link rel="stylesheet" href="https://soggy.cat/static/ssoggycat/sidemenu/web/sidemenu.css"/>
+
     <style>
         body {
-          margin: 0;
+            margin: 0;
             height: 100vh;
+            overflow: hidden;
             display: flex;
             justify-content: center;
             align-items: center;
@@ -88,12 +92,12 @@
             <div class="bitchass-wet-fucking-cat-clone top"></div>
             <div class="bitchass-wet-fucking-cat-clone bottom-uwu"></div>
         </div>
-        
+
     </div>
     <audio id="sound" src="assets/sound.mp3"></audio>
     <script>
         let clickCounter = 0; //my intelligence levels
-        
+
         document.querySelector('.cube').addEventListener('click', function() {
             // make the sogcube fart
             const sound = document.getElementById('sound');
@@ -106,7 +110,7 @@
             }, 50);
             // increment click counter
             clickCounter++;
-            
+
             // change images based on click count
             const faces = document.querySelectorAll('.bitchass-wet-fucking-cat-clone');
             if (clickCounter >= 30) {
@@ -124,5 +128,39 @@
             }
         });
     </script>
+
+	<!-- sogmenu -->
+
+	<div id="sidemenu" class="sm sm-closed" inert>
+		<a aria-label="code" href="https://soggy.cat/github" target="GithubTarget">
+			<div class = "sm-button">
+				<img src="https://soggy.cat/static/other/sidemenu/svgs/code.svg" width="15" height="15" loading="lazy" decoding="async">
+				<p>code</p>
+			</div>
+		</a>
+    <!-- i cant get this to work fukc
+		<a aria-label="upload" href="#" onclick="document.getElementById('picker').click(); return false;">
+			<div class="sm-button sm-small">
+				<img src="https://soggy.cat/static/other/sidemenu/svgs/upload.svg" width="15" height="15" loading="lazy" decoding="async">
+				<p>upload</p>
+			</div>
+		</a>  
+    -->
+		<div class="i_stole_this_field_from_main_page_and_i_do_not_care" style="display:none">
+			<img title='"yippee"
+	- @xavi910 on discord, 2025'
+				class="sm-button" src="assets/sog.png" width="200" height="189" loading="lazy" decoding="async">
+		</div>
+	</div>
+
+	<button id="circlebtn" type="button" aria-label="Navigation"></button>
+	<span id="player" style="display: none"></span>
+	<input type="file" id="picker" style="display: none" accept="image/*">
+
+	<script src="https://soggy.cat/static/other/shared/web/vanillatilt.js" defer></script>
+	<script src="https://soggy.cat/static/other/shared/web/color-thief.umd.js" defer></script>
+
+	<script src="https://soggy.cat/static/ssoggycat/shared/web/main.js" defer></script>
+	<script src="https://soggy.cat/static/ssoggycat/sidemenu/web/sidemenu.js" defer></script>
 </body>
 </html>
