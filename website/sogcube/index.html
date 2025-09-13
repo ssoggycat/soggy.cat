@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>shit yourself</title>
+    <link rel="icon" href="favicon.ico">
+  
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+    <meta charset="UTF-8">
+  
+    <meta name="title" content="soggy cube">
+    <meta property="og:title" content="soggy cube">
+  
+    <meta name="description" content="a photo of a wet cat inside of a cube.">
+    <meta property="og:description" content="a photo of a wet cat inside of a cube.>
+  
+    <meta name="color-scheme" content="light">
+    <meta name="theme-color" content="#faacac">
+    <style>
+        body {
+          margin: 0;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background: radial-gradient(circle at center, #fdd90c 1%, #b9a341 10%,#25200a 18%, #252318 20%, #13110c 25%, #070603 69%, #000000 100%);
+            perspective: 1000px;
+        }
+
+        .scene {
+            width: 200px;
+            height: 200px;
+            position: relative;
+            transform-style: preserve-3d;
+            animation: rotate 3s infinite linear;
+        }
+
+        .cube {
+            width: 100%;
+            height: 100%;
+            position: relative;
+            transform-style: preserve-3d;
+            cursor: pointer;
+        }
+
+        .bitchass-wet-fucking-cat-clone {
+            position: absolute;
+            width: 200px;
+            height: 200px;
+            background-size: cover;
+            background-image: url('assets/soggycat.jpg');
+            border: 4px solid;
+            border-image: linear-gradient(45deg, red, orange, yellow, green, blue, indigo, violet) 1;
+            opacity: 0.9;
+            box-shadow: 0 0 30px rgba(255, 255, 255, 0.5);
+        }
+
+        .front  { transform: rotateY(  0deg) translateZ(100px); }
+        .right  { transform: rotateY( 90deg) translateZ(100px); }
+        .back   { transform: rotateY(180deg) translateZ(100px); }
+        .left   { transform: rotateY(-90deg) translateZ(100px); }
+        .top    { transform: rotateX( 90deg) translateZ(100px); }
+        .bottom-uwu { transform: rotateX(-90deg) translateZ(100px); }
+
+        @keyframes rotate {
+            from { transform: rotateY(0deg) rotateX(0deg); }
+            to { transform: rotateY(360deg) rotateX(360deg); }
+        }
+        .poop-out {
+          animation: poop 0.3s ease-out;
+        }
+
+        @keyframes poop {
+          0% { transform: scale(1); }
+          10% { transform: scale(1.5); }
+          100% { transform: scale(1); }
+        }
+    </style>
+</head>
+<body>
+    <div class="scene">
+        <div class="cube">
+            <div class="bitchass-wet-fucking-cat-clone front"></div>
+            <div class="bitchass-wet-fucking-cat-clone back"></div>
+            <div class="bitchass-wet-fucking-cat-clone right"></div>
+            <div class="bitchass-wet-fucking-cat-clone left"></div>
+            <div class="bitchass-wet-fucking-cat-clone top"></div>
+            <div class="bitchass-wet-fucking-cat-clone bottom-uwu"></div>
+        </div>
+        
+    </div>
+    <audio id="sound" src="assets/sound.mp3"></audio>
+    <script>
+        let clickCounter = 0; //my intelligence levels
+        
+        document.querySelector('.cube').addEventListener('click', function() {
+            // make the sogcube fart
+            const sound = document.getElementById('sound');
+            sound.currentTime = 0;
+            sound.play();
+            // add pop-out effect
+            this.classList.add('poop-out');
+            setTimeout(() => {
+                this.classList.remove('poop-out');
+            }, 50);
+            // increment click counter
+            clickCounter++;
+            
+            // change images based on click count
+            const faces = document.querySelectorAll('.bitchass-wet-fucking-cat-clone');
+            if (clickCounter >= 30) {
+                faces.forEach(face => {
+                    face.style.backgroundImage = "url('assets/fuckyou.webp')";
+                });
+            } else if (clickCounter >= 20) {
+                faces.forEach(face => {
+                    face.style.backgroundImage = "url('assets/sogsplosion.webp')";
+                });
+            } else if (clickCounter >= 10) {
+                faces.forEach(face => {
+                    face.style.backgroundImage = "url('assets/stares_at_you.jpg')";
+                });
+            }
+        });
+    </script>
+</body>
+</html>
