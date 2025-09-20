@@ -1,3 +1,6 @@
+// soggy.cat eslint config
+// just.. like download the libraries yourself, okay?
+
 import babelParser from '@babel/eslint-parser';
 import html from '@html-eslint/eslint-plugin';
 import htmlParser from '@html-eslint/parser';
