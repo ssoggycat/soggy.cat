@@ -3,5 +3,4 @@ ngrok.exe
 createserver.bat
 local.bat
 start.py
-branding/
 node_modules/
