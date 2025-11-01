@@ -102,114 +102,107 @@
 
     document.addEventListener("DOMContentLoaded", function() {
 
-      const video = document.querySelector(".video");
-      const audio = document.querySelector(".audio");
+		const video = document.querySelector(".video");
+		const audio = document.querySelector(".audio");
 
-      const waiting = document.querySelector(".waiting");
-      const subtitles = document.querySelector(".subtitles");
-      const dilemma = document.querySelector(".dilemma");
+		const waiting = document.querySelector(".waiting");
+		const subtitles = document.querySelector(".subtitles");
+		const dilemma = document.querySelector(".dilemma");
 
-      const track = video.textTracks[0];
+		const track = video.textTracks[0];
 
-      // async function autoplaycheck() {
-      //   try {
-      //     waiting.style.display = "none";
-      //     await audio.play(); video.play();
-      //   } catch (err) {console.log("FUCK")}
-      // }; autoplaycheck();
+		// async function autoplaycheck() {
+		//   try {
+		//     waiting.style.display = "none";
+		//     await audio.play(); video.play();
+		//   } catch (err) {console.log("FUCK")}
+		// }; autoplaycheck();
 
-      video.removeAttribute("controlslist");
-      video.setAttribute("controlslist", "nodownload nofullscreen noremoteplayback");
+		video.removeAttribute("controlslist");
+		video.setAttribute("controlslist", "nodownload nofullscreen noremoteplayback");
 
-      document.querySelector(".waiting").addEventListener("click", (event) => {
-        if (!event.target.classList.contains("amini")) {
-          waiting.style.display = "none";
-          video.play();
-          document.documentElement.requestFullscreen();
-        }
-      });
+		document.querySelector(".waiting").addEventListener("click", (event) => {
+			if (!event.target.classList.contains("amini")) {
+			waiting.style.display = "none";
+			video.play();
+			document.documentElement.requestFullscreen();
+			}
+		});
 
-      document.querySelector(".amini").addEventListener("click", () => {
-        document.querySelector(".audio2").play();
-        dilemma.style.display = "block"; dilemma.style.animation = "swirl 9s linear both";
-        waiting.style.pointerEvents = "none";
-        setTimeout(function() {
-          dilemma.style.animation = "fadeout 1s linear both";
-          setTimeout(() => { dilemma.style.display = 'none'; waiting.style.pointerEvents = "auto"}, 1000);
-        }, 9500);
-      });
+		document.querySelector(".amini").addEventListener("click", () => {
+			document.querySelector(".audio2").play();
+			dilemma.style.display = "block"; dilemma.style.animation = "swirl 9s linear both";
+			waiting.style.pointerEvents = "none";
+			setTimeout(function() {
+			dilemma.style.animation = "fadeout 1s linear both";
+			setTimeout(() => { dilemma.style.display = 'none'; waiting.style.pointerEvents = "auto"}, 1000);
+			}, 9500);
+		});
 
-      setInterval(() => {
-        document.title = Array.from({
-          length: Math.floor(Math.random() * 10) + 1
-        }, () =>
-          String.fromCodePoint(Math.floor(Math.random() * (0x2FFF - 0x20)) + 0x20)
-        ).join("")
-      }, 100);
+		setInterval(() => {
+			document.title = Array.from({
+			length: Math.floor(Math.random() * 10) + 1
+			}, () =>
+			String.fromCodePoint(Math.floor(Math.random() * (0x2FFF - 0x20)) + 0x20)
+			).join("")
+		}, 100);
 
-      video.onplay = () => audio.play();
-      video.onpause = () => audio.pause();
-      video.onseeked = () => (audio.currentTime = video.currentTime);
+		track.mode = 'hidden';
+		track.oncuechange = () => {
+			const cue = track.activeCues[0];
+			if (cue) {subtitles.innerHTML = cue.text}
+			else {subtitles.innerHTML = ""}
+		};
+		video.onended = () => {
+			document.exitFullscreen();
+			location.href = "/";
+		};
 
-      track.mode = 'hidden';
-      track.oncuechange = () => {
-        const cue = track.activeCues[0];
-        if (cue) {subtitles.innerHTML = cue.text}
-        else {subtitles.innerHTML = ""}
-      };
-      video.onended = () => {
-        document.exitFullscreen();
-        location.href = "/";
-      };
+		/* make the video transparent by copying it to a canvas element
+			and removing all pixels below a specific rgb threshold. thanks chatgpt! */
 
-      /* make the video transparent by copying it to a canvas element
-         and removing all pixels below a specific rgb threshold. thanks chatgpt! */
+		const canvas = document.getElementById("canvas");
+			const ctx = canvas.getContext("2d", {willReadFrequently: true});
 
-      const canvas = document.getElementById("canvas");
-        const ctx = canvas.getContext("2d");
+			video.addEventListener("loadeddata", () => {
+				canvas.width = video.videoWidth;
+				canvas.height = video.videoHeight;
+			});
 
-        video.addEventListener("loadeddata", () => {
-            canvas.width = video.videoWidth;
-            canvas.height = video.videoHeight;
-        });
+			function remove() {
+				ctx.drawImage(video, 0, 0, canvas.width, canvas.height);
+				let frame = ctx.getImageData(0, 0, canvas.width, canvas.height);
+				let data = frame.data;
+				for (let i = 0; i < data.length; i += 4) {
+					let r = data[i], g = data[i + 1], b = data[i + 2];
+					if (r > 250 && g > 250 && b > 250) {
+						data[i + 3] = 0;
+					}
+				}
+				ctx.putImageData(frame, 0, 0);
+				requestAnimationFrame(remove);
+			}; video.addEventListener("play", remove);
 
-        function remove() {
-            ctx.drawImage(video, 0, 0, canvas.width, canvas.height);
-            let frame = ctx.getImageData(0, 0, canvas.width, canvas.height);
-            let data = frame.data;
-            for (let i = 0; i < data.length; i += 4) {
-                let r = data[i], g = data[i + 1], b = data[i + 2];
-                if (r > 250 && g > 250 && b > 250) {
-                    data[i + 3] = 0;
-                }
-            }
-            ctx.putImageData(frame, 0, 0);
-            requestAnimationFrame(remove);
-        }; video.addEventListener("play", remove);
-    });
+		//////////////////////////////////////////////////////////////////////////
 
-    // awkward sync fix
-    function sync() {
-      if (Math.abs(audio.currentTime - video.currentTime) > 0.05) {
-        audio.currentTime = video.currentTime;
-      }
-      if (!video.paused && !audio.paused) {
-        requestAnimationFrame(syncAudio);
-      }
-    }
-    video.addEventListener("play", () => {
-      audio.play();
-      sync();
-    });
-    video.addEventListener("pause", () => audio.pause());
-    video.addEventListener("seeking", () => {
-      audio.currentTime = video.currentTime;
-    });
-    video.addEventListener("timeupdate", () => {
-      if (Math.abs(audio.currentTime - video.currentTime) > 0.1) {
-        audio.currentTime = video.currentTime;
-      }
-    });
+		let synctimer = null;
+		function sync() {
+			if (video.paused || audio.paused) return;
+			const diff = Math.abs(audio.currentTime - video.currentTime);
+			if (diff > 0.2) {
+				audio.currentTime = video.currentTime;
+			}
+		}
+		video.addEventListener("play", () => {
+			audio.play();
+			audio.currentTime = video.currentTime;
+		});
+		video.addEventListener("pause", () => {audio.pause()});
+		video.addEventListener("timeupdate", () => {
+			if (synctimer) return;
+			synctimer = setTimeout(() => {sync(); synctimer = null}, 2000);
+		});
+	})
 
   </script>
 
@@ -227,11 +220,11 @@
     </audio>
 
   </div>
-  <img class="dilemma" draggable="false" src="https://soggy.cat/static/ssoggycat/team/images/autoplay.webp">
+  <img class="dilemma" draggable="false" src="https://soggy.cat/static/ssoggycat/main/images/autoplay.webp">
 
   <a class="bgtext">404</a>
 
-  <video class="video" controls preload="metadata">
+  <video class="video" controls preload="metadata" crossOrigin="anonymous">
     <source src="https://soggy.cat/static/other/shared/videos/404.mp4" type="video/mp4">
     <track label="English" kind="subtitles" srclang="en" src="https://soggy.cat/static/other/shared/other/404.vtt" default>
   </video>
