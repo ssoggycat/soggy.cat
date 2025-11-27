@@ -108,7 +108,7 @@ const goobErase = {
 
 		let firstPlay = false;
 		if (typingSound === undefined && !silent) {
-			typingSound = new Audio('assets/FUCK.mp3');
+			typingSound = new Audio('/static/other/team/info/audio/FUCK.mp3');
 			typingSound.volume = 0.3;
 			typingSound.preservesPitch = false;
 			firstPlay = true;
