@@ -108,7 +108,7 @@ const goobErase = {
 
 		let firstPlay = false;
 		if (typingSound === undefined && !silent) {
-			typingSound = new Audio('assets/FUCK.mp3');
+			typingSound = new Audio('/static/other/team/info/audio/FUCK.mp3');
 			typingSound.volume = 0.3;
 			typingSound.preservesPitch = false;
 			firstPlay = true;
@@ -159,7 +159,7 @@ const goobErase = {
 
 const goob = {
 	channel: new BroadcastChannel('ssoggycat-goob'),
-	closeSound: new Audio('assets/FUCK.mp3'),
+	closeSound: new Audio('/static/other/team/info/audio/FUCK.mp3'),
 
 	hideNotice: getCookie('hideNotice') === 'true',
 	alreadyDeclined: getCookie('declined') === 'true',
