@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<title>holly jolly christmas!</title>
+	<link rel="icon" href="icon.png">
+
+	<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+	<meta charset="UTF-8">
+
+	<meta name="title" content="the soggy christmas tree">
+	<meta property="og:title" content="the soggy christmas tree">
+
+	<meta name="description" content="decorate it with any image or gif!">
+	<meta property="og:description" content="decorate it with any image or gif!">
+
+	<meta property="og:image" content="assets/masterpiece.png">
+	<meta name="color-scheme" content="dark"/>
+	<meta name="theme-color" content="#212b1e"/>
+
+	<link rel="stylesheet" href="/static/ssoggycat/shared/web/main.css">
+	<link rel="stylesheet" href="/static/ssoggycat/sidemenu/web/sidemenu.css">
+
+	<style>
+		body {
+			background-color: #2b2a2a; margin: 0;
+			overflow: hidden;
+		}
+		.gradient-background {
+			background: radial-gradient(circle, #212b1e 20%, #111111 100%);
+		}
+
+		#progresstext {
+			position: fixed; bottom: 20px; left: 50%;
+			transform: translateX(-50%);
+			color: white; text-align: center;
+			font-family: "Spline Sans Mono" !important;
+			font-size: 16px;
+			padding: 10px 20px; border-radius: 5px;
+			pointer-events: none; z-index: 1000;
+			user-select: none; -webkit-user-drag: none;
+		}
+
+		canvas {
+			display: block; z-index: 0;
+			opacity: 1; animation: fadein 1s ease;
+			position: relative;
+		}
+
+		.rotate {
+			display: flex; position: fixed;
+			width: min(500px, 90vw); z-index: 1;
+			user-select: none;
+			pointer-events: none !important;
+			padding-top: 10em;
+			opacity: 0; animation: fadeinout 4s ease;
+		}
+
+		@keyframes fadein {from {opacity: 0} to {opacity: 1}}
+		@keyframes fadeinout {
+			10% {opacity: 0}
+			40% {opacity: 0.5}
+			80% {opacity: 0.5}
+			100% {opacity: 0}
+		}
+	</style>
+
+	<script type="importmap">
+		{
+			"imports": {
+				"three": "/static/other/shared/web/threejs/three.module.js",
+				"GLTFLoader": "/static/other/shared/web/threejs/addons/GLTFLoader.js",
+				"DRACOLoader": "/static/other/shared/web/threejs/addons/DRACOLoader.js"
+			}
+		}
+	</script>
+
+</head>
+
+<body data-soggy-pagetype="three-js">
+	<div class="gradient-background"></div>
+
+	<div id="sidemenu" class="sm sm-closed" inert>
+		<a aria-label="code" href="//soggy.cat/github" target="GithubTarget">
+			<div class = "sm-button">
+				<img src="/static/other/sidemenu/svgs/code.svg" width="15" height="15" loading="lazy" decoding="async"/>
+				<p>code</p>
+			</div>
+		</a>
+	</div>
+
+	<img class="rotate" src="assets/images/rotate.webp">
+	<button id="circlebtn"></button>
+	<div id="progresstext">double click any place on the tree to add an ornament!<a style="font-size: 0.7em; opacity: 0.5;"><br>(leaves only please sir)</a></div>
+	<input type="file" id="filepicker" style="display: none" accept="image/*" />
+
+	<script type="module" src="index.js"></script>
+	<script src="/static/ssoggycat/shared/web/main.js" defer></script>
+	<script src="/static/ssoggycat/sidemenu/web/sidemenu.js" defer></script>
+</body>
+</html>
