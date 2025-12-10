@@ -4,3 +4,4 @@ createserver.bat
 local.bat
 start.py
 node_modules/
+/website/branding

@@ -6,6 +6,8 @@ const sog = document.querySelector(".smallsog");
 const flash = document.querySelector(".flash");
 const slider = document.querySelector(".slider");
 const discord = document.querySelector(".discord");
+const videoBackground = document.getElementById("video-background");
+const cocaine = document.getElementById("cocaine");
 
 let muted = false;
 let introactivated = false;
@@ -60,14 +62,14 @@ function intro() {
 	sog.style.pointerEvents = "none";
 	flash.style.transition = "opacity 1.5s ease-in";
 	flash.style.opacity = "1";
-	document.querySelector(".bg").load();
+	videoBackground.load();
 	document.querySelector(".song").style.display = "block";
 	document.querySelector(".smallsogt").style.opacity = "0";
 	document.querySelector(".skipintro").style.display = "none";
 	setTimeout(function () {
 		document.querySelector(".overlay").style.display = "none";
 		document.querySelector(".smallsogt").style.display = "none";
-		document.querySelector(".bg").play();
+		videoBackground.play();
 		flash.style.transition = "opacity 2s ease-in-out";
 		flash.style.opacity = "0";
 	}, 1500);
@@ -222,25 +224,31 @@ animate();
 
 // the secret fourth thing (i don't know what to put there it's a placeholder for now lol)
 document.querySelector(".b4").addEventListener("click", function (event) {
-	const video = document.querySelector(".cocaine");
 	if (song) {
 		song.stop(0);
 		song = null;
 	}
 	// the song loop function from earlier needs to be run again to resume properly
-	video.style.display = "block";
-	video.play();
-	video.onended = function () {
-		video.style.display = "none";
-		if (buffer) {
-			song = context.createBufferSource();
-			song.buffer = buffer;
-			song.connect(volume);
-			song.loop = true;
-			song.loopStart = 1.415;
-			song.loopEnd = buffer.duration;
-			song.start(0, context.currentTime % buffer.duration);
-		}
+	cocaine.style.display = "block";
+	videoBackground.pause();
+	videoBackground.currentTime = Math.random() * videoBackground.duration;
+	cocaine.play();
+	cocaine.onended = function () {
+		videoBackground.play();
+
+		song = context.createBufferSource();
+		song.buffer = buffer;
+		song.connect(volume);
+		song.loop = true;
+		song.loopStart = 1.415;
+		song.loopEnd = buffer.duration;
+
+		setTimeout(() => {
+			cocaine.style.display = "none";
+			if (buffer) {
+				song.start(0, context.currentTime % buffer.duration);
+			}
+		}, Math.random() > 0.25 ? 100 : 10000);
 	};
 });
 
@@ -286,13 +294,22 @@ window.addEventListener("beforeunload", function () {
 });
 */
 
+// hopefully this fixes that thing where the video stops playing when you tab back into the website after a while for some reason :sog:
+document.addEventListener("visibilitychange", () => {
+	if (document.visibilityState === "visible" && cocaine.playing) {
+		videoBackground.play();
+		videoBackground.currentTime = videoBackground.currentTime + 1;
+	}
+});
+
 // skip
+
 document.querySelector(".skipintro").addEventListener("click", function () {
 	if (!introactivated) {
 		introactivated = true;
 		WEEE();
-		flash.style.opacity = "1";
-		document.querySelector(".bg").load();
+		flash.style.opacity = ".5";
+		videoBackground.load();
 		document.querySelector(".song").style.display = "block";
 		document.querySelector(".smallsog").style.opacity = "0";
 		document.querySelector(".smallsogt").style.opacity = "0";
@@ -311,8 +328,8 @@ document.querySelector(".skipintro").addEventListener("click", function () {
 		song.loopEnd = buffer.duration;
 		song.start(0, 1.4);
 		setTimeout(function () {
-			document.querySelector(".bg").play();
-			flash.style.transition = "opacity 0.5s ease-in-out";
+			videoBackground.play();
+			flash.style.transition = "opacity 0.6s ease-in-out";
 			flash.style.opacity = "0";
 		}, 50);
 	}
