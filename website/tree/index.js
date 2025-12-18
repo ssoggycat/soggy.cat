@@ -714,7 +714,7 @@ async function loadstaticdecorations(fronttree, backtree, decorations) {
 
 async function loadremotedecorations(fronttree, backtree, decorations) {
 	try {
-		const response = await fetch(`${workerlink}/decorations`, { cache: "no-store" });
+		const response = await fetch(`${workerlink}/decorations`, { cache: "default" });
 		if (!response.ok) {
 			if (response.status === 429) {
 				console.warn("rate limited when loading decorations");
