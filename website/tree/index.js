@@ -320,7 +320,7 @@ function createtreeside(which) {
 
 	// use <img> instead of background-image, apparently this is better?
 	const img = document.createElement("img");
-	img.src = "assets/images/treeflatxl.webp";
+	img.src = "assets/images/treeflatxl2.webp";
 	img.alt = "";
 	Object.assign(img.style, {
 		width: "auto", height: "auto",
@@ -609,7 +609,7 @@ function removeplusmarker(marker) {
 
 function loadtreemask() {
 	treeimage = new Image();
-	treeimage.src = "assets/images/treeflat.png";
+	treeimage.src = "assets/images/treemask.png";
 	treeimage.crossOrigin = "anonymous";
 	treeimage.onload = () => {
 		treemaskcanvas = document.createElement("canvas");
@@ -655,7 +655,7 @@ function computetreehit(clientx, clienty, containerrect, rotationdeg) {
 	const px = Math.floor(u * iw);
 	const py = Math.floor(v * ih);
 	const data = treemaskctx.getImageData(px, py, 1, 1).data;
-	const alpha = data[3];
+	const alpha = data[0];
 	if (alpha <= 10) return null;
 
 	const xdisplay = (xlocal + w / 2) / w;
