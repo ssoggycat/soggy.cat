@@ -13,7 +13,7 @@
 	<meta name="description" content="decorate it with any image or gif!">
 	<meta property="og:description" content="decorate it with any image or gif!">
 
-	<meta property="og:image" content="assets/masterpiece.png">
+	<meta property="og:image" content="//soggy.cat/tree/assets/masterpiece.png">
 	<meta name="color-scheme" content="dark"/>
 	<meta name="theme-color" content="#212b1e"/>
 
@@ -25,9 +25,17 @@
 			background-color: #2b2a2a; margin: 0;
 			overflow: hidden;
 		}
-		.gradient-background {
-			background: radial-gradient(circle, #212b1e 20%, #111111 100%);
+		#tree-scale-wrapper {pointer-events: none}
+		#tree-perspective {pointer-events: auto}
+		.tree-side {
+			backface-visibility: hidden;
+			-webkit-backface-visibility: hidden;
 		}
+		.decoration img {
+			-webkit-user-drag: none;
+			user-select: none;
+		}
+		.gradient-background {background: radial-gradient(circle, #212b1e 20%, #111111 100%)}
 		#circlebtn {z-index: 99999999}
 
 		#progresstext {
@@ -59,10 +67,9 @@
 
 		.rotate {
 			display: flex; position: fixed;
-			width: min(500px, 90vw); z-index: 1;
+			width: min(300px, 90vw); z-index: 1;
 			user-select: none;
 			pointer-events: none !important;
-			padding-top: 10em;
 			opacity: 0; animation: fadeinout 4s ease;
 		}
 
@@ -73,11 +80,29 @@
 		}
 
 		.zoombutton {
-			width: 20px; height: 20px;
-			font-size: 24px; cursor: pointer;
+			width: 40px; height: 40px;
+			font-size: 28px; cursor: pointer;
 			color: white;
-			background: rgba(0, 0, 0, 0);
-			border-radius: 25px; border: none !important
+			background: rgba(255, 255, 255, 0.1);
+			border-radius: 50%; border: none !important;
+			display: flex; align-items: center; justify-content: center;
+			touch-action: manipulation;
+		}
+		.zoombutton:active {
+			background: rgba(255, 255, 255, 0.2);
+		}
+		.spinbutton {
+			font-style: bold;
+			touch-action: manipulation;
+			-webkit-tap-highlight-color: transparent;
+		}
+		.spinbutton:active {
+			opacity: 1 !important;
+		}
+		@media (max-width: 600px) {
+			.spinbutton {
+				width: 50px !important;
+			}
 		}
 
 		.plusmark {
@@ -85,6 +110,17 @@
 			pointer-events: none; z-index: 1000;
 			transform: translate(-50%, -50%);
 		}
+
+		.snow {
+            position: absolute; overflow: hidden; opacity: 0.05;
+            top: 0; width: 100vw; left: 0; right: 0;
+            bottom: 0; z-index: -1; pointer-events: none;
+        }
+        .snowflake {
+            position: absolute; left: 0; top: 0;
+            will-change: transform; pointer-events: none;
+            opacity: 1; background-repeat: no-repeat; background-size: contain;
+        }
 
 		@keyframes fadein {from {opacity: 0} to {opacity: 1}}
 		@keyframes fadeinout {
@@ -111,14 +147,14 @@
 
 	<div id="sidemenu" class="sm sm-closed" inert>
 		<a aria-label="code" href="//soggy.cat/github" target="GithubTarget">
-			<div class = "sm-button">
+			<div class = "smbutton">
 				<img src="/static/other/sidemenu/svgs/code.svg" width="15" height="15" loading="lazy" decoding="async"/>
 				<p>code</p>
 			</div>
 		</a>
 	</div>
 
-	<img class="rotate" src="assets/images/rotate.webp">
+	<img class="rotate" src="assets/images/drag.webp">
 	<button id="circlebtn"></button>
 	<div id="progresstext">double click any place on the tree to add a static ornament!<a style="font-size: 0.7em; opacity: 0.5;"><br>(leaves only please sir)</a></div>
 	<input type="file" id="filepicker" style="display: none" accept="image/*" />
@@ -128,18 +164,6 @@
 	<script src="/static/ssoggycat/sidemenu/web/sidemenu.js" defer></script>
 
 	<!-- from candies.monster/snow. i made that effect, so i BETTER use it!! yeah. -->
-	<style>
-        .snow {
-            position: absolute; overflow: hidden; opacity: 0.05;
-            top: 0; width: 100vw; left: 0; right: 0; filter: blue(5px);
-            bottom: 0; z-index: -1; pointer-events: none;
-        }
-        .snowflake {
-            position: absolute; left: 0; top: 0;
-            will-change: transform; pointer-events: none;
-            opacity: 1; background-repeat: no-repeat; background-size: contain;
-        }
-    </style>
 	<div class="snow" aria-hidden="true"></div>
 	<script>
 		(function() {
@@ -151,12 +175,12 @@
 				"data:image/png;base64,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"
 			];
 
-			var snowmax = 36;
-			var snowpersecond = 2;
+			var snowmax = 16;
+			var snowpersecond = 1;
 			var snowstyles = [
-				{size: 54, blur: 0.6},
-				{size: 68, blur: 0.4},
-				{size: 82, blur: 0.2},
+				{size: 54, blur: 0},
+				{size: 68, blur: 0},
+				{size: 82, blur: 0},
 			];
 
 			var snowdrops = []; var snowimages = [];

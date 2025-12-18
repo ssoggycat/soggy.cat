@@ -5,3 +5,7 @@ local.bat
 start.py
 node_modules/
 /website/branding
+/website/tree/worker
+/website/tree/migratedeco.js
+/website/tree/old.js
+website/tree/assets/images/deco/deco738632.webp
