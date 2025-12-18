@@ -539,7 +539,22 @@ function setupspinbuttons(tree3d, onrotate) {
 
 function setprogress(text) {
 	if (!progresstext) return;
-	progresstext.textContent = text || "";
+	const mainText = document.getElementById("progresstextmain");
+	const subText = document.getElementById("progresstextsub");
+	const defaultMessage = "double click any place on the tree to add a static decoration!";
+
+	if (mainText) {
+		mainText.textContent = text || "";
+		if (subText) {
+			if (text === defaultMessage) {
+				subText.style.display = "block";
+			} else {
+				subText.style.display = "none";
+			}
+		}
+	} else {
+		progresstext.textContent = text || "";
+	}
 }
 
 function createplusmarker(clientX, clientY, rect) {
@@ -768,10 +783,17 @@ function ensuresubmitbutton() {
 function showsubmitbutton() {
 	if (!progresstext) return;
 	ensuresubmitbutton();
-	while (progresstext.firstChild) {
-		progresstext.removeChild(progresstext.firstChild);
+	const subText = document.getElementById("progresstextsub");
+	const children = Array.from(progresstext.children);
+	for (const child of children) {
+		if (child.id !== "progresstextsub") {
+			progresstext.removeChild(child);
+		}
 	}
 	progresstext.appendChild(submitbutton);
+	if (subText && !subText.parentNode) {
+		progresstext.appendChild(subText);
+	}
 	submitbutton.disabled = false;
 	submitbutton.textContent = "submit decoration";
 	submitbutton.style.pointerEvents = "auto";

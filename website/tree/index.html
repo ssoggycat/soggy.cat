@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-	<title>holly jolly christmas!</title>
+	<title>holly jolly christmas</title>
 	<link rel="icon" href="icon.png">
 
 	<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
@@ -10,8 +10,8 @@
 	<meta name="title" content="the soggy christmas tree">
 	<meta property="og:title" content="the soggy christmas tree">
 
-	<meta name="description" content="decorate it with any image or gif!">
-	<meta property="og:description" content="decorate it with any image or gif!">
+	<meta name="description" content="decorate it with any image!">
+	<meta property="og:description" content="decorate it with any image!">
 
 	<meta property="og:image" content="//soggy.cat/tree/assets/masterpiece.png">
 	<meta name="color-scheme" content="dark"/>
@@ -47,6 +47,11 @@
 			padding: 10px 20px; border-radius: 5px;
 			pointer-events: auto; z-index: 1000;
 			user-select: none; -webkit-user-drag: none;
+			text-shadow:
+				0 0 8px rgba(0, 0, 0, 1),
+				0 0 18px rgba(0, 0, 0, 0.9),
+				0 0 32px rgba(0, 0, 0, 0.8),
+				0 4px 12px rgba(0, 0, 0, 0.9);
 		}
 		#progresstext .submitbutton {
 			background: rgba(86, 177, 119, 0.25); color: white;
@@ -54,9 +59,28 @@
 			font-family: "Spline Sans Mono" !important;
 			font-size: 15px; padding: 0.5em;
 			cursor: pointer;
+			text-shadow:
+				0 0 7px rgba(0, 0, 0, 1),
+				0 0 14px rgba(0, 0, 0, 0.9),
+				0 0 28px rgba(0, 0, 0, 0.7),
+				0 2px 8px rgba(0, 0, 0, 0.8);
 		}
 		#progresstext .submitbutton[disabled] {
 			opacity: 0.6; cursor: not-allowed;
+		}
+		#progresstextmain {
+			display: block;
+		}
+		#progresstextsub {
+			display: block;
+			font-size: 0.7em;
+			opacity: 0.5;
+			margin-top: 0.3em;
+			text-shadow:
+				0 0 6px rgba(0, 0, 0, 1),
+				0 0 12px rgba(0, 0, 0, 0.9),
+				0 0 24px rgba(0, 0, 0, 0.8),
+				0 2px 6px rgba(0, 0, 0, 0.9);
 		}
 
 		canvas {
@@ -156,7 +180,10 @@
 
 	<img class="rotate" src="assets/images/drag.webp">
 	<button id="circlebtn"></button>
-	<div id="progresstext">double click any place on the tree to add a static ornament!<a style="font-size: 0.7em; opacity: 0.5;"><br>(leaves only please sir)</a></div>
+	<div id="progresstext">
+		<span id="progresstextmain">double click any place on the tree to add a static decoration!</span>
+		<span id="progresstextsub">(leaves only please sir)</span>
+	</div>
 	<input type="file" id="filepicker" style="display: none" accept="image/*" />
 
 	<script type="module" src="index.js"></script>
