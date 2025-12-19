@@ -2,9 +2,9 @@ const progresstext = document.getElementById("progresstext");
 const fileinput = document.getElementById("filepicker");
 
 // CHANGE IN RELEASE!!
-const workerlink = "https://treeapi.importantserioussoggybusiness.workers.dev";
+const workerlink = "https://treeapi.soggy.cat";
 const discordclientid = "1451552219567755294";
-const discordredirecturi = "http://127.0.0.1:6969/tree";
+const discordredirecturi = "http://soggy.cat/tree";
 const discordauthurl = `https://discord.com/oauth2/authorize?client_id=${discordclientid}&response_type=code&redirect_uri=${encodeURIComponent(discordredirecturi)}&scope=identify`;
 
 let currentzoom = 1;
