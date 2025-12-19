@@ -4,7 +4,7 @@ const fileinput = document.getElementById("filepicker");
 // CHANGE IN RELEASE!!
 const workerlink = "https://treeapi.importantserioussoggybusiness.workers.dev";
 const discordclientid = "1451552219567755294";
-const discordredirecturi = "http://soggy.cat/tree";
+const discordredirecturi = "https://soggy.cat/tree";
 const discordauthurl = `https://discord.com/oauth2/authorize?client_id=${discordclientid}&response_type=code&redirect_uri=${encodeURIComponent(discordredirecturi)}&scope=identify`;
 
 let currentzoom = 1;
