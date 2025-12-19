@@ -2,7 +2,7 @@ const progresstext = document.getElementById("progresstext");
 const fileinput = document.getElementById("filepicker");
 
 // CHANGE IN RELEASE!!
-const workerlink = "https://treeapi.soggy.cat";
+const workerlink = "https://treeapi.importantserioussoggybusiness.workers.dev";
 const discordclientid = "1451552219567755294";
 const discordredirecturi = "http://soggy.cat/tree";
 const discordauthurl = `https://discord.com/oauth2/authorize?client_id=${discordclientid}&response_type=code&redirect_uri=${encodeURIComponent(discordredirecturi)}&scope=identify`;
@@ -352,7 +352,7 @@ function createdecorationelement({imageurl, x, y, side, username, userid, id}) {
 		opacity: "0",
 		transition: "opacity 0.2s",
 	});
-	const sizepercent = 3;
+	const sizepercent = 2; // deco size
 	const z = side === 2 ? -2 : 2;
 	const halfsize = sizepercent / 200;
 	const clampedx = Math.max(halfsize, Math.min(1 - halfsize, x));
