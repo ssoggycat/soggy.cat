@@ -71,10 +71,7 @@ function inittreepage() {
 		transform: "rotateY(0deg)",
 		WebkitTransform: "rotateY(0deg)",
 		transition: "transform 0.15s ease-out",
-		userSelect: "none",
-		willChange: "transform",
-		backfaceVisibility: "hidden",
-		WebkitBackfaceVisibility: "hidden",
+		userSelect: "none", willChange: "transform",
 	});
 	const fronttree = createtreeside("front");
 	const backtree = createtreeside("back");
