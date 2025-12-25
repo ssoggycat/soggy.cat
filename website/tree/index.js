@@ -1,28 +1,29 @@
 const progresstext = document.getElementById("progresstext");
-const fileinput = document.getElementById("filepicker");
-
-// CHANGE IN RELEASE!!
-const workerlink = "https://treeapi.importantserioussoggybusiness.workers.dev";
-const discordclientid = "1451552219567755294";
-const discordredirecturi = "https://soggy.cat/tree";
-const discordauthurl = `https://discord.com/oauth2/authorize?client_id=${discordclientid}&response_type=code&redirect_uri=${encodeURIComponent(discordredirecturi)}&scope=identify`;
 
 let currentzoom = 1;
 let treeimage = null;
 let treemaskcanvas = null;
 let treemaskctx = null;
-let submitbutton = null;
-let hassubmitted = false;
-let placedfile = null;
-let placedplacement = null;
 let decorations = [];
-let currentuser = null;
+let lazyobserver = null;
+let treemaskoverlay = null;
+let treemaskoverlaycanvas = null;
+let treemaskoverlayctx = null;
+const maskeddecorationcache = new Map();
+let isdraggingtree = false;
+let treehasdragged = false;
+const imageprocessingqueue = [];
+let isprocessingqueue = false;
 
-// decrease for better performance but worse quality
-const resscale = 4;
+let presentscontainer = null;
+let presentsready = false;
 
-if (!progresstext || !fileinput) {console.error("required dom elements not found?!")}
-else {initauth().then(() => {inittreepage()})}
+// decrease for worse quality but better performance
+const resscale = 8;
+const loaddeco = true;
+
+if (!progresstext) {console.error("required dom elements not found?!")}
+else {inittreepage()}
 
 function inittreepage() {
 	const container = document.createElement("div");
@@ -71,6 +72,9 @@ function inittreepage() {
 		WebkitTransform: "rotateY(0deg)",
 		transition: "transform 0.15s ease-out",
 		userSelect: "none",
+		willChange: "transform",
+		backfaceVisibility: "hidden",
+		WebkitBackfaceVisibility: "hidden",
 	});
 	const fronttree = createtreeside("front");
 	const backtree = createtreeside("back");
@@ -80,19 +84,47 @@ function inittreepage() {
 	scalewrapper.appendChild(perspectivewrapper);
 	container.appendChild(scalewrapper);
 	document.body.appendChild(container);
+
+	window.treecontainer = container;
+	window.tree3d = tree3d;
 	decorations = [];
 	let isdragging = false;
 	let dragstartx = 0; let dragstarty = 0;
 	let activepointerid = null;
+	let dragstartedondeco = false;
 	let rotationy = 0;
 	let panx = 0; let pany = 0;
 	function updatecontainertransform() {
 		container.style.transform = `translate(${panx}px, ${pany}px) scale(${currentzoom}) translate(-50%, -50%)`;
 		container.style.WebkitTransform = `translate(${panx}px, ${pany}px) scale(${currentzoom}) translate(-50%, -50%)`;
+		if (presentsready) {
+			updatepresentsposition();
+		}
 	}
 	function updatetreerotation() {
 		tree3d.style.transform = `rotateY(${rotationy}deg)`;
 		tree3d.style.WebkitTransform = `rotateY(${rotationy}deg)`;
+		tree3d.style.willChange = "transform";
+        const side = sidefromrotation(rotationy);
+        if (side === 1) {
+            fronttree.style.pointerEvents = "auto";
+            fronttree.style.visibility = "visible";
+            fronttree.style.zIndex = "10";
+            backtree.style.pointerEvents = "none";
+            backtree.style.visibility = "hidden";
+            backtree.style.zIndex = "0";
+        } else {
+            fronttree.style.pointerEvents = "none";
+            fronttree.style.visibility = "hidden";
+            fronttree.style.zIndex = "0";
+            backtree.style.pointerEvents = "auto";
+            backtree.style.visibility = "visible";
+            backtree.style.zIndex = "10";
+        }
+		if (presentsready && presentscontainer && !animationcompleted && !isfadingoutpresents) {
+			const opacity = side === 1 ? "1" : "0.5";
+			presentscontainer.style.opacity = opacity;
+		}
 	}
 	updatecontainertransform();
 	const handlepointerdown = (event) => {
@@ -104,11 +136,15 @@ function inittreepage() {
 			event.target.closest("#progresstext") ||
 			event.target.closest(".plusmark") ||
 			event.target.closest(".spinbutton") ||
+			event.target.closest("#gift-overlay") ||
 			event.target.tagName === "BUTTON" ||
 			event.target.tagName === "A" ||
 			event.target.tagName === "INPUT"
 		) {return}
+		dragstartedondeco = !!event.target.closest(".decoration");
 		isdragging = true;
+		isdraggingtree = !dragstartedondeco;
+		treehasdragged = false;
 		activepointerid = event.pointerId;
 		dragstartx = event.clientX;
 		dragstarty = event.clientY;
@@ -120,20 +156,23 @@ function inittreepage() {
 		if (!isdragging || (activepointerid !== null && event.pointerId !== activepointerid)) return;
 		const dx = event.clientX - dragstartx;
 		const dy = event.clientY - dragstarty;
+		if (Math.abs(dx) > 5 || Math.abs(dy) > 5) {
+			treehasdragged = true;
+		}
 		dragstartx = event.clientX;
 		dragstarty = event.clientY;
-		if (plusmarker && (Math.abs(dx) > 5 || Math.abs(dy) > 5)) {
-			removeplusmarker(plusmarker);
-			plusmarker = null;
-			clearTimeout(clicktimeout);
-			clicktimeout = null;
+		if (isdraggingtree && !dragstartedondeco) {
+			panx += dx; pany += dy;
+			updatecontainertransform();
 		}
-		panx += dx; pany += dy;
-		updatecontainertransform();
 	};
 	const handlepointerend = (event) => {
 		if (!isdragging || (activepointerid !== null && event.pointerId !== activepointerid)) return;
 		isdragging = false;
+		setTimeout(() => {
+			isdraggingtree = false;
+			treehasdragged = false;
+		}, 100);
 		activepointerid = null;
 		if (event.target && event.target.releasePointerCapture) {
 			try {event.target.releasePointerCapture(event.pointerId)} catch (e) {}
@@ -146,134 +185,6 @@ function inittreepage() {
 	setupspinbuttons(tree3d, (delta) => {
 		rotationy += delta;
 		updatetreerotation();
-	});
-
-	let pendingplacement = null;
-	let plusmarker = null;
-	let clicktimeout = null;
-	let lastclicktime = 0;
-	let lastclickx = 0;
-	let lastclicky = 0;
-	const doubleclicktiming = 500;
-
-	container.addEventListener("click", (event) => {
-		if (
-			event.target.closest(".decoration") ||
-			event.target.closest("#zoomcontrols") ||
-			event.target.closest("#sidemenu") ||
-			event.target.closest("#circlebtn") ||
-			event.target.closest("#progresstext") ||
-			event.target.tagName === "BUTTON" ||
-			event.target.tagName === "A" ||
-			event.target.tagName === "INPUT"
-		) {return}
-		const rect = container.getBoundingClientRect();
-		const relx = event.clientX - rect.left;
-		const rely = event.clientY - rect.top;
-		const now = Date.now();
-		const isdoubleclick =
-			now - lastclicktime < doubleclicktiming &&
-			Math.abs(relx - lastclickx) < 10 &&
-			Math.abs(rely - lastclicky) < 10;
-		if (isdoubleclick) {
-			clearTimeout(clicktimeout);
-			clicktimeout = null;
-			event.preventDefault();
-			if (!currentuser) {
-				setprogress("log in with discord to place decorations first");
-				setTimeout(() => setprogress("double click any place on the tree to add a static decoration!"), 2500);
-				showloginbutton();
-				return;
-			}
-			const hit = computetreehit(event.clientX, event.clientY, rect, rotationy);
-			if (!hit) {
-				removeplusmarker(plusmarker);
-				plusmarker = null;
-				setprogress("BROTHER, that is not on a tree..");
-				setTimeout(() => setprogress("double click any place on the tree to add a static decoration!"), 2500);
-			return;
-		}
-			const side = sidefromrotation(rotationy);
-			let x = hit.x;
-			if (side === 2) {
-				x = 1 - x;
-			}
-			pendingplacement = { x, y: hit.y, side, marker: plusmarker };
-		fileinput.click();
-		} else {
-			clearTimeout(clicktimeout);
-			lastclicktime = now;
-			lastclickx = relx; lastclicky = rely;
-			const hit = computetreehit(event.clientX, event.clientY, rect, rotationy);
-			if (hit) {
-				removeplusmarker(plusmarker);
-				plusmarker = createplusmarker(event.clientX, event.clientY, rect);
-				document.body.appendChild(plusmarker);
-			}
-			clicktimeout = setTimeout(() => {
-				removeplusmarker(plusmarker);
-				plusmarker = null;
-				clicktimeout = null;
-			}, doubleclicktiming);
-		}
-	});
-
-	fileinput.addEventListener("change", (event) => {
-		const file = event.target.files[0];
-		event.target.value = "";
-		if (!file || !pendingplacement) return;
-		const placement = pendingplacement;
-		pendingplacement = null;
-		const reader = new FileReader();
-		reader.onload = async () => {
-			const dataurl = reader.result;
-			setprogress("compressing image...");
-			let compressedblob;
-			try {
-				compressedblob = await compressimage(file, 200, 25000);
-				if (compressedblob.size > 25500) {
-					setprogress("image too large after compression?! (max 25kb)");
-					setTimeout(() => setprogress("double click any place on the tree to add a static decoration!"), 3000);
-					return;
-				}
-			} catch (error) {
-				console.error("compression failed:", error);
-				setprogress("compression failed, using original");
-				compressedblob = file;
-			}
-			const compressedurl = URL.createObjectURL(compressedblob);
-			const decoration = createdecorationelement({
-				imageurl: compressedurl,
-				x: placement.x,
-				y: placement.y,
-				side: placement.side,
-				username: currentuser?.username,
-				userid: currentuser?.id,
-			});
-			if (decoration.img.dataset.src) {
-				decoration.img.src = decoration.img.dataset.src;
-				decoration.img.style.opacity = "1";
-				decoration.img.removeAttribute("data-src");
-			}
-			decorations.push(decoration);
-			if (placement.side === 1) {
-				fronttree.appendChild(decoration.element);
-			} else {
-				backtree.appendChild(decoration.element);
-			}
-			removeplusmarker(placement.marker);
-			plusmarker = null;
-			clearTimeout(clicktimeout);
-			clicktimeout = null;
-			placedfile = compressedblob;
-			placedplacement = placement;
-			hassubmitted = false;
-			showsubmitbutton();
-		};
-		reader.onerror = () => {
-			setprogress("error reading file?!");
-		};
-		reader.readAsDataURL(file);
 	});
 	function adjustzoom(delta, zoompointx = null, zoompointy = null) {
 		const oldzoom = currentzoom;
@@ -292,8 +203,7 @@ function inittreepage() {
 	}
 	setupzoomcontrols(adjustzoom);
 	loadtreemask();
-	setprogress("double click any place on the tree to add a static decoration!");
-	loadremotedecorations(fronttree, backtree, decorations);
+	if (loaddeco) {loaddecorationsfromjson(fronttree, backtree, decorations)}
 	setuplazyloading();
 }
 
@@ -305,25 +215,46 @@ function createtreeside(which) {
 		left: "0", top: "0",
 		width: "100%",
 		height: "100%",
-		backfaceVisibility: "hidden",
-		WebkitBackfaceVisibility: "hidden",
-		overflow: "hidden",
 		display: "flex",
 		alignItems: "flex-end",
 		justifyContent: "center",
 	});
 	const img = document.createElement("img");
-	img.src = "assets/images/treeflatxl2.webp";
+	img.src = "assets/images/treeflatxl.webp";
 	img.alt = "";
 	Object.assign(img.style, {
-		width: "auto", height: "auto",
-		maxWidth: "100%", maxHeight: "100%",
+		width: "100%", height: "100%",
 		objectFit: "contain",
 		objectPosition: "center bottom",
 		pointerEvents: "none",
 		userSelect: "none",
+        position: "absolute",
+        zIndex: "0",
 	});
 	side.appendChild(img);
+
+    const decorationsLayer = document.createElement("div");
+    decorationsLayer.className = "decorations-layer";
+    Object.assign(decorationsLayer.style, {
+        position: "absolute",
+        left: "0", top: "0",
+        width: "100%", height: "100%",
+        pointerEvents: "none",
+        zIndex: "1",
+        maskImage: "url(assets/images/treemask.webp)",
+        webkitMaskImage: "url(assets/images/treemask.webp)",
+        maskSize: "cover",
+        webkitMaskSize: "cover",
+        maskPosition: "center bottom",
+        webkitMaskPosition: "center bottom",
+        maskRepeat: "no-repeat",
+        webkitMaskRepeat: "no-repeat",
+        maskMode: "alpha",
+        webkitMaskMode: "alpha"
+    });
+    side.appendChild(decorationsLayer);
+    side.decorationsLayer = decorationsLayer;
+
 	if (which === "front") {
 		side.style.transform = "rotateY(0deg) translateZ(1px)";
 		side.style.WebkitTransform = "rotateY(0deg) translateZ(1px)";
@@ -337,7 +268,7 @@ function createtreeside(which) {
 function createdecorationelement({imageurl, x, y, side, username, userid, id}) {
 	const el = document.createElement("div");
 	el.className = "decoration";
-	if (id) {el.dataset.decorationId = id}
+	if (id) {el.dataset.decorationid = id}
 	const img = document.createElement("img");
 	img.alt = "";
 	img.draggable = false;
@@ -350,10 +281,9 @@ function createdecorationelement({imageurl, x, y, side, username, userid, id}) {
 		userSelect: "none",
 		WebkitUserDrag: "none",
 		opacity: "0",
-		transition: "opacity 0.2s",
+		imageRendering: "auto",
 	});
-	const sizepercent = 2; // deco size
-	const z = side === 2 ? -2 : 2;
+	const sizepercent = 2;
 	const halfsize = sizepercent / 200;
 	const clampedx = Math.max(halfsize, Math.min(1 - halfsize, x));
 	const clampedy = Math.max(halfsize, Math.min(1 - halfsize, y));
@@ -361,17 +291,18 @@ function createdecorationelement({imageurl, x, y, side, username, userid, id}) {
 		position: "absolute",
 		left: `${clampedx * 100}%`,
 		top: `${clampedy * 100}%`,
-		transform: `translate(-50%, -50%) translateZ(${z}px)`,
+		transform: `translate(-50%, -50%)`,
+		WebkitTransform: `translate(-50%, -50%)`,
 		width: `${sizepercent}%`,
 		aspectRatio: "1 / 1",
 		pointerEvents: "auto",
 		userSelect: "none",
-		backfaceVisibility: "hidden",
-		WebkitBackfaceVisibility: "hidden",
+		backfaceVisibility: "visible",
+		WebkitBackfaceVisibility: "visible",
 		overflow: "visible",
-		contentVisibility: "auto",
-		contain: "layout style paint",
 		willChange: "transform",
+		transformStyle: "preserve-3d",
+		WebkitTransformStyle: "preserve-3d",
 	});
 	el.appendChild(img);
 	if (username || userid) {
@@ -382,7 +313,8 @@ function createdecorationelement({imageurl, x, y, side, username, userid, id}) {
 		Object.assign(tooltip.style, {
 			position: "absolute",
 			bottom: "100%", left: "50%",
-			transform: "translateX(-50%)",
+			transform: "translate3d(-50%, 0, 100px)",
+			WebkitTransform: "translate3d(-50%, 0, 100px)",
 			background: "rgba(0, 0, 0, 0.8)",
 			color: "white",
 			padding: "4px 8px", borderRadius: "4px",
@@ -393,6 +325,11 @@ function createdecorationelement({imageurl, x, y, side, username, userid, id}) {
 			marginBottom: "4px",
 			zIndex: "999999",
 			transformOrigin: "center bottom",
+			transformStyle: "flat",
+			WebkitTransformStyle: "flat",
+			backfaceVisibility: "visible",
+			WebkitBackfaceVisibility: "visible",
+			display: "block",
 		});
 		el.appendChild(tooltip);
 		el.addEventListener("mouseenter", (e) => {
@@ -413,6 +350,14 @@ function createdecorationelement({imageurl, x, y, side, username, userid, id}) {
 		});
 	}
 	el.addEventListener("dragstart", (e) => e.preventDefault());
+	el.addEventListener("click", (e) => {
+		if (treehasdragged) {
+			e.stopPropagation();
+			return;
+		}
+		e.stopPropagation();
+		showdecorationoverlay(imageurl, username, x, y);
+	});
 	return {
 		element: el, imageurl,
 		x, y, side, id,
@@ -420,13 +365,15 @@ function createdecorationelement({imageurl, x, y, side, username, userid, id}) {
 	};
 }
 
-let lazyobserver = null;
+/*//////////////////////////////////////////////////////////////////////*/
 
 function setuplazyloading() {
 	if (!window.IntersectionObserver) {
 		document.querySelectorAll(".decoration img[data-src]").forEach(img => {
-			img.src = img.dataset.src;
-			img.style.opacity = "1";
+			const imageurl = img.dataset.src;
+			img.src = imageurl;
+            img.style.transition = "opacity 0.2s ease";
+			img.onload = () => { img.style.opacity = "1"; };
 		});
 		return;
 	}
@@ -435,7 +382,9 @@ function setuplazyloading() {
 			if (entry.isIntersecting) {
 				const img = entry.target;
 				if (img.dataset.src) {
-					img.src = img.dataset.src;
+					const imageurl = img.dataset.src;
+					img.src = imageurl;
+                    img.style.transition = "opacity 0.2s ease";
 					img.onload = () => {
 						img.style.opacity = "1";
 					};
@@ -445,8 +394,8 @@ function setuplazyloading() {
 			}
 		});
 	}, {
-		rootMargin: "50px",
-		threshold: 0.01
+		rootMargin: "200px",
+		threshold: 0
 	});
 }
 
@@ -555,6 +504,8 @@ function setupzoomcontrols(adjustzoom) {
 	});
 }
 
+
+
 function setupspinbuttons(tree3d, onrotate) {
 	const spinspeed = 2;
 	let spininterval = null;
@@ -598,15 +549,25 @@ function setupspinbuttons(tree3d, onrotate) {
 		if (spininterval) return;
 		spindirection = direction;
 		tree3d.style.transition = "none";
-		spininterval = setInterval(() => {
-			onrotate(spindirection * spinspeed);
-		}, 16);
+		tree3d.style.willChange = "transform";
+		let lasttime = performance.now();
+		const animate = (currenttime) => {
+			if (!spininterval) return;
+			const delta = currenttime - lasttime;
+			lasttime = currenttime;
+			onrotate(spindirection * spinspeed * (delta / 16));
+			spininterval = requestAnimationFrame(animate);
+		};
+		spininterval = requestAnimationFrame(animate);
 	}
 	function stopspin() {
 		if (spininterval) {
-			clearInterval(spininterval);
+			cancelAnimationFrame(spininterval);
 			spininterval = null;
 			tree3d.style.transition = "transform 0.15s ease-out";
+			setTimeout(() => {
+				tree3d.style.willChange = "transform";
+			}, 200);
 		}
 	}
 	leftbtn.addEventListener("pointerdown", (e) => {
@@ -627,73 +588,104 @@ function setupspinbuttons(tree3d, onrotate) {
 	document.body.appendChild(rightbtn);
 }
 
-function setprogress(text) {
-	if (!progresstext) return;
-	const maintext = document.getElementById("progresstextmain");
-	const subtext = document.getElementById("progresstextsub");
-	const defaultmessage = "double click any place on the tree to add a static decoration!";
-	if (maintext) {
-		maintext.textContent = text || "";
-		if (subtext) {
-			if (text === defaultmessage) {
-				subtext.style.display = "block";
-			} else {
-				subtext.style.display = "none";
-			}
-		}
-		const existingbutton = progresstext.querySelector(".submitbutton");
-		if (existingbutton && text !== "submit decoration") {
-			existingbutton.remove();
-		}
-	} else {
-		progresstext.textContent = text || "";
-	}
-}
+let decorationoverlay = null;
 
-function createplusmarker(clientx, clienty, rect) {
-	const marker = document.createElement("div");
-	marker.className = "plusmark";
-	Object.assign(marker.style, {
+function showdecorationoverlay(imageurl, username, decox, decoy) {
+	if (decorationoverlay) {
+		closedecorationoverlay();
+	}
+
+	decorationoverlay = document.createElement("div");
+	decorationoverlay.id = "decoration-overlay";
+	Object.assign(decorationoverlay.style, {
 		position: "fixed",
-		width: "30px",
-		height: "30px",
-		left: `${clientx}px`,
-		top: `${clienty}px`,
-		transform: "translate(-50%, -50%)",
-		pointerEvents: "none",
-		zIndex: "1000",
+		top: "0", left: "0",
+		width: "100%", height: "100%",
+		background: "rgba(0, 0, 0, 0.75)",
+		zIndex: "10000",
+		display: "flex",
+		flexDirection: "column",
+		alignItems: "center",
+		justifyContent: "center",
+		opacity: "0",
+		transition: "opacity 0.2s ease-in",
+		pointerEvents: "auto",
 	});
-	const svgns = "http://www.w3.org/2000/svg";
-	const svg = document.createElementNS(svgns, "svg");
-	svg.setAttribute("width", "30");
-	svg.setAttribute("height", "30");
-	svg.setAttribute("viewBox", "0 0 30 30");
-	const line1 = document.createElementNS(svgns, "line");
-	line1.setAttribute("x1", "15");
-	line1.setAttribute("y1", "5");
-	line1.setAttribute("x2", "15");
-	line1.setAttribute("y2", "25");
-	line1.setAttribute("stroke", "#ffffff");
-	line1.setAttribute("stroke-width", "3");
-	line1.setAttribute("stroke-linecap", "round");
-	const line2 = document.createElementNS(svgns, "line");
-	line2.setAttribute("x1", "5");
-	line2.setAttribute("y1", "15");
-	line2.setAttribute("x2", "25");
-	line2.setAttribute("y2", "15");
-	line2.setAttribute("stroke", "#ffffff");
-	line2.setAttribute("stroke-width", "3");
-	line2.setAttribute("stroke-linecap", "round");
-	svg.appendChild(line1);
-	svg.appendChild(line2);
-	marker.appendChild(svg);
-	return marker;
+
+	const imagecontainer = document.createElement("div");
+	Object.assign(imagecontainer.style, {
+		width: "min(400px, 75vw)",
+		height: "min(400px, 75vw)",
+		display: "flex",
+		alignItems: "center",
+		justifyContent: "center",
+		marginBottom: "20px",
+		pointerEvents: "auto",
+	});
+
+	const overlayimg = document.createElement("img");
+	overlayimg.src = imageurl;
+	overlayimg.alt = "";
+	Object.assign(overlayimg.style, {
+		maxWidth: "100%",
+		maxHeight: "100%",
+		width: "100%",
+		height: "100%",
+		objectFit: "contain",
+		pointerEvents: "none",
+		userSelect: "none",
+	});
+	imagecontainer.appendChild(overlayimg);
+
+	imagecontainer.addEventListener("click", (e) => {
+		e.stopPropagation();
+	});
+
+	if (username) {
+		const usernametext = document.createElement("div");
+		usernametext.id = "decoration-overlay-username";
+		Object.assign(usernametext.style, {
+			position: "fixed",
+			bottom: "20px",
+			left: "50%",
+			transform: "translateX(-50%)",
+			color: "white",
+			textAlign: "center",
+			fontFamily: "Spline Sans Mono",
+			fontSize: "16px",
+			padding: "10px 20px",
+			borderRadius: "5px",
+			pointerEvents: "none",
+			userSelect: "none",
+			textShadow: "0 0 8px rgba(0, 0, 0, 1), 0 0 18px rgba(0, 0, 0, 0.9), 0 0 32px rgba(0, 0, 0, 0.8), 0 4px 12px rgba(0, 0, 0, 0.9)",
+		});
+		usernametext.textContent = `by ${username}`;
+		decorationoverlay.appendChild(usernametext);
+	}
+
+	decorationoverlay.appendChild(imagecontainer);
+
+	decorationoverlay.addEventListener("click", (e) => {
+		if (e.target === decorationoverlay) {
+			closedecorationoverlay();
+		}
+	});
+
+	document.body.appendChild(decorationoverlay);
+	requestAnimationFrame(() => {
+		decorationoverlay.style.opacity = "1";
+	});
 }
 
-function removeplusmarker(marker) {
-	if (marker && marker.parentNode) {
-		marker.parentNode.removeChild(marker);
-	}
+function closedecorationoverlay() {
+	if (!decorationoverlay) return;
+	decorationoverlay.style.opacity = "0";
+	setTimeout(() => {
+		if (decorationoverlay && decorationoverlay.parentNode) {
+			decorationoverlay.parentNode.removeChild(decorationoverlay);
+		}
+		decorationoverlay = null;
+	}, 200);
 }
 
 function loadtreemask() {
@@ -709,6 +701,21 @@ function loadtreemask() {
 	};
 	treeimage.onerror = () => {
 		console.warn("failed to load tree image for alpha hit-test");
+	};
+
+	treemaskoverlay = new Image();
+	treemaskoverlay.src = "assets/images/treemask.webp";
+	treemaskoverlay.crossOrigin = "anonymous";
+	treemaskoverlay.onload = () => {
+		treemaskoverlaycanvas = document.createElement("canvas");
+		treemaskoverlaycanvas.width = treemaskoverlay.naturalWidth || treemaskoverlay.width;
+		treemaskoverlaycanvas.height = treemaskoverlay.naturalHeight || treemaskoverlay.height;
+		treemaskoverlayctx = treemaskoverlaycanvas.getContext("2d");
+		treemaskoverlayctx.drawImage(treemaskoverlay, 0, 0);
+	};
+	treemaskoverlay.onerror = () => {
+		console.warn("failed to load tree mask for overlay");
+		treemaskoverlay = null;
 	};
 }
 
@@ -747,36 +754,26 @@ function computetreehit(clientx, clienty, containerrect, rotationdeg) {
 	};
 }
 
-async function loadremotedecorations(fronttree, backtree, decorations) {
-	setprogress("loading decorations...");
+async function loaddecorationsfromjson(fronttree, backtree, decorations) {
 	try {
-		const response = await fetch(`${workerlink}/decorations`, { cache: "default" });
+		const response = await fetch("deco.json");
 		if (!response.ok) {
-			if (response.status === 429) {
-				const errortext = await response.text();
-				setprogress("too many requests - you can view decorations up to 3 times per minute");
-				setTimeout(() => setprogress("double click any place on the tree to add a static decoration!"), 5000);
-				console.warn("rate limited when loading decorations");
-			} else {
-				console.warn("failed to load remote decorations:", response.status);
-				setprogress("failed to load decorations");
-				setTimeout(() => setprogress("double click any place on the tree to add a static decoration!"), 3000);
-			}
+			console.warn("failed to load decorations from deco.json:", response.status);
 			return;
 		}
-		const remotedecos = await response.json();
-		if (!Array.isArray(remotedecos)) {
-			console.warn("remote decorations response is not an array");
+		const decos = await response.json();
+		if (!Array.isArray(decos)) {
+			console.warn("deco.json response is not an array");
 			return;
 		}
 		let loaded = 0;
-		const batchsize = 50;
+		const batchsize = 25;
 		let batchindex = 0;
 		const loadbatch = () => {
-			const batch = remotedecos.slice(batchindex, batchindex + batchsize);
+			const batch = decos.slice(batchindex, batchindex + batchsize);
 			for (const deco of batch) {
 				try {
-					const imageurl = deco.imagedata || deco.imageData;
+					const imageurl = deco.imagepath || deco.imagedata || deco.imageData;
 					const x = Number(deco.x);
 					const y = Number(deco.y);
 					const side = Number(deco.side) === 2 ? 2 : 1;
@@ -794,231 +791,31 @@ async function loadremotedecorations(fronttree, backtree, decorations) {
 					});
 					decorations.push(decoration);
 					if (side === 1) {
-						fronttree.appendChild(decoration.element);
+                        if (fronttree.decorationsLayer) fronttree.decorationsLayer.appendChild(decoration.element);
+						else fronttree.appendChild(decoration.element); // fallback
 					} else {
-						backtree.appendChild(decoration.element);
-					}
-					if (window.applyDebugStyling) {
-						window.applyDebugStyling(decoration.element);
+                        if (backtree.decorationsLayer) backtree.decorationsLayer.appendChild(decoration.element);
+						else backtree.appendChild(decoration.element); // fallback 2
 					}
 					loaded++;
 				} catch (err) {
-					console.error("error creating remote decoration:", err, deco);
+					console.error("error creating decoration:", err, deco);
 				}
 			}
 			batchindex += batchsize;
-			if (batchindex < remotedecos.length) {
+			if (batchindex < decos.length) {
 				requestAnimationFrame(loadbatch);
 			} else {
 				if (loaded > 0) {
-					console.log(`loaded ${loaded} remote decoration(s)`);
+					console.log(`loaded ${loaded} decoration(s)`);
 				}
-				setprogress("double click any place on the tree to add a static decoration!");
 				setTimeout(observedecorations, 100);
 			}
 		};
 		loadbatch();
-		if (loaded > 0) {
-			console.log(`loaded ${loaded} remote decoration(s)`);
-		}
-		setprogress("double click any place on the tree to add a static decoration!");
 	} catch (error) {
-		console.error("error loading remote decorations:", error);
-		setprogress("error loading decorations");
-		setTimeout(() => setprogress("double click any place on the tree to add a static decoration!"), 3000);
+		console.error("error loading decorations from deco.json:", error);
 	}
-}
-
-function ensuresubmitbutton() {
-	if (!submitbutton) {
-		submitbutton = document.createElement("button");
-		submitbutton.className = "submitbutton";
-		submitbutton.textContent = "submit decoration";
-		submitbutton.type = "button";
-		submitbutton.addEventListener("click", handlesubmitclick, true);
-		submitbutton.addEventListener("pointerdown", (e) => {
-			e.stopPropagation();
-		}, true);
-	}
-}
-
-function showsubmitbutton() {
-	if (!progresstext) return;
-	ensuresubmitbutton();
-	const maintext = document.getElementById("progresstextmain");
-	const subtext = document.getElementById("progresstextsub");
-	if (maintext) {
-		maintext.textContent = "";
-	}
-	if (subtext) {
-		subtext.style.display = "none";
-	}
-	const existingbutton = progresstext.querySelector(".submitbutton");
-	if (existingbutton) {
-		existingbutton.remove();
-	}
-	progresstext.appendChild(submitbutton);
-	if (subtext && !subtext.parentNode) {
-		progresstext.appendChild(subtext);
-	}
-	submitbutton.disabled = false;
-	submitbutton.textContent = "submit decoration";
-	submitbutton.style.pointerEvents = "auto";
-	submitbutton.style.cursor = "pointer";
-}
-
-async function handlesubmitclick(event) {
-	event.preventDefault();
-	event.stopPropagation();
-	console.log("submit button clicked", { placedfile: !!placedfile, placedplacement: !!placedplacement, hassubmitted });
-	if (!placedfile || !placedplacement || hassubmitted) {
-		console.warn("submit blocked:", { placedfile: !!placedfile, placedplacement: !!placedplacement, hassubmitted });
-		return;
-	}
-	if (!submitbutton) {
-		console.warn("submit button not found");
-		return;
-	}
-	submitbutton.disabled = true;
-	submitbutton.textContent = "submitting...";
-	try {
-		if (!currentuser) {
-			submitbutton.disabled = false;
-			submitbutton.textContent = "submit decoration";
-			setprogress("please log in with discord to place decorations");
-			showloginbutton();
-			return;
-		}
-		const formdata = new FormData();
-		formdata.append("image", placedfile, "decoration.webp");
-		formdata.append("x", placedplacement.x.toString());
-		formdata.append("y", placedplacement.y.toString());
-		formdata.append("side", placedplacement.side.toString());
-		formdata.append("username", currentuser.username);
-		formdata.append("userid", currentuser.id);
-		const response = await fetch(`${workerlink}/submit`, {
-			method: "POST",
-			body: formdata
-		});
-		if (response.ok) {
-			const result = await response.json();
-			hassubmitted = true;
-			submitbutton.textContent = "submitted!";
-			submitbutton.disabled = true;
-			if (result.id) {
-				const decoration = decorations.find(d =>
-					d.x === placedplacement.x &&
-					d.y === placedplacement.y &&
-					d.side === placedplacement.side
-				);
-				if (decoration) {
-					decoration.element.dataset.decorationId = result.id;
-					decoration.id = result.id;
-					if (debugmodeenabled) {
-						decoration.element.style.outline = "3px solid rgba(255, 0, 0, 0.35)";
-						decoration.element.style.cursor = "pointer";
-					}
-				}
-			}
-			setprogress("decoration published! refresh in about a minute to glare upon its beauty");
-			setTimeout(() => {
-				setprogress("double click any place on the tree to add a static decoration!");
-				if (submitbutton && submitbutton.parentElement) {
-					submitbutton.parentElement.removeChild(submitbutton);
-				}
-				submitbutton = null;
-				placedfile = null;
-				placedplacement = null;
-			}, 2000);
-		} else {
-			const errortext = await response.text();
-			submitbutton.disabled = false;
-			submitbutton.textContent = "retry submit";
-			const errormsg = errortext.includes("rate limited")
-				? "you can place up to 3 decorations per day.."
-				: `error submitting?! ${errortext}`;
-			setprogress(errormsg);
-			setTimeout(() => {
-				if (submitbutton && !hassubmitted) {
-					submitbutton.textContent = "submit decoration";
-				}
-				setprogress("");
-			}, 3000);
-		}
-	} catch (error) {
-		console.error("submit failed:", error);
-		submitbutton.disabled = false;
-		submitbutton.textContent = "retry submit";
-		setprogress("error submitting?! (check console if on pc)");
-		setTimeout(() => {
-			if (submitbutton && !hassubmitted) {
-				submitbutton.textContent = "submit decoration";
-			}
-			setprogress("");
-		}, 3000);
-	}
-}
-
-async function compressimage(file, maxsize, maxbytes) {
-	return new Promise((resolve, reject) => {
-		const img = new Image();
-		img.onload = () => {
-			let width = img.width;
-			let height = img.height;
-			if (width > maxsize || height > maxsize) {
-				const ratio = Math.min(maxsize / width, maxsize / height);
-				width = Math.floor(width * ratio);
-				height = Math.floor(height * ratio);
-			}
-			let targetwidth = width;
-			let targetheight = height;
-			const minsize = 64;
-			let quality = 0.9;
-			const canvas = document.createElement("canvas");
-			const ctx = canvas.getContext("2d");
-			const attemptcompression = () => {
-				canvas.width = targetwidth;
-				canvas.height = targetheight;
-				ctx.clearRect(0, 0, targetwidth, targetheight);
-				ctx.drawImage(img, 0, 0, targetwidth, targetheight);
-				canvas.toBlob((blob) => {
-					if (!blob) {
-						reject(new Error("failed to convert to webp?!"));
-						return;
-					}
-					if (blob.size <= maxbytes) {
-						resolve(blob);
-						return;
-					}
-					if (quality > 0.4) {
-						quality = Math.max(0.4, quality - 0.1);
-						canvas.toBlob((qblob) => {
-							if (qblob && qblob.size <= maxbytes) {
-								resolve(qblob);
-							} else if (targetwidth > minsize && targetheight > minsize) {
-								targetwidth = Math.floor(targetwidth * 0.88);
-								targetheight = Math.floor(targetheight * 0.88);
-								quality = 0.85;
-								attemptcompression();
-							} else {
-								resolve(qblob || blob);
-							}
-						}, "image/webp", quality);
-					} else if (targetwidth > minsize && targetheight > minsize) {
-						targetwidth = Math.floor(targetwidth * 0.88);
-						targetheight = Math.floor(targetheight * 0.88);
-						quality = 0.85;
-						attemptcompression();
-					} else {
-						resolve(blob);
-					}
-				}, "image/webp", quality);
-			};
-			attemptcompression();
-		};
-		img.onerror = reject;
-		img.src = URL.createObjectURL(file);
-	});
 }
 
 function clamp01(v) {
@@ -1027,179 +824,279 @@ function clamp01(v) {
 	return v;
 }
 
-async function initauth() {
-	const urlparams = new URLSearchParams(window.location.search);
-	const code = urlparams.get("code");
-	if (code) {
-		try {
-			const response = await fetch(`${workerlink}/oauth/callback?code=${encodeURIComponent(code)}&redirect_uri=${encodeURIComponent(discordredirecturi)}`);
-			if (response.ok) {
-				const data = await response.json();
-				if (data.access_token) {
-					const userresponse = await fetch(`${workerlink}/oauth/user`, {
-						headers: {"Authorization": `Bearer ${data.access_token}`}
-					});
-					if (userresponse.ok) {
-						const userdata = await userresponse.json();
-						currentuser = {
-							username: userdata.username,
-							id: userdata.id,
-							access_token: data.access_token
-						};
-						sessionStorage.setItem("discord_user", JSON.stringify(currentuser));
-						window.history.replaceState({}, document.title, window.location.pathname);
-						updateauthui();
-						return;
-					} else {
-						const errortext = await userresponse.text();
-						console.error("failed to get user info:", userresponse.status, errortext);
-					}
-				} else {
-					console.error("no access_token in response:", data);
-				}
-			} else {
-				const errortext = await response.text();
-				console.error("oauth callback failed:", response.status, errortext);
-			}
-		} catch (error) {
-			console.error("auth error:", error);
-		}
-		window.history.replaceState({}, document.title, window.location.pathname);
-	}
-	const stored = sessionStorage.getItem("discord_user");
-	if (stored) {
-		try {
-			currentuser = JSON.parse(stored);
-			const userresponse = await fetch(`${workerlink}/oauth/user`, {
-				headers: {
-					"Authorization": `Bearer ${currentuser.access_token}`
-				}
-			});
-			if (userresponse.ok) {
-				const userdata = await userresponse.json();
-				currentuser.username = userdata.username;
-				currentuser.id = userdata.id;
-				sessionStorage.setItem("discord_user", JSON.stringify(currentuser));
-				updateauthui();
-				return;
-			}
-		} catch (error) {
-			console.error("session restore error:", error);
-			sessionStorage.removeItem("discord_user");
-			currentuser = null;
-		}
-	}
-	updateauthui();
-}
+/*//////////////////////////////////////////////////////////////////////*/
 
-function updateauthui() {
-	const existingloginbtn = document.getElementById("discordloginbtn");
-	if (currentuser) {
-		if (existingloginbtn) {
-			existingloginbtn.remove();
-		}
-	} else {
-		if (!existingloginbtn) {
-			showloginbutton();
-		}
-	}
-}
+// gift animation
+let giftoverlay = null; let giftcontainer = null;
+let giftpart1 = null; let giftpart2 = null; let giftpart3 = null;
+let giftpartreward = null; let iscutsceneplaying = false;
+let animationcompleted = false; let isfadingoutpresents = false;
 
-function showloginbutton() {
-	const existingloginbtn = document.getElementById("discordloginbtn");
-	if (existingloginbtn) return;
-	const loginbtn = document.createElement("button");
-	loginbtn.id = "discordloginbtn";
-	loginbtn.textContent = "log in";
-	loginbtn.className = "discordloginbutton";
-	Object.assign(loginbtn.style, {
-		position: "fixed",
-		top: "20px", right: "20px",
-		zIndex: "10000", background: "rgba(88,101,242,0.5)",
-		color: "white", border: "none",
-		borderRadius: "2em", padding: "10px 20px",
-		fontFamily: "Spline Sans Mono",
-		fontSize: "14px", cursor: "pointer",
-		boxShadow: "0 2px 8px rgba(0, 0, 0, 0.3)",
+function updatepresentsposition() {if (!presentsready || !presentscontainer) return}
+function createpresents() {
+	presentscontainer = document.createElement("div");
+	presentscontainer.id = "presents-container";
+	const decorationsize = 20;
+	const container = window.treecontainer || document.getElementById("tree-container");
+	if (!container) {
+		setTimeout(createpresents, 100);
+		return;
+	}
+	const tree3d = window.tree3d || document.getElementById("tree-3d");
+	if (!tree3d) {
+		setTimeout(createpresents, 100);
+		return;
+	}
+	const containerwidth = container.offsetWidth || parseInt(getComputedStyle(container).width);
+	Object.assign(presentscontainer.style, {
+		position: "absolute",
+		left: "0", bottom: "0", width: "100%",
+		display: "flex", justifyContent: "space-around",
+		alignItems: "flex-end", flexWrap: "wrap",
+		gap: "20px", padding: "20px",
+		pointerEvents: "none", transformStyle: "preserve-3d",
+		WebkitTransformStyle: "preserve-3d", backfaceVisibility: "visible",
+		WebkitBackfaceVisibility: "visible",
+		transform: "translateZ(10px)", WebkitTransform: "translateZ(10px)",
 	});
-	loginbtn.addEventListener("click", () => {
-		window.location.href = discordauthurl;
-	});
-	document.body.appendChild(loginbtn);
-}
+	const decorationsizepx = (decorationsize / 100) * containerwidth;
+	const avgpresentsize = decorationsizepx * 2.5; const spacing = 5;
+	const numpresents = Math.max(10, Math.floor((containerwidth - 40) / (avgpresentsize + spacing)) * 3);
 
-// moderation debug mode :p
-let debugmodeenabled = false;
-let debugclickhandler = null;
-
-window.kv = function() {
-	if (debugmodeenabled) {return}
-	debugmodeenabled = true;
-	console.log("hello bro. if you have access to the ssoggycat cloudflare account go to:\nStorage & Databases -> Workers KV -> decotree -> KV Pairs\nyou can delete any decoration from there");
-	debugclickhandler = (event) => {
-		const decoration = event.target.closest(".decoration");
-		if (!decoration) return;
-		event.preventDefault();
-		event.stopPropagation();
-		const kvkey = decoration.dataset.decorationId;
-		if (!kvkey) {
-			console.warn("no key value for this deco yet, perhaps it's very new?");
-			return;
-		}
-		navigator.clipboard.writeText(kvkey).then(() => {
-			const notification = document.createElement("div");
-			notification.textContent = `${kvkey}`;
-			Object.assign(notification.style, {
-				position: "fixed",
-				top: "50%", left: "50%",
-				transform: "translate(-50%, -50%)",
-				background: "rgba(0, 0, 0, 0.5)",
-				color: "#0f0", padding: "1em",
-				borderRadius: "2em",
-				fontFamily: "Spline Sans Mono",
-				fontSize: "14px", zIndex: "999999",
-				textAlign: "center",
-				maxWidth: "80%", wordBreak: "break-all",
-			});
-			document.body.appendChild(notification);
-			setTimeout(() => {
-				notification.style.opacity = "0";
-				notification.style.transition = "opacity 0.3s";
-				setTimeout(() => notification.remove(), 300);
-			}, 2000);
-		}).catch(err => {
-			console.error("failed to copy?!", err);
+	for (let i = 0; i < numpresents; i++) {
+		const sizemultiplier = 1.2 + Math.random() * 2.6;
+		const sizepx = decorationsizepx * sizemultiplier;
+		const present = document.createElement("img");
+		present.src = "assets/images/presentsmall.webp";
+		present.className = "present-small";
+		present.alt = "";
+		present.draggable = false;
+		Object.assign(present.style, {
+			width: `${sizepx}px`,
+			height: "auto",
+			display: "block",
+			pointerEvents: "auto",
 		});
-	}; document.addEventListener("click", debugclickhandler, true);
-	const decos = document.querySelectorAll(".decoration");
-	decos.forEach(decoration => {
-		if (decoration.dataset.decorationId) {
-			decoration.style.outline = "2px solid rgba(255, 0, 0, 0.5)";
-			decoration.style.cursor = "pointer";
-		}
-	});
-	window.applydebugstyling = function(decorationelement) {
-		if (debugmodeenabled && decorationelement.dataset.decorationId) {
-			decorationelement.style.outline = "2px solid rgba(255, 0, 0, 0.5)";
-			decorationelement.style.cursor = "pointer";
+		present.addEventListener("click", (e) => {
+			e.stopPropagation();
+			if (!iscutsceneplaying && !animationcompleted) {
+				showgiftoverlay();
+			}
+		});
+		presentscontainer.appendChild(present);
+	}
+	tree3d.appendChild(presentscontainer);
+	presentsready = true;
+	presentscontainer.style.opacity = "1";
+}
+
+function showgiftoverlay() {
+	if (giftoverlay) {
+		closegiftoverlay();
+		return;
+	}
+	giftoverlay = document.createElement("div");
+	giftoverlay.id = "gift-overlay";
+	giftcontainer = document.createElement("div");
+	giftcontainer.id = "gift-container";
+	giftcontainer.style.transform = "scaleY(1)";
+
+	giftpart2 = document.createElement("img");
+	giftpart2.id = "giftpart2";
+	giftpart2.className = "giftpart";
+	giftpart2.src = "assets/images/parts/present2.webp";
+	giftpart2.alt = "";
+	giftpart2.draggable = false;
+
+	giftpartreward = document.createElement("img");
+	giftpartreward.id = "giftpartreward";
+	giftpartreward.className = "giftpart";
+	giftpartreward.src = "assets/images/parts/presentreward.webp";
+	giftpartreward.alt = "";
+	giftpartreward.draggable = false;
+	giftpartreward.style.opacity = "0";
+	giftpartreward.style.transform = "scale(0.5)";
+	giftpartreward.style.transformOrigin = "center center";
+
+	giftpart1 = document.createElement("img");
+	giftpart1.id = "giftpart1";
+	giftpart1.className = "giftpart";
+	giftpart1.src = "assets/images/parts/present1.webp";
+	giftpart1.alt = "";
+	giftpart1.draggable = false;
+
+	giftpart3 = document.createElement("img");
+	giftpart3.id = "giftpart3";
+	giftpart3.className = "giftpart";
+	giftpart3.src = "assets/images/parts/present3.webp";
+	giftpart3.alt = "";
+	giftpart3.draggable = false;
+
+	giftcontainer.appendChild(giftpart2);
+	giftcontainer.appendChild(giftpartreward);
+	giftcontainer.appendChild(giftpart1);
+	giftcontainer.appendChild(giftpart3);
+	giftoverlay.appendChild(giftcontainer);
+
+	giftcontainer.style.pointerEvents = "auto";
+	giftcontainer.style.cursor = "pointer";
+
+	const handlegiftclick = (e) => {
+		e.stopPropagation();
+		if (!iscutsceneplaying) {
+			startgiftcutscene();
 		}
 	};
-};
 
-window.nokv = function() {
-	if (!debugmodeenabled) {return}
-	debugmodeenabled = false;
-	if (debugclickhandler) {
-		document.removeEventListener("click", debugclickhandler, true);
-		debugclickhandler = null;
-	}
-	const decos = document.querySelectorAll(".decoration");
-	decos.forEach(decoration => {
-		decoration.style.outline = "";
-		decoration.style.cursor = "";
+	giftcontainer.addEventListener("click", handlegiftclick);
+	giftpart1.addEventListener("click", handlegiftclick);
+	giftpart2.addEventListener("click", handlegiftclick);
+	giftpart3.addEventListener("click", handlegiftclick);
+	giftpartreward.addEventListener("click", handlegiftclick);
+
+	giftoverlay.addEventListener("click", (e) => {
+		if (e.target === giftoverlay && !iscutsceneplaying) {
+			startgiftcutscene();
+		}
 	});
-};
+	giftoverlay.addEventListener("pointerdown", (e) => {
+		e.stopPropagation();
+	});
+	giftoverlay.addEventListener("mousedown", (e) => {
+		e.stopPropagation();
+	});
+	giftoverlay.addEventListener("touchstart", (e) => {
+		e.stopPropagation();
+	});
+	document.body.appendChild(giftoverlay);
+	requestAnimationFrame(() => {
+		giftoverlay.classList.add("show");
+	});
+}
 
-console.log("🎄 sog tree");
-console.log("   kv() - click decorations to copy their key values");
-console.log("   nokv() - disable the aforementioned");
+function closegiftoverlay() {
+	if (!giftoverlay) return;
+	giftoverlay.classList.remove("show");
+	setTimeout(() => {
+		if (giftoverlay && giftoverlay.parentNode) {
+			giftoverlay.parentNode.removeChild(giftoverlay);
+		}
+		giftoverlay = null; giftcontainer = null;
+		giftpart1 = null; giftpart2 = null; giftpart3 = null;
+		giftpartreward = null;
+	}, 300);
+}
+
+function startgiftcutscene() {
+	if (iscutsceneplaying || !giftpart3) return;
+	iscutsceneplaying = true;
+	const obtainedel = document.querySelector(".obtained");
+	if (obtainedel) {
+		obtainedel.classList.remove("show");
+		obtainedel.style.opacity = "0";
+		obtainedel.style.pointerEvents = "none";
+	}
+	const pop = new Audio("assets/audio/pop.mp3"); pop.play();
+	giftpart3.style.transition = "none";
+	requestAnimationFrame(() => {
+		giftpart3.style.transform = "translateY(-30px) rotate(15deg)";
+		giftpart3.style.transition = "transform 0.2s ease-out";
+		setTimeout(() => {
+			giftpart3.style.transition = "transform 0.8s ease-in";
+			giftpart3.style.transform = `translateY(${window.innerHeight + 100}px) rotate(15deg)`;
+			setTimeout(() => {
+				startrewardanimation();
+			}, 800);
+		}, 200);
+	});
+	setTimeout(() => {
+		showobtained();
+	}, 3000);
+}
+
+function startrewardanimation() {
+	if (!giftpartreward) return;
+	const jetfly = new Audio("assets/audio/jetfly.mp3"); jetfly.play();
+	giftpartreward.style.opacity = "0";
+	giftpartreward.style.transition = "opacity 0.25s ease";
+	requestAnimationFrame(() => {
+		giftpartreward.style.opacity = "1";
+	});
+	const tree3d = document.getElementById("tree-3d");
+	if (tree3d) {
+		tree3d.style.transition = "transform 0.5s ease-out";
+		tree3d.style.transform = "rotateY(0deg) rotateX(-10deg)";
+	}
+	setTimeout(() => {
+		const starttime = performance.now();
+		const duration = 3000;
+		const traveldistance = window.innerHeight + 200;
+		const present3falleny = window.innerHeight + 100;
+		function animatereward() {
+			const elapsed = performance.now() - starttime;
+			const progress = Math.min(elapsed / duration, 1);
+			const eased = 1 - Math.pow(2, -10 * progress);
+			const rewardabsolutey = -traveldistance * eased;
+			const cameray = rewardabsolutey * 0.8;
+			const cameraoffset = -cameray;
+			giftpartreward.style.transform = `translateY(${rewardabsolutey}px) scale(0.5)`;
+			giftpartreward.style.WebkitTransform = `translateY(${rewardabsolutey}px) scale(0.5)`;
+			if (giftpart1) {
+				giftpart1.style.transform = `translateY(${cameraoffset}px)`;
+				giftpart1.style.WebkitTransform = `translateY(${cameraoffset}px)`;
+			}
+			if (giftpart2) {
+				giftpart2.style.transform = `translateY(${cameraoffset}px)`;
+				giftpart2.style.WebkitTransform = `translateY(${cameraoffset}px)`;
+			}
+			if (giftpart3) {
+				const present3y = present3falleny + cameraoffset;
+				giftpart3.style.transform = `translateY(${present3y}px) rotate(15deg)`;
+				giftpart3.style.WebkitTransform = `translateY(${present3y}px) rotate(15deg)`;
+			}
+			if (progress < 1) {
+				requestAnimationFrame(animatereward);
+			}
+		}
+		requestAnimationFrame(animatereward);
+	}, 250);
+}
+
+function showobtained() {
+	const obtainedel = document.querySelector(".obtained");
+	const hk = new Audio("assets/audio/hkobtained.mp3"); hk.play();
+	obtainedel.style.transition = "opacity 2s ease";
+	obtainedel.style.opacity = "1";
+	obtainedel.style.pointerEvents = "auto";
+	obtainedel.classList.add("show");
+	setTimeout(() => {
+		obtainedel.style.transition = "opacity 5s ease";
+		obtainedel.style.opacity = "0";
+		obtainedel.style.pointerEvents = "none";
+		if (giftoverlay) {
+			giftoverlay.style.transition = "opacity 5s ease";
+			giftoverlay.style.opacity = "0";
+		}
+		if (presentscontainer) {
+			isfadingoutpresents = true;
+			presentscontainer.style.transition = "opacity 5s ease";
+			presentscontainer.style.opacity = "0";
+			presentscontainer.style.pointerEvents = "none";
+		}
+		setTimeout(() => {
+			obtainedel.classList.remove("show");
+			const tree3d = document.getElementById("tree-3d");
+			if (tree3d) {
+				tree3d.style.transition = "transform 0.5s ease-out";
+				tree3d.style.transform = "rotateY(0deg) rotateX(0deg)";
+			}
+			closegiftoverlay();
+			iscutsceneplaying = false;
+			animationcompleted = true;
+		}, 5000);
+	}, 4000);
+}
+
+setTimeout(() => {
+	createpresents();
+}, 100);
