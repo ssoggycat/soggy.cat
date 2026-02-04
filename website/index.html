@@ -41,6 +41,13 @@
 			</div>
 		</a>
 
+		<a aria-label="enter code" href="#" onclick="event.preventDefault(); showcodeinput(); return false;">
+			<div class="sm-button sm-small">
+				<img src="/static/other/sidemenu/svgs/enter.svg" width="15" height="15" loading="lazy" decoding="async">
+				<p>enter code</p>
+			</div>
+		</a>
+
 		<a aria-label="no css" href="nocss" target="NoCSSTarget">
 			<div class="sm-button sm-small">
 				<img src="/static/other/sidemenu/svgs/nocss.svg" width="15" height="15" loading="lazy" decoding="async">
@@ -65,6 +72,12 @@
 	<button id="circlebtn" type="button" aria-label="Navigation"></button>
 	<span id="player" style="display: none"></span>
 	<input type="file" id="picker" style="display: none" accept="image/*">
+
+	<div id="codeinputelmodal" class="entercode entercodehidden">
+		<div class="entercodecontent">
+			<input type="text" id="codeinputel" placeholder="code" autocomplete="off" spellcheck="false">
+		</div>
+	</div>
 
 	<script src="/static/other/shared/web/vanillatilt.js" defer></script>
 	<script src="/static/other/shared/web/color-thief.umd.js" defer></script>
