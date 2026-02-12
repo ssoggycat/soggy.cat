@@ -75,3 +75,15 @@ body {
 	width: 100%; text-align: center;
 	background: transparent;
 }
+
+.thisisnotactuallymalware {
+	font-family: Helvetica, sans-serif;
+	font-weight: 1000; font-size: 3em;
+	padding: 0.25em; border-radius: 0.5em;
+	bottom: 1.5em; max-width: 75vw;
+	text-align: center;
+	position: fixed; display: flex;
+	background-color: white; color: #02AAF3;
+	text-decoration: none;
+	box-shadow: 1.5vh 1.5vh 3vh rgb(41, 41, 41, 0.25);
+}
