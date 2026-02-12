@@ -65,11 +65,11 @@ function showcodeinput() {
 		if (e.key === 'Enter') {
 			const code = input.value.trim();
 
-			if (code.toUpperCase() === 'GOOG') {
+			if (code === 'GOOG') {
 				window.location.href = `https://tiagozip.github.io///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////tetapux/red/encrypt0rh4xx#%E2%B6%BD%E2%96%B9%E2%86%B4%E2%94%A9%E2%9E%BD%E2%8B%A6%E2%84%B3%E2%AE%96%E2%BC%98%E2%AB%92%E2%9E%82%E2%B4%A4%E2%A8%9F%E2%99%AD%E2%B9%9A%E2%B6%8B%E2%8A%B9%E2%9F%8C%E2%AA%A5%E2%8E%94%E2%93%82%E2%87%AD%E2%92%B7%E2%BC%B3%E2%A8%A8%E2%88%BA%E2%BA%87%E2%80%BA%E2%90%92%E2%B3%8F%E2%A9%9B%E2%A6%A5%E2%A6%93%E2%84%85%E2%A7%98%E2%9B%A7%E2%98%8A%E2%A8%BA%E2%BD%84%E2%82%99%E2%95%95%E2%AB%8A%E2%8E%A6%E2%9B%95%E2%97%80%E2%BC%84%E2%B1%97%E2%AC%B1%E2%8C%92%E2%BC%9E%E2%8B%BC%E2%8F%A4%E2%BE%80%E2%B8%91%E2%8B%94%E2%A5%84%E2%A3%B9%E2%8B%82%E2%B0%B7%E2%82%96%E2%AE%A7%E2%9D%9E%E2%A1%85%E2%BA%B1%E2%AD%85%E2%A2%87%E2%BB%B0%E2%80%A1`;
-			} else if (code.toUpperCase() === 'IWantToGetAMiddleFingerAgainThatBitIsVeryFunny') {
+			} else if (code === 'IWantToGetAMiddleFingerAgainThatBitIsVeryFunny') {
 				window.location.href = `https://soggy.cat/free`;
-			} else if (code.toUpperCase() === 'ssoggycat') {
+			} else if (code === 'ssoggycat') {
 				window.location.href = `https://s.soggy.cat`;
 			}
 			else if (code !== '') {
