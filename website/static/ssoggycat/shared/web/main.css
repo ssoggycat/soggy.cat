@@ -78,9 +78,9 @@ body {
 
 .thisisnotactuallymalware {
 	font-family: Helvetica, sans-serif;
-	font-weight: 1000; font-size: 3em;
-	padding: 0.25em; border-radius: 0.5em;
-	bottom: 1.5em; max-width: 75vw;
+	font-weight: 1000; font-size: 1em;
+	padding: 0.5em; border-radius: 10em;
+	top: 1.5em; right: 1.5em; max-width: 50vw;
 	text-align: center;
 	position: fixed; display: flex;
 	background-color: white; color: #02AAF3;
