@@ -1,0 +1,28 @@
+{
+  "tool": {
+    "paint": "Pick a color and a brush to draw with.",
+    "fill": "Click to fill an area with a solid color.",
+    "eraser": "Eraser!",
+    "save": "Your image has been saved!"
+  },
+  "colors": [
+    "Black!",
+    "Dark grey! Some people spell it \"dark gray\".",
+    "Light grey! Some people spell it \"light gray\".",
+    "White!",
+    "Red!",
+    "Orange!",
+    "Yellow!",
+    "Light green!",
+    "Dark green!",
+    "Sky blue!",
+    "Blue!",
+    "Lavender!",
+    "Purple!",
+    "Pink!",
+    "Brown!",
+    "Tan!",
+    "Beige!"
+  ],
+  "tux": {"um": "..?"}
+}

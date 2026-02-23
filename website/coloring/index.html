@@ -1,0 +1,830 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, height=device-height, initial-scale=1.0, user-scalable=no, maximum-scale=1.0, minimal-ui">
+    <title>Color the Sog!</title>
+    <link rel="icon" type="image/x-icon" href="icon.png">
+
+    <meta itemprop="name" content="color the sog">
+    <meta itemprop="description" content="have you ever had the urge to color your own soggy cat? no? then GET OUTTTTT">
+
+    <style>
+
+        body {
+            margin: 0; padding: 0; height: 100vh;
+            background-color: white;
+            font-family: Arial, sans-serif;
+            display: flex; flex-direction: column;
+            overflow: hidden;
+        }
+
+        .app {
+            flex: 1 1 auto; flex-direction: column;
+            display: flex; height: 100%; width: 100%;
+        }
+
+		/*//////////////////////////////////////////////////////////////////////*/
+
+        .mainrow {
+            flex: 1 1 auto; display: flex;
+            min-height: 0;
+        }
+
+        .sidepanel {
+            flex: 0 0 auto; display: flex;
+            flex-direction: column; align-items: center;
+            padding: 0; gap: 0;
+        }
+
+        .toolspanel {justify-content: flex-start}
+        .brushespanel {justify-content: flex-start}
+        .centerpanel {
+            flex: 1 1 auto; display: flex;
+            justify-content: center; align-items: center;
+            padding: 0; position: relative;
+            min-width: 0; min-height: 0;
+        }
+
+		/*//////////////////////////////////////////////////////////////////////*/
+
+        .titlebanner {
+            width: 100%;
+            background-image: url("assets/images/title_large.png");
+            background-repeat: no-repeat;
+            background-size: contain; background-position: center;
+            display: flex; justify-content: center;
+            align-items: center;
+        }
+
+        .titlebanner span {
+            font-size: 20px; user-select: none;
+            text-align: center; display: flex;
+            align-items: center; justify-content: center;
+        }
+
+		/*//////////////////////////////////////////////////////////////////////*/
+
+        .buttoncolumn {
+            width: 100%; display: grid;
+            grid-template-columns: repeat(2, auto);
+            justify-content: center; gap: 0;
+        }
+
+        .btn {
+            position: relative;
+            background-image: url("assets/images/btn_up.png");
+            background-repeat: no-repeat;
+            background-size: 100% 100%;
+            border: none; padding: 0; cursor: pointer;
+            display: flex; flex-direction: column;
+            align-items: center; justify-content: center;
+            color: #000000; text-align: center;
+            background-color: transparent;
+        }
+        .btn.selected {background-image: url("assets/images/btn_down.png")}
+        .btnoff {background-image: url("assets/images/btn_off.png"); cursor: default}
+
+        .btncontent {
+            width: 80%; height: 80%; display: flex;
+            flex-direction: column; align-items: center;
+            justify-content: center; gap: 0;
+        }
+        .btnicon {
+            flex: 0 0 auto; object-fit: contain;
+            max-height: 60%; max-width: 80%;
+        }
+        .btnlabel {font-size: 13px}
+
+		/*//////////////////////////////////////////////////////////////////////*/
+
+        .brushrow {
+            width: 100%;
+            display: grid;
+            grid-template-columns: repeat(2, auto);
+            justify-content: center;
+            gap: 0;
+        }
+        .brushrow.hidden {display: none}
+
+        .brushbutton {
+            background-image: url("assets/images/btn_up.png");
+            background-repeat: no-repeat;
+            background-size: 100% 100%;
+            border: none; cursor: pointer; display: flex;
+            align-items: center; justify-content: center;
+            background-color: transparent;
+        }
+        .brushbutton.selected {background-image: url("assets/images/btn_down.png")}
+
+		.brushdot {border-radius: 50%; background-color: #000000}
+
+        .brushdot.small {width: 12px; height: 12px}
+        .brushdot.medium {width: 21px; height: 21px}
+        .brushdot.large {width: 30px; height: 30px}
+
+		/*//////////////////////////////////////////////////////////////////////*/
+
+        .canvaswrapper {
+            position: relative;
+            max-width: 80%;
+            max-height: 80%;
+            width: 80%;
+            height: auto;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .sog, .paint {position: absolute; top: 0; left: 0}
+        .paint {pointer-events: none; z-index: 1}
+        .sog {z-index: 2}
+
+		/*//////////////////////////////////////////////////////////////////////*/
+
+        .bottombar {
+            flex: 0 0 auto;
+            padding: 0; height: 150px;
+            display: flex; flex-direction: column; gap: 0;
+        }
+
+        .bottomtoprow {
+            display: flex; align-items: center;
+            justify-content: flex-start; gap: 0;
+        }
+
+		/*//////////////////////////////////////////////////////////////////////*/
+
+        .colorstitle {
+            flex: 0 0 auto; user-select: none;
+            background-image: url("assets/images/title_large.png");
+            background-repeat: no-repeat; background-size: contain;
+            background-position: left center;
+            display: flex; align-items: center;
+            padding: 0; justify-content: center;
+        }
+
+        .colorstitle span {
+            font-size: 32px; width: 75%; height: 100%;
+            text-align: center; display: flex;
+            align-items: center; justify-content: center;
+        }
+
+        .colorsrowcontainer {
+            flex: 1 1 auto; display: flex;
+            align-items: center; overflow: hidden;
+            padding-left: 0; min-width: 0;
+        }
+        .colorsrow {
+            display: flex; flex-wrap: nowrap;
+            justify-content: flex-start; gap: 0;
+            padding-bottom: 0; width: 100%;
+        }
+
+        .colorbutton {
+            flex: 1 1 0; min-width: 0;
+            background-image: url("assets/images/btn_up.png");
+            background-repeat: no-repeat; background-size: 100% 100%;
+            border: none; cursor: pointer;
+            display: flex; align-items: center; justify-content: center;
+            background-color: transparent;
+        }
+
+        .colorcircle {
+            width: 70%; height: 70%;
+            border-radius: 50%;
+        }
+
+        .colorbutton.selected {background-image: url("assets/images/btn_down.png")}
+
+		/*//////////////////////////////////////////////////////////////////////*/
+
+        .bottomestrow {
+            display: flex; justify-content: flex-start;
+            align-items: flex-end;
+            min-height: 64px;
+        }
+
+        .description {
+            position: fixed;
+            left: 110px; bottom: 30px;
+            max-width: 80vw; font-size: 20px;
+            line-height: 1.2; height: 60px;
+        }
+
+        .tux {
+            display: flex; position: fixed;
+            bottom: 0; left: 8px;
+            user-select: none;
+        }
+        .tux img {
+            max-height: 60px;
+            user-select: none;
+            pointer-events: auto;
+        }
+
+		/*//////////////////////////////////////////////////////////////////////*/
+
+        .dimoverlay {
+            position: fixed; inset: 0;
+            background-color: rgba(0, 0, 0, 0.5);
+            display: none; z-index: 1000;
+        }
+        .dimoverlay.active {display: block}
+
+    </style>
+</head>
+<body>
+    <div class="app">
+        <div class="mainrow">
+            <aside class="sidepanel toolspanel pixelated">
+                <div class="titlebanner pixelated">
+                    <span>Tools</span>
+                </div>
+                <div class="buttoncolumn">
+                    <button class="btn toolbtn" data-tool="paint">
+                        <div class="btncontent">
+                            <img src="assets/images/brush.png" alt="Paint" class="btnicon pixelated">
+                            <div class="btnlabel">Paint</div>
+                        </div>
+                    </button>
+                    <button class="btn toolbtn" data-tool="fill">
+                        <div class="btncontent">
+                            <img src="assets/images/fill.png" alt="Fill" class="btnicon pixelated">
+                            <div class="btnlabel">Fill</div>
+                        </div>
+                    </button>
+                    <button class="btn toolbtn" data-tool="eraser">
+                        <div class="btncontent">
+                            <img src="assets/images/eraser.png" alt="Eraser" class="btnicon pixelated">
+                            <div class="btnlabel">Eraser</div>
+                        </div>
+                    </button>
+                    <button class="btn toolbtn" data-tool="save">
+                        <div class="btncontent">
+                            <img src="assets/images/save.png" alt="Save" class="btnicon pixelated">
+                            <div class="btnlabel">Save</div>
+                        </div>
+                    </button>
+                </div>
+            </aside>
+
+            <main class="centerpanel">
+                <div class="canvaswrapper pixelated">
+                    <canvas class="sog pixelated"></canvas>
+                    <canvas class="paint pixelated"></canvas>
+                </div>
+            </main>
+
+            <aside class="sidepanel brushespanel pixelated">
+                <div class="titlebanner pixelated">
+                    <span>Brushes</span>
+                </div>
+                <div class="brushrow">
+                    <button class="brushbutton" data-size="small">
+                        <div class="brushdot small"></div>
+                    </button>
+                    <button class="brushbutton" data-size="medium">
+                        <div class="brushdot medium"></div>
+                    </button>
+                    <button class="brushbutton" data-size="large">
+                        <div class="brushdot large"></div>
+                    </button>
+                </div>
+            </aside>
+        </div>
+
+        <footer class="bottombar pixelated">
+            <div class="bottomtoprow">
+                <div class="colorstitle pixelated">
+                    <span>Colors</span>
+                </div>
+                <div class="colorsrowcontainer">
+                    <div class="colorsrow">
+                    </div>
+                </div>
+            </div>
+            <div class="bottomestrow">
+                <div class="description"></div>
+                <div class="tux pixelated">
+                    <img src="assets/images/bored.png" class="pixelated" draggable="false">
+                </div>
+            </div>
+        </footer>
+    </div>
+
+    <div class="dimoverlay"></div>
+
+    <script>
+        (function () {
+
+            const colors = [
+                "#000000", "#808080", "#c0c0c0", "#ffffff",
+                "#ff0000", "#ff8000", "#ffff00", "#a0e480",
+                "#219446", "#8aa8cd", "#3264ff", "#ba9dff",
+                "#800080", "#ffa5d3", "#805000", "#e2bda6", "#f7e4db"
+            ];
+
+            const basecanvas = document.querySelector(".sog");
+            const paintcanvas = document.querySelector(".paint");
+            if (!basecanvas || !paintcanvas) return;
+            const basectx = basecanvas.getContext("2d", {willReadFrequently: true });
+            const paintctx = paintcanvas.getContext("2d");
+            if (!basectx || !paintctx) return;
+
+            let imgwidth = 0;
+            let imgheight = 0;
+            const centerpanel = document.querySelector(".centerpanel");
+            const canvaswrapper = document.querySelector(".canvaswrapper");
+
+            let currenttool = "paint";
+            let currentbrush = "medium";
+            let currentcolor = "#000000";
+            let isdrawing = false;
+            let lastpoint = null;
+
+            let lastpaintsoundtime = 0;
+            let lasterasesoundtime = 0;
+
+            const toolsounds = {
+                click: new Audio("assets/audio/click.ogg"),
+                bubble: new Audio("assets/audio/bubble.ogg"),
+                bleep: new Audio("assets/audio/bleep.ogg"),
+                paintsmall: new Audio("assets/audio/paint1.ogg"),
+                paintmedium: new Audio("assets/audio/paint2.ogg"),
+                paintlarge: new Audio("assets/audio/paint3.ogg"),
+                eraser1: new Audio("assets/audio/eraser1.ogg"),
+                eraser2: new Audio("assets/audio/eraser2.ogg"),
+                areyousure: new Audio("assets/audio/areyousure.ogg"),
+                tuxok: new Audio("assets/audio/tuxok.ogg"),
+				stamp: new Audio("assets/audio/stamp.ogg")
+            };
+
+            const descriptionel = document.querySelector(".description");
+            let messages = null;
+
+			/*//////////////////////////////////////////////////////////////////////*/
+
+            function showmessage(text) {
+                if (!descriptionel || !text) return;
+                descriptionel.textContent = text;
+            }
+
+            function getmessage(path) {
+                if (!messages) return "";
+                const parts = path.split(".");
+                let cur = messages;
+                for (const p of parts) {
+                    if (cur && Object.prototype.hasOwnProperty.call(cur, p)) {
+                        cur = cur[p];
+                    } else {return ""}
+                }
+                return typeof cur === "string" ? cur : "";
+            }
+
+            function playsound(audio) {
+                if (!audio) return;
+                try {
+                    const clone = audio.cloneNode();
+                    clone.play().catch(() => {});
+                } catch (e) {}
+            }
+
+			/*//////////////////////////////////////////////////////////////////////*/
+
+            function initcolors() {
+                const row = document.querySelector(".colorsrow");
+                if (!row) return;
+                colors.forEach((color, index) => {
+
+                    const btn = document.createElement("button");
+                    btn.className = "colorbutton";
+                    btn.dataset.color = color;
+                    const circle = document.createElement("div");
+                    circle.className = "colorcircle";
+                    circle.style.backgroundColor = color;
+
+                    btn.appendChild(circle); row.appendChild(btn);
+
+                    if (index === 0) {btn.classList.add("selected")}
+
+                    btn.addEventListener("click", () => {
+                        document.querySelectorAll(".colorbutton").forEach(b => b.classList.remove("selected"));
+                        btn.classList.add("selected");
+                        currentcolor = color;
+                        playsound(toolsounds.bubble);
+                        const msg = messages && messages.colors && messages.colors[index];
+                        if (msg) showmessage(msg);
+                    });
+                });
+            }
+
+            function settool(tool) {
+                currenttool = tool;
+                document.querySelectorAll(".toolbtn").forEach(btn => {
+                    btn.classList.toggle("selected", btn.dataset.tool === tool);
+                });
+
+                const brushrow = document.querySelector(".brushrow");
+                if (tool === "fill") {brushrow && brushrow.classList.add("hidden")}
+				else {brushrow && brushrow.classList.remove("hidden")}
+                playsound(toolsounds.click);
+
+                if (tool === "paint") showmessage(getmessage("tool.paint"));
+                else if (tool === "fill") showmessage(getmessage("tool.fill"));
+                else if (tool === "eraser") showmessage(getmessage("tool.eraser"));
+
+                if (tool === "save") {exportimage()}
+            }
+
+            function setbrush(size) {
+                currentbrush = size;
+                document.querySelectorAll(".brushbutton").forEach(btn => {
+                    btn.classList.toggle("selected", btn.dataset.size === size);
+                });
+                playsound(toolsounds.bleep);
+            }
+
+			/*//////////////////////////////////////////////////////////////////////*/
+
+            function loadsog() {
+                const img = new Image();
+                img.src = "assets/images/drawing.webp";
+                img.onload = function () {
+                    imgwidth = img.naturalWidth; imgheight = img.naturalHeight;
+                    basecanvas.width = imgwidth; basecanvas.height = imgheight;
+                    paintcanvas.width = imgwidth; paintcanvas.height = imgheight;
+
+                    basectx.clearRect(0, 0, imgwidth, imgheight);
+                    paintctx.clearRect(0, 0, imgwidth, imgheight);
+                    basectx.drawImage(img, 0, 0);
+
+                    basecanvas.style.width = "100%"; basecanvas.style.height = "100%";
+                    paintcanvas.style.width = "100%"; paintcanvas.style.height = "100%";
+
+                    resizecanvaswrapper();
+                };
+                img.onerror = function () {
+                    imgwidth = basecanvas.width || 512; imgheight = basecanvas.height || 512;
+                    basecanvas.width = imgwidth; basecanvas.height = imgheight;
+                    paintcanvas.width = imgwidth; paintcanvas.height = imgheight;
+
+                    basectx.clearRect(0, 0, imgwidth, imgheight);
+                    paintctx.clearRect(0, 0, imgwidth, imgheight);
+                    basectx.fillStyle = "#ffffff";
+                    basectx.fillRect(0, 0, imgwidth, imgheight);
+
+                    basecanvas.style.width = "100%";
+                    basecanvas.style.height = "100%";
+                    paintcanvas.style.width = "100%";
+                    paintcanvas.style.height = "100%";
+
+                    resizecanvaswrapper();
+                };
+            }
+
+            function resizecanvaswrapper() {
+                if (!centerpanel || !canvaswrapper || !imgwidth || !imgheight) return;
+                const targetw = centerpanel.clientWidth * 0.8;
+                const targeth = centerpanel.clientHeight * 0.8;
+                const scale = Math.min(targetw / imgwidth, targeth / imgheight);
+                const w = Math.max(1, Math.floor(imgwidth * scale));
+                const h = Math.max(1, Math.floor(imgheight * scale));
+                canvaswrapper.style.width = w + "px"; canvaswrapper.style.height = h + "px";
+            }
+
+			/*//////////////////////////////////////////////////////////////////////*/
+
+            function handlepointerdown(evt) {
+                if (!imgwidth || !imgheight) return;
+                if (evt.button !== undefined && evt.button !== 0) return;
+                evt.preventDefault();
+                const point = getcanvaspoint(evt);
+
+                if (currenttool === "fill") {
+                    floodfill(point.x, point.y, currentcolor);
+                    playsound(toolsounds.bubble); return;
+                }
+                isdrawing = true;
+                lastpoint = point;
+
+                if (currenttool === "paint") {
+                    drawline(point, point);
+                    playpaintsound();
+                } else if (currenttool === "eraser") {
+                    eraseline(point, point);
+                    playerasersound();
+                }
+            }
+
+            function handlepointermove(evt) {
+                if (!isdrawing || !imgwidth || !imgheight) return;
+                evt.preventDefault();
+                const point = getcanvaspoint(evt);
+                if (!lastpoint) {lastpoint = point}
+                if (currenttool === "paint") {
+                    drawline(lastpoint, point);
+                    playpaintsound();
+                } else if (currenttool === "eraser") {
+                    eraseline(lastpoint, point);
+                    playerasersound();
+                }
+                lastpoint = point;
+            }
+
+            function handlepointerup(evt) {
+                if (!isdrawing) return;
+                evt.preventDefault();
+                isdrawing = false;
+                lastpoint = null;
+            }
+
+			/*//////////////////////////////////////////////////////////////////////*/
+
+            function playpaintsound() {
+                const now = performance.now();
+                if (now - lastpaintsoundtime < 100) return;
+                lastpaintsoundtime = now;
+                if (currentbrush === "small") playsound(toolsounds.paintsmall);
+                else if (currentbrush === "large") playsound(toolsounds.paintlarge);
+                else playsound(toolsounds.paintmedium);
+            }
+            let nexteraser = 1;
+            function playerasersound() {
+                const now = performance.now();
+                if (now - lasterasesoundtime < 200) return;
+                lasterasesoundtime = now;
+                const sound = nexteraser === 1 ? toolsounds.eraser1 : toolsounds.eraser2;
+                playsound(sound);
+                nexteraser = nexteraser === 1 ? 2 : 1;
+            }
+
+			/*//////////////////////////////////////////////////////////////////////*/
+
+			// paint
+            function getbrushradius() {
+                if (currentbrush === "small") return 3;
+                if (currentbrush === "large") return 10;
+                return 6;
+            }
+            function getcanvaspoint(evt) {
+                const rect = basecanvas.getBoundingClientRect();
+                const x = (evt.clientX - rect.left) * (imgwidth / rect.width);
+                const y = (evt.clientY - rect.top) * (imgheight / rect.height);
+                return {x, y};
+            }
+            function drawline(from, to) {
+                const radius = getbrushradius(); paintctx.save();
+                paintctx.globalCompositeOperation = "source-over";
+                paintctx.strokeStyle = currentcolor;
+                paintctx.lineWidth = radius * 2;
+                paintctx.lineCap = "round"; paintctx.lineJoin = "round";
+                paintctx.beginPath();
+                paintctx.moveTo(from.x, from.y);
+                paintctx.lineTo(to.x, to.y);
+                paintctx.stroke(); paintctx.restore();
+            }
+            function eraseline(from, to) {
+                const radius = getbrushradius(); paintctx.save();
+                paintctx.globalCompositeOperation = "destination-out";
+                paintctx.lineWidth = radius * 2;
+                paintctx.lineCap = "round"; paintctx.lineJoin = "round";
+                paintctx.beginPath();
+                paintctx.moveTo(from.x, from.y);
+                paintctx.lineTo(to.x, to.y);
+                paintctx.stroke(); paintctx.restore();
+            }
+
+			/*//////////////////////////////////////////////////////////////////////*/
+
+			// fill
+            function floodfill(startx, starty, fillcolor) {
+                const x = Math.floor(startx);
+                const y = Math.floor(starty);
+                if (x < 0 || x >= imgwidth || y < 0 || y >= imgheight) return;
+
+                const imgdata = basectx.getImageData(0, 0, imgwidth, imgheight);
+                const data = imgdata.data;
+
+                const paintdata = paintctx.getImageData(0, 0, imgwidth, imgheight);
+                const pdata = paintdata.data;
+
+                const startindex = (y * imgwidth + x) * 4;
+                const startalpha = data[startindex + 3];
+                const alphaThreshold = 200;
+
+                if (startalpha > alphaThreshold) {
+                    return;
+                }
+
+                const visited = new Uint8Array(imgwidth * imgheight);
+                const stack = [{ x, y }];
+                const fillr = parseInt(fillcolor.slice(1, 3), 16);
+                const fillg = parseInt(fillcolor.slice(3, 5), 16);
+                const fillb = parseInt(fillcolor.slice(5, 7), 16);
+
+                const fillinregion = (gx, gy) => {
+                    if (gx < 0 || gx >= imgwidth || gy < 0 || gy >= imgheight) return false;
+                    const index = (gy * imgwidth + gx) * 4;
+                    const alpha = data[index + 3];
+                    return alpha <= alphaThreshold;
+                };
+
+                while (stack.length) {
+                    const { x: cx, y: cy } = stack.pop();
+                    const pos = cy * imgwidth + cx;
+                    if (visited[pos]) continue;
+                    visited[pos] = 1;
+
+                    if (!fillinregion(cx, cy)) continue;
+
+                    const pindex = pos * 4;
+                    pdata[pindex] = fillr;
+                    pdata[pindex + 1] = fillg;
+                    pdata[pindex + 2] = fillb;
+                    pdata[pindex + 3] = 255;
+
+                    stack.push({x: cx + 1, y: cy});
+                    stack.push({x: cx - 1, y: cy});
+                    stack.push({x: cx, y: cy + 1});
+                    stack.push({x: cx, y: cy - 1});
+                }
+
+                paintctx.putImageData(paintdata, 0, 0);
+            }
+
+			/*//////////////////////////////////////////////////////////////////////*/
+
+			// save
+            function exportimage() {
+                if (!imgwidth || !imgheight) return;
+                const dim = document.querySelector(".dimoverlay");
+                dim && dim.classList.add("active");
+
+                requestAnimationFrame(() => {
+                    try {
+                        const exportcanvas = document.createElement("canvas");
+                        exportcanvas.width = imgwidth;
+                        exportcanvas.height = imgheight;
+                        const ctx = exportcanvas.getContext("2d");
+                        if (!ctx) return;
+                        ctx.fillStyle = "#ffffff"; // the image is transparent so add a white bg
+                        ctx.fillRect(0, 0, imgwidth, imgheight);
+                        ctx.drawImage(paintcanvas, 0, 0);
+                        ctx.drawImage(basecanvas, 0, 0);
+
+                        const dataurl = exportcanvas.toDataURL("image/png");
+                        const a = document.createElement("a");
+                        a.href = dataurl;
+                        a.download = "mymasterpiece.png";
+                        document.body.appendChild(a);
+                        a.click();
+                        document.body.removeChild(a);
+
+                        playsound(toolsounds.tuxok);
+                        showmessage(getmessage("tool.save"));
+                    } finally {
+                        dim && dim.classList.remove("active");
+                    }
+                });
+            }
+
+            window.addEventListener("beforeunload", function (e) {
+                try {playsound(toolsounds.areyousure)} catch (err) {}
+                e.preventDefault();
+                e.returnValue = "";
+                return "";
+            });
+
+			/*//////////////////////////////////////////////////////////////////////*/
+
+            function inittools() {
+                document.querySelectorAll(".toolbtn").forEach(btn => {
+                    btn.addEventListener("pointerdown", (e) => {
+                        e.preventDefault();
+                        settool(btn.dataset.tool);
+                    });
+                });
+                document.querySelectorAll(".brushbutton").forEach(btn => {
+                    btn.addEventListener("click", () => setbrush(btn.dataset.size));
+                });
+                settool("paint"); setbrush("medium");
+            }
+
+            function initcanvasevents() {
+                basecanvas.addEventListener("pointerdown", handlepointerdown);
+                window.addEventListener("pointermove", handlepointermove);
+                window.addEventListener("pointerup", handlepointerup);
+                window.addEventListener("pointercancel", handlepointerup);
+            }
+
+            function sizebuttonsfromimages() {
+                const btnimg = new Image();
+                btnimg.src = "assets/images/btn_up.png";
+                btnimg.onload = function () {
+                    const btnwidth = btnimg.naturalWidth;
+                    const btnheight = btnimg.naturalHeight;
+
+                    document.querySelectorAll(".btn, .brushbutton").forEach(el => {
+                        el.style.width = btnwidth + "px";
+                        el.style.height = btnheight + "px";
+                    });
+
+                    document.querySelectorAll(".colorbutton").forEach(el => {
+                        el.style.height = btnheight + "px";
+                    });
+
+                    const titleimg = new Image();
+                    titleimg.src = "assets/images/title_large.png";
+                    titleimg.onload = function () {
+                        const ratio = titleimg.naturalHeight / titleimg.naturalWidth;
+                        const titlewidth = btnwidth * 2;
+                        const titleheight = titlewidth * ratio;
+                        document.querySelectorAll(".titlebanner, .colorstitle").forEach(el => {
+                            el.style.width = titlewidth + "px";
+                            el.style.height = titleheight + "px";
+                        });
+
+                        const labelspans = document.querySelectorAll(".titlebanner span, .colorstitle span");
+                        labelspans.forEach(span => {
+                            const parent = span.parentElement;
+                            if (!parent) return;
+                            const labelwidth = parent.clientWidth;
+                            if (!labelwidth) return;
+                            const targetwidth = labelwidth * 0.75;
+
+                            span.style.fontSize = "";
+                            span.style.whiteSpace = "nowrap";
+
+                            const computed = window.getComputedStyle(span);
+                            let basesize = parseFloat(computed.fontSize) || 16;
+                            span.style.fontSize = basesize + "px";
+
+                            const currentwidth = span.scrollWidth || 1;
+                            const scale = targetwidth / currentwidth;
+                            const newsize = basesize * scale;
+                            span.style.fontSize = newsize + "px";
+                        });
+                    };
+                };
+            }
+
+			/*//////////////////////////////////////////////////////////////////////*/
+
+            function init() {
+                fetch("en.json")
+                    .then(r => r.json())
+                    .then(data => {messages = data})
+                    .catch(() => {messages = null})
+                    .finally(() => {
+                        initcolors(); sizebuttonsfromimages();
+                        inittools(); initcanvasevents();
+                        um(); loadsog();
+                        window.addEventListener("resize", resizecanvaswrapper);
+                    });
+            }
+
+            if (document.readyState === "loading") {document.addEventListener("DOMContentLoaded", init)}
+			else {init()}
+
+			function um() {
+                const tuximg = document.querySelector(".tux img");
+                if (!tuximg) return;
+                let holdtimeout = null; let reverttux = null;
+
+                const clearhold = () => {
+                    if (holdtimeout !== null) {clearTimeout(holdtimeout); holdtimeout = null}
+                };
+                const clearrevert = () => {
+                    if (reverttux !== null) {clearTimeout(reverttux); reverttux = null}
+                };
+
+                tuximg.addEventListener("pointerdown", () => {
+                    clearhold();
+                    clearrevert();
+                    holdtimeout = setTimeout(() => {
+						playsound(toolsounds.stamp);
+                        tuximg.src = "assets/images/bored2.png";
+                        showmessage(getmessage("tux.um"));
+                        holdtimeout = null;
+                    }, 3000);
+                });
+                const perhapsrevert = () => {
+                    clearhold();
+                    if (tuximg.src.includes("bored2.png") && reverttux === null) {
+                        reverttux = setTimeout(() => {
+                            tuximg.src = "assets/images/bored.png";
+                            reverttux = null;
+                        }, 3000);
+                    }
+                };
+                window.addEventListener("pointerup", perhapsrevert);
+                window.addEventListener("pointercancel", perhapsrevert);
+                window.addEventListener("blur", clearhold);
+            }
+
+
+        })();
+    </script>
+</body>
+</html>
