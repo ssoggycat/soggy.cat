@@ -50,11 +50,13 @@
 
         .titlebanner {
             width: 100%;
+            min-width: 0;
             background-image: url("assets/images/title_large.png");
             background-repeat: no-repeat;
             background-size: contain; background-position: center;
             display: flex; justify-content: center;
             align-items: center;
+            flex-shrink: 0;
         }
 
         .titlebanner span {
@@ -116,6 +118,7 @@
             background-color: transparent;
         }
         .brushbutton.selected {background-image: url("assets/images/btn_down.png")}
+        .brushbutton.btnoff {background-image: url("assets/images/btn_off.png"); cursor: default}
 
 		.brushdot {border-radius: 50%; background-color: #000000}
 
@@ -345,6 +348,7 @@
 
             let lastpaintsoundtime = 0;
             let lasterasesoundtime = 0;
+            let btnwidth = 0; let btnheight = 0;
 
             const toolsounds = {
                 click: new Audio("assets/audio/click.ogg"),
@@ -722,8 +726,8 @@
                 const btnimg = new Image();
                 btnimg.src = "assets/images/btn_up.png";
                 btnimg.onload = function () {
-                    const btnwidth = btnimg.naturalWidth;
-                    const btnheight = btnimg.naturalHeight;
+                    btnwidth = btnimg.naturalWidth;
+                    btnheight = btnimg.naturalHeight;
 
                     document.querySelectorAll(".btn, .brushbutton").forEach(el => {
                         el.style.width = btnwidth + "px";
@@ -742,6 +746,7 @@
                         const titleheight = titlewidth * ratio;
                         document.querySelectorAll(".titlebanner, .colorstitle").forEach(el => {
                             el.style.width = titlewidth + "px";
+                            el.style.minWidth = titlewidth + "px";
                             el.style.height = titleheight + "px";
                         });
 
@@ -765,8 +770,93 @@
                             const newsize = basesize * scale;
                             span.style.fontSize = newsize + "px";
                         });
+                        placeholdersauto(btnwidth, btnheight);
                     };
                 };
+            }
+
+            function placeholdersauto(btnwidth, btnheight) {
+                const toolspanel = document.querySelector(".toolspanel");
+                const brushespanel = document.querySelector(".brushespanel");
+                if (!toolspanel || !brushespanel) return;
+
+                function fillpanel(panel, buttoncontainer, existingbuttons, isbrush) {
+                    const title = panel.querySelector(".titlebanner");
+                    if (!title || !buttoncontainer) return;
+
+                    const existingplaceholders = buttoncontainer.querySelectorAll(".btnoff");
+                    existingplaceholders.forEach(p => p.remove());
+                    const lastrowbuttons = buttoncontainer.querySelectorAll(".lastrowcropped");
+                    lastrowbuttons.forEach(b => {
+                        b.classList.remove("lastrowcropped");
+                        b.style.height = "";
+                        b.style.overflow = "";
+                    });
+
+                    const panelheight = panel.clientHeight;
+                    const titleheight = title.offsetHeight;
+                    const availableheight = panelheight - titleheight;
+                    if (availableheight <= 0) return;
+
+                    const existingheight = Math.ceil(existingbuttons / 2) * btnheight;
+                    const remainingheight = availableheight - existingheight;
+                    if (remainingheight <= 0) return;
+
+                    const rowsneeded = Math.floor(remainingheight / btnheight);
+                    const placeholdercount = rowsneeded * 2 + 2;
+                    if (placeholdercount <= 0) return;
+
+                    for (let i = 0; i < placeholdercount; i++) {
+                        const placeholder = document.createElement("div");
+                        placeholder.className = isbrush ? "brushbutton btnoff" : "btn btnoff";
+                        placeholder.style.width = btnwidth + "px";
+                        placeholder.style.height = btnheight + "px";
+                        buttoncontainer.appendChild(placeholder);
+                    }
+
+                    const allbuttons = buttoncontainer.querySelectorAll(".btn, .brushbutton");
+                    const totalrows = Math.ceil(allbuttons.length / 2);
+                    const totalheight = totalrows * btnheight;
+                    if (totalheight > availableheight) {
+                        const lastrowstart = (totalrows - 1) * 2;
+                        const lastrowheight = availableheight - (totalrows - 1) * btnheight;
+                        for (let i = lastrowstart; i < allbuttons.length; i++) {
+                            allbuttons[i].classList.add("lastrowcropped");
+                            allbuttons[i].style.height = lastrowheight + "px";
+                            allbuttons[i].style.overflow = "hidden";
+                        }
+                    }
+                }
+
+                const toolcolumn = toolspanel.querySelector(".buttoncolumn");
+                const brushrow = brushespanel.querySelector(".brushrow");
+                if (toolcolumn) {
+                    const toolbuttons = toolcolumn.querySelectorAll(".btn:not(.btnoff)").length;
+                    fillpanel(toolspanel, toolcolumn, toolbuttons, false);
+                }
+                if (brushrow) {
+                    const brushbuttons = brushrow.querySelectorAll(".brushbutton:not(.btnoff)").length;
+                    fillpanel(brushespanel, brushrow, brushbuttons, true);
+                    const placeholder = document.createElement("div");
+                    placeholder.className = "brushbutton btnoff";
+                    placeholder.style.width = btnwidth + "px";
+                    placeholder.style.height = btnheight + "px";
+                    brushrow.appendChild(placeholder);
+                    const brushtitle = brushespanel.querySelector(".titlebanner");
+                    const brushavailable = brushespanel.clientHeight - (brushtitle ? brushtitle.offsetHeight : 0);
+                    const allbrushbuttons = brushrow.querySelectorAll(".brushbutton");
+                    const totalbrushrows = Math.ceil(allbrushbuttons.length / 2);
+                    const totalbrushheight = totalbrushrows * btnheight;
+                    if (totalbrushheight > brushavailable) {
+                        const lastrowstart = (totalbrushrows - 1) * 2;
+                        const lastrowheight = brushavailable - (totalbrushrows - 1) * btnheight;
+                        for (let i = lastrowstart; i < allbrushbuttons.length; i++) {
+                            allbrushbuttons[i].classList.add("lastrowcropped");
+                            allbrushbuttons[i].style.height = lastrowheight + "px";
+                            allbrushbuttons[i].style.overflow = "hidden";
+                        }
+                    }
+                }
             }
 
 			/*//////////////////////////////////////////////////////////////////////*/
@@ -780,7 +870,10 @@
                         initcolors(); sizebuttonsfromimages();
                         inittools(); initcanvasevents();
                         um(); loadsog();
-                        window.addEventListener("resize", resizecanvaswrapper);
+                        window.addEventListener("resize", () => {
+                            resizecanvaswrapper();
+                            if (btnwidth && btnheight) placeholdersauto(btnwidth, btnheight);
+                        });
                     });
             }
 
