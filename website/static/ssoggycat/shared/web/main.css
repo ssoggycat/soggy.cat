@@ -87,3 +87,6 @@ body {
 	text-decoration: none;
 	box-shadow: 1.5vh 1.5vh 3vh rgb(41, 41, 41, 0.25);
 }
+@media screen and (max-width: 520px) {
+	.thisisnotactuallymalware {display: none}
+}
