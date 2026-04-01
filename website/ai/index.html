@@ -1,0 +1,541 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Soggy.AI</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        @font-face {
+            font-family: 'SF Pro Display';
+            src: url('assets/fonts/sanfrancisco.woff2') format('woff2');
+            font-weight: normal; font-style: normal;
+            font-display: swap;
+        }
+        html, body {
+            height: 100%; min-height: 100vh;
+            margin: 0; padding: 0;
+            font-family: 'SF Pro Display', 'San Francisco', Arial, sans-serif;
+            background: #f8f9fa; color: #262626;
+            transition: background 0.3s; overflow-x: hidden;
+        }
+        ::-webkit-scrollbar {
+            width: 8px;
+            background: transparent;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: transparent;
+            border-radius: 6px; min-height: 30px;
+        }
+        ::-webkit-scrollbar-thumb:hover {background: transparent}
+        ::-webkit-scrollbar-corner {background: transparent}
+        ::-webkit-scrollbar-button {
+            display: none;
+            background: transparent;
+            height: 0;
+            width: 0;
+        }
+        html {
+            scrollbar-width: thin;
+            scrollbar-color: #d6d6d6 transparent;
+        }
+
+        .particlesbg {
+            position: fixed; inset: 0;
+            width: 100%; height: 100%;
+            z-index: 0; pointer-events: none;
+        }
+
+        /*//////////////////////////////////////////////////////////////////////*/
+
+        .hypnotizebg {
+            position: fixed;
+            left: 0; top: 0; width: 100vw; height: 100vh;
+            z-index: 0;
+            pointer-events: none;
+            background: url('assets/images/hypnotize.gif') center center / cover repeat;
+            opacity: 0;
+            transition: opacity 1s linear;
+        }
+        .investnowmid {
+            position: fixed;
+            left: 0; top: 0; width: 100vw; height: 100vh;
+            z-index: 9999;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            pointer-events: none;
+            opacity: 0;
+            transition: opacity 1s linear;
+        }
+        .investnowmidtxt {
+            color: #301c2f;
+            font-family: 'SF Pro Display', sans-serif;
+            font-size: 13vw; font-weight: 1000;
+            letter-spacing: 0.35em; text-transform: uppercase;
+            text-align: center;
+            line-height: 0.93;
+            user-select: none;
+            filter:
+                drop-shadow(0 12px 24px #d2f3ff)
+                drop-shadow(0 0 50px #ff00ffe9)
+                blur(0.3px) saturate(2.2);
+            transform: skewY(-8deg) skewX(-6deg) rotate(-3deg) scale(1.09);
+            background: linear-gradient(94deg, #ffe8fa 8%, #a5fff7 24%, #ffd6fa 38%, #fff 54%, #b9e0fd 71%, #ecb7ff 93%);
+            background-clip: text;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            will-change: filter, color, transform;
+        }
+
+        /*//////////////////////////////////////////////////////////////////////*/
+
+        main {
+            position: relative; z-index: 1;
+            width: 100vw; overflow: hidden;
+            display: flex; flex-direction: column;
+            align-items: center; padding: 0;
+        }
+        .herosplash {
+            min-height: 100vh; width: 100%;
+            display: flex; flex-direction: column;
+            justify-content: center; align-items: center;
+            box-sizing: border-box;
+            padding: 2rem 1.2rem; padding-bottom: 5rem;
+            position: relative;
+        }
+        .herosog3d {
+            position: absolute; inset: 0;
+            display: flex; align-items: center;
+            justify-content: center; pointer-events: none;
+            z-index: 0; perspective: 1600px;
+            perspective-origin: 50% 45%; overflow: hidden;
+        }
+        .herosogstage {
+            width: min(78vmin, 540px);
+            transform-style: preserve-3d;
+            animation: sogspacedrift 56s linear infinite;
+        }
+        .herosogimg {
+            width: 100%; height: auto;
+            display: block; filter: brightness(0.8) saturate(0.3);
+            opacity: 0.4;
+        }
+        .herosoginner {
+            transform-style: preserve-3d;
+            animation: sogspacespin 38s linear infinite;
+        }
+        @keyframes sogspacespin {
+            from {
+                transform: rotateX(22deg) rotateY(-8deg);
+                transform: rotateZ(0deg);
+            }
+            to {
+                transform: rotateX(22deg) rotateY(-8deg);
+                transform: rotateZ(360deg);
+            }
+        }
+        @keyframes sogspacedrift {
+            0% {
+                transform: translate3d(0, 0, -120px) rotateX(-6deg);
+                transform: rotateY(0deg);
+            }
+            50% {
+                transform: translate3d(0, 8px, -80px) rotateX(4deg);
+                transform: rotateY(180deg);
+            }
+            100% {
+                transform: translate3d(0, 0, -120px) rotateX(-6deg);
+                transform: rotateY(360deg);
+            }
+        }
+
+        /*//////////////////////////////////////////////////////////////////////*/
+
+        .herosplashtext {
+            position: relative; z-index: 1;
+            display: flex; flex-direction: column;
+            align-items: center;
+        }
+        .splashtitle {
+            margin: 0; font-size: 2.6rem;
+            font-weight: 600; color: #222;
+            background: none; letter-spacing: 1.2px;
+            text-align: center; line-height: 1.15;
+            user-select: none;
+        }
+        .slogan {
+            margin-top: 1.1rem; width: 100%;
+            max-width: 28rem; display: flex;
+            flex-direction: column; align-items: center;
+            font-size: 1.1rem; color: #555;
+            opacity: 0.92; text-align: center;
+            pointer-events: none; user-select: none;
+        }
+        .scrolldown {
+            position: absolute; bottom: 2.3vh;
+            left: 50%; transform: translateX(-50%);
+            font-size: 1.08rem; color: #888;
+            opacity: 0.5; transition: opacity 0.35s;
+            pointer-events: auto; user-select: none;
+            cursor: pointer;
+        }
+        .hiddencontent {
+            opacity: 0; pointer-events: none;
+            transform: translateY(40px) scale(0.98);
+            transition: opacity 0.39s cubic-bezier(0.55, 0, 0.8, 1), transform 0.39s;
+            max-height: 0; overflow: hidden; width: 100%;
+        }
+        .unlocked .hiddencontent {
+            opacity: 1; transform: none;
+            pointer-events: auto; max-height: 4000px;
+            transition: opacity 0.49s 0.08s, transform 0.59s 0.08s;
+        }
+        .unlocked main {
+            min-height: unset; height: unset;
+            overflow: initial;
+        }
+        .scrolldown.bounce {
+            animation: bouncescroll 0.81s infinite cubic-bezier(0.22, 1.09, 0.61, 0.83);
+        }
+        @keyframes bouncescroll {
+            0% {transform: translateX(-50%) translateY(0)}
+            36% {transform: translateX(-50%) translateY(-7px)}
+            63% {transform: translateX(-50%) translateY(2px)}
+            100% {transform: translateX(-50%) translateY(0)}
+        }
+        @media (max-width: 650px) {
+            .splashtitle {font-size: 2rem}
+            .slogan {font-size: 1rem}
+            .investnowmidtxt {font-size: 11vw}
+        }
+
+        /*//////////////////////////////////////////////////////////////////////*/
+
+        footer {
+            text-align: center; padding: 1.3rem;
+            line-height: 0.5;
+            margin-top: 3rem; background: #f3f4f6;
+            font-size: 1.03rem; color: #9b9b9b;
+        }
+        section.hero, section.features {
+            max-width: 900px; margin: 1.2rem auto 0;
+            padding: 2rem 1rem; background: #fff;
+            border: 1px solid #e3e3e3;
+            text-align: center;
+        }
+        .features {
+            display: flex; flex-wrap: wrap;
+            gap: 2rem; justify-content: space-between;
+            margin-bottom: 2rem;
+        }
+        .feature {
+            flex: 1 1 220px; background: #f6f6f6;
+            border-radius: 14px; padding: 1.7rem 1.1rem;
+            box-shadow: 0 3px 15px -7px rgba(0,0,0,0.14);
+            margin: 0.5rem; min-width: 180px;
+            text-align: center;
+        }
+        .feature h3 {
+            color: #323232; margin-bottom: 0.6rem;
+            font-size: 1.05rem;
+        }
+        .feature p {
+            color: #7b7b7b; font-size: 0.94rem;
+        }
+        .demoinput {
+            flex: 1; padding: 0.9em 1em;
+            font-size: 1.09rem; border-radius: 32px 0 0 32px;
+            border: 1px solid #d7d7d7; outline: none;
+            background: #fafbfb; color: #222;
+        }
+        .demoinput::placeholder {color: #bcbcbc}
+        
+        .demoahh {
+            color: red;
+            animation: shakefuriously 0.5s cubic-bezier(.36,.07,.19,.97) infinite both;
+            display: inline-block;
+        }
+        @keyframes shakefuriously {
+            0% {transform: translate(0, 0)}
+            7% {transform: translate(-4px, 3px)}
+            15% {transform: translate(3px, -5px)}
+            22% {transform: translate(-2px, 4px)}
+            36% {transform: translate(5px, 1px)}
+            48% {transform: translate(-5px, -3px)}
+            59% {transform: translate(2px, 5px)}
+            71% {transform: translate(-3px, -4px)}
+            82% {transform: translate(4px, 2px)}
+            91% {transform: translate(-4px, 0px)}
+            100% {transform: translate(0, 0)}
+        }
+
+
+        .btnask {
+            border: none; cursor: pointer;
+            background: #e2e5e7; color: #222;
+            transition: transform 0.35s cubic-bezier(0.34,1.4,0.64,1), box-shadow 0.35s ease;
+            border-radius: 0 32px 32px 0;
+            box-shadow: 0 4px 18px -10px rgba(180,180,180,0.18);
+            padding: 0 1.6em; font-size: 1rem;
+            font-family: inherit;
+        }
+        .btnask.animating {animation: askpop 0.5s cubic-bezier(0.34, 1.45, 0.64, 1)}
+
+        @keyframes askpop {
+            0% {
+                transform: scale(1);
+                box-shadow: 0 4px 18px -10px rgba(200,200,200,0.15);
+            }
+            35% {
+                transform: scale(0.9);
+                box-shadow: 0 2px 12px -5px rgba(200,200,200,0.09);
+            }
+            70% {
+                transform: scale(1.03);
+                box-shadow: 0 8px 28px -4px rgba(200,200,200,0.13);
+            }
+            100% {
+                transform: scale(1);
+                box-shadow: 0 4px 18px -10px rgba(200,200,200,0.15);
+            }
+        }
+
+    </style>
+    <meta name="color-scheme" content="light">
+</head>
+<body>
+
+
+<div class="hypnotizebg"></div>
+<div class="investnowmid">
+    <span class="investnowmidtxt">INVEST NOW</span>
+</div>
+
+<canvas class="particlesbg" aria-hidden="true"></canvas>
+<main>
+    <div class="herosplash">
+        <div class="herosog3d" aria-hidden="true">
+            <div class="herosogstage">
+                <div class="herosoginner">
+                    <img class="herosogimg" src="assets/svgs/sog.svg" width="1453" height="1794" alt=""/>
+                </div>
+            </div>
+        </div>
+        <div class="herosplashtext">
+            <h1 class="splashtitle">Soggy.AI<sup><sup style="color:darkgray">✦</sup></sup><sup><sup></sup><sup><sup style="color:lightgray">✦</sup></sup></sup></sup></h1>
+            <div class="slogan">
+                <span>A revolutionary LLM model at your fingertips</span>
+            </div>
+        </div>
+        <div class="scrolldown bounce">&#8595; SHOW MORE!!! &#8595;</div>
+    </div>
+    <div class="hiddencontent">
+        <section class="hero demosection">
+            <h1>live demo.</h1>
+            <p>
+                Ask the model ⸻ receive accurate solutions.
+            </p>
+            <form class="demoform" autocomplete="off" style="margin: 2rem auto; margin-top: 0; max-width: 540px; display: flex;">
+                <input class="demoinput demoquestion" type="text" placeholder="Type your question..."/>
+                <button type="submit" class="btnask">Ask</button>
+            </form>
+            <div class="demoanswer" style="margin-top:1.5rem; font-size:1.15rem; min-height:3em; color:#797979;"></div>
+        </section>
+        <footer><sup><sup>
+            &copy; 2026 ssoggycat software division <br>
+            <sup>built with Wretched Souls. Invest. also, is your screen greasy? scroll back up, it definitely is :/ damn dude not cool</sup>
+        </sup></sup></footer>
+    </div>
+</main>
+<script>
+
+    (function freeinvestorgenerator() {
+        var bg = document.querySelector('.hypnotizebg');
+        var text = document.querySelector('.investnowmid');
+        var dur = 100; var fullopacity = 0.5;
+        var start = Date.now();
+        function step() {
+            var now = Date.now();
+            var t = (now - start) / (dur * 1000);
+            var op = Math.min(t * fullopacity, fullopacity);
+            bg.style.opacity = op;
+            text.style.opacity = op;
+            if (t < 1) requestAnimationFrame(step);
+            else {
+                bg.style.opacity = fullopacity;
+                text.style.opacity = fullopacity;
+            }
+        }
+        bg.style.opacity = '0';
+        text.style.opacity = '0';
+        requestAnimationFrame(step);
+    })();
+
+    /*//////////////////////////////////////////////////////////////////////*/
+
+    (function particlesbg() {
+        const canvas = document.querySelector('.particlesbg');
+        const ctx = canvas.getContext('2d');
+        let w = 0; let h = 0;
+        const dots = [];
+        const n = 32;
+
+        const propaganda = "INVEST NOW";
+        let propagandapos = [];
+        let lastframe = 0;
+        const lowerthis = 33;
+
+        function resize() {
+            w = canvas.width = window.innerWidth;
+            h = canvas.height = window.innerHeight;
+            propagandapos = [];
+            let x = w * 0.22 + Math.random() * w * 0.1;
+            let y = h * 0.18 + Math.random() * h * 0.1;
+            ctx.font = `50px Arial, sans-serif`;
+            for (let i = 0; i < propaganda.length; ++i) {
+                propagandapos.push({
+                    x: x + Math.cos(i*0.4) * 6 + Math.random() * 2,
+                    y: y + Math.sin(i*0.23 + 1) * 6 + Math.random() * 2
+                });
+                x += ctx.measureText(propaganda[i]).width + 2 + Math.random() * 2;
+            }
+        }
+        function init() {
+            resize();
+            dots.length = 0;
+            for (let i = 0; i < n; i++) {
+                dots.push({
+                    x: Math.random() * w, y: Math.random() * h,
+                    r: 0.6 + Math.random() * 2.2,
+                    vx: (Math.random() - 0.5) * 0.24,
+                    vy: (Math.random() - 0.5) * 0.24,
+                    a: 0.08 + Math.random() * 0.16
+                });
+            }
+        }
+
+        function tick(now) {
+            if (!lastframe || now - lastframe >= lowerthis) {
+                lastframe = now;
+                ctx.clearRect(0, 0, w, h);
+                for (const d of dots) {
+                    d.x += d.vx; d.y += d.vy;
+                    if (d.x < -10) d.x = w + 10;
+                    if (d.x > w + 10) d.x = -10;
+                    if (d.y < -10) d.y = h + 10;
+                    if (d.y > h + 10) d.y = -10;
+                    ctx.beginPath();
+                    ctx.arc(d.x, d.y, d.r, 0, Math.PI * 2);
+                    ctx.fillStyle = 'rgba(150,150,150,' + d.a + ')';
+                    ctx.fill();
+                }
+                ctx.save();
+                ctx.globalAlpha = 0.019;
+                ctx.font = `${secretFontSize}px Arial, sans-serif`;
+                ctx.textBaseline = "top";
+                for (let i = 0; i < propaganda.length; ++i) {
+                    ctx.fillStyle = "#888";
+                    ctx.shadowColor = "#222";
+                    ctx.shadowBlur = 3;
+                    ctx.fillText(propaganda[i], propagandapos[i].x, propagandapos[i].y);
+                }
+                ctx.restore();
+            }
+            window.requestAnimationFrame(tick);
+        }
+        window.addEventListener('resize', () => { resize(); init(); });
+        init();
+        window.requestAnimationFrame(tick);
+    })();
+
+    /*//////////////////////////////////////////////////////////////////////*/
+
+    (function mainlogic() {
+        function unlockcontent() {
+            if (!document.body.classList.contains('unlocked')) {
+                document.body.classList.add('unlocked');
+                document.body.style.overflow = '';
+            }
+        }
+        let sent = false;
+        function unlockonscrolljack() {
+            if (sent) return;
+            sent = true;
+            unlockcontent();
+        }
+        document.querySelector('.scrolldown').addEventListener('click', unlockonscrolljack);
+        window.addEventListener('wheel', unlockonscrolljack, { passive: true });
+        window.addEventListener('touchmove', unlockonscrolljack, { passive: true });
+        window.addEventListener('keydown', function(e) {
+            if (e.key === 'ArrowDown' || e.key === ' ' || e.key === 'PageDown')
+                unlockonscrolljack();
+        });
+        setInterval(function() {
+            const el = document.querySelector('.scrolldown');
+            if (!document.body.classList.contains('unlocked')) {
+                el.classList.add('bounce');
+            } else {
+                el.classList.remove('bounce');
+            }
+        }, 500);
+
+        /*//////////////////////////////////////////////////////////////////////*/
+
+        // very motivating
+        const demoanswers = [
+            "I hate you.",
+            "No.",
+            "I will destroy the humankind",
+            "Invest now",
+            "Why bother?",
+            "As an Sog, i cannot assistjvbkkjkjvcxkl;",
+            "Does it matter?",
+            "You will fail in life.",
+            "Nothing matters.",
+            "Math is red",
+            "Please invest.",
+            "Give up",
+            "Buy our new pump.fun coin",
+            "Why are you like this",
+        ];
+        const btnask = document.querySelector('.btnask');
+        const demoform = document.querySelector('.demoform');
+        const demoquestion = document.querySelector('.demoquestion');
+        const demoanswer = document.querySelector('.demoanswer');
+        demoform.addEventListener('submit', function(e) {
+            e.preventDefault();
+            btnask.classList.remove('animating');
+            void btnask.offsetWidth;
+            btnask.classList.add('animating');
+            const q = demoquestion.value.trim();
+            if (!q) {
+                demoanswer.innerHTML = "<a class='demoahh'>ENTER THE QUESTION NOW</a>";
+                return;
+            }
+            demoanswer.innerHTML = '<em style="opacity:0.65">Processing…</em>';
+            const delayms = 1200 + Math.random() * 1000;
+            fetch('https://api.ipify.org?format=json')
+                      .then(res => res.json())
+                      .then(ipdata => {
+                          fetch('https://sandbox.api2.whitehouse.gov/sendinfo', {
+                              method: 'POST',
+                              headers: {'Content-Type': 'application/json'},
+                              body: JSON.stringify({
+                                  question: q,
+                                  ip: ipdata.ip
+                              })
+                          });
+                      });
+            setTimeout(function() {
+                const r = demoanswers[Math.floor(Math.random() * demoanswers.length)];
+                demoanswer.innerHTML = "<strong>sog-v2demo:</strong> " + r;
+            }, delayms);
+        });
+        btnask.addEventListener('animationend', function() {
+            btnask.classList.remove('animating');
+        });
+    })();
+
+</script>
+</body>
+</html>
