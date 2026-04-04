@@ -15,7 +15,7 @@
 
 	<meta property="og:image" content="/static/ssoggycat/main/soggycat.webp">
 	<meta name="color-scheme" content="light">
-	<meta name="theme-color" content="#ffffff">
+	<meta name="theme-color" content="#ffcc5f">
 
 	<meta name="twitter:card" content="summary">
 	<meta name="twitter:title" content="soggy cat">
@@ -27,83 +27,49 @@
 
 	<link rel="stylesheet" href="/static/ssoggycat/shared/web/main.css">
 	<link rel="stylesheet" href="/static/ssoggycat/sidemenu/web/sidemenu.css">
-	<style>
-		html, body {
-			background: white !important;
-		}
-		.gradient-background {
-			background: white !important;
-		}
-
-		#soggycat {
-			box-shadow: none;
-			filter: drop-shadow(0 0 50px rgba(0,0,0,0.2));
-			image-rendering: crisp-edges;
-		}
-
-		#sidemenu {
-			box-shadow: none;
-		}
-
-		#circlebtn {
-			box-shadow: none;
-			background: black;
-			backdrop-filter: none;
-			transition-timing-function: steps(2, start);
-			transition-duration: 100ms;
-		}
-
-		#circlebtn:hover {
-			background: black;
-			width: 3vmin;
-			height: 3vmin;
-		}
-
-		.sm {
-			transition-duration: 100ms;
-			transition-timing-function: steps(2, start);
-		}
-
-		.sm-button {
-			transition: none;
-		}
-
-	</style>
 </head>
 
 <body data-soggy-pagetype="vtilt-js">
 	<div class="gradient-background"></div>
-	<img id="soggycat" src="/static/ssoggycat/main/svgs/modern.svg" width="1000" height="1333" alt="a picture of a wet cat inside a bathtub." loading="eager" decoding="async" data-tilt data-tilt-speed="100" data-tilt-easing="steps(2,start)" data-tilt-max="3">
+	<img id="soggycat" src="/static/ssoggycat/main/images/soggycat.webp" width="1000" height="1333" alt="a picture of a wet cat inside a bathtub." loading="eager" decoding="async" data-tilt data-tilt-scale="1.05">
 
 	<div id="sidemenu" class="sm sm-closed" inert>
 		<a aria-label="code" href="/github" target="GithubTarget">
 			<div class = "sm-button">
 				<img src="/static/other/sidemenu/svgs/code.svg" width="15" height="15" loading="lazy" decoding="async">
-				<p>SOURCE</p>
+				<p>code</p>
 			</div>
 		</a>
 
 		<a aria-label="enter code" href="#" onclick="event.preventDefault(); showcodeinput(); return false;">
 			<div class="sm-button sm-small">
 				<img src="/static/other/sidemenu/svgs/enter.svg" width="15" height="15" loading="lazy" decoding="async">
-				<p>AUTHORIZATION</p>
+				<p>enter code</p>
 			</div>
 		</a>
 
 		<a aria-label="no css" href="nocss" target="NoCSSTarget">
 			<div class="sm-button sm-small">
 				<img src="/static/other/sidemenu/svgs/nocss.svg" width="15" height="15" loading="lazy" decoding="async">
-				<p>UNSTYLED</p>
+				<p>no css</p>
 			</div>
 		</a>
 
 		<a aria-label="upload" href="#" onclick="document.getElementById('picker').click(); return false;">
 			<div class="sm-button sm-small">
 				<img src="/static/other/sidemenu/svgs/upload.svg" width="15" height="15" loading="lazy" decoding="async">
-				<p>POST</p>
+				<p>upload</p>
 			</div>
 		</a>
+
+		<div class="disappointment" style="display:none">
+			<img title='"i ate my goog cube dont tell anyone"
+	- @leon_jajko1 on twitter, 2025, to @ssoggycat'
+				class="sm-button" src="/static/ssoggycat/main/images/consume.webp" width="200" height="189" loading="lazy" decoding="async">
+		</div>
 	</div>
+
+	<a class="thisisnotactuallymalware" href="https://malware.soggy.cat">DOWNLOAD MALWARE</a>
 
 	<button id="circlebtn" type="button" aria-label="Navigation"></button>
 	<span id="player" style="display: none"></span>
