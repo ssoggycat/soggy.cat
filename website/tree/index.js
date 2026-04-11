@@ -1061,7 +1061,7 @@ function startrewardanimation() {
 
 function showobtained() {
 	const obtainedel = document.querySelector(".obtained");
-	const hk = new Audio("assets/audio/hkobtained.mp3"); hk.play();
+	const hk = new Audio("assets/audio/notobtainedlol.mp3"); hk.play();
 	obtainedel.style.transition = "opacity 2s ease";
 	obtainedel.style.opacity = "1";
 	obtainedel.style.pointerEvents = "auto";
