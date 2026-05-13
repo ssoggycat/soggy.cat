@@ -45,14 +45,7 @@
   </tr>
 </table>
 
-## ⸻ important ⸻
-<img align="left" width="100" height="100" src=".github/nsw.svg"> dear NSW, soggy.cat is NOT meaningless content. it has a lot of meaning, actually! <br>
-**for example:** <br>
-  • wet cat in a bathtub <br>
-please unblock this website for others to have joy on their school wifi.
-
-<br>
 <h6 align="center">
   <sup><img src=".github/sogpyright.svg" width="20" valign="middle">
-    <span style="vertical-align: middle; display: inline-block;">ssoggycat software division (2022-2026)</span></sup>
+    <span style="vertical-align: middle; display: inline-block;">ssoggycat (2022-2026)</span></sup>
 </h6>
