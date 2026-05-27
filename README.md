@@ -4,7 +4,7 @@
 
 **wet?** nope, more like **soggy**.
 **cat?** it's a **cat** for sure! <br>
-<sub> ``📁 thiscat ⟶ this.soggy.cat`` </sub> <sub> ``📁 team ⟶ s.soggy.cat`` </sub> <sub> ``📁 goog ⟶ goog.soggy.cat`` </sub> <sub> ``📁 bot ⟶ hourly.soggy.cat`` </sub>
+<sub> ``📁 thiscat ⟶ this.soggy.cat`` </sub> <sub> ``📁 team ⟶ s.soggy.cat`` </sub> <sub> ``📁 goog ⟶ goog.soggy.cat`` </sub> <sub> ``📁 bot ⟶ hourly.soggy.cat`` </sub> <sub> ``📁 ds ⟶ ds.soggy.cat (HTTP ONLY)`` </sub>
 
 ## ⸻ credits ⸻
 <table>
