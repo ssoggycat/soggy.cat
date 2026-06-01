@@ -49,6 +49,37 @@ body {
 	max-height: 75vh;
 }
 
+/* ############################### */
+
+.holowrap {
+	position: relative; display: inline-block;
+	border-radius: 1.5vh; overflow: hidden;
+	box-shadow: 1.5vh 1.5vh 3vh rgb(41, 41, 41, 0.25);
+	cursor: pointer;
+}
+
+.holowrap img {
+	display: block; box-shadow: none;
+	filter: saturate(1.5) contrast(1.1);
+}
+
+.holowrap::before {
+	content: ""; opacity: 0.75;
+	position: absolute; inset: -80%;
+	z-index: 1;
+	transform: rotate(20deg);
+	background: repeating-linear-gradient(90deg,
+		rgba(255,179,186,0.5) 0px, rgba(255,223,186,0.5) 33px,
+		rgba(255,255,186,0.5) 67px, rgba(186,255,201,0.5) 100px,
+		rgba(186,225,255,0.5) 133px, rgba(215,186,255,0.5) 167px,
+		rgba(255,179,186,0.5) 200px);
+	pointer-events: none;
+	will-change: transform;
+	animation: holoiris 8s linear infinite;
+}
+
+/* ############################### */
+
 .entercode {
 	position: fixed;
 	top: 20px; left: 0;

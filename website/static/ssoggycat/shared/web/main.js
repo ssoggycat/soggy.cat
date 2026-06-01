@@ -1,7 +1,3 @@
-// redirect to https
-// if (window.location.protocol != 'https:') {}
-// window.location.protocol = "https"
-
 // waits for the website to load because IT DOESN'T WORK OTHERWISE RGARGARGRAG
 document.addEventListener('DOMContentLoaded', function () {
 	const isVtilt = document.body.getAttribute('data-soggy-pagetype') == 'vtilt-js';
@@ -11,6 +7,21 @@ document.addEventListener('DOMContentLoaded', function () {
 
 	let colorstealing;
 	if (isVtilt) colorstealing = new ColorThief();
+
+	if (sog && new Date().getMonth() == 5) {
+		const holowrap = document.createElement('span');
+		holowrap.className = 'holowrap';
+		sog.parentNode.insertBefore(holowrap, sog);
+		holowrap.appendChild(sog);
+		const scale = parseFloat(sog.getAttribute('data-tilt-scale')) || 1.05;
+		if (sog.vanillaTilt) sog.vanillaTilt.destroy();
+		sog.removeAttribute('data-tilt');
+		if (window.VanillaTilt) VanillaTilt.init(holowrap, {scale: scale});
+
+		holowrap.addEventListener('click', function () {
+			window.location.href = 'https://gay.soggy.cat';
+		});
+	}
 
 	if (!picker) return;
 	picker.addEventListener('change', function (event) {
@@ -30,8 +41,8 @@ document.addEventListener('DOMContentLoaded', function () {
 				if (isVtilt) {
 					sog.src = e.target.result;
 					sog.onload = function () {
-						// STEAL COLORS!!!! this almost feels like chicory
 
+						// STEAL COLORS!!!! this almost feels like chicory
 						const palette = colorstealing.getPalette(sog, 5);
 						const gradientc = palette.map((color, index) => {
 							const position = Math.floor((index / (palette.length - 1)) * 100);

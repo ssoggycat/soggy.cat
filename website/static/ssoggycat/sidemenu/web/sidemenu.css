@@ -16,6 +16,8 @@
     unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
 }
 
+/* ############################### */
+
 #circlebtn {
 	padding: 0;
 	position: fixed;
@@ -78,45 +80,12 @@
 	max-width: 100%;
 }
 
-.disappointment > .sm-button {
-	width: 310px !important;
-	height: auto !important;
-	border-bottom-left-radius: 0.3rem !important;
-	border-top-left-radius: 0.3rem !important;
-}
-
-@media (max-width: 1100px) {
-	.disappointment {
-		display: none !important;
-		height: 0 !important;
-		margin: 0 !important;
-		padding: 0 !important;
-	}
-
-	#circlebtn {
-		width: 9vmin;
-		height: 9vmin;
-	}
-
-	.sm {
-		bottom: calc(env(safe-area-inset-bottom) / 2 + 12.25vmin);
-	}
-
-	@media (hover: hover) {
-		#circlebtn:hover {
-			width: 9.5vmin;
-			height: 9.5vmin;
-		}
-	}
-}
-
 .sm-closed {
 	transform: translateX(100%);
 	visibility: hidden;
 	pointer-events: none;
 }
 
-/* Side menu children */
 .sm > * {
 	cursor: pointer;
 	margin: 0.1666rem 0;
@@ -131,14 +100,12 @@
 	--hover-size: 0.25rem;
 }
 
-/* Side menu button presets */
 .sm-small {
 	--button-size: 1.75rem;
 	--text-size: 0.95rem;
 	--hover-size: 0.125rem;
 }
 
-/* Side menu button */
 .sm-button {
 	display: flex;
 	flex-direction: row;
@@ -173,3 +140,14 @@
 	height: calc(var(--button-size) + var(--hover-size));
 	font-size: calc(var(--text-size) + var(--hover-size));
 }
+
+/* ############################### */
+
+[aria-label="malware"] div {
+	background-color: rgb(255, 235, 235);
+	--button-size: 1.25rem;
+	--text-size: 0.75rem;
+	--hover-size: 0.125rem;
+}
+[aria-label="malware"] img {height: 1rem}
+[aria-label="malware"] sup {opacity: 0.25}
