@@ -9,7 +9,7 @@
 @font-face
 {
 	font-family: 'OutwardRound';
-	src: url('/assets/fonts/outward-round.ttf') format('truetype');
+	src: url('/static/other/main/fonts/outward-round.ttf') format('truetype');
 }
 
 body
