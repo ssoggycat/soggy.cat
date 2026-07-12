@@ -17,7 +17,7 @@
       </ul>
     </td>
     <td>
-      🐶 <b><a href="https://github.com/cv003">cv</a></b><br>
+      🐶 <b><a href="https://github.com/sogful">cv</a></b><br>
       <ul>
         <li>bad coding</li>
         <li>brainstorming</li>
@@ -31,7 +31,7 @@
       </ul>
     </td>
     <td>
-      🐱 <b><a href="https://github.com/slaskax">fernsy</a></b><br>
+      🐱 <b><a href="https://github.com/lfernsy">fernsy</a></b><br>
       <ul>
         <li>domain & organization setup</li>
       </ul>
