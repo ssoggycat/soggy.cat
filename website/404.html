@@ -13,6 +13,25 @@
   <meta itemprop="name" content="404">
   <meta itemprop="description" content="this page doesn't even exist man!! scram">
 
+  <script>
+
+    var path = location.pathname.replace(/^\/+|\/+$/g, "");
+    var redirectto = null;
+
+    if (path.startsWith("sogcube")) {redirectto = "https://soggy.cat/cube"}
+    else if (path.startsWith("soggy-translate")) {redirectto = "https://soggy.cat/translate"}
+    else if (path === "dry.html") {redirectto = "https://soggy.cat/dry"}
+    else if (path === "dry_nocss.html") {redirectto = "https://soggy.cat/dry/nocss"}
+    else if (path === "github.html") {redirectto = "https://soggy.cat/github"}
+    else if (path.startsWith("faq")) {redirectto = "https://soggy.cat/faq"}
+    else if (path.startsWith("free")) {redirectto = "https://soggy.cat/free"}
+    else if (path.startsWith("nocss")) {redirectto = "https://soggy.cat/nocss"}
+    else if (path.startsWith("video")) {redirectto = "https://soggy.cat/video"}
+    else if (path.startsWith("discord")) {redirectto = "https://soggy.cat/discord"}
+    window.__redirectto = redirectto;
+
+  </script>
+
   <style>
     body {
       margin: 0;
@@ -97,10 +116,44 @@
       display: none !important
     }
 
+    /*//////////////////////////////////////////////////////////////////////*/
+
+    .redirect {
+      font-family: "Lucida Sans", "Lucida Sans Regular", "Lucida Grande", "Lucida Sans Unicode", Geneva, Verdana, sans-serif;
+      font-size: 2em; text-align: center;
+      width: 100vw; height: 100vh; min-height: 100vh;
+      margin: 0; padding: 0; z-index: 999999;
+      background-color: rgba(0,0,0,0.75); color: white;
+      cursor: default;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='700' height='700' opacity='.3'%3E%3Cdefs%3E%3ClinearGradient id='a' x1='50%25' x2='50%25' y1='0%25' y2='100%25' gradientTransform='rotate(150 1 1)'%3E%3Cstop offset='0%25' stop-color='hsl(0, 0%25, 0%25)'/%3E%3Cstop offset='100%25' stop-color='hsl(0, 0%25, 0%25)'/%3E%3C/linearGradient%3E%3Cfilter id='b' width='140%25' height='140%25' x='-20%25' y='-20%25' color-interpolation-filters='sRGB' filterUnits='objectBoundingBox' primitiveUnits='userSpaceOnUse'%3E%3CfeTurbulence width='100%25' height='100%25' x='0%25' y='0%25' baseFrequency='0.005 0.005' result='turbulence' seed='2' stitchTiles='stitch' type='fractalNoise'/%3E%3CfeGaussianBlur width='100%25' height='100%25' x='0%25' y='0%25' in='turbulence' result='blur' stdDeviation='0 0'/%3E%3CfeBlend width='100%25' height='100%25' x='0%25' y='0%25' in='SourceGraphic' in2='blur' mode='saturation' result='blend'/%3E%3C/filter%3E%3C/defs%3E%3Cpath fill='url(%23a)' d='M0 0h700v700H0z' filter='url(%23b)'/%3E%3C/svg%3E");
+      background-size: cover; background-position: center center;
+      background-repeat: no-repeat;
+
+      position: fixed; display: flex;
+      flex-direction: column; gap: 14px;
+      align-items: center; justify-content: center;
+    }
+    .redirect svg {
+      display: block; overflow: visible;
+      width: 180px; height: 180px;
+      flex-shrink: 0;
+    }
+    .redirect a {margin: 0}
+    .redirect.hidden {display: none}
+
   </style>
   <script>
 
     document.addEventListener("DOMContentLoaded", function() {
+
+		const target = window.__redirectto;
+		if (target) {
+			const redirect = document.querySelector(".redirect");
+			redirect.classList.remove("hidden");
+			redirect.querySelector("a").textContent = "redirecting to " + target.replace(/^https?:\/\//, "") + "...";
+			location.replace(target);
+			return;
+		}
 
 		const video = document.querySelector(".video");
 		const audio = document.querySelector(".audio");
@@ -208,6 +261,11 @@
 
 </head>
 <body>
+
+  <div class="redirect hidden">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 532 511" aria-hidden="true"><path fill="#fee368" d="m381 61 20 10 35 20a340 340 0 0 1 48 33l9 8 17 17c7 9 12 26 12 38q-1 12-6 22-5 7-11 12l-52 54c-14 12-28 25-47 27l-4 1-11 1-9-1-3-4-10-10-5-5-15-16-2-1-3-3-17-15-4-4-9-8-20-16-17-14-39-27 7-13 5-8 9-11 31-29q29-24 62-44l15-7c4-2 11-4 13-7"/><path fill="#fdc120" d="m493 132 17 17c7 9 12 26 12 38q-1 12-6 22-5 7-11 12l-52 54c-14 12-28 25-47 27l-4 1-11 1-9-1-3-4-10-10-5-5-15-16-2-1 5-7 8-10 12-15q12-13 26-24l47-40 30-24z"/><path fill="#fea32b" d="m381 61 20 10 35 20-11 5-20 12a577 577 0 0 0-80 67 98 98 0 0 0-31 46l-17-14-39-28 7-12 5-8 9-11 31-29q29-24 62-44l15-7c4-2 11-4 13-7"/><defs><linearGradient id="a" x1="285.6" x2="208.9" y1="144.8" y2="36.9" gradientUnits="userSpaceOnUse"><stop offset="0" stop-color="#fcd119"/><stop offset=".5" stop-color="#fcd119"/><stop offset=".5" stop-color="#ffa12a"/><stop offset="1" stop-color="#ffa12a"/></linearGradient></defs><path fill="url(#a)" d="M20 113c-3-3-6-16-5-20 3-23 20-39 39-50l10-6q22-10 47-18c27-6 60-11 88-8l15 1 38 6 13 3 16 4a667 667 0 0 1 83 29l17 7-14 7-15 7a414 414 0 0 0-62 44l-31 29-8 11-5 8-8 12-36-20-34-14-12-5-5-2-9-3-22-7h-1l-5-1-49-11-7-2c-7-2-21-2-29-2z"/><path fill="#fee368" d="M20 113c-3-3-6-16-5-20 3-23 20-39 39-50l10-6q22-10 47-18c27-6 60-11 88-8l15 1 38 6 13 3-17 7-13 5a431 431 0 0 0-90 49l-16 15a81 81 0 0 0-9 24l-1 7-5-1-49-11-7-2c-7-2-21-2-29-2z"/><path fill="#fdc120" d="M20 113c-3-3-6-16-5-20 3-23 20-39 39-50l10-6q22-10 47-18c27-6 60-11 88-8h-3c-4 0-15 5-19 6-37 14-76 32-105 60l-6 7c-4 7-9 22-8 30-8-2-22-2-29-2zm14 243q2-8 7-13l4-7 1-9 5-21c2-6 8-18 13-21 9-4 18 16 21 21l4 12 2 2 16 3 2 1h3l2 1 7 3 2 1 6 4 3-2 2-1 7-5h1c8-4 22-11 29-4 3 10-3 26-8 35l11-2h12l7 2h1l2 1 4 1 4 1 2 1 5 3 2 2 2 1q7 5 9 13l2 4c8 2 16 3 17-7q0-10-8-19l16-5a44 44 0 0 1 10 25c-1 16-15 25-30 23q1 10-6 19l-7 10c-3 5-7 16-6 22l3 8c2 8 5 23 0 31a16 16 0 0 1-10 7 11 11 0 0 1-9-2q-7-6-7-16l-5 7c-6 5-17 7-23 2-4-4-1-10-1-15q-1-12-9-22l-8-7a266 266 0 0 0-50 18l-4 4-7 7q-4 2-9 0l-7-6q-4-8 0-15 7-14 21-19l2-1-22-7-5 4c-12 9-27 15-40 5q-7-4-8-12l2-5c3-6 15-10 22-12a45 45 0 0 1-9-24l-11-2c-3-5 10-2 11-2l1-7-13-4q-2 0-2-2c2-3 12 1 15 2l2-6-7-7v-1q3-2 5 1z"/><path fill="#fea32b" d="M151 435h11q-2 9 4 16a28 28 0 0 0 15 10q3 0 5 3l2 14-4 7c-6 5-17 7-23 2-4-4-1-10-1-15q-1-12-9-22l-8-7zM14 421l2-5c3-6 15-10 22-12a66 66 0 0 0 24 17l5 3-5 4c-12 9-26 15-40 5q-7-4-8-12m160-68h12l7 2 1 4a50 50 0 0 1-4 32c-2 3-6 7-11 4q-3-5-2-12a52 52 0 0 0-3-30m26 4 4 1 2 1 5 3 2 2 2 1v13q-1 9-5 18c-2 6-9 8-12 1v-10l2-13zm-86-33 7 3 2 1 6 4c-3 0-12 16-14 17-13 2-2-23-1-25m-23-5c4-1 12 2 16 3a42 42 0 0 1-8 19q-7 5-8-4c0-3 2-16 0-18m50 96 4 2c-11 18-39 24-57 15h-1l2-1h5a50 50 0 0 0 47-16"/><path fill="#b1b9bf" d="m30 369-13-4q-2 0-2-2c2-3 12 1 15 2q6 2 9 5c0 5-7 0-9-1m117 37-11-2c-4-5 11-1 12-1l5 1 6 2-2 3-6-2zM32 359l-7-7v-1q3-2 5 1l4 3c2 1 13 9 7 10-3 0-6-6-9-6m124 33 5 1c3 4-4 3-6 3h-4l-9 1-3-1v-1c2-2 11-3 13-3zm-15 23-8-4-1-2 1-1q6 1 11 4l3 2q4 2 5 5c-1 4-5 0-7-2zM29 380l-11-2c-3-5 9-2 11-2q6 1 8 3l1 2c-3 2-8-1-9-1"/><path fill="#fea32b" d="m152 392 1-7 1-12 1 19h1zm-5 14 4 1q-1 4-4 7l-3-2zm4-10h4l-2 8-5-1z"/><path d="M84 376q6 0 12 3t4 8q-3 4-10 4 0 7 5 10c5 2 10-4 14-3l1 1q-1 7-9 8-8 0-12-4l-4-6c-8 6-21 0-22-10-1-4 4-6 5-1q3 9 11 8l5-5q-3-4-4-9l1-2z"/><path fill="#fed2d1" d="M158 329c11-1 0 21-2 25-3 5-4 11-8 3l-10-18c4-5 14-9 20-10m-92-33q4 1 5 3c3 5 8 14 7 20 0 2-11 5-13 6-4 2-10 5-9-4 0-7 5-21 10-25"/><path d="m123 369 5 1 4 5q1 10-9 15c-13 0-12-19 0-21"/><path fill="#686667" d="M120 373q6 1 1 5-6-1-1-5"/><path d="m63 350 6 1 4 4c3 5 0 13-5 15-14 3-15-15-5-20"/><path fill="#686667" d="M64 353q5 1 0 5l-3-1z"/><path fill="#6f8591" d="m20 113 9-1 3 8 7 16 14 38 43 107 12 31 4 11-3-1-21-49-43-102-16-37z"/><defs><linearGradient id="b" x1="379.1" x2="220.8" y1="287.5" y2="378.1" gradientUnits="userSpaceOnUse"><stop offset="0" stop-color="#7d929f"/><stop offset="1" stop-color="#7d929f"/></linearGradient></defs><path fill="url(#b)" d="m379 299 3 3 9 2-35 11-66 23-26 9-13 4-16 5-15 5-7 3-2-2c5-3 15-6 21-8l-3-4 15-7 5 5 16-7 76-28 25-9z"/><path fill="#fdc120" d="m229 350 15-7 5 5-16 6z"/><path fill="#b1b9bf" d="m65 116 8 1 35 146 10 43 5 22-2-1-3-13-7-25-23-88-17-63-4-13zm299 168 5 5-21 9-30 13-48 21-26 11-15 7-23 9-2-1 22-10-7-5 15-9 7 6 11-4 24-11 59-28z"/><path fill="#fdc120" d="m219 343 15-9 7 6-15 8z"/><path fill="#b1b9bf" d="m114 127 5 1 1 1 1 11 2 24 7 117 3 32v16l-1 1-1-10-2-26-7-77-6-62-2-18zm231 137 3 3 2 1-9 6-15 8-64 37-19 10-8 5-15 9-23 13-2-1 8-5 15-9-7-5 13-10 8 6 36-21z"/><path fill="#fdc120" d="m223 327 8 5-14 9-7-5z"/><path fill="#6f8591" d="m150 138 6 2-1 16-1 19-4 54-5 65-3 30h-1l1-20 2-37 4-93 2-25zm173 107 4 4-67 50-19 14-11 8-8 5-1 1v-2l6-5v-1l6-4 14-11 52-40 15-12z"/><path fill="#b1b9bf" d="m221 324 6-5v1l-6 5v2h1l8-6-7 6-13 9-17 12-7 5h-2l10-8 15-11-2-3q2-12 14-7"/><path fill="#fdc120" d="M207 331q3-12 14-7l-12 10z"/></svg>
+    <a>this page has moved, one sec!</a>
+  </div>
 
   <div class="waiting">
 
