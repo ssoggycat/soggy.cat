@@ -4,55 +4,15 @@ document.addEventListener("contextmenu", (event) => {
 
 const sog = document.querySelector(".smallsog");
 const flash = document.querySelector(".flash");
-const slider = document.querySelector(".slider");
 const discord = document.querySelector(".discord");
 const videoBackground = document.getElementById("video-background");
 const cocaine = document.getElementById("cocaine");
 
-let muted = false;
 let introactivated = false;
-let audioload = false;
-
-var context = new (window.AudioContext || window.webkitAudioContext)();
-var volume = context.createGain();
-volume.gain.value = 0.5;
-volume.connect(context.destination);
-
-var buffer = null;
-var song = null;
 
 for (let i = 0; i < 9; i++) {
 		const clone = document.querySelector(".snowflake").cloneNode(true);
 		document.querySelector(".snowflakes").appendChild(clone);
-}
-
-// instant song queueing, any delay and the intro is cooked
-function songfix() {
-	const audioRequest = new XMLHttpRequest();
-	audioRequest.open("GET", "/static/other/team/audio/butt3rfli3s.mp3", true);
-	audioRequest.responseType = "arraybuffer";
-	audioRequest.onload = function () {
-		context.decodeAudioData(audioRequest.response, function (decodedBuffer) {
-			buffer = decodedBuffer;
-			audioload = true;
-		});
-	};
-	audioRequest.send();
-}
-function WEEE() {
-	if (!buffer || !audioload) return;
-	if (song) {
-		song.stop(0);
-		song.disconnect();
-	}
-	song = context.createBufferSource();
-	song.buffer = buffer;
-	song.connect(volume);
-	song.loop = true;
-	song.loopStart = 1.415;
-	song.loopEnd = buffer.duration;
-	document.title = "♪ BUTT3RFLI3S >w< - milkypossum";
-	song.start(0);
 }
 
 // MAIN PART
@@ -71,15 +31,29 @@ function badgesback(fade) {
 
 function intro() {
 	sogdvd();
-	sog.style.animation = "slide 2s cubic-bezier(0.550, 0.085, 0.680, 0.530) forwards";
 	sog.style.pointerEvents = "none";
-	flash.style.transition = "opacity 1.5s ease-in";
-	flash.style.opacity = "1";
 	if (videoBackground.readyState === 0) {videoBackground.load()}
-	badgesout(true);
 	document.querySelector(".song").style.display = "block";
 	document.querySelector(".smallsogt").style.opacity = "0";
 	document.querySelector(".skipintro").style.display = "none";
+
+	if (track.instant) {
+		sog.style.opacity = "0";
+		badgesout(false);
+		document.querySelector(".overlay").style.display = "none";
+		document.querySelector(".smallsogt").style.display = "none";
+		if (track.wtf) {document.body.classList.add("wtf")}
+		videoBackground.play().catch(function () {});
+		setTimeout(function () {badgesback(true)}, 700);
+		return;
+	}
+
+	// the intro pace follows the track's loop point (the white fade out doesn't)
+	const introtime = track.loop;
+	sog.style.animation = `slide ${introtime / 0.75}s cubic-bezier(0.550, 0.085, 0.680, 0.530) forwards`;
+	flash.style.transition = `opacity ${introtime}s ease-in`;
+	flash.style.opacity = "1";
+	badgesout(true);
 	setTimeout(function () {
 		let revealed = false;
 		function reveal() {
@@ -93,10 +67,9 @@ function intro() {
 		}
 		videoBackground.play().then(reveal).catch(reveal);
 		setTimeout(reveal, 5000);
-	}, 1500);
+	}, introtime * 1000);
 }
 document.addEventListener("DOMContentLoaded", function () {
-	songfix();
 	setTimeout(function () {
 		if (!introactivated) {
 			document.querySelector(".smallsogt").style.opacity = "0.5";
@@ -109,43 +82,9 @@ document.addEventListener("click", function (event) {
 	if (event.target.classList.contains("smallsog") && !introactivated) {
 		introactivated = true;
 		if (context.state === "suspended") {context.resume()}
-		if (audioload) {WEEE(); intro()} else {intro();
-			const songwait = setInterval(function() {
-				if (audioload) {clearInterval(songwait); WEEE();
-				}
-			}, 10);
-		}
+		songwhenready(0);
+		intro();
 	}
-});
-
-////////////////////////////////////////////////////////////////
-
-// song input
-slider.addEventListener("input", function () {
-	volume.gain.value = slider.value;
-	if (slider.value == 0) {
-		document.querySelector(".toggle").src =
-			"assets/images/muted.png";
-		muted = true;
-	} else {
-		document.querySelector(".toggle").src =
-			"assets/images/unmuted.png";
-		muted = false;
-	}
-});
-
-// song toggle
-document.querySelector(".toggle").addEventListener("click", function () {
-	if (muted) {
-		volume.gain.value = slider.value;
-		document.querySelector(".toggle").src =
-			"/static/other/team/images/unmuted.png";
-	} else {
-		volume.gain.value = 0;
-		document.querySelector(".toggle").src =
-			"/static/other/team/images/muted.png";
-	}
-	muted = !muted;
 });
 
 ////////////////////////////////////////////////////////////////
@@ -244,31 +183,17 @@ function animate() {
 animate();
 
 // the secret fourth thing (i don't know what to put there it's a placeholder for now lol)
-document.querySelector(".b4").addEventListener("click", function (event) {
-	if (song) {
-		song.stop(0);
-		song = null;
-	}
-	// the song loop function from earlier needs to be run again to resume properly
+document.querySelector(".b4").addEventListener("click", function () {
+	songstop();
 	cocaine.style.display = "block";
 	videoBackground.pause();
 	videoBackground.currentTime = Math.random() * videoBackground.duration;
 	cocaine.play();
 	cocaine.onended = function () {
 		videoBackground.play();
-
-		song = context.createBufferSource();
-		song.buffer = buffer;
-		song.connect(volume);
-		song.loop = true;
-		song.loopStart = 1.415;
-		song.loopEnd = buffer.duration;
-
 		setTimeout(() => {
 			cocaine.style.display = "none";
-			if (buffer) {
-				song.start(0, context.currentTime % buffer.duration);
-			}
+			songresume();
 		}, Math.random() > 0.25 ? 100 : 10000);
 	};
 });
@@ -345,7 +270,8 @@ document.fonts.ready.then(fitbuttons);
 document.querySelector(".skipintro").addEventListener("click", function () {
 	if (!introactivated) {
 		introactivated = true;
-		WEEE();
+		if (context.state === "suspended") {context.resume()}
+		songwhenready(track.loop || 0);
 		badgesout(false);
 		flash.style.opacity = ".5";
 		if (videoBackground.readyState === 0) {videoBackground.load()}
@@ -355,17 +281,7 @@ document.querySelector(".skipintro").addEventListener("click", function () {
 		document.querySelector(".skipintro").style.display = "none";
 		document.querySelector(".overlay").style.display = "none";
 		document.querySelector(".smallsogt").style.display = "none";
-		if (song) {
-			song.stop(0);
-			song.disconnect();
-		}
-		song = context.createBufferSource();
-		song.buffer = buffer;
-		song.connect(volume);
-		song.loop = true;
-		song.loopStart = 1.415;
-		song.loopEnd = buffer.duration;
-		song.start(0, 1.4);
+		if (track.wtf) {document.body.classList.add("wtf")}
 		setTimeout(function () {
 			videoBackground.play().catch(function () {});
 			flash.style.transition = "opacity 0.6s ease-in-out";

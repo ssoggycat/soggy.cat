@@ -1,0 +1,128 @@
+// jukebox!
+const songs = [
+	{
+		artist: "Chroma", name: "Guardian Of The Flower Offering",
+		file: "/static/other/team/audio/chroma.ogg",
+		url: "https://soundcloud.com/c-h-r-o-m-a/lqyzxilzziyj",
+		loop: 3.0585, weight: 33
+	},
+	{
+		artist: "???", name: "what the fuck",
+		file: "/static/other/team/audio/whatthefuck.ogg",
+		url: null,
+		loop: null, instant: true, wtf: true, weight: 1
+	},
+	{
+		artist: "tn-shi", name: "Synthesis",
+		file: "/static/other/team/audio/synthesis.ogg",
+		url: "https://soundcloud.com/tn-shi/synthesis",
+		loop: 1.3136, weight: 33
+	},
+	{
+		artist: "AZALI", name: "VOIDSIDE SWORDFIGHT",
+		file: "/static/other/team/audio/voidside.ogg",
+		url: "https://open.spotify.com/track/2gK2pHWovCVnTKm0LIEycY",
+		loop: 1.1748, weight: 33
+	},
+	{
+		artist: "SH2K", name: "Unending Uncanny",
+		file: "/static/other/team/audio/uncanny.ogg",
+		url: "https://sh2k.bandcamp.com/track/024-unending-uncanny",
+		loop: null, weight: 33
+	}
+];
+
+const track = (function () {
+	let roll = Math.random() * songs.reduce((sum, s) => sum + s.weight, 0);
+	for (const s of songs) {if ((roll -= s.weight) < 0) return s}
+	return songs[0];
+})();
+
+const songlink = document.querySelector(".song");
+songlink.textContent = `♪ ${track.artist} ~ ${track.name}`;
+if (track.url) {songlink.href = track.url} else {songlink.removeAttribute("href")}
+
+/*//////////////////////////////////////////////////////////////////////*/
+
+let muted = false;
+let audioload = false;
+
+var context = new (window.AudioContext || window.webkitAudioContext)();
+var volume = context.createGain();
+volume.gain.value = 0.5;
+volume.connect(context.destination);
+
+var buffer = null;
+var song = null;
+
+// instant song queueing, any delay and the intro is cooked
+function songfix() {
+	const audioRequest = new XMLHttpRequest();
+	audioRequest.open("GET", track.file, true);
+	audioRequest.responseType = "arraybuffer";
+	audioRequest.onload = function () {
+		context.decodeAudioData(audioRequest.response, function (decodedBuffer) {
+			buffer = decodedBuffer;
+			audioload = true;
+		});
+	};
+	audioRequest.send();
+}
+songfix();
+
+function makesource() {
+	const source = context.createBufferSource();
+	source.buffer = buffer;
+	source.connect(volume);
+	source.loop = true;
+	source.loopStart = track.loop || 0;
+	source.loopEnd = buffer.duration;
+	return source;
+}
+
+function WEEE(offset) {
+	if (!buffer || !audioload) return;
+	if (song) {song.stop(0); song.disconnect()}
+	song = makesource();
+	document.title = `♪ ${track.name} - ${track.artist}`;
+	song.start(0, offset || 0);
+}
+
+function songwhenready(offset) {
+	if (audioload) {WEEE(offset); return}
+	const songwait = setInterval(function () {
+		if (audioload) {clearInterval(songwait); WEEE(offset)}
+	}, 10);
+}
+
+function songstop() {
+	if (song) {song.stop(0); song = null}
+}
+function songresume() {
+	if (!buffer) return;
+	song = makesource();
+	song.start(0, context.currentTime % buffer.duration);
+}
+
+/*//////////////////////////////////////////////////////////////////////*/
+
+const slider = document.querySelector(".slider");
+
+slider.addEventListener("input", function () {
+	volume.gain.value = slider.value;
+	muted = slider.value == 0;
+	document.querySelector(".toggle").src = muted
+		? "/static/other/team/images/muted.png"
+		: "/static/other/team/images/unmuted.png";
+});
+
+document.querySelector(".toggle").addEventListener("click", function () {
+	if (muted) {
+		volume.gain.value = slider.value;
+		document.querySelector(".toggle").src = "/static/other/team/images/unmuted.png";
+	} else {
+		volume.gain.value = 0;
+		document.querySelector(".toggle").src = "/static/other/team/images/muted.png";
+	}
+	muted = !muted;
+});

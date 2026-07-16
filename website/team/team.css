@@ -347,6 +347,13 @@ a {
 }
 .lolimg {position: fixed; height: 50%; width: auto; z-index: 1000; user-select: none}
 
+/* the site is uncomfortable with how bad the 1% song is */
+.wtf {
+  filter: grayscale(1);
+  animation: unease 4s ease-in-out infinite;
+}
+
+@keyframes unease {0%, 100% {transform: skew(0.5deg, 0.2deg) rotate(0.1deg)} 50% {transform: skew(-0.5deg, -0.3deg) rotate(-0.15deg)}}
 @keyframes flip {0% {transform: translateX(-50%) rotateY(0deg)} 50% {transform: translateX(-50%) rotateY(180deg)} 100% {transform: translateX(-50%) rotateY(360deg)}}
 @keyframes levitate {0%, 100% {transform: translateX(-50%) translateY(0)} 50% {transform: translateX(-50%) translateY(-10px)}}
 @keyframes scroll {0% {background-position: 0 0} 100% {background-position: -100% 0}}
