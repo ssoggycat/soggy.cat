@@ -32,7 +32,7 @@ body {
   height: auto;
 }
 .site {
-  position: relative; overflow-y: auto;
+  position: relative; overflow-y: hidden;
   height: 100vh; height: 100dvh;
   display: flex;  flex-direction: column;
   -ms-overflow-style: none; scrollbar-width: none;
@@ -180,7 +180,7 @@ a {
   width: 80%; height: fit-content; top: 105%;
   left: 50%; transform: translateX(-50%);
   transform-origin: top center;
-  padding-bottom: 200px; z-index: 10;
+  z-index: 10;
 }
 
 .button {

@@ -56,22 +56,43 @@ function WEEE() {
 }
 
 // MAIN PART
+function badgesout(fade) {
+	document.querySelectorAll(".footerb > *").forEach(function (badge) {
+		badge.style.transition = fade ? `opacity 0.75s ease ${Math.random() * 0.5}s` : "none";
+		badge.style.opacity = "0";
+	});
+}
+function badgesback(fade) {
+	document.querySelectorAll(".footerb > *").forEach(function (badge) {
+		badge.style.transition = fade ? `opacity 0.5s ease ${Math.random() * 0.3}s` : "none";
+		badge.style.opacity = "";
+	});
+}
+
 function intro() {
 	sogdvd();
 	sog.style.animation = "slide 2s cubic-bezier(0.550, 0.085, 0.680, 0.530) forwards";
 	sog.style.pointerEvents = "none";
 	flash.style.transition = "opacity 1.5s ease-in";
 	flash.style.opacity = "1";
-	videoBackground.load();
+	if (videoBackground.readyState === 0) {videoBackground.load()}
+	badgesout(true);
 	document.querySelector(".song").style.display = "block";
 	document.querySelector(".smallsogt").style.opacity = "0";
 	document.querySelector(".skipintro").style.display = "none";
 	setTimeout(function () {
-		document.querySelector(".overlay").style.display = "none";
-		document.querySelector(".smallsogt").style.display = "none";
-		videoBackground.play();
-		flash.style.transition = "opacity 2s ease-in-out";
-		flash.style.opacity = "0";
+		let revealed = false;
+		function reveal() {
+			if (revealed) return;
+			revealed = true;
+			document.querySelector(".overlay").style.display = "none";
+			document.querySelector(".smallsogt").style.display = "none";
+			flash.style.transition = "opacity 2s ease-in-out";
+			flash.style.opacity = "0";
+			badgesback(false);
+		}
+		videoBackground.play().then(reveal).catch(reveal);
+		setTimeout(reveal, 5000);
 	}, 1500);
 }
 document.addEventListener("DOMContentLoaded", function () {
@@ -294,11 +315,10 @@ window.addEventListener("beforeunload", function () {
 });
 */
 
-// hopefully this fixes that thing where the video stops playing when you tab back into the website after a while for some reason :sog:
+// resume bg when tabbing back in
 document.addEventListener("visibilitychange", () => {
-	if (document.visibilityState === "visible" && cocaine.playing) {
-		videoBackground.play();
-		videoBackground.currentTime = videoBackground.currentTime + 1;
+	if (document.visibilityState === "visible" && introactivated && (cocaine.paused || cocaine.ended)) {
+		videoBackground.play().catch(function () {});
 	}
 });
 
@@ -308,9 +328,10 @@ const sitediv = document.querySelector(".site");
 
 function fitbuttons() {
 	buttonsrow.style.transform = "translateX(-50%)";
+	const sitetop = sitediv.getBoundingClientRect().top;
 	const row = buttonsrow.getBoundingClientRect();
 	const lastrow = buttonsrow.lastElementChild.getBoundingClientRect();
-	const space = badges.getBoundingClientRect().top - 15 - (row.top + sitediv.scrollTop);
+	const space = badges.getBoundingClientRect().top - 15 - (row.top - sitetop + sitediv.scrollTop);
 	const scale = Math.max(Math.min(1, space / (lastrow.bottom - row.top)), 0.4);
 	buttonsrow.style.transform = `translateX(-50%) scale(${scale})`;
 }
@@ -325,8 +346,9 @@ document.querySelector(".skipintro").addEventListener("click", function () {
 	if (!introactivated) {
 		introactivated = true;
 		WEEE();
+		badgesout(false);
 		flash.style.opacity = ".5";
-		videoBackground.load();
+		if (videoBackground.readyState === 0) {videoBackground.load()}
 		document.querySelector(".song").style.display = "block";
 		document.querySelector(".smallsog").style.opacity = "0";
 		document.querySelector(".smallsogt").style.opacity = "0";
@@ -345,9 +367,10 @@ document.querySelector(".skipintro").addEventListener("click", function () {
 		song.loopEnd = buffer.duration;
 		song.start(0, 1.4);
 		setTimeout(function () {
-			videoBackground.play();
+			videoBackground.play().catch(function () {});
 			flash.style.transition = "opacity 0.6s ease-in-out";
 			flash.style.opacity = "0";
 		}, 50);
+		setTimeout(function () {badgesback(true)}, 700);
 	}
 });
