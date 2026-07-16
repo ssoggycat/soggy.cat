@@ -4,43 +4,51 @@ const songs = [
 		artist: "Chroma", name: "Guardian Of The Flower Offering",
 		file: "/static/other/team/audio/chroma.ogg",
 		url: "https://soundcloud.com/c-h-r-o-m-a/lqyzxilzziyj",
-		loop: 3.0585, weight: 33
+		loop: 3.0585, fx: "desat"
 	},
 	{
 		artist: "???", name: "what the fuck",
 		file: "/static/other/team/audio/whatthefuck.ogg",
-		url: null,
-		loop: null, instant: true, wtf: true, weight: 1
+		loop: null, instant: true, fx: "wtf", weight: 1, info: false
 	},
 	{
 		artist: "tn-shi", name: "Synthesis",
 		file: "/static/other/team/audio/synthesis.ogg",
 		url: "https://soundcloud.com/tn-shi/synthesis",
-		loop: 1.3136, weight: 33
+		loop: 1.3136, fx: "bluehue", rate: 2
 	},
 	{
 		artist: "AZALI", name: "VOIDSIDE SWORDFIGHT",
 		file: "/static/other/team/audio/voidside.ogg",
 		url: "https://open.spotify.com/track/2gK2pHWovCVnTKm0LIEycY",
-		loop: 1.1748, weight: 33
+		loop: 1.1748, fx: "mono"
 	},
 	{
 		artist: "SH2K", name: "Unending Uncanny",
 		file: "/static/other/team/audio/uncanny.ogg",
 		url: "https://sh2k.bandcamp.com/track/024-unending-uncanny",
-		loop: null, weight: 33
+		loop: null, instant: true, flash: true,
+		sog: "/static/ssoggycat/team/images/canny.webp"
+	},
+	{
+		artist: "Toby Fox", name: "AIRWAVES",
+		file: "/static/other/team/audio/doNOTcheckjonglerspronounsinch5sadface.ogg",
+		loop: 1.6969, fx: "party", info: false
 	}
 ];
 
+const autoshare = (100 - songs.reduce((sum, s) => sum + (s.weight || 0), 0)) / songs.filter((s) => !s.weight).length;
 const track = (function () {
-	let roll = Math.random() * songs.reduce((sum, s) => sum + s.weight, 0);
-	for (const s of songs) {if ((roll -= s.weight) < 0) return s}
+	let roll = Math.random() * 100;
+	for (const s of songs) {if ((roll -= s.weight || autoshare) < 0) return s}
 	return songs[0];
 })();
 
 const songlink = document.querySelector(".song");
-songlink.textContent = `♪ ${track.artist} ~ ${track.name}`;
-if (track.url) {songlink.href = track.url} else {songlink.removeAttribute("href")}
+if ((track.name || track.artist) && track.info !== false) {
+	songlink.textContent = "♪ " + [track.artist, track.name].filter(Boolean).join(" ~ ");
+	if (track.url) {songlink.href = track.url} else {songlink.removeAttribute("href")}
+}
 
 /*//////////////////////////////////////////////////////////////////////*/
 
@@ -84,7 +92,9 @@ function WEEE(offset) {
 	if (!buffer || !audioload) return;
 	if (song) {song.stop(0); song.disconnect()}
 	song = makesource();
-	document.title = `♪ ${track.name} - ${track.artist}`;
+	if (track.name || track.artist) {
+		document.title = "♪ " + [track.name, track.artist].filter(Boolean).join(" - ");
+	}
 	song.start(0, offset || 0);
 }
 

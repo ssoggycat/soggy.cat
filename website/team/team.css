@@ -347,13 +347,45 @@ a {
 }
 .lolimg {position: fixed; height: 50%; width: auto; z-index: 1000; user-select: none}
 
-/* the site is uncomfortable with how bad the 1% song is */
+/* filters */
+.desat .videobg, .desat .pet, .desat .sogs {filter: saturate(0.15)}
+.mono .videobg, .mono .pet, .mono .sogs {filter: grayscale(1) contrast(10)}
+
+.bluehue::after {
+  content: "";
+  position: fixed;
+  top: 0; left: 0; right: 0; bottom: 0;
+  background: linear-gradient(135deg, #3344ff, #bb33ff);
+  mix-blend-mode: color; opacity: 0.6;
+  z-index: -1; pointer-events: none;
+}
+.party .videobg, .party .pet, .party .sogs {
+  filter: saturate(1.3) hue-rotate(0deg);
+  animation: rainbow 5.142857s steps(12, end) infinite; /* bpm-shaped second count */
+}
+@keyframes rainbow {
+  from {filter: saturate(1.3) hue-rotate(0deg)}
+  to   {filter: saturate(1.3) hue-rotate(360deg)}
+}
+
 .wtf {
   filter: grayscale(1);
+  background-image: none;
   animation: unease 4s ease-in-out infinite;
+}
+.wtf .videobg {display: none}
+.wtfscroll {
+  position: fixed;
+  top: 50%; left: 0;
+  white-space: nowrap;
+  font-family: "Comic Sans MS", "Comic Sans", cursive;
+  font-size: 80px; color: white;
+  z-index: 800; pointer-events: none; user-select: none;
+  animation: wtfscroll 20s linear forwards;
 }
 
 @keyframes unease {0%, 100% {transform: skew(0.5deg, 0.2deg) rotate(0.1deg)} 50% {transform: skew(-0.5deg, -0.3deg) rotate(-0.15deg)}}
+@keyframes wtfscroll {from {transform: translate(100vw, -50%)} to {transform: translate(-100%, -50%)}}
 @keyframes flip {0% {transform: translateX(-50%) rotateY(0deg)} 50% {transform: translateX(-50%) rotateY(180deg)} 100% {transform: translateX(-50%) rotateY(360deg)}}
 @keyframes levitate {0%, 100% {transform: translateX(-50%) translateY(0)} 50% {transform: translateX(-50%) translateY(-10px)}}
 @keyframes scroll {0% {background-position: 0 0} 100% {background-position: -100% 0}}

@@ -1,6 +1,4 @@
-document.addEventListener("contextmenu", (event) => {
-	event.preventDefault();
-});
+document.title = "soggy cat"
 
 const sog = document.querySelector(".smallsog");
 const flash = document.querySelector(".flash");
@@ -20,20 +18,41 @@ function badgesout(fade) {
 	document.querySelectorAll(".footerb > *").forEach(function (badge) {
 		badge.style.transition = fade ? `opacity 0.75s ease ${Math.random() * 0.5}s` : "none";
 		badge.style.opacity = "0";
+		badge.style.pointerEvents = "none";
 	});
 }
-function badgesback(fade) {
-	document.querySelectorAll(".footerb > *").forEach(function (badge) {
-		badge.style.transition = fade ? `opacity 0.5s ease ${Math.random() * 0.3}s` : "none";
-		badge.style.opacity = "";
-	});
+
+function applyfx() {
+	if (track.rate) {
+		videoBackground.playbackRate = track.rate;
+		setInterval(function () {
+			if (videoBackground.duration && videoBackground.currentTime > videoBackground.duration - 0.25) {
+				videoBackground.currentTime = 0;
+			}
+		}, 50);
+	}
+	if (!track.fx) return;
+	document.body.classList.add(track.fx);
+	if (track.fx === "wtf") {
+		setTimeout(function () {
+			const text = document.createElement("div");
+			text.className = "wtfscroll";
+			text.textContent = "example string";
+			document.body.appendChild(text);
+			text.addEventListener("animationend", function () {text.remove()});
+		}, 6000);
+	}
+}
+
+function songlabel(delay) {
+	if ((!track.name && !track.artist) || track.info === false) return;
+	setTimeout(function () {document.querySelector(".song").style.display = "block"}, delay);
 }
 
 function intro() {
 	sogdvd();
 	sog.style.pointerEvents = "none";
 	if (videoBackground.readyState === 0) {videoBackground.load()}
-	document.querySelector(".song").style.display = "block";
 	document.querySelector(".smallsogt").style.opacity = "0";
 	document.querySelector(".skipintro").style.display = "none";
 
@@ -42,14 +61,20 @@ function intro() {
 		badgesout(false);
 		document.querySelector(".overlay").style.display = "none";
 		document.querySelector(".smallsogt").style.display = "none";
-		if (track.wtf) {document.body.classList.add("wtf")}
-		videoBackground.play().catch(function () {});
-		setTimeout(function () {badgesback(true)}, 700);
+		applyfx();
+		if (track.fx !== "wtf") {videoBackground.play().catch(function () {})}
+		if (track.flash) {
+			flash.style.opacity = "1";
+			setTimeout(function () {
+				flash.style.transition = "opacity 2s ease-in-out";
+				flash.style.opacity = "0";
+			}, 50);
+		}
+		songlabel(track.flash ? 2000 : 0);
 		return;
 	}
 
-	// the intro pace follows the track's loop point (the white fade out doesn't)
-	const introtime = track.loop;
+	const introtime = track.loop || 1.5;
 	sog.style.animation = `slide ${introtime / 0.75}s cubic-bezier(0.550, 0.085, 0.680, 0.530) forwards`;
 	flash.style.transition = `opacity ${introtime}s ease-in`;
 	flash.style.opacity = "1";
@@ -63,7 +88,8 @@ function intro() {
 			document.querySelector(".smallsogt").style.display = "none";
 			flash.style.transition = "opacity 2s ease-in-out";
 			flash.style.opacity = "0";
-			badgesback(false);
+			applyfx();
+			songlabel(2000);
 		}
 		videoBackground.play().then(reveal).catch(reveal);
 		setTimeout(reveal, 5000);
@@ -77,21 +103,21 @@ document.addEventListener("DOMContentLoaded", function () {
 	}, 2000);
 });
 
-// click the bart (sog)
+// clickable anywhere!
 document.addEventListener("click", function (event) {
-	if (event.target.classList.contains("smallsog") && !introactivated) {
-		introactivated = true;
-		if (context.state === "suspended") {context.resume()}
-		songwhenready(0);
-		intro();
-	}
+	if (introactivated) return;
+	if (event.target.closest(".skipintro, .volumeslider, .footerb, .footer")) return;
+	introactivated = true;
+	if (context.state === "suspended") {context.resume()}
+	songwhenready(0);
+	intro();
 });
 
 ////////////////////////////////////////////////////////////////
 
 // bouncy little guys
 function sogdvd() {
-	const sogImageSrc = "/static/ssoggycat/team/images/cheese.webp";
+	const sogImageSrc = track.sog || "/static/ssoggycat/team/images/cheese.webp";
 
 	function birth(container) {
 		for (let i = 0; i < 6; i++) {
@@ -183,6 +209,7 @@ function animate() {
 animate();
 
 // the secret fourth thing (i don't know what to put there it's a placeholder for now lol)
+// ^- WDYM PLACEHOLDER?? I KNOW I WROTE THAT BUT IS THAT NOT ENOUGH
 document.querySelector(".b4").addEventListener("click", function () {
 	songstop();
 	cocaine.style.display = "block";
@@ -242,7 +269,7 @@ window.addEventListener("beforeunload", function () {
 
 // resume bg when tabbing back in
 document.addEventListener("visibilitychange", () => {
-	if (document.visibilityState === "visible" && introactivated && (cocaine.paused || cocaine.ended)) {
+	if (document.visibilityState === "visible" && introactivated && track.fx !== "wtf" && (cocaine.paused || cocaine.ended)) {
 		videoBackground.play().catch(function () {});
 	}
 });
@@ -275,18 +302,17 @@ document.querySelector(".skipintro").addEventListener("click", function () {
 		badgesout(false);
 		flash.style.opacity = ".5";
 		if (videoBackground.readyState === 0) {videoBackground.load()}
-		document.querySelector(".song").style.display = "block";
 		document.querySelector(".smallsog").style.opacity = "0";
 		document.querySelector(".smallsogt").style.opacity = "0";
 		document.querySelector(".skipintro").style.display = "none";
 		document.querySelector(".overlay").style.display = "none";
 		document.querySelector(".smallsogt").style.display = "none";
-		if (track.wtf) {document.body.classList.add("wtf")}
+		applyfx();
 		setTimeout(function () {
-			videoBackground.play().catch(function () {});
+			if (track.fx !== "wtf") {videoBackground.play().catch(function () {})}
 			flash.style.transition = "opacity 0.6s ease-in-out";
 			flash.style.opacity = "0";
 		}, 50);
-		setTimeout(function () {badgesback(true)}, 700);
+		songlabel(700);
 	}
 });
