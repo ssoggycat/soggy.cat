@@ -4,7 +4,19 @@
 	<title>the squad...</title>
 
 	<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+	<meta name="theme-color" content="#000000">
 	<meta charset="UTF-8">
+	<script>
+		const viewportmeta = document.querySelector("meta[name=viewport]");
+		const portrait = matchMedia("(orientation: portrait)");
+		function fitviewport() {
+			viewportmeta.content = portrait.matches
+				? "width=540, viewport-fit=cover"
+				: "width=device-width, initial-scale=1, viewport-fit=cover";
+		}
+		portrait.addEventListener("change", fitviewport);
+		fitviewport();
+	</script>
 
 	<meta name="description" content="hello">
 
@@ -70,7 +82,7 @@
 				<a class="buddy left" style="width:200px" href="https://x.com/cvsilly_" target="cvTarget">
 					<img src="/static/other/team/images/pfp/cv.webp" width="320" height="320" alt="gayyyy">
 					<span class="bigtext">cv</span>
-					<span class="smalltext">cvgd • he/they</span>
+					<span class="smalltext">he/they</span>
 				</a>
 				<a class="buddy right" style="width:150px;margin-top:100px">
 					<img src="/static/other/team/images/pfp/mat.webp" width="320" height="320" alt="mat">
@@ -80,31 +92,31 @@
 
 			</div>
 			<div class="big" style="max-width:450px">
-				<a class="plus" style="width:50px" href="dark">
+				<a class="plus" href="dark">
 					<span>+</span>
 				</a>
 
-				<a class="small buddy" style="width:50px" href="https://x.com/looouuuiiiss_" target="louisTarget">
+				<a class="small buddy" href="https://x.com/looouuuiiiss_" target="louisTarget">
 					<img src="/static/other/team/images/pfp/louis.webp" width="64" height="64" alt="louis">
 					<span class="smalltext padtop">louis</span>
 				</a>
-				<a class="small buddy" style="width:50px">
+				<a class="small buddy">
 					<img src="/static/other/team/images/pfp/nev.webp" width="64" height="64" alt="nev">
 					<span class="smalltext padtop">nev</span>
 				</a>
-				<a class="small buddy" style="width:50px">
+				<a class="small buddy">
 					<img src="/static/other/team/images/pfp/fancycoach.webp" width="64" height="64" alt="fancycoach">
 					<span class="smalltext padtop">coach</span>
 				</a>
-				<a class="small buddy" style="width:50px" href="https://x.com/nullcultured" target="goobTarget">
+				<a class="small buddy" href="https://x.com/nullcultured" target="goobTarget">
 					<img src="/static/other/team/images/pfp/goob.webp" width="64" height="64" alt="goob">
 					<span class="smalltext padtop">goob</span>
 				</a>
-				<a class="small buddy" style="width:50px" href="https://x.com/sho_buh" target="shobeTarget">
+				<a class="small buddy" href="https://x.com/sho_buh" target="shobeTarget">
 					<img src="/static/other/team/images/pfp/shobe.webp" width="64" height="64" alt="shobe">
 					<span class="smalltext padtop">shobe</span>
 				</a>
-				<a class="small buddy" style="width:50px" href="https://x.com/_ktg5" target="ktgTarget">
+				<a class="small buddy" href="https://x.com/_ktg5" target="ktgTarget">
 					<img src="/static/other/team/images/pfp/ktg.webp" width="64" height="64" alt="ktg5">
 					<span class="smalltext padtop">kyle</span>
 				</a>
@@ -120,7 +132,7 @@
 					<span>discord</span>
 				</a>
 				<a class="button b3" href="https://images.soggy.cat" target="driveTarget">
-					<img src="/static/ssoggycat/main/svgs/modern.svg" class="icon">
+					<img src="/static/other/team/images/drive.png" class="icon">
 					<span>soggy drive</span>
 				</a>
 				<a class="button b4">

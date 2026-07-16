@@ -302,8 +302,25 @@ document.addEventListener("visibilitychange", () => {
 	}
 });
 
-// skip
+const buttonsrow = document.querySelector(".buttons");
+const badges = document.querySelector(".footerb");
+const sitediv = document.querySelector(".site");
 
+function fitbuttons() {
+	buttonsrow.style.transform = "translateX(-50%)";
+	const row = buttonsrow.getBoundingClientRect();
+	const lastrow = buttonsrow.lastElementChild.getBoundingClientRect();
+	const space = badges.getBoundingClientRect().top - 15 - (row.top + sitediv.scrollTop);
+	const scale = Math.max(Math.min(1, space / (lastrow.bottom - row.top)), 0.4);
+	buttonsrow.style.transform = `translateX(-50%) scale(${scale})`;
+}
+fitbuttons();
+addEventListener("resize", fitbuttons);
+document.fonts.ready.then(fitbuttons);
+
+////////////////////////////////////////////////////////////////
+
+// skip
 document.querySelector(".skipintro").addEventListener("click", function () {
 	if (!introactivated) {
 		introactivated = true;
