@@ -37,7 +37,7 @@ function applyfx() {
 		setTimeout(function () {
 			const text = document.createElement("div");
 			text.className = "wtfscroll";
-			text.textContent = "example string";
+			text.textContent = "oh my god bruh";
 			document.body.appendChild(text);
 			text.addEventListener("animationend", function () {text.remove()});
 		}, 6000);
@@ -57,7 +57,7 @@ function intro() {
 	document.querySelector(".skipintro").style.display = "none";
 
 	if (track.instant) {
-		sog.style.opacity = "0";
+		sog.style.display = "none";
 		badgesout(false);
 		document.querySelector(".overlay").style.display = "none";
 		document.querySelector(".smallsogt").style.display = "none";
@@ -76,6 +76,7 @@ function intro() {
 
 	const introtime = track.loop || 1.5;
 	sog.style.animation = `slide ${introtime / 0.75}s cubic-bezier(0.550, 0.085, 0.680, 0.530) forwards`;
+	sog.addEventListener("animationend", function () {sog.style.display = "none"}, {once: true});
 	flash.style.transition = `opacity ${introtime}s ease-in`;
 	flash.style.opacity = "1";
 	badgesout(true);
@@ -120,60 +121,52 @@ function sogdvd() {
 	const sogImageSrc = track.sog || "/static/ssoggycat/team/images/cheese.webp";
 
 	function birth(container) {
+		const sogdiv = container.getBoundingClientRect();
+		const cats = [];
 		for (let i = 0; i < 6; i++) {
 			const img = document.createElement("img");
 			img.src = sogImageSrc;
 			img.classList.add("sog");
 			img.style.position = "absolute";
+			img.style.top = "0"; img.style.left = "0";
 			img.style.width = "50px"; img.style.height = "50px";
-
-			const sogdiv = container.getBoundingClientRect();
-			const rtop = Math.random() * (sogdiv.height - 50);
-			const rleft = Math.random() * (sogdiv.width - 50);
-
-			img.style.top = `${rtop}px`; img.style.left = `${rleft}px`;
-			img.dataset.dx = (Math.random() * 2 - 1) * 2; img.dataset.dy = (Math.random() * 2 - 1) * 2;
-			img.dataset.angle = Math.random() * 360;
-
-			const blur = Math.random() * 3;
-			const skewX = Math.random() * 10 - 5; const skewY = Math.random() * 10 - 5;
-
-			img.style.filter = `blur(${blur}px)`;
-			img.style.transform = `skew(${skewX}deg, ${skewY}deg)`;
-
+			img.style.filter = `blur(${Math.random() * 3}px)`;
 			container.appendChild(img);
+
+			cats.push({
+				img,
+				x: Math.random() * (sogdiv.width - 50), y: Math.random() * (sogdiv.height - 50),
+				dx: (Math.random() * 2 - 1) * 2, dy: (Math.random() * 2 - 1) * 2,
+				angle: Math.random() * 360
+			});
 		}
+		return cats;
 	}
 
-	function youth(container) {
-		const sogs = container.querySelectorAll(".sog");
-		const sogdiv = container.getBoundingClientRect();
+	// transform only moves, so layout never gets dirtied
+	function youth(container, cats) {
+		let sogdiv = container.getBoundingClientRect();
+		addEventListener("resize", function () {sogdiv = container.getBoundingClientRect()});
 
-		sogs.forEach((sog) => {
-			let dx = parseFloat(sog.dataset.dx); let dy = parseFloat(sog.dataset.dy);
-			let angle = parseFloat(sog.dataset.angle);
-			let left = parseFloat(sog.style.left) + dx; let top = parseFloat(sog.style.top) + dy;
-
-			if (left <= 0 || left + 50 >= sogdiv.width) {
-				dx *= -1; left = Math.max(0, Math.min(left, sogdiv.width - 50));
-			}
-			if (top <= 0 || top + 50 >= sogdiv.height) {
-				dy *= -1; top = Math.max(0, Math.min(top, sogdiv.height - 50));
-			}
-
-			sog.style.left = `${left}px`;
-			sog.style.top = `${top}px`;
-			sog.style.transform = `rotate(${(angle += 2) % 360}deg)`;
-
-			sog.dataset.dx = dx;
-			sog.dataset.dy = dy;
-			sog.dataset.angle = angle;
-		});
-		requestAnimationFrame(() => youth(container));
+		function step() {
+			cats.forEach((cat) => {
+				cat.x += cat.dx; cat.y += cat.dy;
+				if (cat.x <= 0 || cat.x + 50 >= sogdiv.width) {
+					cat.dx *= -1; cat.x = Math.max(0, Math.min(cat.x, sogdiv.width - 50));
+				}
+				if (cat.y <= 0 || cat.y + 50 >= sogdiv.height) {
+					cat.dy *= -1; cat.y = Math.max(0, Math.min(cat.y, sogdiv.height - 50));
+				}
+				cat.angle = (cat.angle + 2) % 360;
+				cat.img.style.transform = `translate(${cat.x}px, ${cat.y}px) rotate(${cat.angle}deg)`;
+			});
+			requestAnimationFrame(step);
+		}
+		step();
 	}
 	document.addEventListener("DOMContentLoaded", () => {
 		document.querySelectorAll(".sogs").forEach((container) => {
-			birth(container); youth(container);
+			youth(container, birth(container));
 		});
 	});
 }
@@ -182,28 +175,38 @@ sogdvd();
 ////////////////////////////////////////////////////////////////
 
 // big text motion blur
+// a fixed pool of ghosts gets recycled, only transform/opacity ever change
 const title = document.querySelector(".title");
 document.body.style.overflow = "hidden";
 
-function ghost(x, y) {
-	let ghost = document.createElement("div");
+const ghostpool = [];
+let ghostindex = 0;
+
+for (let i = 0; i < 64; i++) {
+	const ghost = document.createElement("div");
 	ghost.textContent = title.textContent;
 	ghost.className = "ghost";
-
-	let titleStyles = window.getComputedStyle(title);
-	let width = title.getBoundingClientRect().width;
-
-	ghost.style.left = `${x + width / 2}px`;
-	ghost.style.top = `${y}px`;
-	ghost.style.transform = titleStyles.transform;
-
+	ghost.style.opacity = "0";
 	document.body.appendChild(ghost);
-	setTimeout(() => ghost.remove(), 500);
+	ghostpool.push(ghost);
 }
-let angle = 0;
+
+function ghostrect() {
+	const rect = title.getBoundingClientRect();
+	ghostpool.forEach(function (ghost) {
+		ghost.style.left = `${rect.left + rect.width / 2}px`;
+		ghost.style.top = `${rect.top}px`;
+	});
+}
+ghostrect();
+addEventListener("resize", ghostrect);
+
 function animate() {
-	ghost(title.getBoundingClientRect().left, title.getBoundingClientRect().top);
-	angle += 0.05;
+	const ghost = ghostpool[ghostindex];
+	ghostindex = (ghostindex + 1) % ghostpool.length;
+	ghost.style.transform = getComputedStyle(title).transform;
+	if (ghost.fade) {ghost.fade.cancel()}
+	ghost.fade = ghost.animate([{opacity: 0.1}, {opacity: 0}], 500);
 	requestAnimationFrame(animate);
 }
 animate();
@@ -302,7 +305,7 @@ document.querySelector(".skipintro").addEventListener("click", function () {
 		badgesout(false);
 		flash.style.opacity = ".5";
 		if (videoBackground.readyState === 0) {videoBackground.load()}
-		document.querySelector(".smallsog").style.opacity = "0";
+		document.querySelector(".smallsog").style.display = "none";
 		document.querySelector(".smallsogt").style.opacity = "0";
 		document.querySelector(".skipintro").style.display = "none";
 		document.querySelector(".overlay").style.display = "none";

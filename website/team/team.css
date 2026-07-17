@@ -56,12 +56,19 @@ body {
   background-color: lightgray;
   pointer-events: none; z-index: 2000;
 }
+
+.sogclip {
+  position: fixed;
+  top: 0; left: 0; right: 0; bottom: 0;
+  overflow: hidden;
+  z-index: 1900; pointer-events: none;
+}
 .smallsog {
   margin: auto; position: absolute;
   top: 0; left: 0; bottom: 0; right: 0;
   width: 150px;
   animation: shake 0.3s cubic-bezier(0.250, 0.460, 0.450, 0.940) infinite both;
-  z-index: 1900; user-select: none;
+  z-index: 1900; user-select: none; pointer-events: auto;
 }
 .smallsogt {
   position: absolute;
@@ -106,15 +113,10 @@ body {
   position: fixed;
   font-size: 80px;
   font-family: "title", sans-serif;
-  color: rgba(255, 255, 255, 0.692);
+  color: rgba(255,255,255,0.692);
   pointer-events: none;
-  animation: fadeout 0.5s linear forwards;
-  z-index: -1; user-select: none; transition: opacity 0.5s ease;
-}
-
-@keyframes fadeout {
-  from { opacity: 0.1; }
-  to { opacity: 0; }
+  will-change: transform, opacity;
+  z-index: -1; user-select: none;
 }
 
 a {
