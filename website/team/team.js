@@ -3,10 +3,10 @@ document.title = "soggy cat"
 const sog = document.querySelector(".smallsog");
 const flash = document.querySelector(".flash");
 const discord = document.querySelector(".discord");
-const videoBackground = document.getElementById("video-background");
+const videobg = document.querySelector(".videobackground");
 const cocaine = document.getElementById("cocaine");
 
-if (track.video) {videoBackground.src = track.video}
+if (track.video) {videobg.src = track.video}
 
 let introactivated = false;
 
@@ -26,10 +26,10 @@ function badgesout(fade) {
 
 function applyfx() {
 	if (track.rate) {
-		videoBackground.playbackRate = track.rate;
+		videobg.playbackRate = track.rate;
 		setInterval(function () {
-			if (videoBackground.duration && videoBackground.currentTime > videoBackground.duration - 0.25) {
-				videoBackground.currentTime = 0;
+			if (videobg.duration && videobg.currentTime > videobg.duration - 0.25) {
+				videobg.currentTime = 0;
 			}
 		}, 50);
 	}
@@ -54,7 +54,7 @@ function songlabel(delay) {
 function intro() {
 	sogdvd();
 	sog.style.pointerEvents = "none";
-	if (videoBackground.readyState === 0) {videoBackground.load()}
+	if (videobg.readyState === 0) {videobg.load()}
 	document.querySelector(".smallsogt").style.opacity = "0";
 	document.querySelector(".skipintro").style.display = "none";
 
@@ -64,7 +64,7 @@ function intro() {
 		document.querySelector(".overlay").style.display = "none";
 		document.querySelector(".smallsogt").style.display = "none";
 		applyfx();
-		if (track.fx !== "wtf") {videoBackground.play().catch(function () {})}
+		if (track.fx !== "wtf") {videobg.play().catch(function () {})}
 		if (track.instant === "flash") {
 			flash.style.opacity = ".5";
 			setTimeout(function () {
@@ -94,7 +94,7 @@ function intro() {
 			applyfx();
 			songlabel(2000);
 		}
-		videoBackground.play().then(reveal).catch(reveal);
+		videobg.play().then(reveal).catch(reveal);
 		setTimeout(reveal, 5000);
 	}, introtime * 1000);
 }
@@ -215,11 +215,11 @@ animate();
 document.querySelector(".b4").addEventListener("click", function () {
 	songstop();
 	cocaine.style.display = "block";
-	videoBackground.pause();
-	videoBackground.currentTime = Math.random() * videoBackground.duration;
+	videobg.pause();
+	videobg.currentTime = Math.random() * videobg.duration;
 	cocaine.play();
 	cocaine.onended = function () {
-		videoBackground.play();
+		videobg.play();
 		setTimeout(() => {
 			cocaine.style.display = "none";
 			songresume();
@@ -272,7 +272,7 @@ window.addEventListener("beforeunload", function () {
 // resume bg when tabbing back in
 document.addEventListener("visibilitychange", () => {
 	if (document.visibilityState === "visible" && introactivated && track.fx !== "wtf" && (cocaine.paused || cocaine.ended)) {
-		videoBackground.play().catch(function () {});
+		videobg.play().catch(function () {});
 	}
 });
 
@@ -287,7 +287,7 @@ function fitbuttons() {
 	const lastrow = buttonsrow.lastElementChild.getBoundingClientRect();
 	const space = badges.getBoundingClientRect().top - 15 - (row.top - sitetop + sitediv.scrollTop);
 	const scale = Math.max(Math.min(1, space / (lastrow.bottom - row.top)), 0.4);
-	buttonsrow.style.transform = `translateX(-50%) scale(${scale})`;
+	buttonsrow.style.transform = `perspective(900px) translateX(-50%) rotateX(-8deg) scale(${scale})`;
 }
 fitbuttons();
 addEventListener("resize", fitbuttons);
@@ -303,7 +303,7 @@ document.querySelector(".skipintro").addEventListener("click", function () {
 		songwhenready(track.loop || 0);
 		badgesout(false);
 		flash.style.opacity = ".5";
-		if (videoBackground.readyState === 0) {videoBackground.load()}
+		if (videobg.readyState === 0) {videobg.load()}
 		document.querySelector(".smallsog").style.display = "none";
 		document.querySelector(".smallsogt").style.opacity = "0";
 		document.querySelector(".skipintro").style.display = "none";
@@ -311,7 +311,7 @@ document.querySelector(".skipintro").addEventListener("click", function () {
 		document.querySelector(".smallsogt").style.display = "none";
 		applyfx();
 		setTimeout(function () {
-			if (track.fx !== "wtf") {videoBackground.play().catch(function () {})}
+			if (track.fx !== "wtf") {videobg.play().catch(function () {})}
 			flash.style.transition = "opacity 0.6s ease-in-out";
 			flash.style.opacity = "0";
 		}, 50);
