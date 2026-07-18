@@ -15,7 +15,8 @@ const songs = [
 		artist: "tn-shi", name: "Synthesis",
 		file: "/static/other/team/audio/synthesis.ogg",
 		url: "https://soundcloud.com/tn-shi/synthesis",
-		loop: 1.3136, video: "/static/ssoggycat/team/videos/starsbeautiful.mp4"
+		loop: 1.3136, fx: "purplehue",
+		video: "/static/ssoggycat/team/videos/starsbeautiful.mp4"
 	},
 	{
 		artist: "AZALI", name: "VOIDSIDE SWORDFIGHT",
@@ -27,7 +28,7 @@ const songs = [
 		artist: "SH2K", name: "Unending Uncanny",
 		file: "/static/other/team/audio/uncanny.ogg",
 		url: "https://sh2k.bandcamp.com/track/024-unending-uncanny",
-		loop: null, instant: true, flash: true,
+		loop: null, instant: "flash",
 		sog: "/static/ssoggycat/team/images/canny.webp"
 	},
 	{

@@ -360,6 +360,7 @@ a {
 /* filters */
 .desat .videobg, .desat .pet, .desat .sogs {filter: saturate(0.15)}
 .mono .videobg, .mono .pet, .mono .sogs {filter: grayscale(1) contrast(10)}
+.purplehue .pet, .purplehue .sogs {filter: sepia(1) hue-rotate(220deg) saturate(1.6)}
 
 .party .videobg, .party .pet, .party .sogs {
   filter: saturate(1.3) hue-rotate(0deg);

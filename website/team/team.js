@@ -65,14 +65,14 @@ function intro() {
 		document.querySelector(".smallsogt").style.display = "none";
 		applyfx();
 		if (track.fx !== "wtf") {videoBackground.play().catch(function () {})}
-		if (track.flash) {
-			flash.style.opacity = "1";
+		if (track.instant === "flash") {
+			flash.style.opacity = ".5";
 			setTimeout(function () {
-				flash.style.transition = "opacity 2s ease-in-out";
+				flash.style.transition = "opacity 0.6s ease-in-out";
 				flash.style.opacity = "0";
 			}, 50);
 		}
-		songlabel(track.flash ? 2000 : 0);
+		songlabel(track.instant === "flash" ? 700 : 0);
 		return;
 	}
 
