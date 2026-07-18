@@ -180,13 +180,15 @@ document.body.style.overflow = "hidden";
 
 const ghostpool = [];
 let ghostindex = 0;
+const ghosts = document.createElement("div");
+ghosts.className = "ghosts";
+document.body.appendChild(ghosts);
 
 for (let i = 0; i < 64; i++) {
 	const ghost = document.createElement("div");
 	ghost.textContent = title.textContent;
 	ghost.className = "ghost";
-	ghost.style.opacity = "0";
-	document.body.appendChild(ghost);
+	ghosts.appendChild(ghost);
 	ghostpool.push(ghost);
 }
 
@@ -203,9 +205,12 @@ addEventListener("resize", ghostrect);
 function animate() {
 	const ghost = ghostpool[ghostindex];
 	ghostindex = (ghostindex + 1) % ghostpool.length;
-	ghost.style.transform = getComputedStyle(title).transform;
+	const snapshot = getComputedStyle(title).transform;
 	if (ghost.fade) {ghost.fade.cancel()}
-	ghost.fade = ghost.animate([{opacity: 0.1}, {opacity: 0}], 500);
+	ghost.fade = ghost.animate([
+		{transform: snapshot, opacity: 0.1},
+		{transform: snapshot, opacity: 0}
+	], 500);
 	requestAnimationFrame(animate);
 }
 animate();
