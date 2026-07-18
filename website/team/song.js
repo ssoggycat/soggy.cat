@@ -45,11 +45,34 @@ const track = (function () {
 	return songs[0];
 })();
 
-const songlink = document.querySelector(".song");
-if ((track.name || track.artist) && track.info !== false) {
-	songlink.textContent = "♪ " + [track.artist, track.name].filter(Boolean).join(" ~ ");
-	if (track.url) {songlink.href = track.url} else {songlink.removeAttribute("href")}
-}
+const videosources = track.video
+	? [[track.video, "video/mp4"]]
+	: [
+		["/static/ssoggycat/team/videos/stars.webm", "video/webm"],
+		["/static/ssoggycat/team/videos/stars.mp4", "video/mp4"]
+	];
+
+const videowarm = document.createElement("video");
+videowarm.className = "videobackground";
+videowarm.preload = "auto";
+videowarm.loop = true; videowarm.muted = true;
+videowarm.playsInline = true; videowarm.disablePictureInPicture = true;
+videowarm.setAttribute("disableremoteplayback", "");
+videowarm.setAttribute("x-webkit-airplay", "deny");
+videosources.forEach(function (source) {
+	const el = document.createElement("source");
+	el.src = source[0]; el.type = source[1];
+	videowarm.appendChild(el);
+});
+videowarm.load();
+
+document.addEventListener("DOMContentLoaded", function () {
+	const songlink = document.querySelector(".song");
+	if ((track.name || track.artist) && track.info !== false) {
+		songlink.textContent = "♪ " + [track.artist, track.name].filter(Boolean).join(" ~ ");
+		if (track.url) {songlink.href = track.url} else {songlink.removeAttribute("href")}
+	}
+});
 
 /*//////////////////////////////////////////////////////////////////////*/
 
@@ -117,23 +140,25 @@ function songresume() {
 
 /*//////////////////////////////////////////////////////////////////////*/
 
-const slider = document.querySelector(".slider");
+document.addEventListener("DOMContentLoaded", function () {
+	const slider = document.querySelector(".slider");
 
-slider.addEventListener("input", function () {
-	volume.gain.value = slider.value;
-	muted = slider.value == 0;
-	document.querySelector(".toggle").src = muted
-		? "/static/other/team/images/muted.png"
-		: "/static/other/team/images/unmuted.png";
-});
-
-document.querySelector(".toggle").addEventListener("click", function () {
-	if (muted) {
+	slider.addEventListener("input", function () {
 		volume.gain.value = slider.value;
-		document.querySelector(".toggle").src = "/static/other/team/images/unmuted.png";
-	} else {
-		volume.gain.value = 0;
-		document.querySelector(".toggle").src = "/static/other/team/images/muted.png";
-	}
-	muted = !muted;
+		muted = slider.value == 0;
+		document.querySelector(".toggle").src = muted
+			? "/static/other/team/images/muted.png"
+			: "/static/other/team/images/unmuted.png";
+	});
+
+	document.querySelector(".toggle").addEventListener("click", function () {
+		if (muted) {
+			volume.gain.value = slider.value;
+			document.querySelector(".toggle").src = "/static/other/team/images/unmuted.png";
+		} else {
+			volume.gain.value = 0;
+			document.querySelector(".toggle").src = "/static/other/team/images/muted.png";
+		}
+		muted = !muted;
+	});
 });

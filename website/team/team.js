@@ -3,10 +3,10 @@ document.title = "soggy cat"
 const sog = document.querySelector(".smallsog");
 const flash = document.querySelector(".flash");
 const discord = document.querySelector(".discord");
-const videobg = document.querySelector(".videobackground");
 const cocaine = document.getElementById("cocaine");
 
-if (track.video) {videobg.src = track.video}
+document.querySelector(".videobackground").replaceWith(videowarm);
+const videobg = videowarm;
 
 let introactivated = false;
 
@@ -173,8 +173,6 @@ sogdvd();
 
 ////////////////////////////////////////////////////////////////
 
-// big text motion blur
-// a fixed pool of ghosts gets recycled, only transform/opacity ever change
 const title = document.querySelector(".title");
 document.body.style.overflow = "hidden";
 
@@ -193,10 +191,9 @@ for (let i = 0; i < 64; i++) {
 }
 
 function ghostrect() {
-	const rect = title.getBoundingClientRect();
 	ghostpool.forEach(function (ghost) {
-		ghost.style.left = `${rect.left + rect.width / 2}px`;
-		ghost.style.top = `${rect.top}px`;
+		ghost.style.left = `${title.offsetLeft}px`;
+		ghost.style.top = `${title.offsetTop}px`;
 	});
 }
 ghostrect();

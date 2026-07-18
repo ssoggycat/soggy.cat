@@ -159,6 +159,7 @@ a {
   justify-content: space-between;
   margin: 20px; margin-bottom: 0;
   width: 80%; height: fit-content;
+  transform: perspective(1200px) rotateX(3deg);
 }
 
 .plus {
@@ -388,7 +389,7 @@ a {
 @keyframes unease {0%, 100% {transform: skew(0.5deg, 0.2deg) rotate(0.1deg)} 50% {transform: skew(-0.5deg, -0.3deg) rotate(-0.15deg)}}
 @keyframes wtfscroll {from {transform: translate(100vw, -50%)} to {transform: translate(-100%, -50%)}}
 @keyframes flip {0% {transform: perspective(600px) translateX(-50%) rotateX(12deg) rotateY(0deg)} 50% {transform: perspective(600px) translateX(-50%) rotateX(12deg) rotateY(180deg)} 100% {transform: perspective(600px) translateX(-50%) rotateX(12deg) rotateY(360deg)}}
-@keyframes levitate {0%, 100% {transform: perspective(1200px) translateX(-50%) rotateX(3deg) translateY(0)} 50% {transform: perspective(1200px) translateX(-50%) rotateX(3deg) translateY(-10px)}}
+@keyframes levitate {0%, 100% {transform: translateX(-50%) translateY(0)} 50% {transform: translateX(-50%) translateY(-10px)}}
 @keyframes scroll {0% {background-position: 0 0} 100% {background-position: -100% 0}}
 @keyframes slideoff {10% {left: -300px} 30% {left: 10px} 60% {left: 10px} 90% {left: -300px}}
 
