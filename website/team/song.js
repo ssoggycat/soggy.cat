@@ -15,7 +15,7 @@ const songs = [
 		artist: "tn-shi", name: "Synthesis",
 		file: "/static/other/team/audio/synthesis.ogg",
 		url: "https://soundcloud.com/tn-shi/synthesis",
-		loop: 1.3136, fx: "bluehue", rate: 2
+		loop: 1.3136, video: "/static/ssoggycat/team/videos/starsbeautiful.mp4"
 	},
 	{
 		artist: "AZALI", name: "VOIDSIDE SWORDFIGHT",

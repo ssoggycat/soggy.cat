@@ -6,6 +6,8 @@ const discord = document.querySelector(".discord");
 const videoBackground = document.getElementById("video-background");
 const cocaine = document.getElementById("cocaine");
 
+if (track.video) {videoBackground.src = track.video}
+
 let introactivated = false;
 
 for (let i = 0; i < 9; i++) {
@@ -127,9 +129,6 @@ function sogdvd() {
 			const img = document.createElement("img");
 			img.src = sogImageSrc;
 			img.classList.add("sog");
-			img.style.position = "absolute";
-			img.style.top = "0"; img.style.left = "0";
-			img.style.width = "50px"; img.style.height = "50px";
 			img.style.filter = `blur(${Math.random() * 3}px)`;
 			container.appendChild(img);
 
