@@ -164,7 +164,6 @@ function sogdvd() {
 		return cats;
 	}
 
-	// transform only moves, so layout never gets dirtied
 	function youth(container, cats) {
 		let sogdiv = container.getBoundingClientRect();
 		addEventListener('resize', () => {
@@ -309,6 +308,22 @@ document.addEventListener('visibilitychange', () => {
 		videobg.play().catch(() => {});
 	}
 });
+
+////////////////////////////////////////////////////////////////
+
+const pals = document.querySelector('.buddypals');
+
+function fitpals() {
+	pals.style.zoom = '';
+	const space = document.querySelector('.footerb').getBoundingClientRect().top - 20 - (title.offsetTop + title.offsetHeight);
+	if (pals.offsetHeight > space) {
+		pals.style.zoom = Math.max(space / pals.offsetHeight, 0.4);
+	}
+}
+fitpals();
+addEventListener('resize', fitpals);
+addEventListener('load', fitpals);
+document.fonts.ready.then(() => requestAnimationFrame(fitpals));
 
 ////////////////////////////////////////////////////////////////
 

@@ -113,6 +113,7 @@ body {
   font-family: "title", sans-serif;
   font-size: 80px;
   color: white;
+  margin-top: 20px;
   animation: flip 3s linear infinite; transition: opacity 0.5s ease;
   user-select: none;
 }
@@ -132,16 +133,15 @@ a {
 }
 
 .mainstuff {
-	width: 100%;
-	display: flex;
-	flex-direction: column;
-	justify-content: center;
-	align-items: center;
+  width: 100%; flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding-bottom: 90px; box-sizing: border-box;
 }
 .buddypals {
-  top: 120px;
   width: 80%; max-width: 700px; height: fit-content;
-  left: 50%;
+  margin: auto 0;
   display: flex; flex-direction: column; justify-content: center; align-items: center;
   pointer-events: all;
 }
@@ -194,9 +194,7 @@ a {
 
 .buttons {
   display: flex;  flex-wrap: wrap;
-  width: 80%; height: fit-content; top: 105%;
-  left: 50%;
-  transform-origin: top center;
+  width: 80%; height: fit-content;
   z-index: 10;
 }
 
@@ -396,7 +394,7 @@ a {
 
 @keyframes unease {0%, 100% {transform: skew(0.5deg, 0.2deg) rotate(0.1deg)} 50% {transform: skew(-0.5deg, -0.3deg) rotate(-0.15deg)}}
 @keyframes wtfscroll {from {transform: translate(100vw, -50%)} to {transform: translate(-100%, -50%)}}
-@keyframes flip {0% {transform: perspective(600px) translateX(-50%) rotateX(12deg) rotateY(0deg)} 50% {transform: perspective(600px) translateX(-50%) rotateX(12deg) rotateY(180deg)} 100% {transform: perspective(600px) translateX(-50%) rotateX(12deg) rotateY(360deg)}}
+@keyframes flip {0% {transform: perspective(600px) rotateX(12deg) rotateY(0deg)} 50% {transform: perspective(600px) rotateX(12deg) rotateY(180deg)} 100% {transform: perspective(600px) rotateX(12deg) rotateY(360deg)}}
 @keyframes scroll {0% {background-position: 0 0} 100% {background-position: -100% 0}}
 @keyframes slideoff {10% {left: -300px} 30% {left: 10px} 60% {left: 10px} 90% {left: -300px}}
 
