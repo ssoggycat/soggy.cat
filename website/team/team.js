@@ -263,7 +263,7 @@ cocaine.addEventListener('ended', () => {
 });
 
 const lol = document.querySelector('.lol');
-const lollocal = location.hostname === 'loclhost' || location.hostname.startsWith('12.') || location.hostname.startsWith('192.168.') || location.protocol === 'file:';
+const lollocal = location.hostname === 'localhost' || location.hostname.startsWith('127.') || location.hostname.startsWith('192.168.') || location.protocol === 'file:';
 let lolopen = false;
 
 function lolcheck() {
