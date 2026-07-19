@@ -68,6 +68,7 @@ body {
   width: 150px;
   animation: shake 0.3s cubic-bezier(0.250, 0.460, 0.450, 0.940) infinite both;
   z-index: 1900; user-select: none; pointer-events: auto;
+  will-change: transform;
 }
 .smallsogt {
   position: absolute;
@@ -108,12 +109,11 @@ body {
 }
 
 .title {
+  will-change: transform;
   font-family: "title", sans-serif;
-  position: fixed; top: 20px;
-  left: 50%; transform: translateX(-50%);
   font-size: 80px;
   color: white;
-  z-index: -1; animation: flip 3s linear infinite; transition: opacity 0.5s ease;
+  animation: flip 3s linear infinite; transition: opacity 0.5s ease;
   user-select: none;
 }
 .ghost {
@@ -131,12 +131,19 @@ a {
   color: white;
 }
 
+.mainstuff {
+	width: 100%;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+}
 .buddypals {
-  position: relative; top: 120px;
+  top: 120px;
   width: 80%; max-width: 700px; height: fit-content;
-  left: 50%; transform: translateX(-50%); z-index: 10;
+  left: 50%;
   display: flex; flex-direction: column; justify-content: center; align-items: center;
-  animation: levitate 3s ease-in-out infinite; pointer-events: all;
+  pointer-events: all;
 }
 
 .buddy {
@@ -146,7 +153,8 @@ a {
   display: flex; overflow: hidden; border-radius: 20px;
   flex-direction: column; justify-content: center; align-items: center; text-align: center;
   background-color: rgba(0,0,0,0.45);
-  user-select: none; pointer-events: all;
+  backdrop-filter: blur(64px);
+  pointer-events: all;
 }
 .buddy img {
   width: 100%; height: auto; border-radius: 10px;
@@ -159,7 +167,6 @@ a {
   justify-content: space-between;
   margin: 20px; margin-bottom: 0;
   width: 80%; height: fit-content;
-  transform: perspective(1200px) rotateX(3deg);
 }
 
 .plus {
@@ -175,7 +182,8 @@ a {
 .padtop {padding-top: 5px}
 
 .bigtext {font-size: 20px}
-.smalltext {font-size: 15px; color: #71767b}
+.smalltext {font-size: 15px}
+.lowtext {color: #71767b}
 
 @media (max-width: 560px) {
   .buddypals {width: 92%}
@@ -185,9 +193,9 @@ a {
 }
 
 .buttons {
-  position: fixed; display: flex;  flex-wrap: wrap;
+  display: flex;  flex-wrap: wrap;
   width: 80%; height: fit-content; top: 105%;
-  left: 50%; transform: translateX(-50%);
+  left: 50%;
   transform-origin: top center;
   z-index: 10;
 }
@@ -389,7 +397,6 @@ a {
 @keyframes unease {0%, 100% {transform: skew(0.5deg, 0.2deg) rotate(0.1deg)} 50% {transform: skew(-0.5deg, -0.3deg) rotate(-0.15deg)}}
 @keyframes wtfscroll {from {transform: translate(100vw, -50%)} to {transform: translate(-100%, -50%)}}
 @keyframes flip {0% {transform: perspective(600px) translateX(-50%) rotateX(12deg) rotateY(0deg)} 50% {transform: perspective(600px) translateX(-50%) rotateX(12deg) rotateY(180deg)} 100% {transform: perspective(600px) translateX(-50%) rotateX(12deg) rotateY(360deg)}}
-@keyframes levitate {0%, 100% {transform: translateX(-50%) translateY(0)} 50% {transform: translateX(-50%) translateY(-10px)}}
 @keyframes scroll {0% {background-position: 0 0} 100% {background-position: -100% 0}}
 @keyframes slideoff {10% {left: -300px} 30% {left: 10px} 60% {left: 10px} 90% {left: -300px}}
 

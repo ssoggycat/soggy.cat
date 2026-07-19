@@ -1,80 +1,69 @@
 // jukebox!
 const songs = [
 	{
-		artist: "Chroma", name: "Guardian Of The Flower Offering",
-		file: "/static/other/team/audio/chroma.ogg",
-		url: "https://soundcloud.com/c-h-r-o-m-a/lqyzxilzziyj",
-		loop: 3.0585, fx: "desat"
+		artist: 'Chroma', name: 'Guardian Of The Flower Offering',
+		file: '/static/other/team/audio/chroma.ogg',
+		url: 'https://soundcloud.com/c-h-r-o-m-a/lqyzxilzziyj',
+		loop: 3.0585, fx: 'desat',
 	},
 	{
-		artist: "???", name: "what the fuck",
-		file: "/static/other/team/audio/whatthefuck.ogg",
-		loop: null, instant: true, fx: "wtf", weight: 1, info: false
+		artist: '???', name: 'what the fuck',
+		file: '/static/other/team/audio/whatthefuck.ogg',
+		loop: null, instant: true, fx: 'wtf', weight: 1, info: false,
 	},
 	{
-		artist: "tn-shi", name: "Synthesis",
-		file: "/static/other/team/audio/synthesis.ogg",
-		url: "https://soundcloud.com/tn-shi/synthesis",
-		loop: 1.3136, fx: "purplehue",
-		video: "/static/ssoggycat/team/videos/starsbeautiful.mp4"
+		artist: 'tn-shi', name: 'Synthesis',
+		file: '/static/other/team/audio/synthesis.ogg',
+		url: 'https://soundcloud.com/tn-shi/synthesis',
+		loop: 1.3136, fx: 'purplehue',
+		sources: [
+			['/static/ssoggycat/team/videos/stars2-av1.mp4', 'video/mp4'],
+			['/static/ssoggycat/team/videos/stars2-h264.mp4', 'video/mp4'],
+		],
 	},
 	{
-		artist: "AZALI", name: "VOIDSIDE SWORDFIGHT",
-		file: "/static/other/team/audio/voidside.ogg",
-		url: "https://open.spotify.com/track/2gK2pHWovCVnTKm0LIEycY",
-		loop: 1.1748, fx: "mono"
+		artist: 'AZALI', name: 'VOIDSIDE SWORDFIGHT',
+		file: '/static/other/team/audio/voidside.ogg',
+		url: 'https://open.spotify.com/track/2gK2pHWovCVnTKm0LIEycY',
+		loop: 1.1748, fx: 'mono',
 	},
 	{
-		artist: "SH2K", name: "Unending Uncanny",
-		file: "/static/other/team/audio/uncanny.ogg",
-		url: "https://sh2k.bandcamp.com/track/024-unending-uncanny",
-		loop: null, instant: "flash",
-		sog: "/static/ssoggycat/team/images/canny.webp"
+		artist: 'SH2K', name: 'Unending Uncanny',
+		file: '/static/other/team/audio/uncanny.ogg',
+		url: 'https://sh2k.bandcamp.com/track/024-unending-uncanny',
+		loop: null, instant: 'flash',
+		sog: '/static/ssoggycat/team/images/canny.webp',
+		canny: true,
 	},
 	{
-		artist: "Toby Fox", name: "AIRWAVES",
-		file: "/static/other/team/audio/doNOTcheckjonglerspronounsinch5sadface.ogg",
-		loop: 1.6969, fx: "party", info: false
-	}
+		artist: 'Toby Fox', name: 'AIRWAVES',
+		file: '/static/other/team/audio/doNOTcheckjonglerspronounsinch5sadface.ogg',
+		url: 'https://tobyfox.bandcamp.com/album/deltarune-chapters-3-4-ost',
+		loop: 1.6969, fx: 'party',
+	},
 ];
 
-const autoshare = (100 - songs.reduce((sum, s) => sum + (s.weight || 0), 0)) / songs.filter((s) => !s.weight).length;
+const autoshare = (100 - songs.reduce((sum, s) => sum + (s.weight || 0), 0)) / songs.filter(s => !s.weight).length;
 const track = (function () {
 	let roll = Math.random() * 100;
-	for (const s of songs) {if ((roll -= s.weight || autoshare) < 0) return s}
+	for (const s of songs) {
+		if ((roll -= s.weight || autoshare) < 0) return s;
+	}
 	return songs[0];
 })();
 
-const videosources = track.video
-	? [[track.video, "video/mp4"]]
-	: [
-		["/static/ssoggycat/team/videos/stars.webm", "video/webm"],
-		["/static/ssoggycat/team/videos/stars.mp4", "video/mp4"]
-	];
-
-const videowarm = document.createElement("video");
-videowarm.className = "videobackground";
-videowarm.preload = "auto";
-videowarm.loop = true; videowarm.muted = true;
-videowarm.playsInline = true; videowarm.disablePictureInPicture = true;
-videowarm.setAttribute("disableremoteplayback", "");
-videowarm.setAttribute("x-webkit-airplay", "deny");
-videosources.forEach(function (source) {
-	const el = document.createElement("source");
-	el.src = source[0]; el.type = source[1];
-	videowarm.appendChild(el);
-});
-videowarm.load();
-
-document.addEventListener("DOMContentLoaded", function () {
-	const songlink = document.querySelector(".song");
+document.addEventListener('DOMContentLoaded', function () {
+	const songlink = document.querySelector('.song');
 	if ((track.name || track.artist) && track.info !== false) {
-		songlink.textContent = "♪ " + [track.artist, track.name].filter(Boolean).join(" ~ ");
-		if (track.url) {songlink.href = track.url} else {songlink.removeAttribute("href")}
+		songlink.textContent = '♪ ' + [track.artist, track.name].filter(Boolean).join(' ~ ');
+		if (track.url) {
+			songlink.href = track.url;
+		}
+		else { songlink.removeAttribute('href'); }
 	}
 });
 
-/*//////////////////////////////////////////////////////////////////////*/
+/* ////////////////////////////////////////////////////////////////////// */
 
 let muted = false;
 let audioload = false;
@@ -90,8 +79,8 @@ var song = null;
 // instant song queueing, any delay and the intro is cooked
 function songfix() {
 	const audioRequest = new XMLHttpRequest();
-	audioRequest.open("GET", track.file, true);
-	audioRequest.responseType = "arraybuffer";
+	audioRequest.open('GET', track.file, true);
+	audioRequest.responseType = 'arraybuffer';
 	audioRequest.onload = function () {
 		context.decodeAudioData(audioRequest.response, function (decodedBuffer) {
 			buffer = decodedBuffer;
@@ -114,23 +103,35 @@ function makesource() {
 
 function WEEE(offset) {
 	if (!buffer || !audioload) return;
-	if (song) {song.stop(0); song.disconnect()}
+	if (song) {
+		song.stop(0);
+		song.disconnect();
+	}
 	song = makesource();
 	if (track.name || track.artist) {
-		document.title = "♪ " + [track.name, track.artist].filter(Boolean).join(" - ");
+		document.title = '♪ ' + [track.name, track.artist].filter(Boolean).join(' - ');
 	}
 	song.start(0, offset || 0);
 }
 
 function songwhenready(offset) {
-	if (audioload) {WEEE(offset); return}
+	if (audioload) {
+		WEEE(offset);
+		return;
+	}
 	const songwait = setInterval(function () {
-		if (audioload) {clearInterval(songwait); WEEE(offset)}
+		if (audioload) {
+			clearInterval(songwait);
+			WEEE(offset);
+		}
 	}, 10);
 }
 
 function songstop() {
-	if (song) {song.stop(0); song = null}
+	if (song) {
+		song.stop(0);
+		song = null;
+	}
 }
 function songresume() {
 	if (!buffer) return;
@@ -138,26 +139,27 @@ function songresume() {
 	song.start(0, context.currentTime % buffer.duration);
 }
 
-/*//////////////////////////////////////////////////////////////////////*/
+/* ////////////////////////////////////////////////////////////////////// */
 
-document.addEventListener("DOMContentLoaded", function () {
-	const slider = document.querySelector(".slider");
+document.addEventListener('DOMContentLoaded', () => {
+	const slider = document.querySelector('.slider');
 
-	slider.addEventListener("input", function () {
+	slider.addEventListener('input', () => {
 		volume.gain.value = slider.value;
 		muted = slider.value == 0;
-		document.querySelector(".toggle").src = muted
-			? "/static/other/team/images/muted.png"
-			: "/static/other/team/images/unmuted.png";
+		document.querySelector('.toggle').src = muted
+			? '/static/other/team/images/muted.png'
+			: '/static/other/team/images/unmuted.png';
 	});
 
-	document.querySelector(".toggle").addEventListener("click", function () {
+	document.querySelector('.toggle').addEventListener('click', () => {
 		if (muted) {
 			volume.gain.value = slider.value;
-			document.querySelector(".toggle").src = "/static/other/team/images/unmuted.png";
-		} else {
+			document.querySelector('.toggle').src = '/static/other/team/images/unmuted.png';
+		}
+		else {
 			volume.gain.value = 0;
-			document.querySelector(".toggle").src = "/static/other/team/images/muted.png";
+			document.querySelector('.toggle').src = '/static/other/team/images/muted.png';
 		}
 		muted = !muted;
 	});
