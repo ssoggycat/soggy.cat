@@ -114,12 +114,14 @@ function WEEE(offset) {
 	song.start(0, offset || 0);
 }
 
+let songwait = null;
 function songwhenready(offset) {
 	if (audioload) {
 		WEEE(offset);
 		return;
 	}
-	const songwait = setInterval(function () {
+	clearInterval(songwait);
+	songwait = setInterval(function () {
 		if (audioload) {
 			clearInterval(songwait);
 			WEEE(offset);
@@ -128,6 +130,7 @@ function songwhenready(offset) {
 }
 
 function songstop() {
+	clearInterval(songwait);
 	if (song) {
 		song.stop(0);
 		song = null;
@@ -135,6 +138,10 @@ function songstop() {
 }
 function songresume() {
 	if (!buffer) return;
+	if (song) {
+		song.stop(0);
+		song.disconnect();
+	}
 	song = makesource();
 	song.start(0, context.currentTime % buffer.duration);
 }

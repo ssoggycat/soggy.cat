@@ -354,11 +354,12 @@ a {
 .increment {background-image: url("/static/other/team/images/88x31/easrng-increment.gif")}
 
 .lol {
-  position: fixed; background-color: rgba(0,0,0,0.5);
+  position: fixed;
   width: 100%;
   height: 100vh; height: 100dvh;
   display: flex; justify-content: center; align-items: center;
-  z-index: 10000;  display: none; user-select: none;
+  z-index: 10000;  display: none;
+  user-select: none; pointer-events: none;
 }
 .lolimg {position: fixed; height: 50%; width: auto; z-index: 1000; user-select: none}
 

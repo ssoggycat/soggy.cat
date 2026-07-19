@@ -227,6 +227,8 @@ function ghostrect() {
 }
 ghostrect();
 addEventListener('resize', ghostrect);
+addEventListener('load', ghostrect);
+document.fonts.ready.then(() => requestAnimationFrame(ghostrect));
 
 function animate() {
 	const ghost = ghostpool[ghostindex];
@@ -243,20 +245,49 @@ animate();
 
 // the secret fourth thing (i don't know what to put there it's a placeholder for now lol)
 // ^- WDYM PLACEHOLDER?? I KNOW I WROTE THAT BUT IS THAT NOT ENOUGH
+let cocainewait = null;
 document.querySelector('.b4').addEventListener('click', () => {
 	songstop();
+	clearTimeout(cocainewait);
 	cocaine.style.display = 'block';
 	videobg.pause();
 	videobg.currentTime = Math.random() * videobg.duration;
 	cocaine.play();
-	cocaine.addEventListener('ended', () => {
-		videobg.play();
-		setTimeout(() => {
-			cocaine.style.display = 'none';
-			songresume();
-		}, Math.random() > 0.25 ? 100 : 10000);
-	});
 });
+cocaine.addEventListener('ended', () => {
+	videobg.play();
+	cocainewait = setTimeout(() => {
+		cocaine.style.display = 'none';
+		songresume();
+	}, Math.random() > 0.25 ? 100 : 10000);
+});
+
+const lol = document.querySelector('.lol');
+const lollocal = location.hostname === 'loclhost' || location.hostname.startsWith('12.') || location.hostname.startsWith('192.168.') || location.protocol === 'file:';
+let lolopen = false;
+
+function lolcheck() {
+	const open = outerWidth - innerWidth > 160 || outerHeight - innerHeight > 160;
+	if (open && !lolopen) {
+		lol.style.transition = 'none';
+		lol.style.opacity = '1';
+		lol.style.display = 'flex';
+		setTimeout(() => {
+			lol.style.transition = 'opacity 0.4s ease';
+			lol.style.opacity = '0';
+			setTimeout(() => {
+				lol.style.display = 'none';
+			}, 400);
+		}, 750);
+	}
+	lolopen = open;
+}
+if (!lollocal) {
+	lolcheck();
+	addEventListener('resize', lolcheck);
+}
+
+////////////////////////////////////////////////////////////////
 
 // copy button code
 document.addEventListener('mousedown', (e) => {
