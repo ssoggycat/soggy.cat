@@ -4,12 +4,12 @@ const songs = [
 		artist: 'Chroma', name: 'Guardian Of The Flower Offering',
 		file: '/static/other/team/audio/chroma.ogg',
 		url: 'https://soundcloud.com/c-h-r-o-m-a/lqyzxilzziyj',
-		loop: 3.0585, fx: 'desat',
+		loop: 3.0585, fx: 'desat'
 	},
 	{
 		artist: '???', name: 'what the fuck',
 		file: '/static/other/team/audio/whatthefuck.ogg',
-		loop: null, instant: true, fx: 'wtf', weight: 1, info: false,
+		loop: null, instant: true, fx: 'wtf', weight: 1, info: false
 	},
 	{
 		artist: 'tn-shi', name: 'Synthesis',
@@ -25,21 +25,20 @@ const songs = [
 		artist: 'AZALI', name: 'VOIDSIDE SWORDFIGHT',
 		file: '/static/other/team/audio/voidside.ogg',
 		url: 'https://open.spotify.com/track/2gK2pHWovCVnTKm0LIEycY',
-		loop: 1.1748, fx: 'mono',
+		loop: 1.1748, fx: 'mono'
 	},
 	{
 		artist: 'SH2K', name: 'Unending Uncanny',
 		file: '/static/other/team/audio/uncanny.ogg',
 		url: 'https://sh2k.bandcamp.com/track/024-unending-uncanny',
 		loop: null, instant: 'flash',
-		sog: '/static/ssoggycat/team/images/canny.webp',
-		canny: true,
+		sog: '/static/ssoggycat/team/images/canny.webp', canny: true
 	},
 	{
 		artist: 'Toby Fox', name: 'AIRWAVES',
 		file: '/static/other/team/audio/doNOTcheckjonglerspronounsinch5sadface.ogg',
 		url: 'https://tobyfox.bandcamp.com/album/deltarune-chapters-3-4-ost',
-		loop: 1.6969, fx: 'party',
+		loop: 1.6969, fx: 'party'
 	},
 ];
 
