@@ -7,8 +7,8 @@ const cocaine = document.getElementById('cocaine');
 
 const videobg = document.querySelector('.videobackground');
 const defaultSources = [
-	['/static/ssoggycat/team/videos/stars.webm', 'video/webm'], // this one is considered hdr and it breaks the backdrop filters.. i am working on rerendering
-	['/static/ssoggycat/team/videos/stars.mp4', 'video/mp4'],
+	['/static/ssoggycat/team/videos/stars-av1.webm', 'video/webm'],
+	['/static/ssoggycat/team/videos/stars-h264.mp4', 'video/mp4'],
 ];
 
 // ?
@@ -333,9 +333,11 @@ window.addEventListener('beforeunload', function () {
 
 // resume bg when tabbing back in
 document.addEventListener('visibilitychange', () => {
-	if (document.visibilityState === 'visible' && introactivated && track.fx !== 'wtf' && (cocaine.paused || cocaine.ended)) {
+	if (document.visibilityState === 'hidden') {
 		videobg.pause();
 		videobg.currentTime = 0;
+	}
+	else if (document.visibilityState === 'visible' && introactivated && track.fx !== 'wtf' && (cocaine.paused || cocaine.ended)) {
 		videobg.play().catch(() => {});
 	}
 });

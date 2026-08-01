@@ -17,7 +17,7 @@ const songs = [
 		url: 'https://soundcloud.com/tn-shi/synthesis',
 		loop: 1.3136, fx: 'purplehue',
 		sources: [
-			['/static/ssoggycat/team/videos/stars2-av1.mp4', 'video/mp4'],
+			['/static/ssoggycat/team/videos/stars2-av1.webm', 'video/webm'],
 			['/static/ssoggycat/team/videos/stars2-h264.mp4', 'video/mp4'],
 		],
 	},
