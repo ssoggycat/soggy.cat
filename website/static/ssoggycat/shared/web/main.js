@@ -1,8 +1,11 @@
 // waits for the website to load because IT DOESN'T WORK OTHERWISE RGARGARGRAG
 document.addEventListener('DOMContentLoaded', function () {
 	const isVtilt = document.body.getAttribute('data-soggy-pagetype') == 'vtilt-js';
+	const isGoog = document.body.getAttribute('data-soggy-goog') != null;
+
 	const sog = document.getElementById('soggycat');
 
+	const dot = (a, b) => a.map((x, i) => a[i] * b[i]).reduce((m, n) => m + n);
 	const picker = document.getElementById('picker');
 
 	let colorstealing;
@@ -39,14 +42,20 @@ document.addEventListener('DOMContentLoaded', function () {
 				document.dispatchEvent(soggyUpdateEvent);
 
 				if (isVtilt) {
+					if (isGoog) sog.style = 'filter: grayscale(1.0);';
+
 					sog.src = e.target.result;
 					sog.onload = function () {
-
 						// STEAL COLORS!!!! this almost feels like chicory
 						const palette = colorstealing.getPalette(sog, 5);
 						const gradientc = palette.map((color, index) => {
 							const position = Math.floor((index / (palette.length - 1)) * 100);
-							return `rgba(${color[0]}, ${color[1]}, ${color[2]}, 1) ${position}%`;
+
+							if (isGoog) {
+								const luma = dot(color, [0.2126, 0.7152, 0.0722]);
+								return `rgb(${luma}, ${luma}, ${luma}) ${position}%`;
+							}
+							return `rgb(${color[0]}, ${color[1]}, ${color[2]}) ${position}%`;
 						});
 						const epicgradient = `radial-gradient(circle, ${gradientc.join(', ')})`;
 

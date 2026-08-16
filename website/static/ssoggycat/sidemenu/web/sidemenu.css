@@ -140,14 +140,3 @@
 	height: calc(var(--button-size) + var(--hover-size));
 	font-size: calc(var(--text-size) + var(--hover-size));
 }
-
-/* ############################### */
-
-[aria-label="malware"] div {
-	background-color: rgb(255, 235, 235);
-	--button-size: 1.25rem;
-	--text-size: 0.75rem;
-	--hover-size: 0.125rem;
-}
-[aria-label="malware"] img {height: 1rem}
-[aria-label="malware"] sup {opacity: 0.25}

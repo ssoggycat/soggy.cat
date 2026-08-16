@@ -1,11 +1,7 @@
 body {
-    background-color: #40736a;
+    background-color: #d3d5d4;
 }
 
 .gradient-background {
-    background: linear-gradient(rgb(0, 0, 0) 0%, rgb(42, 73, 77) 70%, rgb(64,115,106) 100%);
-}
-
-#googtainer{
-    filter: drop-shadow(15px 17px 26px rgb(41, 41, 41,0.6));
+    background: radial-gradient(circle, rgb(67,71,70) 20%, rgb(211,213,212) 100%);
 }

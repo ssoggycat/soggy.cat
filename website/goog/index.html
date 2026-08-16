@@ -1,78 +1,67 @@
 <!DOCTYPE html>
-
 <html lang="en">
 <head>
 	<title>Goog...</title>
-	<link rel="icon" href="assets/images/goog.webp"/>
+	<link rel="icon" href="favicon.ico">
 
-	<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover"/>
-	<meta charset="UTF-8"/>
+	<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+	<meta charset="UTF-8">
 
-	<meta name="title" content="Goog..."/>
-	<meta property="og:title" content="Goog..."/>
+	<meta name="title" content="Goog...">
+	<meta property="og:title" content="Goog...">
 
-	<meta name="description" content="Goog..."/>
-	<meta property="og:description" content="Goog..."/>
+	<meta name="description" content="a picture of a wet cat inside a bathtub.">
+	<meta property="og:description" content="a picture of a wet cat inside a bathtub.">
 
-	<meta property="og:image" content="assets/images/goog.webp"/>
-	<meta name="color-scheme" content="light"/>
-	<meta name="theme-color" content="#40736a"/>
+	<meta property="og:image" content="/static/ssoggycat/goog/images/goog.webp">
+	<meta name="color-scheme" content="light">
+	<meta name="theme-color" content="#d3d5d4">
 
-	<link rel="stylesheet" href="/static/ssoggycat/sidemenu/web/sidemenu.css"/>
-	<link rel="stylesheet" href="/static/ssoggycat/shared/web/main.css"/>
-	<!-- links starting with "/" lead to goog.soggy.cat and not soggy.cat -->
-	<!-- THIS MAY CHANGE!! at least, /static specifically could redirect to soggy.cat -->
+	<meta name="twitter:card" content="summary">
+	<meta name="twitter:title" content="Goog...">
+	<meta name="twitter:description" content="Goog...">
+	<meta name="twitter:image" content="https://soggy.cat/static/ssoggycat/goog/images/goog.webp">
 
-	<!-- needed files are inside /goog/ for now so that it could work on both the subdomain and the main domain -->
-
-	<link rel="stylesheet" href="goog.css"/>
+	<link rel="stylesheet" href="/static/ssoggycat/shared/web/main.css">
+	<link rel="stylesheet" href="/static/ssoggycat/sidemenu/web/sidemenu.css">
+	<link rel="stylesheet" href="goog.css">
 </head>
 
-<body data-soggy-pagetype="three-js">
-	<script type="importmap">
-		{
-			"imports": {
-				"three": "/static/other/shared/web/threejs/three.module.js",
-				"GLTFLoader": "/static/other/shared/web/threejs/addons/GLTFLoader.js",
-				"DRACOLoader": "/static/other/shared/web/threejs/addons/DRACOLoader.js"
-			}
-		}
-	</script>
-
+<body data-soggy-pagetype="vtilt-js" data-soggy-goog>
 	<div class="gradient-background"></div>
-
-	<script type="module" src="index.js"></script>
-	<div id="googtainer"></div>
+	<img id="soggycat" src="/static/ssoggycat/goog/images/goog.webp" width="1024" height="1024" alt="Goog..." data-tilt data-tilt-scale="1.05">
 
 	<div id="sidemenu" class="sm sm-closed" inert>
 		<a aria-label="code" href="https://soggy.cat/github" target="GithubTarget">
 			<div class = "sm-button">
-				<img src="/static/other/sidemenu/svgs/code.svg"/>
+				<img src="/static/other/sidemenu/svgs/code.svg" width="15" height="15" loading="lazy" decoding="async">
 				<p>code</p>
 			</div>
 		</a>
 
 		<a aria-label="no css" href="nocss" target="NoCSSTarget">
 			<div class="sm-button sm-small">
-				<img src="/static/other/sidemenu/svgs/nocss.svg"/>
+				<img src="/static/other/sidemenu/svgs/nocss.svg" width="15" height="15" loading="lazy" decoding="async">
 				<p>no css</p>
 			</div>
 		</a>
 
-		<a aria-label="upload" href="#"
-			onclick="document.getElementById('picker').click(); return false;">
+		<a aria-label="upload" href="#" onclick="document.getElementById('picker').click(); return false;">
 			<div class="sm-button sm-small">
-				<img src="/static/other/sidemenu/svgs/upload.svg"/>
+				<img src="/static/other/sidemenu/svgs/upload.svg" width="15" height="15" loading="lazy" decoding="async">
 				<p>upload</p>
 			</div>
 		</a>
 	</div>
 
-	<button id="circlebtn"></button>
+	<button id="circlebtn" type="button" aria-label="Navigation"></button>
 	<span id="player" style="display: none"></span>
-	<input type="file" id="picker" style="display: none" accept="image/*"/>
+	<input type="file" id="picker" style="display: none" accept="image/*">
 
-	<script src="/static/ssoggycat/shared/web/main.js"></script>
-	<script src="/static/ssoggycat/sidemenu/web/sidemenu.js"></script>
+	<script src="/static/other/shared/web/vanillatilt.js" defer></script>
+	<script src="/static/other/shared/web/color-thief.umd.js" defer></script>
+
+	<script src="/static/ssoggycat/shared/web/main.js" defer></script>
+	<script src="/static/ssoggycat/sidemenu/web/sidemenu.js" defer></script>
 </body>
 </html>
