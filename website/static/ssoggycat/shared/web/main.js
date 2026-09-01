@@ -123,3 +123,54 @@ function murdercodeinput() {
 	}
 }
 window.showcodeinput = showcodeinput;
+
+/* ############################### */
+
+let sogheaterheld = false;
+let sogheaterholdstart = 0;
+let sogheaterreleasestart = 0;
+let sogheaterreleasefrom = 0;
+let sogheaterframe = null;
+
+function sogheaterload(now) {
+	if (sogheaterheld) return Math.min(1, (now - sogheaterholdstart) / 5000);
+	if (sogheaterreleasestart) {
+		const elapsed = now - sogheaterreleasestart;
+		if (elapsed >= 3000) return 0;
+		return sogheaterreleasefrom * (1 - elapsed / 3000);
+	}
+	return 0;
+}
+
+function sogheatertick() {
+	const now = performance.now();
+	const load = sogheaterload(now);
+
+	if (load > 0) {
+		const busyuntil = now + load * 14;
+		while (performance.now() < busyuntil) {}
+	}
+
+	if (sogheaterheld || load > 0) {
+		sogheaterframe = requestAnimationFrame(sogheatertick);
+	} else {sogheaterframe = null}
+}
+
+document.addEventListener("keydown", function (e) {
+	if (e.code !== "Space" || e.repeat || sogheaterheld) return;
+	const tag = document.activeElement && document.activeElement.tagName;
+	if (tag === "INPUT" || tag === "TEXTAREA") return;
+
+	sogheaterheld = true;
+	sogheaterholdstart = performance.now();
+	sogheaterreleasestart = 0;
+	if (!sogheaterframe) sogheaterframe = requestAnimationFrame(sogheatertick);
+});
+
+document.addEventListener("keyup", function (e) {
+	if (e.code !== "Space" || !sogheaterheld) return;
+
+	sogheaterheld = false;
+	sogheaterreleasefrom = sogheaterload(performance.now());
+	sogheaterreleasestart = performance.now();
+});
